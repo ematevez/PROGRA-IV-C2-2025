@@ -1,0 +1,38 @@
+{% load static %}
+{% load i18n %}
+{% if new_arrivals.results %}
+<section class="main w-12/12">
+    <div class="grid md:w-full mx-auto p-2 md:p-0 cf-1 gap-4">
+        <div class="section-body new_arrival grid gap-2 items-start card p-3 py-4 rounded-md bg-white text-lighterBackgroundColor">
+            <div class="flex justify-between items-baseline px-3">
+                <!-- <div class="flex gap-5"> -->
+                    <h1 class="text-lg md:text-xl text-yellowColor font-bold">{% trans 'New Arrivals' %}</h1>
+                    <!-- <h1 class="hidden md:flex gap-1 items-baseline text-lg text-slate-400 font-bold"><span
+                            class="text-lg text-xl text-slate-500">30%</span> OFF</h1> -->
+                <!-- </div> -->
+                <a class="justify-self-end text-base text-yellowColor" href="{% if showroom %}{% url 'supplier:new-arivals' %}?showroom={{showroom}}{% else %}{% url 'supplier:new-arivals' %}{% endif %}">{% trans "View All" %}</a>
+            </div>
+            <div class="grid gap-1 horizontal-scroll items-start" data-context="{{new_arrivals.context_name}}">
+                {% for new_arrival in new_arrivals.results %}
+                    <div class="promotion-card grid"  data-new_arrival-index="{{forloop.counter}}">
+                        <a class="grid rounded-md" href="{% if showroom %}{% url 'supplier:new-arivals' %}?showroom={{showroom}}{% else %}{% url 'supplier:new-arivals' %}{% endif %}" style="background-color: rgba(239, 246, 247, 0.438);padding: .25rem;">
+                            <div class="grid p-2">
+                                <img loading="lazy" src="/media/{{new_arrival.main_image.image}}" alt="{{new_arrival.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/.8;object-fit:cover;">
+                            </div>
+                            <div class="item-details grid gap-0 px-2 items-start content-start">
+                                <h5 class="text-base font-semibold leading-5">
+                                    {{new_arrival.product.name|slice:":15"}}
+                                </h5>
+                                <!-- <p class="text-base font-bold flex gap-2 items-baseline">
+                                    {{new_arrival.product.currency}} <span>{{new_arrival.product.price}}</span>
+                                    <s class="text-slate-400 font-normal text-sm">{{new_arrival.product.price}}</s>
+                                </p> -->
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}

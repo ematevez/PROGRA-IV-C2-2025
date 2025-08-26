@@ -1,0 +1,93 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foroden Contract Payment Receipt</title>
+
+
+    <style>
+
+        tr {
+            cursor: pointer;
+        }
+
+        td {
+            color: #165983;
+        }
+
+        .receipt-table td,
+        .receipt-table th {
+            border: 1px dashed #e7e4e4;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
+
+</head>
+<body>
+        <table>
+            <tr>
+                <td style="border: none;"><h1 style="color: #165983;border: none;">{% trans "Foroden Contract Payment Receipt" %}</h1></td>
+                <td style="border: none;"><h2 style="border: none;">{% trans "Ref No:" %} {{ contract.ref_no }}</h2></td>
+            </tr>
+        </table>
+        <h4 style="border: none;">{% trans "Buyer information" %}</h4>
+        <table class="receipt-table">
+            <thead>
+                <tr>
+                    <th>{% trans "Business Name" %}</th>
+                    <th>{% trans "Full Name" %}</th>
+                    <th>{% trans "Location" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="">{{ contract.buyer.profile }}</span></td>
+                    <td><span class="">{{ contract.buyer }}</span></td>
+                    <td><span class="">{{ contract.buyer.profile.country }}</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <h4 style="border: none;">{% trans "Supplier information" %}</h4>
+        <table class="receipt-table">
+            <thead>
+                <tr>
+                    <th>{% trans "Business Name" %}</th>
+                    <th>{% trans "Full Name" %}</th>
+                    <th>{% trans "Location" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="">{{ contract.supplier.profile }}</span></td>
+                    <td><span class="">{{ contract.supplier }}</span></td>
+                    <td><span class="">{{ contract.supplier.profile.country }}</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <h4 style="border: none;">{% trans "Receipt info" %}</h4>
+        <table class="receipt-table">
+            <thead>
+                <tr>
+                    <th>{% trans "Service" %}</th>
+                    <th>{% trans "Price" %}</th>
+                    <th>{% trans "Status" %}</th>
+                    <th>{% trans "Created On" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="">{{ contract.service.name }}</span></td>
+                    <td><span class="">{{ contract.service.currency }} {{ contract.service.price }}</span></td>
+                    <td><span class="">{% if contract.is_complete %} Complete {% else %} Not Complete {% endif %}</span></td>
+                    <td><span class="">{{ contract.created_on }}</span></td>
+                </tr>
+            </tbody>
+        </table>
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+{% extends './utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load format_date %}
+{% block content %}
+    <!-- section area -->
+        <!-- section selectors -->
+        <nav class="section-nav-area br-sm cs-bg-white outlined">
+            <ul class="cs-grid section-nav list-none list-outside" style="--gap: .25rem;">
+                <div class="cs-flex">
+                    <li class="cs-text-md cs-font-500">
+                        <a href="{% url 'app_admin:promotions' %}">General Promotions</a>
+                    </li>
+                    <li class="cs-text-md cs-font-500 active">
+                        <a href="{% url 'app_admin:email-promotions' %}">Email Promotions</a>
+                    </li>
+                </div>
+                <ul class="nav-emph-cta" style="justify-self: flex-end;align-self: center;margin-inline-end: .5rem;">
+                    <li id="nav-emph-cta" class="cs-flex cs-text-md cs-bg-secondary cs-font-500 br-sm emph">
+                        <a href="{% url 'app_admin:email-promotions-create' %}" class="cs-flex cs-text-white" style="--text-color: #fff;--gap: .5rem;align-items: center;">
+                            <i class="fa fa-plus"></i>
+                            <span>Create</span>
+                        </a>
+                    </li>
+                </ul>
+            </ul>
+        </nav>
+        <!-- section selectors -->
+
+        <section class="content cs-grid br-sm outlined" style="--gap: 1rem;padding: 1rem;">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                        <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                        </div>
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                        <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% if not text_promotions and not banner_promotions %}
+                <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                    {% trans "No Email Promotions Found" %}
+                </p>
+            {% endif %}
+            {% if text_promotions %}
+            <div class="cs-grid" style="gap: .5rem;">
+                <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                    {% trans "Email Promotions" %}
+                </p>
+                <div class="cs-grid" style="gap: 1rem; grid-template-columns: repeat(4, 1fr);">
+                    {% for promotion in text_promotions %}
+                        <div class="promotion-card">
+                            <a href="{% url 'app_admin:email-promotions-edit' promotion.slug %}" class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .5rem;">
+                                <h4 class="cs-text-normal cs-font-700" style="margin: 0;color: var(--text-color);">
+                                    {{ promotion.subject }}
+                                </h4>
+                                <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                                    <div class="cs-grid" style="--gap: .25rem">
+                                        <span class="cs-text-md" style="color: var(--text-color);">
+                                            {{ promotion.description }}
+                                        </span>
+                                        <span class="cs-text-secondary cs-text-sm cs-font-700">{{ promotion.target }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            {% if request.user.is_superuser %}
+                            <form method="POST" class="send-promotion" action="{% url 'app_admin:email-promotions-send' promotion.slug %}">
+                                {% csrf_token %}
+                                <button class="btn cs-text-white cs-bg-danger" type="submit" value="delete">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                <button class="btn cs-text-white cs-bg-secondary" type="submit" value="send">
+                                    <i class="fa fa-paper-plane"></i>
+                                </button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if banner_promotions %}
+            <div class="cs-grid" style="gap: 1rem;">
+                <div class="cs-grid" style="gap: 1rem; grid-template-columns: repeat(4, 1fr);">
+                    {% for promotion in banner_promotions %}
+                    <div class="promotion-card">
+                        <a href="{% url 'app_admin:email-promotions-edit' promotion.slug %}" class="stats-summary-card w-img cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: 0rem;">
+                            <div class="img-wrapper">
+                                <img src="/media/{{promotion.image}}" alt="">
+                            </div>
+                            <div class="cs-grid description" style="--gap: .25rem;">
+                                <h4 class="cs-text-normal cs-font-bold" style="margin: 0;color: var(--text-color);">
+                                    {{ promotion.subject }}
+                                </h4>
+                                <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                                    <div class="cs-grid" style="--gap: .25rem">
+                                        <span class="cs-text-md" style="color: var(--text-color);">
+                                            {{ promotion.description }}
+                                        </span>
+                                        <span class="cs-text-secondary cs-text-sm cs-font-700">{{ promotion.target }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {% if request.user.is_superuser %}
+                        <form method="POST" class="send-promotion" action="{% url 'app_admin:email-promotions-send' promotion.slug %}">
+                            {% csrf_token %}
+                            <button class="btn cs-text-white cs-bg-danger" type="submit" name="delete" value="delete">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                            <button class="btn cs-text-white cs-bg-secondary" type="submit" name="send" value="send">
+                                <i class="fa fa-paper-plane"></i>
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+        </section>
+    <!-- section area -->
+{% endblock %}

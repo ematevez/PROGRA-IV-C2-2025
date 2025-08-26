@@ -1,0 +1,40 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load format_date %}
+{% block content %}
+
+<section class="main w-12/12 py-6 pt-0 gap-8" style="block-size: auto;">
+    <div class="grid gap-4 w-10/12 mx-auto my-6">
+        <h3 class="font-semibold text-2xl">{% trans 'Create a discussion' %}</h3>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                    <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                    </div>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                    <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <form action="{% url 'manager:create-discussion' %}" method="POST" class="grid gap-4">
+            {% csrf_token %}
+            <div class="form-group grid gap-2">
+                <label for="subject">{% trans "Subject" %}</label>
+                <input type="text" name="subject" id="subject" required>
+            </div>
+            <div class="form-group grid gap-2">
+                <label for="description">{% trans "Description" %}</label>
+                <textarea name="description" style="background-color: transparent;" id="description" cols="30" rows="5" required></textarea>
+            </div>
+            <input type="submit" value="{% trans 'Send' %}" class="justify-self-start bg-yellowColor text-white text-base px-4 py-2 rounded-full">
+        </form>
+    </div>
+</section>
+
+{% endblock %}

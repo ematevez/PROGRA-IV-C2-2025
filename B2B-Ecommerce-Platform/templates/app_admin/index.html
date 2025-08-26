@@ -1,0 +1,229 @@
+{% extends './utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <!-- section area -->
+        <!-- section selectors -->
+        <nav class="section-nav-area br-sm cs-bg-white outlined">
+            <ul class="cs-grid section-nav list-none list-outside" style="--gap: .25rem;">
+                <div class="cs-flex">
+                    <li class="cs-text-md cs-font-500 active">Overview</li>
+                </div>
+                <!-- <div class="cs-flex" style="justify-self: flex-end;">
+                    <li class="cs-flex cs-text-md cs-bg-secondary cs-font-500 br-sm emph" style="--text-color: #fff;--gap: .5rem;align-items: center;">
+                        <i class="fa fa-plus"></i>
+                        <span>Create</span>
+                    </li>
+                </div> -->
+            </ul>
+        </nav>
+        <!-- section selectors -->
+
+        <section class="content cs-grid br-sm" style="--gap: 1rem;">
+            <div class="cs-grid horizontal-scroll" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;" data-context="{{statistics.name}}">
+                {% for statistic in statistics.results %}
+                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                        <h4 class="cs-text-md cs-font-500" style="margin: 0;color: var(--text-color);">
+                            {% trans statistic.name %}
+                        </h4>
+                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                            <div class="cs-grid">
+                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
+                                    {{ statistic.count }}
+                                </p>
+                                <span class="cs-text-sm" style="color: var(--text-color);">
+                                    {% trans statistic.description %}</span>
+                            </div>
+                            <!-- <a href="" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end;cursor: pointer">View All</a> -->
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="cs-grid" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;grid-template-columns: repeat(2, 1fr);">
+                <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                    <div class="cs-grid cs-justify-between" style="--gap: 1rem;grid-template-columns: 1fr 1fr;">
+                        <div class="cs-grid">
+                            <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                                Requests
+                            </p>
+                            <span class="cs-text-sm" style="color: var(--text-color);">Requests Statistics</span>
+                        </div>
+                        <div id="request-selectors" class="selectors cs-flex cs-align-start" style="--gap: .5rem;">
+                            <button style="padding: 0.25rem .75rem;" class="active btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="day">Day</button>
+                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="week">Week</button>
+                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="month">Month</button>
+                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="year">Year</button>
+                        </div>
+                    </div>
+                    <div>
+                        <canvas id="requests"></canvas>
+                    </div>
+                </div>
+                <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                    <div class="cs-grid">
+                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                            Users
+                        </p>
+                        <span class="cs-text-sm" style="color: var(--text-color);">Users Statistics</span>
+                    </div>
+                    <div>
+                        <canvas id="users" style="max-block-size: 266px;"></canvas>
+                    </div>
+                </div>
+                <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                    <div class="cs-grid">
+                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                            Requests By Location
+                        </p>
+                        <span class="cs-text-sm" style="color: var(--text-color);">Requests Stats By Location</span>
+                    </div>
+                    <div>
+                        <canvas id="requests-by-location" style="max-block-size: 266px;"></canvas>
+                    </div>
+                </div>
+                <div class="cs-grid" style="--gap: 1rem;align-content: flex-start;grid-template-columns: repeat(2, 1fr);">
+                    {% if top_suppliers.results %}
+                        <div class="cs-grid br-md cs-content-start" style="--gap: 1rem;padding: 0 0;align-content: flex-start;" data-context="{{top_suppliers.context_name}}">
+                            <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                                Top Suppliers
+                            </p>
+                            <div class="cs-grid cs-content-start" style="--gap: 1rem;">
+                                {% for supplier in top_suppliers.results %}
+                                    {% if supplier.profile %}
+                                    <a href="{% url 'supplier:supplier-detail' supplier.profile.slug %}" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;justify-self: stretch;">
+                                        <div class="avator br-full cs-overflow-hidden">
+                                            <img src="/media/{{supplier.image}}" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                        </div>
+                                        <div class="cs-grid">
+                                            <h5 class="cs-text-secondary" style="margin: 0;">{{supplier.profile.business_name}}</h5>
+                                            <span class="cs-text-accent cs-text-sm">View Profile</span>
+                                        </div>
+                                    </a>
+                                    {% else %}
+                                    <div class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;justify-self: stretch;">
+                                        <div class="avator br-full cs-overflow-hidden">
+                                            <img src="/media/{{supplier.image}}" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                        </div>
+                                        <div class="cs-grid">
+                                            <h5 class="cs-text-secondary" style="margin: 0;">{{supplier.profile.business_name}}</h5>
+                                            <span class="cs-text-accent cs-text-sm">View Profile</span>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if recent_payments.results %}
+                        <div class="cs-grid br-md cs-content-start" style="--gap: .8rem;padding: 1rem 1rem;background-color: hsla(213, 28%, 19%, 85%);" data-context="{{recent_payments.context_name}}">
+                            <p class="cs-text-normal cs-font-bold cs-text-white" style="margin: 0;">
+                                Recent Payments
+                            </p>
+                            <div class="cs-grid cs-content-start" style="--gap: 1rem;">
+                                {% for payment in recent_payments.results %}
+                                    <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
+                                        <div class="avator br-full cs-overflow-hidden">
+                                            <img src="/media/{{payment.supplier.image}}" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                        </div>
+                                        <div class="cs-grid">
+                                            <h5 class="cs-text-secondary" style="margin: 0;">{{payment.supplier.profile.business_name}}</h5>
+                                            <span class="cs-text-accent cs-text-sm">View Details</span>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+    <!-- section area -->
+
+    <!-- charts -->
+
+    {{ user_group|json_script:"user_group" }}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user_group = JSON.parse(document.getElementById('user_group').textContent);
+
+            let mChart1 = createChart('Requests.',
+                'line',
+                ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
+                [80, 100, 46, 70],
+                'requests'
+            );
+
+            let mChart2 = createChart('Users',
+                'doughnut',
+                user_group.map(obj => obj.account_type),
+                user_group.map(obj => obj.dcount),
+                'users'
+            );
+
+            let mChart3 = createChart('Requests by location',
+                'bar',
+                ['Africa', 'Europe', 'Asia'],
+                [20, 200, 100],
+                'requests-by-location'
+            );
+
+
+            const actionBtns = document.querySelectorAll('.selectors button');
+            for (let i = 0; i < actionBtns.length; i++) {
+                actionBtns[i].addEventListener('click', e => {
+                    actionBtns.forEach(btn => {
+                        if (btn.classList.contains('active')) btn.classList.remove('active');
+                    });
+
+                    actionBtns[i].classList.add('active');
+
+                    if (actionBtns[i].getAttribute('id') === "day") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per day.',
+                            'line',
+                            ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
+                            [80, 100, 46, 70],
+                            'requests'
+                        );
+
+                    } else if (actionBtns[i].getAttribute('id') === "week") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per week.',
+                            'line',
+                            ['week 1', 'week 1', 'week 1','week 1'],
+                            [80, 100, 46, 70],
+                            'requests'
+                        );
+
+                    } else if (actionBtns[i].getAttribute('id') === "month") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per month.',
+                            'line',
+                            ['08/2000', '08/2000', '08/2000','08/2000'],
+                            [80, 100, 46, 70],
+                            'requests'
+                        );
+
+                    } else if (actionBtns[i].getAttribute('id') === "year") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per year.',
+                            'line',
+                            ['2000', '2000', '2000','2000'],
+                            [40, 50, 46, 70],
+                            'requests'
+                        );
+                    } else {
+                        // console.log("");
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- charts -->
+{% endblock %}

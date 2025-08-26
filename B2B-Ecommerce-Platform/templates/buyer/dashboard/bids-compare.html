@@ -1,0 +1,149 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="main-content" style="overflow-y: scroll;">
+    <div class="content-area outlined" style="padding-block-start: 1.2rem; padding: .6rem .4rem;">
+        <div class="content-area-top flex" style="justify-content: space-between;padding-block-start: .4rem;">
+            <h3 style="font-weight:600;">{% trans 'Reizhen Smart Watch Bids' %}</h3>
+            <div class="sort-by flex">
+                <h4 style="margin-inline-end: .6rem;">Sort by: </h4>
+                <select name="sort-by" style="padding: .4rem .6rem;background-color: transparent;border-radius: 3px;">
+                    <option value="">Reviews</option>
+                    <option value="">Price</option>
+                    <option value="">Lead time</option>
+                </select>
+            </div>
+        </div>
+        <div class="card data-table wishlist-table" style="border-block-end: 0;">
+            <table id="buyer-contracts___--___" class="display" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>{% trans 'Supplier' %}</th>
+                        <th>{% trans 'Price' %}</th>
+                        <th>{% trans 'Lead Time' %}</th>
+                        <th>{% trans 'Reviews' %}</th>
+                        <th>{% trans 'View' %}</th>
+                        <th>{% trans 'Purchase' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Rizeen Suppliers</td>
+                        <td>$1500</td>
+                        <td>5 days</td>
+                        <td>
+                            <div class="item-ratings star-05">
+                                <i class="ti-star"></i>
+                                <i class="ti-star"></i>
+                                <i class="ti-star"></i>
+                                <i class="ti-star"></i>
+                                <i class="ti-star"></i>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="item-link">
+                                <button class="item-link-btn">More Details <i class="ti-arrow-top-right"></i></button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="item-link">
+                                <button class="item-link-btn"><i class="ti-shopping-cart-full"></i> Add to Cart</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Modern Electronics</td>
+                        <td>$1250</td>
+                        <td>7 days</td>
+                        <td>
+                            <div class="item-ratings star-03">
+                                <i class="ti-star"></i>
+                                <i class="ti-star"></i>
+                                <i class="ti-star"></i>
+                                <i class="ti-star"></i>
+                                <i class="ti-star"></i>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="item-link">
+                                <button class="item-link-btn">More Details <i class="ti-arrow-top-right"></i></button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="item-link">
+                                <button class="item-link-btn"><i class="ti-shopping-cart-full"></i> Add to Cart</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Electroni World</td>
+                        <td>$900</td>
+                        <td>10 days</td>
+                        <td>
+                            <div class="item-ratings star-01">
+                                <i class="ti-star"></i>
+                                <i class="ti-star"></i>
+                                <i class="ti-star"></i>
+                                <i class="ti-star"></i>
+                                <i class="ti-star"></i>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="item-link">
+                                <button class="item-link-btn">More Details <i class="ti-arrow-top-right"></i></button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="item-link">
+                                <button class="item-link-btn"><i class="ti-shopping-cart-full"></i> Add to Cart</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">{% trans 'Showing Page' %} <span id="current-page-0"></span> {% trans 'of' %} <span id="max-page"></span>. (<span id="table-item-count"></span> {% trans 'Entries' %})</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Previous' %}</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Next' %}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    
+    const section_togglers = document.querySelectorAll(".section-togglers")
+    section_togglers.forEach(
+        activator => activator.addEventListener("click", () => {
+            let sectionToShow = document.querySelector(`#${activator.dataset.section}`)
+
+            section_togglers.forEach(section_toggler => {
+                section_toggler.style.borderBlockEnd = "unset";
+                section_toggler.style.color = "#929293";
+            })
+            activator.style.color = "#363637";
+            activator.style.borderBlockEnd = "2px solid #363637";
+            
+            let openSections = document.querySelectorAll(".notification-section.inview");
+            openSections.forEach(section => section.classList.remove("inview"))
+
+            sectionToShow.classList.add("inview")
+        })
+    )
+})
+</script>
+
+
+
+
+{{ category_group|json_script:"category_group" }}
+
+{% endblock %}

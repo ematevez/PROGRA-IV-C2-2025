@@ -1,0 +1,272 @@
+{% extends './utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <!-- section area -->
+        <!-- section selectors -->
+        <nav data-page="manager" class="section-nav-area br-sm cs-bg-white outlined">
+            <ul class="cs-grid section-nav list-none list-outside overflow-hidden" style="--gap: .5rem;">
+                <ul class="cs-flex">
+                    <li id="manager-overview-activator" class="cs-text-md cs-font-500">Overview</li>
+                    <li id="manager-showroom-activator" class="cs-text-md cs-font-500">Showrooms</li>
+                    <li id="manager-services-activator"class="cs-text-md cs-font-500">Services</li>
+                    <li id="manager-memberships-activator"class="cs-text-md cs-font-500">Membership</li>
+                </ul>
+                <ul class="nav-emph-cta" style="justify-self: flex-end;align-self: center;margin-inline-end: .5rem;">
+                    <li id="nav-emph-cta" class="cs-flex cs-text-md cs-bg-secondary cs-font-500 br-sm emph" style="--text-color: #fff;--gap: .5rem;align-items: center;">
+                        <i class="fa fa-plus"></i>
+                        <span>Create</span>
+                    </li>
+                    <ul class="cs-hidden cs-bg-white outlined br-sm cta-emph" style="--gap: .15rem;">
+                        <li class="cs-flex cs-text-md cs-bg-secondary cs-font-500 emph">
+                            <a style="--gap: .5rem;align-items: center;" class="cs-flex cs-text-white cs-text-md" href="{% url 'app_admin:category-create' %}">
+
+                            <i class="fa fa-plus"></i>
+                            <span>Product Category</span>
+                            </a>
+                        </li>
+                        <li class="cs-flex cs-text-md cs-bg-secondary cs-font-500 emph">
+                            <a style="--gap: .5rem;align-items: center;" class="cs-flex cs-text-white cs-text-md" href="{% url 'app_admin:subcategory-create' %}">
+                                <i class="fa fa-plus"></i>
+                                <span>Sub Category</span>
+                            </a>
+                        </li>
+                        <li class="cs-flex cs-text-md cs-bg-secondary cs-font-500 emph">
+                            <a style="--gap: .5rem;align-items: center;" class="cs-flex cs-text-white cs-text-md" href="{% url 'app_admin:showroom-create' %}">
+
+                            <i class="fa fa-plus"></i>
+                            <span>Showroom</span>
+                            </a>
+                        </li>
+                        <li class="cs-flex cs-text-md cs-bg-secondary cs-font-500 emph">
+                            <a style="--gap: .5rem;align-items: center;" class="cs-flex cs-text-white cs-text-md" href="{% url 'app_admin:service-create' %}">
+                                <i class="fa fa-plus"></i>
+                                <span>Service</span>
+                            </a>
+                        </li>
+                    </ul>
+                </ul>
+            </ul>
+        </nav>
+        <!-- section selectors -->
+
+            <!-- when in display -> cs-grid -->
+            <!-- when not in display -> cs-hidden -->
+
+        <section id="manager-overview-section" class="cs-hidden content br-sm" style="--gap: 1rem;">
+            <div class="cs-grid horizontal-scroll" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;" data-context="{{statistics.name}}">
+                {% for statistic in statistics.results %}
+                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                        <h4 class="cs-text-md cs-font-500" style="margin: 0;color: var(--text-color);">
+                            {{statistic.name}}
+                        </h4>
+                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                            <div class="cs-grid">
+                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
+                                    {{statistic.count}}
+                                </p>
+                                <span class="cs-text-sm" style="color: var(--text-color);">
+                                    {{statistic.description}}</span>
+                            </div>
+                            <a id="{% if 'Total Memberships' == statistic.name %}manager-memberships-overview-activator{% elif 'Total Services' == statistic.name %}manager-services-overview-activator{% else %}manager-showroom-overview-activator{% endif %}" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end;cursor: pointer;">View All</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="cs-grid" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;grid-template-columns: repeat(2, 1fr);">
+                <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;min-block-size: 290px;justify-items: stretch;">
+                    <div class="cs-grid">
+                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                            Memberships By Location
+                        </p>
+                        <span class="cs-text-sm" style="color: var(--text-color);">Memberships Stats By Location</span>
+                    </div>
+                    <div>
+                        <canvas id="requests-by-location" style="max-block-size: 266px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="manager-showroom-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Stores</th>
+                        <th>Products</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Stores</th>
+                        <th>Products</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="manager-services-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <!-- <th>Delete</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <!-- <th>Delete</th> -->
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="manager-memberships-section" class="cs-hidden content br-sm" style="--gap: 1rem;">
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Client</th>
+                        <th>Membership</th>
+                        <th>Paid On</th>
+                        <th>Expires On</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Client</th>
+                        <th>Membership</th>
+                        <th>Paid On</th>
+                        <th>Expires On</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                </div>
+            </div> 
+        </section>
+
+        <!-- modals -->
+        <div id="manager-service-modal" class="modal cs-hidden elevated outlined cs-align-start" style="align-content: flex-start;--gap: .5rem;">
+            <div class="modal-header cs-grid cs-align-start" style="--gap: 1rem;">
+                <div class="cs-flex cs-justify-between cs-align-center">
+                    <h3 style="margin: 0;" class="cs-text-body cs-text-secondary cs-font-600">
+                        Service Detials
+                    </h3>
+                    <button class="btn cs-bg-transparent" id="manager-service-modal-deactivator">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+            </div>
+            <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="modal-body cs-grid" style="--gap: 1rem;">
+                <div class="cs-grid cs-justify-between" style="grid-template-columns: 1fr;--gap: 1rem;">
+                    <div class="cs-grid cs-content-start" style="--gap: .5rem;">
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Name:</h4>
+                            <p class="cs-text-normal cs-text-secondary" id="modal-service-name"></p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <p class="cs-text-medium cs-font-500" style="color: var(--text-color);" id="modal-service-description"></p>
+                        </div>
+                    </div>
+                </div>
+                <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                <div class="modal-cta cs-flex cs-justify-center" style="--gap: 1rem;">
+                    <a href="" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
+                        Edit
+                    </a>
+                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" data-serviceId="1" id="suspend-btn">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="operation-confirm-modal" class="modal sm cs-hidden elevated outlined cs-align-start" style="align-content: flex-start;--gap: .5rem;">
+            <div class="modal-header cs-grid cs-align-start" style="--gap: 1rem;">
+                <div class="cs-flex cs-justify-between cs-align-center">
+                    <h3 style="margin: 0;" class="cs-text-body cs-text-secondary cs-font-600">
+                        Confirm Operation
+                    </h3>
+                </div>
+            </div>
+            <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
+            <p class="cs-text-normal cs-text-secondary" id="confirm-msg"></p>
+            <div class="modal-cta cs-flex" style="--gap: 1rem;margin-block-start: .5rem;">
+                <form action="" method="post">
+                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm">
+                        Continue
+                    </button>
+                </form>
+                <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm" id="cancel-operation">
+                    Cancel
+                </button>
+            </div>
+        </div>
+        <!-- modals -->
+
+    <!-- section area -->
+    {{ membership_group|json_script:"membership_group" }}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const membership_group = JSON.parse(document.getElementById('membership_group').textContent);
+
+            let mChart2 = createChart('Users',
+                'doughnut',
+                membership_group.map(obj => obj.feature),
+                membership_group.map(obj => obj.count),
+                'requests-by-location'
+            );
+        });
+    </script>
+
+
+{% endblock %}

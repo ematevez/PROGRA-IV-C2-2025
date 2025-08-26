@@ -1,0 +1,84 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="content-area">
+            <div class="cs-grid outlined" style="grid-template-columns: 1fr;padding: .5rem 1.5rem;--gap:2rem;">
+                <!-- <div class="img-wrapper br-full cs-overflow-hidden">
+                    <img src="{% static 'assets/imgs/resources/profiledefault.png" style="object-fit: cover;" alt="{{request.user.username}}">
+                </div> -->
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <div class="cs-grid cs-content-start" style="--gap: 1rem;">
+                    <h2>{% trans 'Business Details' %}</h2>
+                    <div class="group cs-grid" style="--gap: .75rem;">
+                        <p class="">{% trans 'Business Name' %}:</p>
+                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.business_name}}</p>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .75rem;">
+                        <p class="">{% trans 'Description' %}:</p>
+                        <p class="outlined br-sm" style="padding: .5rem 1.5rem; line-height: 1.6rem;">{{profile.business_description}}</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="group cs-grid" style="--gap: .75rem;">
+                            <p class="">{% trans 'Country' %}:</p>
+                            <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.country}}</p>
+                        </div>
+                        <div class="group cs-grid" style="--gap: .75rem;">
+                            <p class="">{% trans 'City' %}:</p>
+                            <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.city}}</p>
+                        </div>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .75rem;">
+                        <p class="">{% trans 'Business Line' %}:</p>
+                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">+ ({{profile.country_code}}) {{profile.mobile_user}}</p>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .75rem;">
+                        <p class="">{% trans 'VAT Number' %}:</p>
+                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.vat_number}}</p>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .75rem;">
+                        <p class="">{% trans 'Legal Entity Identifier' %}:</p>
+                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.legal_etity_identifier}}</p>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .75rem;">
+                        <p class="">{% trans 'Website' %}:</p>
+                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.website}}</p>
+                    </div>
+                    <div class="group cs-flex" style="--gap: .5rem;">
+                        <a class="btn br-sm" href="{% url 'supplier:dashboard-editbusinessprofile' profile.slug %}">{% trans 'Edit Bussiness Details' %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+
+    <script>
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+    </script>
+
+{% endblock %}

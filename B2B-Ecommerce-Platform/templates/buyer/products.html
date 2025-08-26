@@ -1,0 +1,88 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <main class="grid">
+        <section class="grid gap-4 w-10/12 mx-auto content-start items-start" style="grid-template-columns: .8fr 2fr;">
+            <div class="grid gap-4">
+                <div class="section-nav flex gap-1">
+                    <a class="grid place-items-center py-1 rounded hover:bg-neutral-100 px-3 black border border-slate-300 border-solid text-gray-700" href="{% url 'buyer:profile' %}" style="font-size: .95rem;">Account</a>
+                    <a class="grid place-items-center py-1 rounded hover:bg-neutral-100 px-3 black border border-slate-300 border-solid text-gray-700" href="{% url 'buyer:contracts' %}" style="font-size: .95rem;">Contract</a>
+                    <a class="grid place-items-center py-1 rounded hover:bg-neutral-100 px-3 black border border-slate-300 border-solid text-gray-700" href="{% url 'buyer:products' %}" style="font-size: .95rem;">Visited Products</a>
+                </div>
+                <div class="grid gap-2 border border-solid border-slate-200 rounded p-4">
+                    <h3 class="font-bold text-lg text-lightBackgroundColor">Account Details</h3>
+                    <div class="grid gap-1 border-b border-solid border-slate-200 py-2 px-1">
+                        <p class="text-lightBackgroundColor text-base font-semibold">Username</p>
+                        <p class="text-slate-600 text-base">{{user.username}}</p>
+                    </div>
+                    <div class="grid gap-1 border-b border-solid border-slate-200 py-2 px-1">
+                        <p class="text-lightBackgroundColor text-base font-semibold">Business Name</p>
+                        <p class="text-slate-600 text-base">{{buyer.profile.business_name}}</p>
+                    </div>
+                    <div class="grid gap-1 border-b border-solid border-slate-200 py-2 px-1">
+                        <p class="text-lightBackgroundColor text-base font-semibold">Email</p>
+                        <p class="text-slate-600 text-base">{{user.email}}</p>
+                    </div>
+                    <div class="flex flex-wrap justify-start gap-2 my-4">
+                        <a class="grid place-items-center py-2 px-4 bg black border-none text-white" href="{% url 'auth_app:logout' %}" style="background-color: hsl(0, 0%, 9%);">Edit Account</a>
+                        <a class="grid place-items-center py-2 px-4 bg black border-none text-white" href="{% url 'auth_app:logout' %}" style="background-color: hsl(213, 28%, 19%);">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid content-start gap-4">
+                <div class="p-5 grid gap-6 content-start border border-gray-300 border-solid rounded-lg">
+                    <div class="grid gap-3 content-start">
+                        <h3 class="font-semibold text-lg">User Profile</h3>
+                        <div class="group grid gap-2">
+                            <p class="text-slate-700">Username:</p>
+                            <p class="text-black border border-gray-300 border-solid px-4 py-2 rounded-md">{{user.username}}</p>
+                        </div>
+                        <div class="group grid gap-2">
+                            <p class="text-slate-700">Email:</p>
+                            <p class="text-black border border-gray-300 border-solid px-4 py-2 rounded-md">{{user.email}}</p>
+                        </div>
+                    </div>
+                    <div class="grid gap-3 content-start">
+                        <h3 class="font-semibold text-lg">Business Details</h3>
+                        <div class="group grid gap-2">
+                            <p class="text-slate-700">Business Name:</p>
+                            <p class="text-black border border-gray-300 border-solid px-4 py-2 rounded-md">{{buyer.profile.business_name}}</p>
+                        </div>
+                        <div class="group grid gap-2">
+                            <p class="text-slate-700">Description:</p>
+                            <p class="text-black border border-gray-300 border-solid px-4 py-2 rounded-md">{{buyer.profile.business_description}}</p>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="group grid gap-2">
+                                <p class="text-slate-700">Country:</p>
+                                <p class="text-black border border-gray-300 border-solid px-4 py-2 rounded-md">{{buyer.profile.country}}</p>
+                            </div>
+                            <div class="group grid gap-2">
+                                <p class="text-slate-700">City:</p>
+                                <p class="text-black border border-gray-300 border-solid px-4 py-2 rounded-md">{{buyer.profile.city}}</p>
+                            </div>
+                        </div>
+                        <div class="group grid gap-2">
+                            <p class="text-slate-700">Business Line:</p>
+                            <p class="text-black border border-gray-300 border-solid px-4 py-2 rounded-md">+ ({{buyer.profile.country_code}}) {{buyer.profile.mobile_user}}</p>
+                        </div>
+                        <div class="group grid gap-2">
+                            <p class="text-slate-700">VAT Number:</p>
+                            <p class="text-black border border-gray-300 border-solid px-4 py-2 rounded-md">{{buyer.profile.vat_number}}</p>
+                        </div>
+                        <div class="group grid gap-2">
+                            <p class="text-slate-700">Legal Entity Identifier:</p>
+                            <p class="text-black border border-gray-300 border-solid px-4 py-2 rounded-md">{{buyer.profile.legal_etity_identifier}}</p>
+                        </div>
+                        <div class="group grid gap-2">
+                            <p class="text-slate-700">Website:</p>
+                            <p class="text-black border border-gray-300 border-solid px-4 py-2 rounded-md">{{buyer.profile.website}}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </div>
+        </section>
+    </main>
+{% endblock %}

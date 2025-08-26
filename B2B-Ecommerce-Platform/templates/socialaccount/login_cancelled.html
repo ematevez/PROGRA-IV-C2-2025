@@ -1,0 +1,16 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load socialaccount %}
+{% load i18n %}
+{% block head_title %}{% trans "Login Cancelled" %}{% endblock %}
+
+{% block content %}
+
+<h1>{% trans "Login Cancelled" %}</h1>
+
+{% url 'account_login' as login_url %}
+    <div class="container mx-auto mt-20 grid gap-4 border border-slate-400 border-solid w-11/12 md:w-6/12 py-5 px-5 my-8">
+        <p class="text-lighterBackgroundColor text-lg">{% blocktrans %}You decided to cancel logging in to our site using one of your existing accounts. If this was a mistake, please proceed to <a href="{{login_url}}">sign in</a>.{% endblocktrans %}</p>
+    </div>
+{% endblock %}

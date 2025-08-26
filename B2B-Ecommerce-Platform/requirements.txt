@@ -1,0 +1,26 @@
+asgiref
+channels==3.0.4
+channels_redis
+Django==4.0.0
+django_allauth
+django-rosetta
+djangorestframework
+django-modeltranslation
+django_user_agents
+celery==4.4.2
+googletrans==4.0.0-rc1
+paypal_checkout_serversdk
+python_dateutil
+# selenium
+braintree
+six
+stripe
+webdriver_manager
+xhtml2pdf
+psycopg2
+pyyaml
+paypalrestsdk
+daphne
+gunicorn
+pandas
+openpyxl

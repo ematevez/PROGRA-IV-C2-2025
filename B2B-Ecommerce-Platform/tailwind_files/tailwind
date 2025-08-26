@@ -1,0 +1,4 @@
+npm install -D tailwindcss
+npx tailwindcss init
+npx tailwindcss -i ./tailwind.css -o ./static/tailcss.css --watch
+npx tailwindcss build ./tailwind.css -o ./static/tailcss.css --minify

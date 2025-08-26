@@ -1,0 +1,108 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <!-- section area -->
+        <!-- section selectors -->
+        <nav class="section-nav-area br-sm cs-bg-white outlined">
+            <ul class="cs-grid section-nav list-none list-outside" style="--gap: .25rem;">
+                <div class="cs-flex">
+                    <li class="cs-text-md cs-font-500 active">
+                        <a class="active" href="{% url 'app_admin:discussions' %}">Chatrooms</a>
+                    </li>
+                    <li class="cs-text-md cs-font-500">
+                        <a href="{% url 'app_admin:community' %}">Community</a>
+                    </li>
+                    <!-- <li class="cs-text-md cs-font-500">Chatrooms</li> -->
+                </div>
+            </ul>
+        </nav>
+        <!-- section selectors -->
+
+        <section class="content cs-grid br-sm" style="--gap: 1rem;">
+            <div class="inbox-area split cs-grid" style="--gap: 1rem">
+                <div class="inbox outlined br-sm cs-align-start cs-content-start cs-grid" style="--gap:.5rem;padding: 1rem 1rem;">
+                    <div class="cs-flex cs-align-baseline cs-justify-between">
+                        <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">Chatrooms</h4>
+                        <span class="cs-text-md cs-text-accent" >{{ chatrooms.results|length }} chatrooms</span>
+                    </div>
+                    <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                    <ul class="list cs-grid cs-content-start" style="--gap: .25rem" data-context="{{ chatrooms.context_name }}}}">
+                        {% for chatroom in chatrooms.results %}
+                            <li>
+                                <a href="{% url 'app_admin:discussion' chatroom.chatroom.roomname %}" class="cs-grid" style="--gap:.25rem;">
+                                    <p class="cs-flex cs-align-baseline cs-justify-between">
+                                        <span class="cs-grid cs-text-secondary cs-text-md">{{ chatroom.chatroom.user }}</span>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">{{ chatroom.chatroom.created_on }}</span>
+                                    </p>
+                                    <p class="cs-flex cs-align-baseline cs-justify-start" style="--gap: .5rem;">             
+                                        <!-- <span class="cs-grid cs-text-secondary cs-text-sm">(Payments)</span>                        -->
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">{{ chatroom.last_message.message }}</span>
+                                    </p>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="chat outlined br-sm cs-align-start cs-content-start cs-grid" style="--gap:1rem;padding: 1rem 1rem;">
+                    <div class="cs-flex cs-align-baseline cs-justify-between">
+                        <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">{{ selected_chatroom.user.username }}</h4>
+                        <a class="cs-text-md cs-text-accent" href="{% url 'app_admin:discussions' %}">Close Chat</a>
+                    </div>
+                    <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                    <ul class="chat-list list cs-grid cs-content-start" style="--gap: .25rem">
+                       
+                    </ul>
+                    <form id="chat-form" class="cs-grid" style="grid-template-columns: 1fr .2fr;--gap: .5rem;">
+                        <input type="text" name="message" id="message" placeholder="Message">
+                        <input class="btn cs-text-white cs-bg-secondary" type="submit" name="" value="Send">
+                    </form>
+                </div>
+            </div>
+        </section>
+
+{{ room_name|json_script:"room_name" }}
+{{ request.user.username|json_script:"username" }}
+<script>
+
+    const chatList = document.querySelector('.chat-list');
+    const roomName = JSON.parse(document.getElementById('room_name').textContent);
+    const username = JSON.parse(document.getElementById('username').textContent);
+
+    let protocol = window.location.host.includes("localhost") ? "ws://" : "ws://"
+    const chatSocket = new WebSocket(
+        protocol + window.location.host + "/ws/chat/" + roomName + "/"
+    );
+    
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        
+        const msgElem = document.createElement('li');
+        msgElem.className = data.user === 'Support' ? "grid received" : "grid sent";
+        msgElem.style.gap = ".25rem";
+        const msgElemContent = document.createElement('p');
+        msgElemContent.className = "cs-text-md";
+        msgElemContent.textContent = (data.message)
+        msgElem.appendChild(msgElemContent);
+    
+        chatList.appendChild(msgElem);
+    }
+    
+    const chatForm = document.querySelector("#chat-form");
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let messageField = chatForm.querySelector("#message");
+
+        chatSocket.send(JSON.stringify({
+            "message": messageField.value,
+            "username": username,
+            "user": "Support"
+        }))
+        chatForm.reset();
+    })
+
+
+</script>
+
+    <!-- section area -->
+{% endblock %}

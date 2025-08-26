@@ -1,0 +1,145 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="view-sub-tabs">
+            <a href="{% url 'supplier:dashboard-products' %}">Product List</a>
+            <a style="cursor: disabled;" href="{% url 'supplier:dashboard-productscreate' %}">Create Product</a>
+            <a class="active"  style="cursor: disabled;" href="">Customize Product</a>
+        </div>
+        <div class="cs-grid content-area w-desciption cs-align-start">
+            <form action="{% url 'supplier:dashboard-productscreate' %}" method="POST" id="category-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 1rem;--gap:1rem;">
+                <div class="cs-grid cs-grid-flow-col" style="align-items: baseline;">
+                    <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                        {% trans 'Customize' %} {{ product.name }}
+                    </h2>
+                    <p class="text-base text-slate-600"><b>*</b> {% trans 'Represents required fields' %}.</p>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% csrf_token %}
+                <div class="form-group customize cs-grid" style="--gap: .5rem;">
+                    <header>
+                        <h5>{% trans "1. Choose Product Colors" %}</h5>
+                    </header>
+                    <div class="cs-grid cs-grid-flow-col grouped-colors cs-justify-start" style="--gap: .5rem">
+                        <input type="text" placeholder="{% trans 'Color Name' %}" name="color-name-1" id="color-name-1">
+                        <input type="text" placeholder="{% trans 'Color Name' %}" name="color-name-2" id="color-name-2">
+                        <input type="text" placeholder="{% trans 'Color Name' %}" name="color-name-3" id="color-name-3">
+                        <input type="text" placeholder="{% trans 'Color Name' %}" name="color-name-4" id="color-name-4">
+                        <input type="text" placeholder="{% trans 'Color Name' %}" name="color-name-5" id="color-name-5">
+                    </div>
+                </div>
+                <div class="form-group customize cs-grid" style="--gap: .5rem;">
+                    <header>
+                        <h5>{% trans "2. Choose Payment Methods" %}</h5>
+                    </header>
+                    <div class="cs-grid payment-methods grouped-colors cs-justify-start" style="--gap: .5rem">
+                        <div class="payment-method">
+                            <i class="fa fa-paypal"></i>
+                            <p>{% trans "Paypal" %}</p>
+                        </div>
+                        <div class="payment-method">
+                            <i class="fa fa-cc-visa"></i>
+                            <p>{% trans "Visa" %}</p>
+                        </div>
+                        <div class="payment-method">
+                            <i class="fa fa-cc-amex"></i>
+                            <p>{% trans "American Express" %}</p>
+                        </div>
+                        <div class="payment-method">
+                            <i class="fa fa-cc-discover"></i>
+                            <p>{% trans "Discover" %}</p>
+                        </div>
+                        <div class="payment-method">
+                            <i class="fa fa-cc-discover"></i>
+                            <p>{% trans "Apple Pay" %}</p>
+                        </div>
+                        <div class="payment-method">
+                            <i class="fa fa-google-wallet"></i>
+                            <p>{% trans "Google Pay" %}</p>
+                        </div>
+                        <div class="payment-method">
+                            <i class="fa fa-credit-card"></i>
+                            <p>{% trans "Credit Card" %}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group customize cs-grid" style="--gap: .5rem;">
+                    <header>
+                        <h5>{% trans "2. Shipping Details" %}</h5>
+                    </header>
+                    <div class="cs-grid payment-methods grouped-colors cs-justify-start" style="--gap: .5rem">
+                        <div class="payment-method">
+                            <i class="fa fa-paypal"></i>
+                            <p>{% trans "Paypal" %}</p>
+                        </div>
+                        <div class="payment-method">
+                            <i class="fa fa-cc-visa"></i>
+                            <p>{% trans "Visa" %}</p>
+                        </div>
+                        <div class="payment-method">
+                            <i class="fa fa-cc-amex"></i>
+                            <p>{% trans "American Express" %}</p>
+                        </div>
+                        <div class="payment-method">
+                            <i class="fa fa-cc-discover"></i>
+                            <p>{% trans "Discover" %}</p>
+                        </div>
+                        <div class="payment-method">
+                            <i class="fa fa-cc-discover"></i>
+                            <p>{% trans "Apple Pay" %}</p>
+                        </div>
+                        <div class="payment-method">
+                            <i class="fa fa-google-wallet"></i>
+                            <p>{% trans "Google Pay" %}</p>
+                        </div>
+                        <div class="payment-method">
+                            <i class="fa fa-credit-card"></i>
+                            <p>{% trans "Credit Card" %}</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="description cs-grid br-sm outlined cs-content-start">
+                <h3 class="cs-font-bold cs-text-secondary cs-text-body">{% trans 'Guidelines' %}</h3>
+                <ul class="cs-font-normal cs-text-normal cs-grid" style="--gap: .5rem;list-style-type:lower-alpha;list-style-position: inside;">
+                    <li>{% trans 'Provide a name that is easily understood.' %}</li>
+                    <li>{% trans 'Select a store (from the dropdown list) from those you created.' %}</li>
+                    <li>{% trans 'Select a product sub category from the dropdown list. This enables proper grouping of products.' %}</li>
+                    <li>{% trans 'Provide a currency that suites you best e.g EUR, USD.' %}</li>
+                    <li>{% trans 'Product tags help buyers to find your service easily.' %}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll(".payment-method").forEach(
+            p_method => p_method.addEventListener("click", () => {
+                p_method.classList.toggle("active");
+            }
+        ));
+    </script>
+
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,153 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <section class="main w-12/12 mt-2">
+        <div class="grid py-2 w-full mx-auto justify-end">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                        <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                        </div>
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                        <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="page-starter grid w-full mx-auto cf-1 gap-4 overflow-hidden">
+            <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12 ">
+                <div class="grid p-0 side-menu card rounded-none rounded-t-md overflow-hidden">
+                    <h2 class="text-xl font-bold px-5 py-3 text-lighterBackgroundColor" style="background-color: hsla(213, 28%, 90%, .8);">
+                        {% trans "Product Categories" %}</h2>
+                    <ul class="grid gap-0.5 px-5 py-2" data-context='{{ product_categories.context_name }}'>
+                        
+                        {% for category in categories_header %}  
+                            <li
+                                class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in" data-category-index="{{ forloop.counter }}">
+                                <a class="flex items-center justify-start gap-2 py-2" href='{% url "supplier:category-detail" category.slug %}'>
+                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}">
+                                    <span>{{ category.name }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <a class="side-menu-footer bg-yellowColor flex gap-1 px-6 items-center py-3 text-white rounded-b-md" href="{% url 'supplier:category-list' %}">
+                    <i class="ti-menu"></i>
+                    <span>{% trans "All Categories" %}</span>
+                </a>
+            </div>
+            <div class="promotion-area rounded-t-md w-12/12 md:grid gap-3">
+                <div id="banner-1" class="promotion-banner">
+                    <div class="upper">
+                        <div id="banner" style="block-size:100%;">
+                            <div class="coursel" style="block-size: 100%;inline-size: 100%;">
+                                <div class="header">
+                                  <div class="progress-bar"></div>
+                                </div>
+                                <div class="slider-container">
+                                  <button class="handle left-handle">
+                                    <div class="text">&#8249;</div>
+                                  </button>
+                                  <div class="slider">
+                                    {% for banner in banners.results %}
+                                        <div class="item"><img src="/media/{{banner.image}}" alt="Owl Image"></div>
+                                    {% endfor %}
+                                  </div>
+                                  <button class="handle right-handle">
+                                    <div class="text">&#8250;</div>
+                                  </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lower" style="gap: .5rem;">
+                        <div class="product-promotion-content" style="display:grid;;gap: .25rem">
+                            <h2 class="head text-xl font-bold text-white">{% trans "Top Suppliers" %}</h2>
+                            <p class="desc text-normal text-slate-100" style="line-height: 20px;">{% trans "Get quality products from our top suppliers!" %}</p>
+                        </div>
+                        <div class="products">
+                            {% for advert in adverts.results %}
+                            <a href="{% url 'supplier:product-detail' advert.product.slug %}" class="product-card">
+                                <div class="img-wrapper">
+                                    <img src="/media/{{advert.main_image.image}}" alt="{{ advert.product.name }}">
+                                </div>
+                                <div class="content">
+                                    <div class="content-group">
+                                        <span class="symbol"></span>
+                                        <span class="label">{{ advert.supplier.profile.business_name }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12">
+                <div class="grid p-0 side-menu card rounded-none rounded-t-md overflow-hidden">
+                    <h2 class="text-xl font-bold px-5 py-3 text-lighterBackgroundColor" style="background-color: hsla(213, 28%, 90%, .8);">{% trans 'Showrooms' %}</h2>
+                    <ul class="grid gap-0.5 px-5 py-2" data-context='{{ product_categories.context_name }}'>
+                        {% for showroom in showroows_headers %}
+                            <li
+                                class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in">
+                                <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:showroom-detail' showroom.slug %}"  data-showroom-index="{{forloop.counter}}">
+                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ showroom.image }}" alt="{{ showroom.name }}">
+                                    <span>{{ showroom.name }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <a class="side-menu-footer bg-yellowColor flex gap-1 px-6 items-center py-3 text-white rounded-b-md" href="{% url 'manager:showrooms' %}">
+                    <i class="ti-menu"></i>
+                    <span>{% trans 'All Showrooms' %}</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {% include '../utils/new_arrivals.html' %}
+
+    {% include '../utils/category_cards.html' %}
+
+    {% include '../utils/product_list.html' %}
+
+    {% include '../utils/stores_list.html' %}
+
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../../static/owl-carousel/owl.carousel.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#banner").owlCarousel({
+                autoPlay: 5000, //Set AutoPlay to 3 seconds
+                responsiveClass:true,
+                items: 1,
+                lazyLoad: true,
+                pagination: false
+            });
+        });
+    </script> -->
+
+    <script>
+
+        (function() {
+          let slider = document.querySelector('.slider-container .slider');
+          slider.style.setProperty("--items-per-screen",  1)
+        })()
+      
+    </script>
+      
+
+    <script src="{% static 'js/coursel.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="content-area outlined" style="padding: .6rem .4rem;block-size: 100vh;">
+            <div class="content-area-top" style="justify-content: space-between;padding-block-start: .4rem;">
+                <h3 style="font-weight:600;">{% trans 'Request For Quote' %}</h3>
+            </div>
+
+            <div class="content-form rfq flex" style="border-block-start: 1px solid rgb(209, 209, 209);padding-block-start: 1.2rem;">
+                <div class="rfq-form">
+                    <form action="" class="flex" style="flex-direction: column;align-items: flex-start;gap: .8rem;">
+                        <div class="rfq-form-control">
+                            <label for="">Title <i class="ti-info-alt"></i> </label>
+                            <input type="text" name="" id="" placeholder="Write request title">
+                        </div>
+                        <div class="item-specs flex" style="justify-content: space-between;gap:.8rem;">
+                            <div class="rfq-form-control">
+                                <label for="">From Supplier <i class="ti-info-alt"></i> </label>
+                                <input type="text" name="" id="" value="Reizen Wrists" disabled style="background-color: rgb(247, 248, 249);">
+                            </div>
+                            <div class="rfq-form-control">
+                                <label for="">Specify item name <i class="ti-info-alt"></i> </label>
+                                <input type="text" name="" id="" value="Reizen CT Wrist Ban" disabled style="background-color: rgb(247, 248, 249);">
+                            </div>
+                            <div class="rfq-form-control">
+                                <label for="">State the quantity <i class="ti-info-alt"></i> </label>
+                                <input type="text" name="" id="" placeholder="Eg, 100 pieces">
+                            </div>
+                        </div>
+                        <div class="rfq-form-control" style="margin-block-start: 1.2rem;">
+                            <label for="body">Create a simple request for quote: <i class="ti-info-alt"></i> </label>
+                            <input type="textarea" id="email-body-input"/>
+                        </div>
+                        <div class="rfq-form-control flex" style="margin-block-start: .6rem;justify-content: flex-end;">
+                            <button type="submit">Send Request</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="rfq-item">
+                    <div class="right-card cs-no-box-shadow cs-right-card cs-product-card" style="border-radius: 6px;">
+                        <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg" alt="">
+                        <div class="details">
+                            <h6>Reizen CT Wrist Ban</h6>
+                            <span><i class="ti-star"></i> 4.5 | 12.3k</span>
+                            <span>Price: $572/piece</span>
+                            <span>Min Order: 100 pieces</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+    <!-- <script src="{% static 'js/modal.js' %}"></script> -->
+    <script>
+
+        function navigateToContract() {
+            location.href = "_contract-detail.html";
+        }
+
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+
+        tinymce.init({
+            selector: "#email-body-input",
+            width: 100 + "%",
+            height: 300,
+        });
+
+        // const form = document.querySelector("form");
+        // form.addEventListener("submit", (event) => {
+        //     event.preventDefault();
+        //     const data = document.querySelector("#email-body-input");
+        //     console.log(data.value);
+        // });
+    </script>
+
+{% endblock %}

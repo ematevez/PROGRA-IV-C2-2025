@@ -1,0 +1,395 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<style>
+    .cs-chat {
+        display: none;
+    }
+    .cs-chat.inview {
+        display: grid;
+    }
+    .room-messages {
+        block-size: 55vh;
+        overflow-y: auto;
+    }
+    .create-group {
+        display: grid;
+        grid-template-columns: .5fr 2fr;
+        gap: .5rem;
+        border: none;
+        outline: transparent;
+        color: #fff;
+        background-color: #1E1F21;
+        border-radius: 5px;
+        font-size: 1rem;
+        align-items: center;
+        align-content: center;
+        justify-content: flex-start;
+        margin: .25rem;
+        padding: 1rem;
+        inline-size: 100%;
+    }
+    .create-group-area {
+        position: relative;
+    }
+    .user-list {
+        position: absolute;
+        inset-block-start: 110%;
+        inset-inline-start: 5%;
+        display: none;
+        gap: .5rem;
+        z-index: 9999999;
+        background-color: #fff;
+        box-shadow: 0 1px 1px rgba(36, 35, 35, 0.7);
+        inline-size: 20vw;
+        border-radius: 5px;
+        padding: 0.5rem 0 1rem;
+    }
+    #group_link {
+        inline-size: 16vw;
+        word-wrap: break-word;
+    }
+    .user-list div {
+        display: grid;
+        gap: .5rem;
+        padding: 0.5rem 1rem;
+        align-content: center;
+        justify-content: flex-start;
+        justify-items: flex-start;
+        z-index: 9999999;
+        font-size: 1rem;
+        transition: all .2s linear;
+        cursor: pointer;
+    }
+    .user-list div:hover {
+        background-color: hsl(0, 0%, 95%);
+    }
+    .link-area#link {
+        display: none;
+    }
+    .room-messages.flex small {
+        font-size: .8rem;        
+    }
+    
+
+</style>
+
+<div class="main-content">
+    <div class="content-area cs-content-area" >
+        <div class="notifications-section flex" style="background-color: rgb(226, 226, 224);">
+            <h4 class="section-togglers" data-section="business_chat" id="business_chat_activator" style="padding-block: 1.2rem;">{% trans "Business" %}</h4>
+            <!-- <h4 class="section-togglers" data-section="personal_chat" style="padding-block: 1.2rem;">{% trans "Personal" %}</h4> -->
+            <h4 class="section-togglers" data-section="group_chat" id="group_chat_activator" style="padding-block: 1.2rem;">{% trans "Groups" %}</h4>
+        </div>
+        <div class="cs-supplier cs-chat inview" id="business_chat" style="block-size: 75vh;">
+            <div class="chat-window flex" style="block-size: 100%;">
+                <div class="all-chats">
+                    <div class="chats"></div>
+                </div>
+                <div class="chat-room">
+                    <div class="room">
+                        <div class="room-client">
+                            <div class="chat flex">
+                                <div class="img">
+                                    <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile chat_room_img">
+                                </div>
+                                <div class="text"><h5></h5></div>
+                            </div>
+                        </div>
+                        <div class="room-messages flex"></div>
+                        <form method="POST" id="business-chat-form" class="room-actions flex">
+                            <textarea name="" id="" rows="3" placeholder="Type a message"></textarea>
+                            <button type="submit" style="cursor: pointer;"><img src="/static/graphics/paper-plane.png" alt=""></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cs-supplier cs-chat" id="personal_chat" style="block-size: 75vh;">
+            <div class="chat-window flex" style="block-size: 100%;">
+                <div class="all-chats">
+                    <div class="chats"></div>
+                </div>
+                <div class="chat-room">
+                    <div class="room">
+                        <div class="room-client">
+                            <div class="chat flex">
+                                <div class="img">
+                                    <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile chat_room_img">
+                                </div>
+                                <div class="text"><h5></h5></div>
+                            </div>
+                        </div>
+                        <div class="room-messages flex"></div>
+                        <form method="POST" id="personal-chat-form" class="room-actions flex">
+                            <textarea name="" id="" rows="3" placeholder="Type a message"></textarea>
+                            <button type="submit" style="cursor: pointer;"><img src="/static/graphics/paper-plane.png" alt=""></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cs-supplier cs-chat" id="group_chat" style="block-size: 75vh;">
+            <div class="chat-window flex" style="block-size: 100%;">
+                <div class="all-chats">
+                    <div class="create-group-area">
+                        <button class="create-group" id="create_group" style="cursor: pointer;">
+                            <i class="fa fa-plus"></i>
+                            <span>{% trans "Create Chat Group" %}</span>
+                        </button>
+                        <form action="" method="POST" id="link-display-area" class="user-list">
+                            <div class="link-area" id="link">
+                                <b>{% trans "Copy Group Link" %}</b>
+                                <p id="group_link"></p>
+                            </div>
+                            <div class="link-area" id="form">
+                                <label for="">{% trans "Group Name" %}</label>
+                                <input type="text" name="" id="group_name" required>
+                                <input type="submit" value="{% trans 'Create' %}">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="chats"></div>
+                </div>
+                <div class="chat-room">
+                    <div class="room">
+                        <div class="room-client">
+                            <div class="chat flex">
+                                <div class="img">
+                                    <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile chat_room_img">
+                                </div>
+                                <div class="text"><h5></h5></div>
+                            </div>
+                        </div>
+                        <div class="room-messages flex"></div>
+                        <form method="POST" id="group-chat-form" class="room-actions flex">
+                            <textarea name="" id="" rows="3" placeholder="Type a message"></textarea>
+                            <button type="submit" style="cursor: pointer;"><img src="/static/graphics/paper-plane.png" alt=""></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+    <!-- <script src="{% static 'js/modal.js' %}"></script> -->
+    <script>
+        
+        function retrieveMessages(chat, parentId) {
+            let protocol = window.location.host.includes("localhost") ? "ws://" : "ws://"
+            let chat_type;
+            let url;
+            if (parentId.includes("business")) {
+                chat_type = "business"
+                url = protocol + window.location.host + `/ws/interchats/${chat.roomname}/`
+            }
+            else if (parentId.includes("group")) {
+                chat_type = "group"
+                url = protocol + window.location.host + `/ws/interchats/${chat.roomname}/` 
+            }
+            
+            const chatSocket = new WebSocket(url);
+
+            chatSocket.addEventListener('open', function(event) {
+                // first load old messges
+                chatSocket.send(JSON.stringify({
+                    "status": "load_messages",
+                    "sender": "{{request.user.pk}}",
+                    "type": chat_type,
+                    "chat": chat
+                }))
+            });
+
+
+            chatSocket.onmessage = async function (e) {
+                const data = JSON.parse(e.data);
+
+                
+                let chat_are = document.querySelector(`${parentId} .room-messages.flex`)
+                // business_id
+                let elem = document.createElement("div")
+                
+                if (data.sender != "{{request.user.pk}}") {
+                    elem.classList.add("client")
+                }
+                else {
+                    elem.classList.add("agent")
+                }
+
+                let span = document.createElement("span")
+                let response = await makeRequest(`/api/user/${data.sender}`, method="GET")
+                
+                span.innerHTML = `<small>${response.username}</small> <p>${data.message}</p>`
+                elem.appendChild(span)
+                chat_are.appendChild(elem);
+            }
+            
+            const chatForm = document.querySelector(`${parentId} form.room-actions`);
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let messageField = chatForm.querySelector("textarea");
+                if (messageField.value != "") {
+                    chatSocket.send(JSON.stringify({
+                        "message": messageField.value,
+                        "status": "new_message",
+                        "sender": "{{request.user.pk}}",
+                        "type": chat_type,
+                        "chat": chat
+                    }))
+                    chatForm.reset();
+                }
+
+            })
+        }
+        function createChatElem(chat, imgUrl, user, time, parentId=null) {
+            
+            if (parentId.includes("group")) {
+                imgUrl = "{% static 'assets/imgs/resources/group.png' %}"
+            }
+
+            const elem = document.createElement("div")
+            elem.className = "chat flex"
+            elem.innerHTML = `
+                <div class="img">
+                    <img src="${imgUrl}" alt="" class="avatar mobile" id="toggle-dropdown">
+                </div>
+                <div class="text">
+                    <h5>${user}</h5>
+                    <h6>${new Date(time).toLocaleString()}</h6>
+                </div>
+            `
+            elem.addEventListener("click", () => {
+                document.querySelectorAll(".chat.flex.active").forEach(elem => elem.classList.remove("active"))
+                elem.classList.add("active")
+                document.querySelector(`${parentId} .chat_room_img`).src = imgUrl
+                document.querySelector(`${parentId} .room-client .text h5`).textContent = user
+
+                
+            
+                if (parentId.includes("group")) {
+                    const link = document.createElement("p")
+                    link.textContent = `Chat Link: ${window.location.host}/en/communications/groups/${chat.roomname}/`
+                    link.style.fontSize = ".8rem"
+                    link.style.color = "#CB8205"
+                    link.style.justifySelf = "flex-end"
+                    document.querySelector(`${parentId} .room-client .text`).style.display = "grid"
+                    document.querySelector(`${parentId} .room-client .text`).style.alignItems = "center"
+                    document.querySelector(`${parentId} .room-client .text`).style.alignContent = "center"
+                    document.querySelector(`${parentId} .room-client .text`).appendChild(link)
+                }
+
+                document.querySelector(`${parentId} .room-messages`).innerHTML = ""
+                // fetch messages and update chat
+                retrieveMessages(chat, parentId)
+            })
+            return elem
+        }
+        
+        function updateChats(data) {
+            business = data["business"]
+            groups = data["groups"]
+            users = data["users"]
+
+            if (business.length > 0) {
+                business.forEach(async (chat) => {
+                    let targetId;
+                    let businessData;
+                    if (chat.initiator == '{{request.user.business.pk}}') {
+                        targetId = chat.participant
+                    }
+                    else {
+                        targetId = chat.initiator
+                    }
+                    // get business details
+                    try {
+                        let response = await makeRequest(`/api/business/${targetId}`, method="GET")
+                        let elem = createChatElem(chat, response.image, response.business_name, chat.updated_on, '#business_chat')
+
+                        let business_chat = document.querySelector("#business_chat")
+                        business_chat.querySelector(".chats").appendChild(elem)
+
+                    }
+                    catch (err) {
+            
+                    }
+                })
+            }
+            document.querySelector("#group_chat_activator").addEventListener("click", () => {
+                if (groups.length > 0) {
+                    document.querySelector("#group_chat .chats").innerHTML = ""
+                    groups.forEach(async (chat) => {
+                        let elem = createChatElem(chat, chat.image, chat.name, chat.updated_on, '#group_chat')
+
+                        let group_chat = document.querySelector("#group_chat")
+                        group_chat.querySelector(".chats").appendChild(elem)
+                    })
+                }
+            })
+        }
+
+        async function getChats() {
+            try {
+                let response = await makeRequest(`/api/chats/`, method="GET")
+                updateChats(response.data)
+            }
+            catch (err) {
+    
+            }
+        }
+
+        // load chats
+        document.addEventListener("DOMContentLoaded", () => {
+            getChats()
+
+            document.querySelector("#create_group").addEventListener("click", () => {
+                let display = document.querySelector("#link-display-area")
+                display.style.display = "grid"
+                display.addEventListener("submit", async (e) => {
+                    e.preventDefault()
+                    let group_name = document.querySelector("#group_name")
+                    if (group_name.value == "" || group_name.value == undefined) {
+                        return;
+                    }
+
+                    // form
+
+                    try {
+                        let response = await makeRequest(`/api/chats/group/create/`, method="POST", data={"name":  group_name.value})
+                        // window.location.reload()
+                        document.querySelector(".link-area#form").style.display = "none"
+                        document.querySelector(".link-area#link").style.display = "grid"
+                        display.querySelector("#group_link").textContent = `${window.location.host}/en/communications/groups/${response.data}/`
+                    }
+                    catch (err) {
+            
+                    }
+                })
+            })
+
+            const section_togglers = document.querySelectorAll(".section-togglers")
+            section_togglers.forEach(
+                activator => activator.addEventListener("click", () => {
+                    let sectionToShow = document.querySelector(`#${activator.dataset.section}`)
+
+                    section_togglers.forEach(section_toggler => {
+                        section_toggler.style.borderBlockEnd = "unset";
+                        section_toggler.style.color = "#929293";
+                    })
+                    activator.style.color = "#363637";
+                    activator.style.borderBlockEnd = "2px solid #363637";
+                    
+                    let openSections = document.querySelectorAll(".cs-chat.inview");
+                    openSections.forEach(section => section.classList.remove("inview"))
+
+                    sectionToShow.classList.add("inview")
+                })
+            )
+        })
+    </script>
+
+{% endblock %}

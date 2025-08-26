@@ -1,0 +1,384 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<!-- Load the client component. -->
+<script src="https://js.braintreegateway.com/web/3.91.0/js/client.min.js"></script>
+
+<!-- Load the PayPal Checkout component. -->
+<script src="https://js.braintreegateway.com/web/3.91.0/js/paypal-checkout.min.js"></script>
+
+<!-- Load the PayPal JS SDK with your PayPal Client ID-->
+<script src="https://www.paypal.com/sdk/js?client-id=AWtHogExtwwI5Zbu8uGAzT7unZBArvaw_3vGiKocwk2wyaBvrhoLhin5Br0spi2fD-BKQXXQwmRWqGmH"></script>
+
+<!-- cards -->
+<script src="https://js.braintreegateway.com/web/dropin/1.18.0/js/dropin.min.js"></script>
+
+<!-- google pay -->
+<script src="https://pay.google.com/gp/p/js/pay.js"></script>
+<script src="https://js.braintreegateway.com/web/3.87.0/js/google-payment.min.js"></script>
+
+<!-- venmo -->
+<script src="https://js.braintreegateway.com/web/3.87.0/js/venmo.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.87.0/js/data-collector.min.js"></script>
+
+
+        
+<script src="https://www.paypal.com/sdk/js?client-id=AdoY6Euji9UokT-HMy3UBZnAenKPPGA3slyR4t46b0LoZ_7sh6UB429UkKNAfCt0K4Y8Hdh1oRlJYIli&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+
+<style>
+    .package {
+        border: 1px solid rgb(219, 219, 219);
+        cursor: pointer;
+    }
+    .active {
+        border: none;
+        outline: 2px solid hsl(38 95% 47% / 1);
+        transform: scale(1.1);
+    }
+    .venmo-btn {
+        cursor: pointer;
+        background: #009cde;
+        color: #fff;
+        display: grid;
+        place-items: center;
+        padding: 0rem 2rem;
+        border-radius: 5px;
+    }
+
+    .paypal-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #003087;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    }
+
+    .paypal-btn:hover {
+    background-color: #002166;
+    }
+
+</style>
+
+    <section class="grid">
+        <div class="grid md:px-8 px-2 py-8 rounded auth-area w-11/12 md:w-10/12 gap-10 mx-auto my-10" style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="grid gap-6">
+                <h1 class="text-xl md:text-2xl font-bold text-lighterBackgroundColor">{% trans "1. Choose your Package" %}</h1>
+                <hr class="border-t border-solid border-slate-200">
+                <div class="plan-group grid gap-6">
+                    {% for group in membership_groups %}
+                    <div class="grid gap-4 px-4">
+                        <h1 class="text-lg md:text-xl font-semibold text-lighterBackgroundColor">{{forloop.counter}}. {{ group.group.name }}</h1>
+                        <div class="grid plan_group grid-cols-1 md:grid-cols-3 gap-8 justify-center md:justify-start py-4 md:px-6" id="VirtualShowroomsPlans">
+                            {% for plan in group.plans %}
+                                <div class="package grid gap-3 p-6 md:p-8 rounded-md" data-group="{{ group.group.name }}">
+                                    <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{{plan.plan.name}}</h2>
+                                    <hr class="border-t border-solid border-slate-300">
+                                    <div class="grid gap-2">
+                                        {% for feature in plan.features %}
+                                        <div class="flex gap-2">
+                                            <input type="radio" name="{{plan.plan.name}}" id="{{feature.custom_id}}" data-price="{{feature.price}}" data-name="{{feature.name}}">
+                                            <label class="text-base font-semibold" for="{{feature.custom_id}}">{{feature.price}} {{feature.currency_iso_code}} <span class="font-normal text-sm text-slate-600">{{feature.get_duration}}</span></label>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% if braintree_client_token %}
+            <div class="grid gap-4">
+                <h1 class="text-xl md:text-2xl font-bold text-lighterBackgroundColor">{% trans "2. Choose your Payment Method" %}</h1>
+                <hr class="border-t border-solid border-slate-200">
+                <div class="grid gap-3 py-3">
+                    <div class="payment-methods grid items-start justify-start gap-2">
+                        <div class="flex gap-4 items-start content-start">
+                            <div id="paypal-button"></div>
+                            <div class="google-container"style="block-size: 70px;cursor: pointer;">
+                                <span id="google-pay-button" style="block-size: 70px;">
+                                    <img src="{% static 'icons/GPay.png' %}" style="inline-size: auto;block-size: 70px;" alt="g-pay">
+                                </span>
+                            </div>
+                            <button class="venmo-btn" id="venmo-button">
+                                <img style="inline-size: auto;block-size: 40px;object-fit: contain;" src="{% static 'icons/venmo.svg' %}" alt="venmo">
+                            </button>
+                            <button class="paypal-btn flex gap-2" id="paypal-btn">
+                                <span>Pay with PayPal</span>
+                                <i class="fa fa-paypal"></i>
+                            </button>
+                        </div>
+                        <form autocomplete="off">
+                            {% if braintree_error %}
+                            <div class="alert alert-danger fade in">
+                                <button class="close" data-dismiss="alert">&times;</button>
+                                {{ braintree_error|safe }}
+                            </div>
+                            {% endif %}
+                            <div class="braintree-notifications"></div>
+                            <div id="braintree-dropin"></div>
+                            <input style="background-color: #0783ca;color: white;cursor: pointer;" id="braintree-submit-button" class="btn btn-success btn-lg btn-block" type="button" value="Pay now!" style="cursor: pointer;" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <div class="payment-modal gap-2">
+        <header class="py-1 px-4">
+            <p class="text-lg text-backgroundColor font-bold">{% trans "Payment Progress" %}</p>
+        </header>
+        <div class="payment-details py-1 px-4 grid gap-2">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            var selectedPlanids = [];
+            var braintree_client_token = "{{ braintree_client_token }}";
+            var card_pay_button = document.querySelector('#braintree-submit-button');
+            if (card_pay_button) {
+                card_pay_button.style.display = "none";
+                card_pay_button.disabled = true;
+            }
+
+            const packages = document.querySelectorAll(".package");
+            packages.forEach(package => {
+                package.addEventListener('click', (e) => {
+                    let selectedPlan = e.target.classList.contains('package') ? e.target : e.target.closest('.package');
+
+                    document.querySelectorAll(".package.active").forEach(
+                        package => {
+                            if (package.dataset.group == selectedPlan.dataset.group) {
+                                package.classList.remove('active');
+                            }
+                        }
+                    )
+                    
+                    selectedPlan.classList.add('active');
+                    
+                    let inputs = document.querySelectorAll(".package.active input[type='radio']:checked")
+                    if (card_pay_button) {
+                        if (inputs.length <= 0) {
+                            card_pay_button.disabled = true;
+                        }
+                        else {
+                            card_pay_button.disabled = false;
+                        }
+                    }
+                })
+            })
+
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            
+            function simulateWait(plan_id) {
+                let modal = document.querySelector(".payment-modal")
+                let paymentItems = modal.querySelector(".payment-details")
+
+                selectedPlanids.forEach(plan_id => {
+                    let input = document.querySelector(`#${plan_id}`);
+                    plan_name = input.dataset.name;
+
+                    let paymentItem = document.createElement("div");
+                    paymentItem.className = "payment-item";
+                    paymentItem.dataset.plan = plan_id;
+                    paymentItem.innerHTML = `
+                        <span class="status">
+                            <div class="loading inView"></div>
+                            <i class="fa fa-check text-yellowColor status-check"></i>
+                        </span>
+                        <span class="plan_name">${plan_name}</span>
+                    `;
+                    paymentItems.appendChild(paymentItem)
+                })
+                document.body.classList.add("modal-open");
+                modal.classList.add("in-view")
+            }
+
+            function updatemodal(complete_plan_id) {
+                let modal = document.querySelector(".payment-modal")
+                let item = modal.querySelector(`[data-plan="${complete_plan_id}"]`)
+                item.querySelector(".loading").classList.remove("inView")
+                item.querySelector(".status-check").classList.add("inView")
+            }
+
+            function paymentFinished() {
+                // redirect
+                let domain = (new URL(window.location.href));
+                window.location.href = `{% url 'manager:profile' %}{% if not request.user.is_authenticated %}?next=profile{% endif %}`
+            }
+
+            function makeRequest (payload, plan_id) {
+                return $.ajax({
+                    type: 'POST',
+                    url: '{% url "payment:memberships" %}',
+                    data: {'paymentMethodNonce': payload.nonce,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}', 'method': "CARD", "plan_id": plan_id}
+                })
+            }
+
+            function makeCardsPayment(instance, selectedPlanids) {
+                simulateWait()
+                
+                instance.requestPaymentMethod(function (err, payload) {
+                    if (selectedPlanids.length > 1) {                        
+                        makeRequest (payload, selectedPlanids[0])
+                        .done(function (result) {
+                            if (result  == "SUCCESSFUL") {
+                                updatemodal(selectedPlanids[0])
+                                makeRequest (payload, selectedPlanids[1])
+                                .done(function (result) {
+                                    if (result  == "SUCCESSFUL") {
+                                        updatemodal(selectedPlanids[1])
+                                        setTimeout(() => paymentFinished(), 2000);
+                                    }
+                                });
+                            }
+                            else {
+                                
+                            }
+                        });
+                    }
+                    else {
+                        makeRequest (payload, selectedPlanids[0])
+                        .done(function (result) {
+                            if (result  == "SUCCESSFUL") {
+                                updatemodal(selectedPlanids[0])
+                                setTimeout(() => paymentFinished(), 2000);
+                            }
+                        });
+                    }
+                })
+            }
+            
+            
+            // CARDS
+            function handleCardPayments() {
+                braintree.dropin.create({
+                    authorization: braintree_client_token,
+                    container: '#braintree-dropin',
+                    card: {
+                        cardholderName: {
+                            required: false
+                        }
+                    }
+                }, function (createErr, instance) {
+                    card_pay_button.style.display = "grid";
+                    card_pay_button.addEventListener('click', function () {
+
+                        let inputs = document.querySelectorAll(".package.active input[type='radio']:checked")
+                        if (inputs.length > 0) {
+                            inputs.forEach(
+                                pricing => {
+                                    if (!selectedPlanids.includes(pricing.id)) {
+                                        selectedPlanids.push(pricing.id)
+                                    }
+                                }
+                            )
+                        }
+                        console.log(selectedPlanids)
+                        
+                        let response = makeCardsPayment(instance, selectedPlanids);
+                    });
+                });
+            }
+
+            function makePaypalSubRequest(plan_id) {
+                return $.ajax({
+                    type: 'POST',
+                    url: '{% url "payment:paypal-subscription" %}',
+                    data: {'csrfmiddlewaretoken': '{{ csrf_token }}', 'method': "PAYPAL", "plan_id": plan_id}
+                })
+            }
+        
+        
+            // paypal
+            function handlePaypalPayments() {
+                let inputs = document.querySelectorAll(".package.active input[type='radio']:checked")
+                if (inputs.length > 0) {
+                    inputs.forEach(
+                        pricing => {
+                            if (!selectedPlanids.includes(pricing.id)) {
+                                selectedPlanids.push(pricing.id)
+                            }
+                        }
+                    )
+                }
+                
+                console.log(selectedPlanids)
+                simulateWait()
+                
+                if (selectedPlanids.length > 1) {                        
+                    makePaypalSubRequest (selectedPlanids[0])
+                    .done(function (result) {
+                        if (result.status  == "SUCCESSFUL") {
+                            updatemodal(selectedPlanids[0])
+
+                            setTimeout(() => paymentFinished(), 2000);
+                            window.open(result.url, '_blank');
+
+                            makePaypalSubRequest (selectedPlanids[1])
+                            .done(function (result) {
+                                if (result.status  == "SUCCESSFUL") {
+                                    updatemodal(selectedPlanids[1])
+                                    setTimeout(() => paymentFinished(), 2000);
+                                    window.open(result.url, '_blank');
+                                }
+                            });
+                        }
+                        else {
+                            
+                        }
+                    });
+                }
+                else {
+                    makePaypalSubRequest (selectedPlanids[0])
+                    .done(function (result) {
+                        console.log(result)
+                        if (result.status  == "SUCCESSFUL") {
+                            updatemodal(selectedPlanids[0])
+                            setTimeout(() => paymentFinished(), 2000);
+                            window.open(result.url, '_blank');
+                        }
+                    });
+                }
+            
+            }
+            if (card_pay_button) {
+                document.querySelector("#paypal-btn").addEventListener("click", () => handlePaypalPayments())
+                handleCardPayments();
+            }
+
+        })
+
+    </script>
+
+{% endblock %}

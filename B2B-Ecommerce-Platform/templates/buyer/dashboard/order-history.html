@@ -1,0 +1,35 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="main-content">
+    <div class="content-area">
+        <div class="content-area-top" style="justify-content: space-between;padding-block-start: .4rem;">
+            <h3 style="font-weight:600;">{% trans 'Order History' %}</h3>
+        </div>
+    </div>
+</div>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+    <!-- <script src="{% static 'js/modal.js' %}"></script> -->
+    <script>
+        // Table
+        $(document).ready(function () {
+            $('#table-1').DataTable();
+        });
+
+        function navigateToContract() {
+            location.href = "_contract-detail.html";
+        }
+
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+    </script>
+
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" class="fa fa-close"></i>
+                    </div>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" class="fa fa-close"></i>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <div class="content-area outlined" style="padding-block-start: 1.2rem; padding: .6rem .4rem;block-size: 100vh">
+            <div class="content-area-top flex" style="justify-content: space-between;padding-block-start: .4rem;">
+                <h3 style="font-weight:600;">{% trans 'My Cart' %}</h3>
+                <div class="sort-by flex">
+                    <h4 style="margin-inline-end: .6rem;">Sort by: </h4>
+                    <select name="sort-by" style="padding: .4rem .6rem;background-color: transparent;border-radius: 3px;">
+                        <option value="">Category</option>
+                        <option value="">Date</option>
+                        <option value="">Others</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="card data-table wishlist-table" style="border-block-end: 0;">
+                <table class="display" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'Product' %}</th>
+                            <th>{% trans 'Quantity' %}</th>
+                            <th>{% trans 'Color' %}</th>
+                            <th>{% trans 'Material' %}</th>
+                            <th>{% trans 'Unit Price' %}</th>
+                            <th>{% trans 'Total' %}</th>
+                            <th>{% trans 'Action' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for object in object_list %}
+                        <tr>
+                            <td>{{ object.product.name }}</td>
+                            <td>{{ object.quantity }}</td>
+                            <td>{{ object.color.name }}</td>
+                            <td>{{ object.material.name }}</td>
+                            <td>{{ object.price.currency }} {{ object.price.min_price }} - {{ object.price.max_price }}</td>
+                            <td>{{ object.price.currency }} {{ object.min_total_price }} - {{ object.max_total_price }}</td>
+                            <td>
+                                <form action="{% url 'buyer:cart-delete-product' object.pk %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="submit" value='{% trans "Remove" %}' style="cursor: pointer;">
+                                </form>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="cta-area" style="display: grid;justify-content: flex-end;">
+                    <form action="{% url 'buyer:order-create' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value='{% trans "Place Order" %}' class="btn">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+    <!-- <script src="{% static 'js/modal.js' %}"></script> -->
+    <script>
+        // Table
+        $(document).ready(function () {
+            $('#table-1').DataTable();
+        });
+
+        function navigateToContract() {
+            location.href = "_contract-detail.html";
+        }
+
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+    </script>
+
+{% endblock %}

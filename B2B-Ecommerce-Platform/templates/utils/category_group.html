@@ -1,0 +1,30 @@
+{% load static %}
+{% load i18n %}
+{% if category_group.results %}
+<section class="md:grid main w-12/12">
+    <div class="grid md:w-full mx-auto p-2 md:p-4 cf-1 gap-4 category-card card bg-white" data-context="{{ category.context_name }}">
+        <!-- <div class="grid gap-2">
+            <h3 class="text-lg md:text-xl font-bold text-yellowColor">{{ category_group.category.name }}</h3>
+        </div> -->
+        <div class="body grid gap-4">
+            <a href='{% url "supplier:category-detail" category_group.category.slug %}' class="grid img-wrapper banner items-center rounded-md p-6">
+                <h3 class="text-lg text-black font-bold">{% trans 'Shopping guide for trending' %} {{ category_group.category.name }} {% trans 'products' %}.</h3>
+                <img src="/media/{{ category_group.category.image }}" alt="{{ category_group.category.name }}">
+                <button class="bg-black py-2 px-4 text-base justify-self-end rounded-full text-white font-semibold">{% trans "View All" %}</button>
+            </a>
+            <div class="grid gap-2 grid-cols-1 md:grid-cols-4 sub-categories">
+                {% for subcategory in category_group.results %}
+                <a href='{% url "supplier:subcategory-detail" category_group.category.slug subcategory.subcategory.slug %}' class="sub-category border border-solid border-slate-200 rounded-md grid gap-2 p-3 py-2">
+                    <h4 class="text-base font-semibold text-lighterBackgroundColor">{{ subcategory.subcategory.name }}</h4>
+                    <div class="img-wrapper grid grid-cols-2 gap-2">
+                        {% for product in subcategory.results %}
+                            <img src="/media/{{ product.main_image.image }}" alt="">
+                        {% endfor %}
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}

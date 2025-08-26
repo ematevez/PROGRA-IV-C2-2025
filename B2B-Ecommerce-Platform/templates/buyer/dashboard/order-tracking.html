@@ -1,0 +1,125 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load isEqual %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="content-area">
+            <div class="view-sub-tabs">
+                <a href="{% url 'supplier:dashboard-order-list' %}">{% trans "All Orders" %}</a>
+                <a href="?overdue=true">{% trans "Overdue Orders" %}</a>
+            </div>
+            <div class="table-filter-area">
+                <form action="" class="filter-form" method="get">
+                    <div class="filter-form-group">
+                        <input type="search" name="order_search_value" placeholder="Search by Order ID or Customer Name" id="">
+                    </div>
+                    <input type="submit" hidden />
+                </form>
+                <form id="status-filter-form" class="filter-form" method="GET" action="" data-context="{{statuses.context_name}}">
+                    <p class="title">{% trans 'status' %}: </p>
+                    <div class="filter-form-group">
+                        <select name="status" id="status-filter" onchange="(function(){document.querySelector('#status-filter-form').submit()})()">
+                            <option value="all">{% trans 'All' %}</option>
+                            {% for status in statuses.results %}
+                                <option value="{{status}}">{{status}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" hidden />
+                </form>
+                <form id="country-filter-form" class="filter-form" method="GET" action="" data-context="{{countries.context_name}}">
+                    <p class="title">{% trans 'Country' %}: </p>
+                    <div class="filter-form-group">
+                        <select name="country" id="country-filter" onchange="(function(){document.querySelector('#country-filter-form').submit()})()">
+                            <option value="all">{% trans 'All' %}</option>
+                            {% for country in countries.results %}
+                                <option value="{{country}}">{{country}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" hidden />
+                </form>
+                <form id="supplier-filter-form" class="filter-form" method="GET" action="" data-context="{{suppliers.context_name}}">
+                    <p class="title">{% trans 'Supplier' %}: </p>
+                    <div class="filter-form-group">
+                        <select name="supplier" id="supplier-filter" onchange="(function(){document.querySelector('#supplier-filter-form').submit()})()">
+                            <option value="all">{% trans 'All' %}</option>
+                            {% for supplier in suppliers.results %}
+                                <option value="{{supplier.slug}}">{{supplier.business_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" hidden />
+                </form>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                        <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" class="fa fa-close"></i>
+                        </div>
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                        <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" class="fa fa-close"></i>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <div class="data-table bordered">
+                <table class="display" style="width:100%;margin-top:.5rem;">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'Order Id' %}</th>
+                            <th>{% trans 'Supplier' %}</th>
+                            <th>{% trans 'Status' %}</th>
+                            <th>{% trans 'Total Price' %}</th>
+                            <th>{% trans 'Completed' %}</th>
+                            <th>{% trans 'Delivery Date' %}</th>
+                            <th>{% trans 'Created On' %}</th>
+                            <th>{% trans 'Detials' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders.results %}
+                            <tr>
+                                <td>{{order.order_id}}</td>
+                                <td>{{order.supplier}}</td>
+                                <td class="{% if order.status == 'IN DELIVERY' %}  IN_DELIVERY {% elif order.status == 'VIEWED BY SUPPLER' %} VIEWED  {% elif order.status == 'ACCEPTED BY SUPPLER' %} ACCEPTED {% else %} {{order.status}} {% endif %}">{{order.status}}</td>
+                                <td>{{order.currency}} {{order.total_price}}</td>
+                                <td>{{order.is_complete}}</td>
+                                <td>{{order.delivery_date}}</td>
+                                <td>{{order.created_on}}</td>
+                                <td><a class="cta" href="{% url 'buyer:order-detail' order.order_id %}">{% trans "View Details" %}</a></td>
+                            </tr>
+                        {% endfor%}
+                    </tbody>
+                </table>
+                <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                    <div class="cs-grid cs-align-center">
+                        <!-- <p class="cs-text-md" style="color: var(--text-color);">{{page_obj}}</p> -->
+                    </div>
+                    <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                        {% if page_obj.has_previous %}
+                            <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Previous' %}</button>
+                        {% endif %}
+                        {% for page in page_obj.number|make_list %}
+                            {% if current_page_number|isEqual:page %}
+                                <a href="?page={{page}}" id="current-page" class="cs-text-md"  style="border-block-end: 2px solid black;padding: .25rem .5rem;">{{ page }}</a>
+                            {% else %}
+                                <a href="?page={{page}}" id="current-page" class="cs-text-md" style="padding: .25rem .5rem">{{ page }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Next' %}</button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

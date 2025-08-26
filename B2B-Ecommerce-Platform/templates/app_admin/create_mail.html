@@ -1,0 +1,40 @@
+{% extends './utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <!-- section area -->
+
+            <!-- when in display -> cs-grid -->
+            <!-- when not in display -> cs-hidden -->
+        
+        <section class="content br-sm outlined" style="--gap: 1rem;">
+            <form action="{% url 'app_admin:contact' slug %}" method="POST" id="mail-form" class="cs-grid br-sm" style="padding: 2rem;--gap:1rem;">
+                <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                    Compose Email.
+                </h2>
+                {% csrf_token %}
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="client-name" class="cs-text-normal" style="color: var(--text-color);">Client</label>
+                    <input type="text" name="client-name" id="client-name" readonly value="{{user.username}}">
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="client-email" class="cs-text-normal" style="color: var(--text-color);">Client Email</label>
+                    <input type="text" name="client-email" id="client-email" readonly value="{{user.email}}">
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="subject" class="cs-text-normal" style="color: var(--text-color);">Subject</label>
+                    <input type="text" name="subject" id="subject" required>
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="description" class="cs-text-normal" style="color: var(--text-color);">Message</label>
+                    <textarea name="description" class="cs-bg-transparent" id="description" cols="30" rows="5" required></textarea>
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <input class="cs-text-white cs-bg-secondary" type="submit" name="contract-start-date" id="contract-start-date"
+                    value="Send Email">
+                </div>
+            </form>
+        </section>
+
+    <!-- section area -->
+{% endblock %}

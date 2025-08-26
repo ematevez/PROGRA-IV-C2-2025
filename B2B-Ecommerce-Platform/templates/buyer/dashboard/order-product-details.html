@@ -1,0 +1,90 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load isEqual %}
+{% block content %}
+
+    <div class="main-content">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" class="fa fa-close"></i>
+                    </div>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" class="fa fa-close"></i>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <div class="cs-grid content-area w-desciption cs-align-start">
+            <form action="{% url 'buyer:product-variation-detial' object.pk %}" method="POST" id="category-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;">
+                <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                    {% trans 'Fill in form to edit Product details' %}
+                </h2>
+                <p class="cs-text-base text-slate-600"><b>*</b> {% trans 'Represents required fields' %}.</p>
+                {% csrf_token %}
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="name" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Product'  %} *</label>
+                    <input type="text" class="cs-text-normal" name="product" id="name" value="{{object.product}}" readonly required>
+                </div>
+                <div class="form-group cs-grid form-3-split" style="--gap: .5rem;">
+                    {% if colors %}
+                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                        <label for="product_color" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Product Color' %} *</label>
+                        <Select name="product_color" id="product_color">
+                            {% for color in colors %}
+                                <option value="{{color.pk}}">{{color.name}}</option>
+                            {% endfor %}
+                        </Select>
+                    </div>
+                    {% endif %}
+                    {% if materials %}
+                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                        <label for="product_material" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Product Material' %} *</label>
+                        <Select name="product_material" id="product_material">
+                            {% for material in materials %}
+                                <option value="{{material.pk}}">{{material.name}}</option>
+                            {% endfor %}
+                        </Select>
+                    </div>
+                    {% endif %}
+                    {% if pricings %}
+                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                        <label for="product_pricing" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Product Pricing' %} *</label>
+                        <Select name="product_pricing" id="product_pricing">
+                            {% for pricing in pricings %}
+                            <option value="{{pricing.pk}}">{{ pricing.currency }} {{ pricing.min_price }} - {{ pricing.currency }} {{ pricing.max_price }}</option>
+                            {% endfor %}
+                        </Select>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="product_quantity" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Product Quantity' %} *</label>
+                    <input type="number" class="cs-text-normal" name="product_quantity" id="product_quantity" value="{{object.quantity}}" required>
+                </div>
+                <div class="form-group cs-grid cs-grid-flow-col" style="--gap: 1rem;justify-self: flex-end;">
+                    <input class="cs-text-white cs-bg-secondary br-sm" type="submit" name="edit"
+                    value="{% trans 'Save Details' %}">
+                    <input class="cs-text-white cs-bg-danger br-sm" type="submit" name="delete"
+                    value="{% trans 'Delete Product' %}">
+                    <a href="{% url 'buyer:order-detail' object.order.order_id %}" class="btn cs-text-white outlined cs-text-secondary cs-font-600 cs-grid cs-justify-center">{% trans 'Cancel' %}</a>
+                </div>
+            </form>
+
+            <div class="description cs-grid br-sm outlined cs-content-start">
+                <h3 class="cs-font-bold cs-text-secondary cs-text-body">{% trans "Guidelines" %}</h3>
+                <ul class="cs-font-normal cs-text-normal cs-grid" style="--gap: .5rem;list-style-type:lower-alpha;list-style-position: inside;">
+                    <li>{% trans 'Provide a name that is easily understood.' %}</li>
+                    <li>{% trans 'Provide a currency that suites you best e.g EUR, USD.' %}</li>
+                    <li>{% trans 'Service tags help buyers to find your service easily.' %}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="content-area">
+            <div class="cs-grid outlined" style="grid-template-columns: 1fr;padding: .5rem 1.5rem;--gap:2rem;">
+                <!-- <div class="img-wrapper br-full cs-overflow-hidden">
+                    <img src="{% static 'assets/imgs/resources/profiledefault.png" style="object-fit: cover;" alt="{{request.user.username}}">
+                </div> -->
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm font-600" style="border: 1px solid rgb(37, 141, 2930);color: rgb(37, 141, 2930); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <div class="cs-grid cs-content-start" style="--gap: 1rem;padding: 1rem 0;">
+                    <h2 class="cs-text-secondary">{% trans 'Account Details' %}</h2>
+                    <div class="group cs-grid" style="--gap: .5rem;">
+                        <span class="cs-text-normal" style="color: var(--text-color);">{% trans 'Name' %}:</span>
+                        <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ request.user.first_name }} {{ request.user.last_name }}</span>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .5rem;">
+                        <span class="cs-text-normal" style="color: var(--text-color);">{% trans 'Username' %}:</span>
+                        <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ request.user.username }}</span>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .5rem;">
+                        <span class="cs-text-normal" style="color: var(--text-color);">{% trans 'Email' %}:</span>
+                        <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ request.user.email }}</span>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .5rem;">
+                        <span class="cs-text-normal" style="color: var(--text-color);">{% trans 'Account Type' %}:</span>
+                        <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ request.user.account_type }}</span>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .5rem;">
+                        <span class="cs-text-normal" style="color: var(--text-color);">{% trans 'Membership' %}:</span>
+                        {% if not memberships %}
+                            <a class="btn cs-bg-success br-sm" style="justify-self: flex-start;" href="{% url 'payment:memberships' %}">{% trans 'Subscribe' %}</a>
+                        {% endif %}
+
+                        {% for membership in memberships %}
+                        <div class="cs-grid cs-md-grid-col-1 profile-subscription">
+                            <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ membership.plan_group }} - {{ membership.membership.feature.name }}</span>
+                            <div class="actions cs-grid cs-grid-flow-col" style="--gap: .75rem">
+                                <form action="{% url 'payment:subscription-deactivate' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="plan_id" value="{{ membership.membership.feature.custom_id}}">
+                                    <input type="submit" class="btn cs-bg-danger br-sm" style="font-size: 1.1rem;" value="{% trans 'Deactivate' %}">
+                                </form>
+                                <a class="btn cs-bg-secondary br-sm" style="text-align: center" href="{% url 'payment:memberships' %}">{% trans 'Upgrade' %}</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="group cs-flex" style="--gap: .5rem;">
+                        <a class="btn br-sm" href="{% url 'supplier:dashboard-editaccountsprofile' %}">{% trans 'Edit Profile' %}</a>
+                        <a class="btn cs-bg-primary  cs-text-white br-sm br-sm" href="{% url 'supplier:password-reset' %}">{% trans 'Reset Password' %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+
+    <script>
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+    </script>
+
+{% endblock %}

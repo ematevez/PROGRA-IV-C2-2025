@@ -1,0 +1,138 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <section class="main w-12/12 mt-5">
+        <div class="page-starter grid w-full mx-auto cf-1 gap-4 overflow-hidden">
+            <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12 ">
+                <div class="grid p-0 side-menu card rounded-none rounded-t-md overflow-hidden">
+                    <h2 class="text-xl font-bold px-5 py-3 text-lighterBackgroundColor" style="background-color: hsla(213, 28%, 90%, .8);">
+                        {% trans "Product Categories" %}</h2>
+                    <ul class="grid gap-0.5 px-5 py-2" data-context='{{ product_categories.context_name }}'>
+                        
+                        {% for category in categories_header %}  
+                            <li
+                                class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in" data-category-index="{{ forloop.counter }}">
+                                <a class="flex items-center justify-start gap-2 py-2" href='{% url "supplier:category-detail" category.slug %}?showroom={{object.slug}}'>
+                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}">
+                                    <span>{{ category.name }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <a class="side-menu-footer bg-yellowColor flex gap-1 px-6 items-center py-3 text-white rounded-b-md" href="{% url 'supplier:category-list' %}">
+                    <i class="ti-menu"></i>
+                    <span>{% trans "All Categories" %}</span>
+                </a>
+            </div>
+            <div class="promotion-area w-12/12 md:grid gap-3">
+                <div id="banner-1" class="promotion-banner">
+                    <div class="upper">
+                        <div id="banner" style="block-size:100%;">
+                            <div class="coursel" style="block-size: 100%;inline-size: 100%;">
+                                <div class="header">
+                                  <div class="progress-bar"></div>
+                                </div>
+                                <div class="slider-container">
+                                  <button class="handle left-handle">
+                                    <div class="text">&#8249;</div>
+                                  </button>
+                                  <div class="slider">
+                                    {% for banner in banners.results %}
+                                        <div class="item"><img src="/media/{{banner.image}}" alt="Owl Image"></div>
+                                    {% endfor %}
+                                  </div>
+                                  <button class="handle right-handle">
+                                    <div class="text">&#8250;</div>
+                                  </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lower" style="gap: .5rem;">
+                        <div class="product-promotion-content" style="display:grid; align-content: center;gap: .25rem">
+                            <h2 class="head text-xl font-bold text-white">{% trans "Top" %} {{ view_name }} {% trans "Suppliers" %}</h2>
+                            <p class="desc text-normal text-slate-100" style="line-height: 20px;">{% trans "Get quality products from our top suppliers!" %}</p>
+                        </div>
+                        <div class="products">
+                            {% for advert in adverts.results %}
+                            <a href="{% url 'supplier:product-detail' advert.product.slug %}" class="product-card">
+                                <div class="img-wrapper">
+                                    <img src="/media/{{advert.main_image.image}}" alt="{{ advert.product.name }}">
+                                </div>
+                                <div class="content">
+                                    <div class="content-group">
+                                        <span class="symbol"></span>
+                                        <span class="label">{{ advert.supplier.profile.business_name }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden md:grid gap-2 content-start">
+                {% if text_promotion.results %}
+                {% for text_promotion in text_promotion.results %}
+                <a 
+                    href="{% if text_promotion.type == 'SUPPLIERS' %} {% url 'auth_app:signup' %}?Supplier=1 {% elif text_promotion.type == 'BUYERS' %} {% url 'auth_app:signup' %}?Buyer=1 {% elif text_promotion.type == 'SHOWROOWS' %} {% url 'manager:showrooms' %} {% elif text_promotion.type == 'PRODUCTS' %} {% url 'supplier:products' %} {% endif %}" 
+                    class="grid gap-2 items-start p-4 rounded-md" style="background-image: linear-gradient(to right top,hsl(350, 100%, 95%),hsl(350, 100%, 90%),hsl(350, 100%, 91%),hsl(350, 100%, 93%),hsl(350, 100%, 95%));">
+                    <div class="grid">
+                        <h4 class="font-semibold text-lighterBackgroundColor">{{text_promotion.name}}</h4>
+                        <p class="text-lighterBackgroundColor text-base">{{text_promotion.description}}</p>
+                    </div>
+                    <button class="bg-black py-2 px-4 text-base justify-self-end rounded-full text-white font-semibold">{% trans "View More" %}</button>
+                </a>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    {% include '../utils/new_arrivals.html' with showroom=object.slug %}
+    
+    {% include '../utils/product_list.html' with with_title=False %}
+
+    {% if stores.results %}
+    <section class="main w-12/12 py-3">
+        <div class="grid w-11/12 md:w-full mx-auto cf-1 gap-2">
+            <div class="section-heading flex justify-start items-baseline gap-2">
+                <h2 class="sec-title text-lg capitalize md:text-xl font-bold text-lightBackgroundColor">{{ object.name }} {% trans 'Stores' %}</h2>
+            </div>
+            <div class="grid gap-3 horizontal-scroll rounded-md py-3" data-context="{{ stores.context_name }}">
+                {% for store in stores.results %}
+                    <div class="store-card grid items-start rounded-md card gap-4">
+                        <a class="grid gap-1 rounded-md overflow-hidden" href="{% url 'supplier:store-detail' store.slug %}">
+                            <img loading="lazy" src="/media/{{store.image}}" alt="{{store.name}}" class="img-wrapper rounded-md">
+                            <div class="card-details grid items-end px-4 py-4">
+                                <h2 class="text-lg leading-5 text-white font-bold">    
+                                    {{store.name}}
+                                </h2>
+                                <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                    <span>{{store.supplier}}</span>
+                                    <!-- <span>120 Products</span> -->
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% include '../utils/category_group.html' %}
+
+    <script>
+
+        (function() {
+          let slider = document.querySelector('.slider-container .slider');
+          slider.style.setProperty("--items-per-screen",  1)
+        })()
+      
+    </script>
+
+{% endblock %}

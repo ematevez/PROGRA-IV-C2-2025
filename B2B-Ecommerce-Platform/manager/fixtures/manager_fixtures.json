@@ -1,0 +1,292 @@
+[
+    {
+        "fields": {
+            "name": "Bosnia and Herzegovina",
+            "slug": "bosnia-and-herzegovina-5c9d2542-90a8-4c22-9073-eb1"
+        },
+        "model": "manager.location",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "name": "Indonesia",
+            "slug": "indonesia-c6a61ff7-eeba-4ac3-a185-73ae328114b9"
+        },
+        "model": "manager.location",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "name": "Thailand",
+            "slug": "thailand-4221255f-05d1-430b-9426-cbf740373627"
+        },
+        "model": "manager.location",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "name": "South Korea",
+            "slug": "south-korea-f49e17b5-86c3-4e57-ae1b-415be9ae616b"
+        },
+        "model": "manager.location",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "name": "Brazil",
+            "slug": "brazil-42333e09-f660-4d5a-8cda-796b80f1674b"
+        },
+        "model": "manager.location",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "name": "China",
+            "slug": "china-d9776930-2cea-4b6b-a6fd-2382e953a130"
+        },
+        "model": "manager.location",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "name": "France",
+            "slug": "france-c686e3fb-989d-435b-b7e6-c2d38d3fc830"
+        },
+        "model": "manager.location",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "name": "Portugal",
+            "slug": "portugal-7761fe42-5986-44f3-8c5a-aff22692983c"
+        },
+        "model": "manager.location",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "name": "Indonesia",
+            "slug": "indonesia-a370673f-fa7d-4b4e-9480-b5a007f4425f"
+        },
+        "model": "manager.location",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "name": "China",
+            "slug": "china-a5e08ce4-f3c4-41c7-a64b-04717bb5bade"
+        },
+        "model": "manager.location",
+        "pk": 10
+    },
+    {
+        "fields": {
+            "location": 1,
+            "name": "capacity",
+            "slug": "capacity-021ce5a3-dbe2-4c74-aed2-b1916a61fc54",
+            "store": [
+                1
+            ]
+        },
+        "model": "manager.showroom",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "location": 2,
+            "name": "functionalities",
+            "slug": "functionalities-ac9a40df-f76f-4a9e-be9e-37e2fb04b7",
+            "store": [
+                2
+            ]
+        },
+        "model": "manager.showroom",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "location": 3,
+            "name": "impactful",
+            "slug": "impactful-c2a7933a-62d5-4d62-bc07-0f08b074c91a",
+            "store": [
+                3
+            ]
+        },
+        "model": "manager.showroom",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "location": 4,
+            "name": "contingency",
+            "slug": "contingency-e2a4e5ac-8573-4373-8248-2a066065dea6",
+            "store": [
+                4
+            ]
+        },
+        "model": "manager.showroom",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "location": 5,
+            "name": "Realigned",
+            "slug": "realigned-f9cd4d7d-74bf-45fa-9d40-59b82bb1f8b0",
+            "store": [
+                5
+            ]
+        },
+        "model": "manager.showroom",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "location": 6,
+            "name": "capability",
+            "slug": "capability-e8165e80-bc52-41e1-929d-98bd9318bb1c",
+            "store": [
+                6
+            ]
+        },
+        "model": "manager.showroom",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "location": 7,
+            "name": "disintermediate",
+            "slug": "disintermediate-4c48ca6f-af53-42e5-9596-092f84d0e8",
+            "store": [
+                7
+            ]
+        },
+        "model": "manager.showroom",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "location": 8,
+            "name": "product",
+            "slug": "product-d11dba83-c371-4825-a47f-2015ba3e7aac",
+            "store": [
+                8
+            ]
+        },
+        "model": "manager.showroom",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "location": 9,
+            "name": "database",
+            "slug": "database-5e55b63a-38f6-4b3b-b6e4-b79977214e10",
+            "store": [
+                9
+            ]
+        },
+        "model": "manager.showroom",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "location": 10,
+            "name": "Configurable",
+            "slug": "configurable-3de98166-5a62-46f1-9aa6-a777d67dd9d4",
+            "store": [
+                10
+            ]
+        },
+        "model": "manager.showroom",
+        "pk": 10
+    },
+    {
+        "fields": {
+            "description": "middleware",
+            "name": "capacity",
+            "slug": "capacity-d288878a-5431-4925-a68d-464709667947"
+        },
+        "model": "manager.service",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "description": "initiative",
+            "name": "functionalities",
+            "slug": "functionalities-6ab5e0e2-c2f5-42a0-becd-91ba106597"
+        },
+        "model": "manager.service",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "description": "hybrid",
+            "name": "impactful",
+            "slug": "impactful-ecb6d1e9-a1c5-4adf-be06-5de3b22f9987"
+        },
+        "model": "manager.service",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "description": "modular",
+            "name": "contingency",
+            "slug": "contingency-b444f720-4ac7-48ae-8736-6b4000e012bb"
+        },
+        "model": "manager.service",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "description": "Optional",
+            "name": "Realigned",
+            "slug": "realigned-100799d6-6938-4dd7-aff4-8372b735e4ca"
+        },
+        "model": "manager.service",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "description": "Switchable",
+            "name": "capability",
+            "slug": "capability-23ca9203-6a2e-4c24-b87f-5359284d17e0"
+        },
+        "model": "manager.service",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "description": "policy",
+            "name": "disintermediate",
+            "slug": "disintermediate-11a0a7ee-d5cb-4a7e-b424-480b502fa7"
+        },
+        "model": "manager.service",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "description": "Front-line",
+            "name": "product",
+            "slug": "product-47eec3ee-96e6-4457-b047-36bd8554aba6"
+        },
+        "model": "manager.service",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "description": "Profit-focused",
+            "name": "database",
+            "slug": "database-b11e18c3-0bd6-4e15-915d-81bdd33921c5"
+        },
+        "model": "manager.service",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "description": "adapter",
+            "name": "Configurable",
+            "slug": "configurable-b16eb35d-c6e0-4776-a820-c76d2cc3cddc"
+        },
+        "model": "manager.service",
+        "pk": 10
+    }
+]

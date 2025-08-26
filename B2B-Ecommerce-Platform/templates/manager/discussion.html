@@ -1,0 +1,73 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load format_date %}
+{% block content %}
+
+<section class="main w-12/12 py-6 pt-0 gap-8" style="block-size: auto;">
+    <div class="grid gap-10 w-10/12 mx-auto my-6">
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                    <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                    </div>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                    <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <div class="grid gap-4">
+            <div class="grid gap-2 border border-solid border-yellowColor px-4 py-3 rounded">
+                <span class="flex gap-1 items-center">
+                    <h4 class="font-semibold text-lg">{{discussion.subject}}</h4>
+                    <span>-</span>
+                    <span class="font-semibold text-base text-slate-500">{{ discussion.user.first_name }} {{ discussion.user.last_name }}</span>
+                </span>
+                <div class="grid gap-2">
+                    <p class="text-base text-slate-600">{{ discussion.description }}</p>
+                </div>
+                <div class="flex gap-2 justify-between">
+                    <span class="text-sm text-slate-500">{{ discussion.created_on|format_date }}</span>
+                    <a href="#reply" class="text-yellowColor text-base font-bold rounded-full">{% trans 'Reply' %}</a>
+                </div>
+            </div>
+
+            {% if replies %}
+                <div class="grid gap-4 ml-10">
+                    <h4 class="text-xl font-semibold">{% trans "Replies" %}</h4>
+                    {% for reply in replies %}
+                        <div class="grid gap-2 border border-solid border-slate-300 px-4 py-3 rounded">
+                            <span class="flex gap-1 items-center">
+                                <h4 class="font-semibold text-lg">{{ reply.user.first_name }} {{ reply.user.last_name }}</h4>
+                            </span>
+                            <div class="grid gap-2">
+                                <p class="text-base text-slate-600">{{ reply.description }}</p>
+                                <div class="flex gap-2">
+                                    {% if reply.user.account_type == "ADMIN" or reply.user.account_type == "SUPPORT" %}
+                                        <span class="text-sm text-yellowColor font-bold">SUPPORT</span>
+                                    {% endif %}
+                                    <span class="text-sm text-slate-500">{{ reply.created_on|format_date }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <form action="{% url 'manager:discussion' discussion.slug %}" method="POST" class="grid gap-4" id="reply">
+            {%csrf_token %}
+            <h3 class="font-semibold text-xl">{% trans 'Send a Reply' %}</h3>
+            <textarea name="description" style="background-color: transparent;" id="description" cols="30" rows="5" required></textarea>
+            <input type="submit" value="Send" class="justify-self-start bg-yellowColor text-white text-base px-4 py-2 rounded-full">
+        </form>
+    </div>
+</section>
+
+{% endblock %}

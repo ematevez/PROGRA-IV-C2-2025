@@ -1,0 +1,183 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <section class="main w-12/12 py-6 pt-0" style="block-size: auto;">
+        <div class="breadcrumb flex flex-wrap justify-start gap-2 w-full md:w-full mx-auto px-5 pt-0">
+            <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
+            <a>/</a>
+            <a class="text-gray-600 hover:text-gray-900" href=''>{% trans 'Suppliers' %}</a>
+            <a>/</a>
+            <span class="text-lightBackgroundColor capitalize">{{object.business_name}}</span>
+        </div>
+        <div class="grid gap-6 md:gap-10 p-5 py-0 supplier-detail w-full md:w-full mx-auto">
+            <div class="grid gap-4 justify-start content-start">
+                <div class="grid md:grid-flow-col justify-between gap-1">                        
+                    <h3 class="text-xl md:text-2xl font-bold text-lghterBackgroundColor">
+                        {{object.business_name}}</h3>
+                </div>
+                <div class="client-infor grid gap-6 py-4 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                    <div class="grid gap-2">
+                        <h4 class="text-lg font-semibold text-lightBackgroundColor">{% trans 'About Supplier' %}</h4>
+                        <p class="text-base font-normal text-slate-800">
+                            {{object.business_description}}
+                        </p>
+                    </div>
+                    <div class="grid items-start gap-2">
+                        <h4 class="text-lg font-semibold">{% trans 'Detailed Supplier Information' %}</h4>
+                        <span class="flex gap-1 items-start">
+                            <h3 class="text-base font-semibold text-lightBackgroundColor">{% trans 'Business Name' %}: </h3>
+                            <p class="font-normal text-slate-700">{{object.business_name}}</p>
+                        </span>
+                        <span class="grid gap-1 md:grid-flow-col gap-2">
+                            <h3 class="text-base font-semibold text-lightBackgroundColor">{% trans 'Business Address' %}:</h3>
+                            <ul class="list-none grid gap-1 list-inside mc:ml-0 font-normal text-slate-700">
+                                <li><span class="text-slate-500">VAT No:</span> {{object.vat_number}}</li>
+                                <li><span class="text-slate-500">LEI:</span> {{object.legal_etity_identifier}}</li>
+                                <li>+({{object.country_code}}) {{object.mobile_user}}</li>
+                                <li>{{object.city}}</li>
+                                <li>{{object.country}}</li>
+                                <li>{{object.website}}</li>
+                            </ul>
+                        </span>
+                    </div>
+                </div>
+                <!-- <div class="grid gap-4 justify-start">
+                    <div class="membership-sticker grid place-items-center text-white font-semibold px-4 py-2 " style="background-color: rgb(92, 204, 241);">Premium Supplier</div>
+                    <p class="text-slate-700 flex gap-2" data-context="{{product_supplier.context_name}}">
+                        <span>Country: </span>
+                        <span class="font-semibold">France</span>
+                    </p>
+                </div> -->
+                {% if request.user.business != object %}
+                <div class="cta flex flex-wrap gap-3 my-3">
+                    <a href="{% url 'supplier:supplier-contact' object.slug %}" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                        <span class="text-white"><i class="fa fa-envelope"></i></span>
+                        <span>{% trans 'Compose Email' %}</span>
+                    </a>
+                    <a href="{% url 'coms:interclient-chat-init' object.slug %}" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-lighterBackgroundColorHover hover:bg-lghterBackgroundColor duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                        <span class="text-white"><i class="fa fa-comment"></i></span>
+                        <span>{% trans 'Live Chat' %}</span>
+                    </a>
+                    <a href="{% url 'supplier:supplier-contact' object.slug %}" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-black hover:bg-black duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                        <span class="text-white"><i class="fa fa-phone"></i></span>
+                        <span>{% trans 'Schedule A Call' %}</span>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    {% if supplier_service.results %}
+        <section class="main w-12/12 py-6 md:py-10" style="background-color: #FFFFFF;">
+            <div class="grid w-full mx-auto cf-1 gap-4 md:gap-6 w-full md:w-full mx-auto">
+                <div class="section-heading  flex justify-between px-4 items-center">
+                    <h2 class="sec-title text-lg capitalize md:text-xl font-bold text-lghterBackgroundColor capitalize">{{object.business_name}} {% trans 'Services' %}</h2>
+                </div>
+                <div class="section-body grid gap-4 md:gap-3 grid-cols-1 md:grid-cols-4" data-content="{{supplier_service.context_name}}">
+                    {% for service in supplier_service.results %}
+                        <div class="service grid gap-3 p-4 card-outlined rounded content-start">
+                            <h2 class="text-lg font-semibold text-lghterBackgroundColor">{{service.service.name}}</h2>
+                            <hr/>
+
+                            <div class="grid gap-2">
+                                <p class="text-base text-slate-700 font-normal">
+                                    {{service.service.description}}
+                                </p>
+
+                                <div class="flex gap-1 flex-wrap">
+                                    {% for tag in service.tags %}
+                                        <span style="color: hsla(189, 96%, 30%, 0.836);">{{tag.name}}, </span>
+                                    {% endfor %}
+                                </div>
+
+                                <a href="{% url 'supplier:supplier-contract' service.service.slug %}" class="flex place-items-center gap-2 px-2 text-base text-yellowColor duration-200 transition-all ease-in rounded-full  font-semibold justify-self-start">
+                                    <span><i class="fa fa-money"></i></span>
+                                    <span>Make Contract</span>
+                                </a>
+                            </div>
+
+                            {% if service.service.contract_count %}
+                                <hr>
+                                <p class="text-base text-slate-500 font-normal">
+                                    <span class="font-semibold">
+                                        {{service.service.contract_count}}</span>
+                                    <span>Contracted Customers</span>
+                                </p>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {% if products.results %}
+        <section class="main w-12/12" style="block-size: auto">
+            <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: 1fr;">             
+                <div class="flex p-2 px-2 pt-0 justify-between items-baseline">
+                    <div class="flex gap-5">
+                        <h1 class="capitalize sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{{object.business_name}} Products</h1>
+                    </div>
+                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="{% url 'supplier:products' %}?supplier={{object.business_name}}">View All</a>
+                </div>
+                <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-6 py-4"
+                data-context="{{products.context_name}}">
+                    {% for product in products.results %}
+                        <div class="single-image-product-card overflow-hidden rounded grid gap-0.5 card-outlined">
+                            <a class="grid gap-2 rounded overflow-hidden" href="{% url 'supplier:product-detail' product.product.slug %}">
+                                <img loading="lazy" src="/media/{{product.images.image}}" alt="{{product.name}}"
+                                    class="item-img rounded" style="width: 100%;object-fit:cover;">
+                                <div class="item-details grid gap-0 py-1 md:py-2 px-4 gap-2"
+                                    style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                    <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">
+                                        {{product.product.name|slice:":40"}}..
+                                    </h5>
+                                    <p class="text-xs font-medium">
+                                        <span>{{product.product.currency}}</span>
+                                        <span>{{product.product.price}}</span>
+                                    </p>
+                                </div>
+                                <span class="grid items-center pb-2 px-4 font-semibold text-sm">By {{ product.supplier.profile.business_name }}</span>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {% if stores.results %}
+        <section class="main w-12/12 py-3 my-3">
+            <div class=" w-full md:w-full mx-auto grid">                    
+                <div class="flex p-2 px-2 pt-0 justify-between items-baseline">
+                    <div class="flex gap-5">
+                        <h1 class="capitalize sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{{object.business_name}} {% trans "Stores" %}</h1>
+                    </div>
+                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="{% url 'supplier:store-list' %}">View All</a>
+                </div>
+                <div class="grid gap-3 md:grid-cols-5 rounded-md py-3" data-content="{{stores.context_name}}">
+                    {% for store in stores.results %}
+                        <div class="store-card grid items-start rounded-md card gap-4">
+                            <a class="grid gap-1 rounded-md overflow-hidden" href="{% url 'supplier:store-detail' store.slug %}">
+                                <img loading="lazy" src="/media/{{store.image}}" alt="{{store.name}}" class="img-wrapper rounded-md">
+                                <div class="card-details grid items-end px-4 py-4">
+                                    <h2 class="text-lg leading-5 text-white font-bold">    
+                                        {{store.name}}
+                                    </h2>
+                                    <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                        <span>{{store.supplier.profile.business_name}}</span>
+                                        <!-- <span>120 Products</span> -->
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+ 
+{% endblock %}

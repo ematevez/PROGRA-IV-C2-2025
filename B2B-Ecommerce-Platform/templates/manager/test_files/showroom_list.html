@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden - {{ view_name }}</title>
+</head>
+<body>
+
+
+    <div class="flex">
+        <a href="{% url 'manager:home' %}" data-link="products">Home</a>
+        <a href="{% url 'supplier:products' %}" data-link="products">Products</a>
+        <a href="{% url 'manager:showrooms' %}" data-link="products">Showrooms</a>
+        <a href="{% url 'manager:services' %}" data-link="products">Services</a>
+        <a href="{% url 'manager:support' %}" data-link="products">Support</a>
+        <a href="{% url 'manager:about-us' %}" data-link="products">About Us</a>
+    </div>
+
+    <h4>Sort by location</h4>
+    <ul data-context="{{locations}}" style="display: flex; gap: 2rem;">
+        {% for location in locations.results %}
+        <li data-location-index="{{ forloop.counter }}">
+            <a href="">{{location.name}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Showrooms</h3>
+    <ul data-context='{{ product_categories.context_name }}' style="display: grid;grid-template-columns: repeat(5, 1fr); gap: 2rem;">
+        {% for showroom in object_list %}
+            <li data-showroom-index="{{forloop.counter}}">
+                <a href="{% url 'manager:showroom-detail' showroom.slug %}">
+                    <img style="width: 100%" src="/media/{{ showroom.image }}" alt="">
+                    <p>{{ showroom.name }}</p>
+                    <p>{{ showroom.location }}</p>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>

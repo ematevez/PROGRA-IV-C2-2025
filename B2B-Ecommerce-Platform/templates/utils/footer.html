@@ -1,0 +1,290 @@
+{% load static %}
+{% load i18n %}
+
+<style>
+    .flex-left-bottom a,
+    footer li a {
+        color: #717171;
+    }
+
+    .flex-left-bottom a {
+        padding-inline-end: .4rem;
+    }
+
+    .flex-left-bottom a:last-child {
+        border-inline-end: unset;
+    }
+
+    #footer-small {
+        display: none;
+    }
+
+    .accordion {
+        width: 100%;
+    }
+
+    .accordion-collapsible {
+        background: transparent;
+    }
+
+    .accordion-collapsible:not(:last-child) {
+        border-bottom: none;
+    }
+
+    .collapsible-header {
+        font-size: 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: .25rem 0;
+        cursor: pointer;
+    }
+
+    .collapsible-header::after {
+        content: '+';
+        position: relative;
+        right: .625rem;
+    }
+
+    .collapsible-content {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height .3s, opacity 1s;
+    }
+
+    .collapsible-open .collapsible-header::after {
+        content: '-';
+    }
+
+    .collapsible-open .collapsible-content {
+        max-height: 100%;
+        opacity: 1;
+    }
+
+    .collapsible-content ul li {
+        margin: .1rem 0;
+    }
+
+    .collapsible-content ul li a {
+        font-size: 16px;
+        margin: .625rem;
+    }
+
+    .collapsible-content ul li a {
+        color: #333232;
+    }
+
+    @media (max-width: 786px) {
+        .advert .section-item-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .section-heading h2:first-child,
+        .section-heading h2:last-child {
+            display: none;
+        }
+
+        #footer-large {
+            display: none;
+        }
+
+        #footer-small {
+            display: block;
+        }
+    }
+</style>
+
+    <footer class="mt-4 pt-6 grid">
+        <div class="container-fluid foot mt-50 grid gap-6 w-12" id="footer-large">
+            <div class="container">
+                <div class="fc flex">
+                    <div class="flex hoverables" style="width:100%;height:auto;">
+                        <div class="cl cl1">
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'Popular Features' %}</h1>
+                            <ul class="py-2 md:py-0">
+                                <li><a href="{% url 'manager:guides-stores' %}">{% trans 'Stores' %}</a></li>
+                                <li><a href="{% url 'manager:guides-showrooms' %}">{% trans 'Showrooms' %}</a></li>
+                                <li><a href="{% url 'manager:guides-products' %}">{% trans 'Products' %}</a></li>
+                                <li><a href="{% url 'manager:guides-memberships' %}">{% trans 'Memberships' %}</a></li>
+                            </ul>
+                        </div>
+                        <div class="cl cl2">
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'Payment Methods' %}</h1>
+                            <ul class="py-2 md:py-0">
+                                <li><a href="#">{% trans 'PayPal' %}</a></li>
+                                <li><a href="#">{% trans 'Apple Pay' %}</a></li>
+                                <li><a href="#">{% trans 'Google Pay' %}</a></li>
+                                <li><a href="#">{% trans 'Cards' %}</a></li>
+                            </ul>
+                        </div>
+                        <div class="cl cl2">
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'FAQs' %}</h1>
+                            <ul class="py-2 md:py-0">
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-stores' %}">{% trans 'What is a store?' %}</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-showrooms' %}">{% trans 'What is a showroom?' %}</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-services' %}">{% trans 'What is a Supplier service?' %}</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-memberships' %}">{% trans 'What are memberships?' %}</a></li>
+                            </ul>
+                        </div>
+                        <div class="cl cl4">
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'Company' %}</h1>
+                            <ul class="py-2 md:py-0">
+                                <li><a href="{% url 'manager:services' %}">{% trans 'Services' %}</a></li>
+                                <li><a href="{% url 'manager:about-us' %}">{% trans 'About Us' %}</a></li>
+                                <li><a href="{% url 'manager:support' %}">{% trans 'Support' %}</a></li>
+                                <li><a href="{% url 'payments:memberships' %}">{% trans 'Memberships' %}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container" style="margin: 10px auto;">
+                <div class="flex" style="justify-content:space-between;margin:.6rem 0;">
+                    <div class="flex-left">
+                        <div class="flex-left-top" style="margin-bottom:14px;">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                                {% if language.code == LANGUAGE_CODE  %}
+                                    <span style="border:1px solid #ccc;border-radius:5px;padding: 5px 15px;text-decoration:none;">{{ language.name_local }}</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="flex-left-bottom flex">
+                            <span style="margin-inline-end:10px;color: #717171;">© Foroden <script>document.write(new Date().getFullYear())</script></span>
+                            <a href="{% url 'manager:dashboard' %}{% if not request.user.is_authenticated %}?next=dashboard{% endif %}"
+                                style="margin-inline-end:10px;margin-inline-start:20px;">{% trans "Admin" %}</a>
+                            <a href="#" style="margin-inline-end:10px;">{% trans "Terms" %}</a>
+                            <a href="#" style="margin-inline-end:10px;">{% trans "Privacy" %}</a>
+                            <a href="#" style="margin-inline-end:10px;">{% trans "Legal" %}</a>
+                            <a href="#" style="margin-inline-end:10px;">{% trans "Accessibility Statement" %}</a>
+                        </div>
+                    </div>
+                    <div class="flex-right">
+                        <div class="flex-left-top">
+                            <i class="ti-facebook" style="margin-inline-end:10px;"></i>
+                            <i class="ti-twitter" style="margin-inline-end:10px;"></i>
+                            <i class="ti-linkedin" style="margin-inline-end:10px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container-fluid foot mt-50" id="footer-small">
+            <div class="container hidden" style="margin-block:1.2rem;">
+                <div class="accordion">
+                    <div class="accordion-collapsible">
+                        <div class="collapsible-header">
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'Popular Features' %}</h1>
+                        </div>
+                        <div class="collapsible-content">
+                            <ul class="py-2 md:py-0">
+                                <li><a href="{% url 'manager:guides-stores' %}">{% trans 'Stores' %}</a></li>
+                                <li><a href="{% url 'manager:guides-showrooms' %}">{% trans 'Showrooms' %}</a></li>
+                                <li><a href="{% url 'manager:guides-products' %}">{% trans 'Products' %}</a></li>
+                                <li><a href="{% url 'manager:guides-memberships' %}">{% trans 'Memberships' %}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-collapsible">
+                        <div class="collapsible-header">
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'Payment Methods' %}</h1>
+                        </div>
+                        <div class="collapsible-content">
+                            <ul class="py-2 md:py-0">
+                                <li>{% trans 'PayPal' %}</li>
+                                <li>{% trans 'Venmo' %}</li>
+                                <li>{% trans 'Google Pay' %}</li>
+                                <li>{% trans 'Cards' %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-collapsible">
+                        <div class="collapsible-header">
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'FAQs' %}</h1>
+                        </div>
+                        <div class="collapsible-content">
+                            <ul class="py-2 md:py-0">
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-stores' %}">{% trans 'What is a store?' %}</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-showrooms' %}">{% trans 'What is a showroom?' %}</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-services' %}">{% trans 'What is a Supplier service?' %}</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-memberships' %}">{% trans 'What are memberships?' %}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-collapsible">
+                        <div class="collapsible-header">
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'Company' %}</h1>
+                        </div>
+                        <div class="collapsible-content">
+                            <ul class="py-2 md:py-0">
+                                <li><a href="{% url 'manager:services' %}">{% trans 'Services' %}</a></li>
+                                <li><a href="{% url 'manager:about-us' %}">{% trans 'About Us' %}</a></li>
+                                <li><a href="{% url 'manager:support' %}">{% trans 'Support' %}</a></li>
+                                <li><a href="{% url 'payments:memberships' %}">{% trans 'Memberships' %}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container" style="margin-bottom:25px;">
+                <div class="flex" style="flex-direction:column;">
+                    <div class="flex" style="justify-content: center;">
+                        <a href="{% url 'app_admin:home' %}" style="margin-inline-end:10px;">{% trans "Admin" %}</a>
+                        <a href="#" style="margin-inline-end:10px;">{% trans "Terms" %}</a>
+                        <a href="#" style="margin-inline-end:10px;">{% trans "Privacy" %}</a>
+                        <a href="#" style="margin-inline-end:10px;">{% trans "Legal" %}</a>
+                        <a href="#" style="margin-inline-end:10px;">{% trans "Accessibility" %}</a>
+                    </div>
+                    <div class="flex" style="justify-content: center;margin-block-start: .4rem;">
+                        <i class="ti-facebook" style="margin-inline-end:10px;"></i>
+                        <i class="ti-twitter" style="margin-inline-end:10px;"></i>
+                        <i class="ti-linkedin" style="margin-inline-end:10px;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'owl-carousel/owl.carousel.js' %}"></script>
+    <script>
+
+        // const toggleDropdownFoot = document.querySelector('#toggle-dropdown-foot');
+        // const dropdownFoot = document.querySelector('.dropdown-foot');
+        // toggleDropdownFoot.addEventListener('click', () => {
+        //     // It looks like tailwind is blocking this class
+        //     dropdownFoot.classList.toggle('hide');
+        // });
+
+        let collapsibleHeaders = document.getElementsByClassName('collapsible-header');
+        let collapsibleSubHeaders = document.getElementsByClassName('collapsible-sub-header');
+
+        Array.from(collapsibleHeaders).forEach((header, i) => {
+            header.addEventListener('click', () => {
+                if (header.parentElement.classList.contains('collapsible-open')) {
+                    header.parentElement.classList.toggle('collapsible-open');
+                    return;
+                }
+                Array.from(collapsibleHeaders).forEach(header => {
+                    header.parentElement.classList.remove('collapsible-open');
+                });
+                header.parentElement.classList.toggle('collapsible-open');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<script src="https://www.paypal.com/sdk/js?client-id=AVtfMXZd9wxW19asF-CH9XMsGdzbSBqop8qCgwgR9zWEMlMeX4KOxuuHHiyhv282-SH7xAtl7z3eEmag&components=buttons"></script>
+
+
+<script src="https://js.braintreegateway.com/web/dropin/1.18.0/js/dropin.min.js"></script>
+<script src="https://pay.google.com/gp/p/js/pay.js"></script>
+<script src="https://js.braintreegateway.com/web/3.86.0/js/client.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.86.0/js/google-payment.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.86.0/js/client.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.86.0/js/data-collector.min.js"></script>
+
+<!-- <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+<script src="https://js.stripe.com/v3/"></script> -->
+
+<section class="main w-12/12 py-6" style="block-size: auto;">
+
+    <div class="mx-auto w-10/12 rounded-md py-4 px-6 grid gap-4">
+        <div class="grid justify-betweeen px-2 gap-3">
+            <div class="grid">
+                <h2 class="text-2xl font-bold text-lghterBackgroundColor">{% trans '1.' %} {% trans 'Contract Details' %}</h2>
+            </div>
+            <div class="grid ml-6 gap-1">
+            <p class="text-lg text-slate-600">{% trans 'Service' %}: <span class="text-slate-900 text-lghterBackgroundColor font-semibold">{{ contract.service.name }}</span></p>
+                <p class="text-lg text-slate-600">{% trans 'Price' %}: <span class="text-slate-900 text-lghterBackgroundColor font-semibold">{{ contract.service.currency }} {{ contract.service.price }}</span></p>
+                <p class="text-lg text-slate-600">{% trans 'Start Date' %}: <span class="text-slate-900 text-lghterBackgroundColor font-semibold">{{ contract.start_date }}</span></p>
+                <p class="text-lg text-slate-600">{% trans 'End Date' %}: <span class="text-slate-900 text-lghterBackgroundColor font-semibold">{{ contract.end_date }}</span></p>
+                <p class="text-lg text-slate-600">{{ contract.service.description }}</span></p>
+            </div>
+
+            <ul class="list grid gap-2 px-4 py-4">
+                {% for feature in features.results %}
+                    <li class="flex text-lg gap-3 items-center text-slate-700"><i class="fa fa-check"></i> {{feature.name}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+            
+        <div class="grid justify-betweeen px-2 gap-2">
+            <div class="grid">
+                <h2 class="text-2xl font-bold text-lghterBackgroundColor">{% trans '2.' %} {% trans 'Select Payment Method' %}</h2>
+            </div>
+
+            <div class="grid gap-3 py-3">
+                <div class="flex gap-2 px-4 flex-wrap">
+                    <div class="google-container">
+                        <span id="google-pay-button">
+                            <img src="{% static 'icons/GPay.png' %}" style="inline-size: auto;block-size: 70px;" alt="g-pay">
+                        </span>
+                    </div>
+                </div>
+                <div class="payment-methods grid md:grid-cols-2 gap-4 justify-start">
+                    <div class="flex justify-center p-3" id="paypal-button-container"></div>
+                    <form autocomplete="off">
+                        {% if braintree_error %}
+                        <div class="alert alert-danger fade in">
+                            <button class="close" data-dismiss="alert">&times;</button>
+                            {{ braintree_error|safe }}
+                        </div>
+                        {% endif %}
+                        <div class="braintree-notifications"></div>
+                        <div id="braintree-dropin"></div>
+                        <input style="background-color: #0783ca" id="braintree-submit-button" class="btn btn-success btn-lg btn-block" type="button" value="Pay now!" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

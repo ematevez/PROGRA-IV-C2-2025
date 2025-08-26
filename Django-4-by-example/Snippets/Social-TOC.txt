@@ -1,0 +1,165 @@
+04 Building a Social Website
+   01 Creating a social website project
+      01 Starting the social website project
+         ch04/01.01/bookmarks/settings_00.py
+         ch04/01.01/bookmarks/urls_00.py
+         ch04/01.01/account/admin_00.py
+         ch04/01.01/account/models_00.py
+         ch04/01.01/account/views_00.py
+         ch04/01.01/bookmarks/settings_01.py
+   02 Using the Django authentication framework
+      01 Creating a login view
+         ch04/02.01/account/forms_01.py
+         ch04/02.01/account/views_01.py
+         ch04/02.01/account/urls_01.py
+         ch04/02.01/bookmarks/urls_01.py
+         Chapter04/bookmarks/account/static/css/base.css
+         ch04/02.01/account/templates/base_01.html
+         Chapter04/bookmarks/account/templates/account/login.html
+      02 Using Django authentication views
+      03 Login and logout views
+         ch04/02.03/account/urls_01.py
+         ch04/02.03/account/templates/registration/login_01.html
+         Chapter04/bookmarks/account/templates/registration/logged_out.html
+         ch04/02.03/account/views_01.py
+         ch04/02.03/account/templates/account/dashboard_01.html
+         ch04/02.03/account/urls_02.py
+         ch04/02.03/bookmarks/settings_01.py
+         ch04/02.03/account/templates/base_01.html
+      04 Change password views
+         ch04/02.04/account/urls_01.py
+         Chapter04/bookmarks/account/templates/registration/password_change_form.html
+         Chapter04/bookmarks/account/templates/registration/password_change_form.html
+      05 Reset password views
+         ch04/02.05/account/urls_01.py
+         Chapter04/bookmarks/account/templates/registration/password_reset_form.html
+         Chapter04/bookmarks/account/templates/registration/password_reset_email.html
+         Chapter04/bookmarks/account/templates/registration/password_reset_done.html
+         Chapter04/bookmarks/account/templates/registration/password_reset_confirm.html
+         Chapter04/bookmarks/account/templates/registration/password_reset_complete.html
+         ch04/02.05/account/templates/registration/login_01.html
+         ch04/02.05/bookmarks/settings_01.py
+         ch04/02.05/account/urls_02.py
+   03 User registration and user profiles
+      01 User registration
+         ch04/03.01/account/forms_01.py
+         ch04/03.01/account/forms_02.py
+         ch04/03.01/account/views_01.py
+         ch04/03.01/account/urls_01.py
+         Chapter04/bookmarks/account/templates/account/register.html
+         Chapter04/bookmarks/account/templates/account/register_done.html
+         Chapter04/bookmarks/account/templates/registration/login.html
+      02 Extending the user model
+         Chapter04/bookmarks/account/models.py
+      03 Installing Pillow and serving media files
+         ch04/03.03/bookmarks/settings_01.py
+         Chapter04/bookmarks/bookmarks/urls.py
+         Chapter04/bookmarks/account/admin.py
+      04 Creating migrations for the profile model
+         ch04/03.04/account/forms_01.py
+         ch04/03.04/account/views_01.py
+         ch04/03.04/account/views_02.py
+         Chapter04/bookmarks/account/urls.py
+         Chapter04/bookmarks/account/templates/account/edit.html
+         Chapter04/bookmarks/account/dashboard.html
+         01 Using a custom user model
+      05 Using the messages framework
+         Chapter04/bookmarks/account/templates/base.html
+         Chapter04/bookmarks/account/views.py
+   04 Building a custom authentication backend
+      Chapter04/bookmarks/account/authentication.py
+      Chapter04/bookmarks/bookmarks/settings.py
+      01 Preventing users from using an existing email
+         ch04/04.01/account/forms_01.py
+         Chapter04/bookmarks/account/forms.py
+   05 Additional resources
+   06 Summary
+05 Implementing Social Authentication
+   01 Adding social authentication to your site
+      ch05/01/bookmarks/settings_01.py
+      Chapter05/bookmarks/bookmarks/urls.py
+      ch05/01/bookmarks/settings_02.py
+      01 Running the development server through HTTPS
+         ch05/01.01/bookmarks/settings_01.py
+      02 Authentication using Facebook
+         ch05/01.02/bookmarks/settings_01.py
+         ch05/01.02/bookmarks/settings_02.py
+         ch05/01.02/account/templates/registration/login_01.html
+      03 Authentication using Twitter
+         ch05/01.03/bookmarks/settings_01.py
+         ch05/01.03/bookmarks/settings_02.py
+         ch05/01.03/account/templates/registration/login_01.html
+      04 Authentication using Google
+         ch05/01.04/bookmarks/settings_01.py
+         ch05/01.04/bookmarks/settings_02.py
+         Chapter05/bookmarks/account/templates/registration/login.html
+      05 Creating a profile for users that register with social authentication
+         ch05/01.05/bookmarks/settings_01.py
+         Chapter05/bookmarks/account/authentication.py
+         Chapter05/bookmarks/bookmarks/settings.py
+   02 Additional resources
+   03 Summary
+06 Sharing Content on Your Website
+   01 Creating an image bookmarking website
+      ch06/01/images/admin_00.py
+      ch06/01/images/models_00.py
+      ch06/01/images/views_00.py
+      ch06/01/bookmarks/settings_01.py
+      01 Building the image model
+         ch06/01.01/images/models_01.py
+         ch06/01.01/images/models_02.py
+      02 Creating many-to-many relationships
+         ch06/01.02/images/models_01.py
+      03 Registering the image model in the administration site
+         Chapter06/bookmarks/images/admin.py
+   02 Posting content from other websites
+      ch06/02/images/forms_01.py
+      01 Cleaning form fields
+         ch06/02.01/images/forms_01.py
+      02 Installing the Requests library
+         Chapter06/bookmarks/images/forms.py
+      03 Overriding the save() method of a ModelForm
+         ch06/02.03/images/views_01.py
+         ch06/02.03/images/urls_01.py
+         Chapter06/bookmarks/bookmarks/urls.py
+         Chapter06/bookmarks/images/templates/images/image/create.html
+      04 Building a bookmarklet with JavaScript
+         Chapter06/bookmarks/images/templates/images/bookmarklet_launcher.js
+         Chapter06/bookmarks/account/templates/account/dashboard.html
+         ch06/02.04/static/js/bookmarklet_01.js
+         ch06/02.04/static/js/bookmarklet_02.js
+         ch06/02.04/static/js/bookmarklet_03.js
+         ch06/02.04/static/js/bookmarklet_04.js
+         ch06/02.04/static/js/bookmarklet_05.js
+         Chapter06/bookmarks/static/js/bookmarklet.js
+   03 Creating a detail view for images
+      ch06/03/images/views_01.py
+      ch06/03/images/urls_01.py
+      Chapter06/bookmarks/images/models.py
+      ch06/03/images/templates/images/image/detail_01.html
+   04 Creating image thumbnails using easy-thumbnails
+      Chapter06/bookmarks/bookmarks/settings.py
+      ch06/04/images/templates/images/image/detail_01.html
+   05 Adding asynchronous actions with JavaScript
+      ch06/05/images/views_01.py
+      ch06/05/images/urls_01.py
+      01 Loading JavaScript on DOM ready
+         ch06/05.01/account/templates/base_01.html
+      02 Cross-site request forgery for HTTP requests in JavaScript
+         ch06/05.02/account/templates/base_01.html
+      03 Performing HTTP requests with JavaScript
+         ch06/05.03/images/templates/images/image/detail_01.html
+         ch06/05.03/images/templates/images/image/detail_02.html
+         ch06/05.03/images/templates/images/image/detail_03.html
+         Chapter06/bookmarks/images/templates/images/image/detail.html
+   06 Adding infinite scroll pagination to the image list
+      Chapter06/bookmarks/images/views.py
+      Chapter06/bookmarks/images/urls.py
+      Chapter06/bookmarks/images/templates/images/image/list_images.html
+      ch06/06/images/templates/images/image/list_01.html
+      Chapter06/bookmarks/images/templates/images/image/list.html
+      Chapter06/bookmarks/account/templates/base.html
+   07 Additional resources
+   08 Summary
+07 Tracking User Actions
+

@@ -1,0 +1,69 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="content-area outlined" style="padding-block-start: 1.2rem; padding: .6rem .4rem;block-size: 100vh;">
+            <div class="content-area-top" style="justify-content: space-between;padding-block-start: .4rem;">
+                <h3 style="font-weight:600;">{% trans 'Contracts' %}</h3>
+            </div>
+            <div class="card data-table products-table">
+                <table id="buyer-contracts" class="display" style="width:100%;margin-top:.5rem;">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'No' %}</th>
+                            <th>{% trans 'Service' %}</th>
+                            <th>{% trans 'Supplier' %}</th>
+                            <th>{% trans 'Start date' %}</th>
+                            <th>{% trans 'Action' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>{% trans 'No' %}</th>
+                            <th>{% trans 'Service' %}</th>
+                            <th>{% trans 'Supplier' %}</th>
+                            <th>{% trans 'Created on' %}</th>
+                            <th>{% trans 'Action' %}</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                    <div class="cs-grid cs-align-center">
+                        <p class="cs-text-md" style="color: var(--text-color);">{% trans 'Showing Page' %} <span id="current-page-0"></span> {% trans 'of' %} <span id="max-page"></span>. (<span id="table-item-count"></span> {% trans 'Entries' %})</p>
+                    </div>
+                    <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                        <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Previous' %}</button>
+                        <span id="current-page" class="cs-text-md"></span>
+                        <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Next' %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+    <!-- <script src="{% static 'js/modal.js' %}"></script> -->
+    <script>
+        // Table
+        $(document).ready(function () {
+            
+        });
+
+        function navigateToContract() {
+            location.href = "_contract-detail.html";
+        }
+
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+    </script>
+
+{% endblock %}

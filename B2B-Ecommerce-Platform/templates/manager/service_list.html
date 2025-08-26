@@ -1,0 +1,37 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+
+    <section class="main w-12/12 pb-10" style="background-color: #FFFFFF;">
+        <div class="block bg-white px-5">
+            <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full md:mx-auto justify-self-start">
+                <a class="text-gray-600 hover:text-gray-900" href="./index.html">{% trans 'Home' %}</a>
+                <a>/</a>
+                <span class="text-lightBackgroundColor">{% trans 'Services' %}</span>
+            </div>
+        </div>
+        <div class="grid w-full mx-auto gap-4 md:gap-6 w-full md:w-full mx-auto">
+            <div class="section-heading flex justify-between items-center">
+                <h2 class="sec-title text-lg capitalize md:text-xl font-bold text-lghterBackgroundColor">{% trans 'Foroden Services' %}</h2>
+            </div>
+            <div class="section-body grid gap-6 grid-cols-1 md:grid-cols-2">
+                {% for service in object_list %}
+                    <div class="service grid gap-3 p-4 card-outlined items-start content-start rounded">
+                        <h2 class="text-lg font-semibold text-yellowColor px-4 py-2 rounded-md" style="text-transform: capitalize;background: #FEE9CC;justify-self: flex-start;font-weight: 700;">
+                            <i class="ti-medall-alt"></i>
+                            {{service.name}}
+                        </h2>
+                        <hr>
+                        <div class="grid gap-2" style="justify-content: flex-start;">
+                            <pre style="white-space: pre-line;font-family: inherit;line-height: 26px;text-align: justify;" class="text-base text-slate-700 font-normal">
+                                {{service.description}} 
+                            </pre>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

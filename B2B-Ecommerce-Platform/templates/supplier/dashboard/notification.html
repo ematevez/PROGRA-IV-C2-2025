@@ -1,0 +1,124 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="main-content">
+    <div class="cs-content-area card cs-no-box-shadow" style="block-size: fit-content;">
+        <!-- <div class="upper-content-area cs-top-cards cs-no-box-shadow" style="background-color: #fff;">
+            <ul class="nav-links cs-flex cs-align-center" style="--gap: 1rem;justify-self: flex-end;">
+                <li class="section-activavtors" data-target="sec_00"><span>Email</span></li>
+                <li class="section-activavtors" data-target="sec_01"><span>Notifications</span></li>
+                <li class="section-activavtors" data-target="sec_02"><span>SMS</span></li>
+            </ul>
+        </div> -->
+        <div class="section cs-supplier cs-notification" id="sec_00">
+            <div class="notification-window flex">
+                <div class="all-notifications">
+                    <h3>All Channels</h3>
+                    <ul class="notification-channels">
+                        <li class="section-activators active" data-section="sec_01"> <i class="ti-bell"></i> <span>1. Email</span></li>
+                        <li class="section-activators" data-section="sec_02"> <i class="ti-bell"></i> <span>2. Push</span></li>
+                        <li class="section-activators" data-section="sec_03"> <i class="ti-bell"></i> <span>3. SMS</span></li>
+                    </ul>
+                </div>
+                <div class="notification-room">
+                    <div class="notification-section inview" id="sec_01">
+                        <div class="email">
+                            <div class="email-header">
+                                <div class="subject">
+                                    <h4><span class="label">Subject: </span><input type="text" class="value" /></h4>
+                                </div>
+                                <div class="from">
+                                    <h4><span class="label">From: </span><input type="text" class="value" value="fututech@foroden.com" disabled /></h4>
+                                </div>
+                                <div class="to">
+                                    <h4><span class="label">To: </span><input type="text" class="value" /></h4>
+                                </div>
+                            </div>
+                            <div class="email-body">
+                                <div class="content">
+                                    <label for="body">Body: </label>
+                                    <input type="textarea" id="email-body-input" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification-section" id="sec_02">
+                        <div class="email">
+                            <div class="email-header">
+                                <div class="subject">
+                                    <h4><span class="label">Title: </span><input type="text" class="value" /></h4>
+                                </div>
+                                <div class="from">
+                                    <h4><span class="label">Recepient: </span><input type="text" class="value" /></h4>
+                                </div>
+                            </div>
+                            <div class="email-body">
+                                <div class="content">
+                                    <label for="body">Push Message: </label>
+                                    <input type="textarea" id="email-body-input" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification-section" id="sec_03">
+                        <div class="email">
+                            <div class="email-header">
+                                <div class="subject">
+                                    <h4><span class="label">Title: </span><input type="text" class="value" /></h4>
+                                </div>
+                                <div class="from">
+                                    <h4><span class="label">Recepient: </span><input type="text" class="value" /></h4>
+                                </div>
+                            </div>
+                            <div class="email-body">
+                                <div class="content">
+                                    <label for="body">Short Message Service: </label>
+                                    <input type="textarea" id="email-body-input" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{{ category_group|json_script:"category_group" }}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const sectionActivators = document.querySelectorAll(".section-activators");
+        sectionActivators.forEach(
+            activator => activator.addEventListener("click", (event) => {
+                const sectionToShow = document.querySelector(`#${activator.dataset.section}`);
+
+                sectionActivators.forEach(li => {
+                    li.classList.remove("active");
+                })
+                activator.classList.add("active");
+                
+                const openSections = document.querySelectorAll(".notification-section.inview");
+                openSections.forEach(section => section.classList.remove("inview"));
+
+                sectionToShow.classList.add("inview");
+            })
+        );
+
+        tinymce.init({
+            selector: "#email-body-input",
+            width: 100 + "%",
+            height: 300,
+        });
+    
+    
+    });
+
+
+</script>
+
+{% endblock %}

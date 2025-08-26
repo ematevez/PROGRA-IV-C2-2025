@@ -1,0 +1,237 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<style>
+    body {
+        scroll-behavior: smooth;
+    }
+    .about-us {
+        margin: 2rem 0;
+    }
+
+    .about-us h1 {
+        font-size: 24px;
+        font-weight: bolder;
+    }
+
+    .about-us-image {
+        inline-size: 100%;
+        block-size: 450px;
+    }
+
+    .about-us-image img {
+        inline-size: 100%;
+        block-size: 100%;
+    }
+
+    .statements {
+        margin: .8rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .our-history,
+    .our-statistics,
+    .our-mission {
+        border-right: 1px solid rgb(228, 225, 225);
+    }
+
+    .our-history,
+    .our-statistics,
+    .our-mission,
+    .our-vision {
+        padding: 0 .5rem;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .our-history:hover,
+    .our-statistics:hover,
+    .our-mission:hover,
+    .our-vision:hover {
+        text-decoration: underline;
+    }
+
+    .what-we-do {
+        display: flex;
+        inline-size: 100%;
+        padding: 0;
+        padding-block: 2.5rem;
+    }
+
+    .what-we-do-items {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem 0;
+    }
+
+    .what-we-do-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .what-we-do-item img {
+        block-size: 90px;
+        inline-size: 90px;
+    }
+
+    .what-we-do-item h3 {
+        text-align: center;
+    }
+
+    @media (max-width: 786px) {
+        .about-us {
+            display: grid;
+        }
+        .what-we-do-items {
+            grid-template-columns: 1fr;
+        }
+
+
+        .statements {
+            margin: 0rem;
+            gap: 0rem;
+        }
+    }
+</style>
+    <section class="main">
+        <div class="container" style="border-bottom:1px solid rgb(238, 233, 233);">
+            <div class="about-us gap-2">
+                <!-- <h1>About Us</h1> -->
+                <div class="statements text-base text-slate-600 font-normal">
+                    <a href="#our-history">
+                        <h4 class="our-history">{% trans "History" %}</h4>
+                    </a>
+                    <a href="#our-statistics">
+                        <h4 class="our-statistics">{% trans "Statistics" %}</h4>
+                    </a>
+                    <a href="#our-mission">
+                        <h4 class="our-mission">{% trans "Mission" %}</h4>
+                    </a>
+                    <a href="#our-vision">
+                        <h4 class="our-vision" style="padding:0 .8rem;">{% trans "Vision" %}</h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="container about-us-image">
+            <img src="../static/assets/imgs/resources/02.jpg" alt="About Image">
+        </div> -->
+    </section>
+
+    <section class="main w-12/12 py-6 pt-0" style="background-color: #FFFFFF;" id="about-us">
+        <div class="what-we-do" style="background-color: rgb(242, 245, 248);">
+            <div class="container what-we-do-items">
+                <div class="what-we-do-item">
+                    <img src="{% static 'assets/imgs/resources/03.png' %}" alt="intro">
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'Secure ans' %}</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'Reliable' %}</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'Transactions' %}</h3>
+                </div>
+                <div class="what-we-do-item">
+                    <img src="{% static 'assets/imgs/resources/04.png' %}" alt="intro">
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'Dedicated team' %}</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'to offer' %}</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans '24hr support' %}</h3>
+                </div>
+                <div class="what-we-do-item">
+                    <img src="{% static 'assets/imgs/resources/05.png' %}" alt="intro">
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'Providing a 100%' %}</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'authentic' %}</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'stores' %}</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="main w-12/12 py-6 pt-0" style="background-color: #FFFFFF;" id="about-us">
+        <div id="our-history" class="grid gap-2 w-12/12 about-intro" style="background-color: rgb(242, 245, 248);">
+            <div class="grid gap-2 justify-center">
+                <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans "About Foroden" %}</h2>
+            </div>
+            <div class="grid gap-2 grid-flow-cols">
+                <p class="text-lighterBackgroundColor text-base md:text-lg text-semi-bold">
+                   {% trans 'We represent a wide network of Digital Promoting and local and Traditional Marketing and Advertising  services  of products (in large scale) of various companies. Our offices and specialized and indigenous forces are operating in different countries. We have created a sustainable, learning and progressive system.' %}
+                   {% trans 'We decide and act as a team. Our organization is an interconnected and learning system. Over time, we make the necessary adjustments to both maintain and increase our success.' %}
+                </p>
+                <div class="grid md:flex gap-4">
+                    <ul class="text-lighterBackgroundColor text-base md:text-lg text-semi-bold list-disc mx-4">
+                        <li>{% trans "Accurate knowledge" %}</li>
+                        <li>{% trans "Informed and effective manpower" %}</li>
+                        <li>{% trans "Extensive and sustainable networking" %}</li>
+                    </ul>
+                    <ul class="text-lighterBackgroundColor text-base md:text-lg text-semi-bold list-disc mx-4">
+                        <li>{% trans "Commitment" %}</li>
+                        <li>{% trans "flexibility" %}</li>
+                        <li>{% trans "Efficient decision making" %}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="grid gap-10 about-us-content py-10">
+        <div id="our-mission"
+            class="md:grid right md:grid-cols-2 gap-20 w-12/12 md:w-10/12 mx-auto overflow-hidden">
+            <div class="grid gap-4 content-center about-description">
+                <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'Our Mission' %}</h2>
+                <ul class="text-lighterBackgroundColor text-base md:text-lg text-semi-bold list-disc mx-4">
+                    <li>{% trans "Accepting and obtaining representation of reputable companies" %}</li>
+                    <li>{% trans "Acting as if the parent company itself is operating in different countries" %}</li>
+                    <li>{% trans "Development of our offices in different countries" %}</li>
+                    <li>{% trans "Creating a network of specialized and indigenous forces in each country" %}</li>
+                    <li>{% trans "Creating a dynamic system from the source of production, transportation, customs, distribution, control, feedback and promotion" %}</li>
+                </ul>
+            </div>
+            <div class="grid gap-2 img-wrapper">
+                <img src="https://images.unsplash.com/photo-1542744174-a35e40ade835?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHNhbGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                    alt="">
+            </div>
+        </div>
+        <div id="our-vision" class="md:grid left md:grid-cols-2 gap-20 w-12/12 md:w-10/12 mx-auto overflow-hidden">
+            <div class="grid gap-2 img-wrapper  hidden md:grid">
+                <img src="https://images.unsplash.com/photo-1467318339494-a32c2ada54d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fG9mZmljZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                    alt="">
+            </div>
+            <div class="grid gap-2 md:gap-4 content-center about-description">
+                <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'Our Vision' %}</h2>
+                <ul class="text-lighterBackgroundColor text-base md:text-lg text-semi-bold list-disc mx-4">
+                    <li>{% trans "Accepting and obtaining representation of more than 100 companies by 2026" %}</li>
+                    <li>{% trans "Development of operating offices in more than 14 countries by 2026" %}</li>
+                    <li>{% trans "Development of human resources to more than 2,000 people by 2026" %}</li>
+                    <li>{% trans "Activate more than 6 subsidiaries by 2026" %}</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="grid bg-lghterBackgroundColor my-4">
+        <div id="our-statistics" class="stats grid gap-4 grid-cols-2 md:grid-cols-4 w-12/12 mx-auto justify-start">
+            <div class="grid gap-1 stats-card">
+                <span class="num font-semibold text-white">50,000</span>
+                <span class="text-xl md:text-2xl text-white font-semibold">{% trans 'Suppliers' %}</span>
+                <span class="text-slate-300">{% trans 'All over the world.' %}</span>
+            </div>
+            <div class="grid gap-1 stats-card">
+                <span class="num font-semibold text-white">5</span>
+                <span class="text-xl md:text-2xl text-white font-semibold">{% trans 'Showrooms' %}</span>
+                <span class="text-slate-300">{% trans 'All over the world.' %}</span>
+            </div>
+            <div class="grid gap-1 stats-card">
+                <span class="num font-semibold text-white">100</span>
+                <span class="text-xl md:text-2xl text-white font-semibold">{% trans 'Countries' %}</span>
+                <span class="text-slate-300">{% trans 'Using Foroden.' %}</span>
+            </div>
+            <div class="grid gap-1 stats-card">
+                <span class="num font-semibold text-white">20,000</span>
+                <span class="text-xl md:text-2xl text-white font-semibold">{% trans 'Buyers' %}</span>
+                <span class="text-slate-300">{% trans 'Trading Everyday.' %}</span>
+            </div>
+        </div>
+    </section>
+{% endblock %}

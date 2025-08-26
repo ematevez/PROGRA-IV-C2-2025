@@ -1,0 +1,77 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="content-area outlined" style="padding-block-start: 1.2rem; padding: .6rem .4rem;block-size: 100vh">
+            <div class="content-area-top" style="justify-content: space-between;padding-block-start: .4rem;">
+                <h3 style="font-weight:600;">{% trans 'Contract Details' %}</h3>
+            </div>
+                <div class="contract outlined cs-grid" style="--gap: 1rem;align-items: flex-start;padding: 1rem 1.5rem;">
+                    <div class="contract-header">
+                        <div class="">
+                            <h4>{% trans 'Contract Details' %}</h4>
+                        </div>
+                    </div>
+                    <div class="contract-body cs-grid" style="align-items: flex-start;--gap: 1rem;">
+                        <div class="title flex">
+                            <h4>{% trans 'Supplier information' %}</h4>
+                            <h4>Ref No: {{ contract.ref_no }}</h4>
+                        </div>
+                        <div class="contract card">
+                            <div class="top-content flex">
+                                <div class="profile flex">
+                                    <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt=""
+                                        class="avatar">
+                                    <h4 class="client">{{contract.supplier.profile.business_name}}</h4>
+                                </div>
+                                <h4 class="date">{{contract.created_on}}</h4>
+                            </div>
+                            <div class="bottom-content flex">
+                                <h4 class="location"><small>{% trans 'Location' %}:</small> {{contract.supplier.profile.country}}</h4>
+                                <!-- <h4 class="timestamp">Status: {% if contract.is_complete %} Complete {% else %} Not Complete {% endif %}</h4> -->
+                            </div>
+                        </div>
+                        <h4>{% trans 'Contract info' %}</h4>
+                        <div class="">
+                            <table class="contract-table">
+                                <thead>
+                                    <tr>
+                                        <th>{% trans 'Service' %}</th>
+                                        <th>{% trans 'Price' %}</th>
+                                        <th>{% trans 'Status' %}</th>
+                                        <th>{% trans 'Created On' %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="">{{contract.service.name}}</span></td>
+                                        <td><span class="">{{contract.service.currency}} {{contract.service.price}}</span></td>
+                                        <td><span class="">{% if contract.is_complete %} Complete {% else %} Not Complete {% endif %}</span></td>
+                                        <td><span class="">{{contract.created_on}}</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-5 flex" style="margin-top:.8rem;justify-content:flex-start;gap:.4rem;">    
+                            <form action="{% url 'payments:contract-payment' contract.pk %}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-control">
+                                    <input type="submit" value="{% trans 'Print' %}" name="print" class="btn">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
+    <script>
+
+
+    </script>
+{% endblock %}

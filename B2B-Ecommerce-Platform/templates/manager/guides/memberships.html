@@ -1,0 +1,40 @@
+{% extends '../../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <section class="w-11/12 py-6 mx-auto grid grid-flow-dense md:flex md:gap-8" style="height: auto">
+
+        {% include './faqs.html' %}
+            <div class="section-body card p-6 grid gap-4 text-lighterBackgroundColor" style="box-shadow:unset;">
+                <div class="grid gap-2">
+                    <h1 class="font-bold text-lg md:text-2xl" style="text-align: justify;">{% trans "Foroden Membership Plans" %}:</h1>
+                    <p class="" style="text-align: justify;">{% trans 'The platform offers three membership packages each with different features to enable store owners attain the different objectives.' %}</p>
+                    <p class="" style="text-align: justify;">{% trans "Foroden offers the following three membership plans" %}:</p>
+                    <ul class="grid gap-2 px-2 py-4 mx-4 font-semibold">
+                        <li>{% trans "Gold Membership Plan" %}</li>
+                        <li>{% trans "Silver Membership Plan" %}</li>
+                        <li>{% trans "Bronze Membership Plan" %}</li>
+                    </ul>
+                </div>
+
+                <div class="grid gap-2 ">
+                    <h2 class="font-semibold text-lg md:text-xl" style="text-align: justify;">{% trans "Gold Membership Plan" %}</h2>
+                    <p class="" style="text-align: justify;">{% trans "This comes with so many interesting features such as the ability to advertise a stores products several times on the showrooms each single day. This increases the chances of a store making a great deal of sales on a daily basis." %}</p>
+                    <p class="" style="text-align: justify;">{% trans "The stores can sell their products to buyers from any country on globe. The cost for this membership plan per year is as low as" %}<span class="font-bold">$500</span>.</p>
+                </div>
+
+                <div class="grid gap-2 ">
+                    <h2 class="font-semibold text-lg md:text-xl" style="text-align: justify;">{% trans "Silver Membership Plan" %}</h2>
+                    <p class="" style="text-align: justify;">{% trans "This membership plan allows store owners to sell their products to any buyers on the platform but does not allow them to have their products listed under the adverts." %}</p>
+                    <p class="" style="text-align: justify;">{% trans "However, products from the store can be accessible and purchased by any buyers from within the location's store and overseas. This membership plan costs " %}<span class="font-bold">$250</span>.</p>
+                </div>
+
+                <div class="grid gap-2 ">
+                    <h2 class="font-semibold text-lg md:text-xl" style="text-align: justify;">{% trans "Bronze Membership Plan" %}</h2>
+                    <p class="" style="text-align: justify;">{% trans "This membership plan is limited in such a way that the store's products are never listed on the advertisement section. The store is also limited to sales from the same location but not away from it or overseas. The bronze package is free of charge." %}</p>
+                    <p class="" style="text-align: justify;">{% trans "However, products from the store can be accessible and purchased by any buyers from within the location's store and overseas. This membership plan costs " %}<span class="font-bold">$250</span>.</p>
+                </div>
+            </div>
+        </section>
+{% endblock %}

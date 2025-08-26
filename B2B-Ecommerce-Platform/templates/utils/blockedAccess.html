@@ -1,0 +1,51 @@
+{% load i18n %}
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon/favicon.ico' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/utils.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/themify-icons.css' %}">
+    <link href="{% static 'icons/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet"  type='text/css'>
+    <link href="{% static 'css/tailwcss.css' %}" rel="stylesheet">
+
+    <title>Golden</title>
+</head>
+
+<style>
+    .error-card {
+        /* From https://css.glass */
+        background: rgba(255, 255, 255, 0.116);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+</style>
+
+<body style="overflow: hidden;">
+<div class="bg-lghterBackgroundColor grid place-items-center px-8 md:px-4" style="min-block-size: 100vh;min-inline-size: 100vw;justify-content: center;">
+    <div class="error-card card grid gap-4 text-lg md:text-xl text-white capitalize text-center px-4 py-6 md:px-6 md:py-8">
+        <i class="fa fa-desktop text-6xl"></i>
+        <h1>{% trans 'Please use a desktop to access site page' %}</h1>
+        <a href="{% url 'manager:home' %}" class="text-yellowColor text-base md:text-xl">{% trans 'Return Home' %}</a>
+    </div>
+</div>
+</body>
+
+<script>
+    if (window.location.href.includes('/ar/')) {
+        document.body.classList.add('rtl');
+    }
+</script>
+
+</html>

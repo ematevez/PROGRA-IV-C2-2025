@@ -1,0 +1,39 @@
+{% load static %}
+{% load i18n %}
+{% if advertised_products.results %}
+<section class="main w-12/12">
+    <div class="grid w-full mx-auto cf-1 advert card rounded-md pb-2">
+        <div class="section-heading rounded-t-md bg-yellowColor">
+            <div class="section-graphics flex gap-2">
+                <!-- <img class="sec-svg" src="../static/assets/imgs/resources/price-tag.svg" alt="Price Tag"> -->
+                <h2 class="text-lg md:text-xl font-bold text-white">{% trans 'Trending Products' %}</h2>
+            </div>
+            <!-- <h2 class="text-base md:text-lg font-bold text-white"><span
+                    style="font-weight:100;">Time Left:</span> 01d : 05h : 42m
+            </h2> -->
+            <div class="section-graphics">
+                <a href="{% url 'supplier:superdeals' %}" class="text-base font-normal text-white">{% trans "View All" %}</a>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="section-item-group rounded-md p-4">
+                {% for advertised_product in advertised_products.results %}
+                <div class="product card">
+                    <a class="grid gap-0.5" href="{% url 'supplier:superdeals' %}" style="background-color: rgba(228, 245, 247, 0.438);padding: .25rem;">
+                        <img loading="lazy"
+                            src="/media/{{advertised_product.main_image.image}}"
+                            alt="{{advertised_product.product.name}}" class="item-img rounded"
+                            style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
+                        <div class="item-details grid gap-0 justify-start text-left px-3">
+                            <h5 class="text-base font-semibold leading-5">
+                                <span class="title">{{advertised_product.product.name|slice:":40"}}</span>
+                            </h5>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}

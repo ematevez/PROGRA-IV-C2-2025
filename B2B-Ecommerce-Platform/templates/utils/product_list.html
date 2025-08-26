@@ -1,0 +1,45 @@
+{% load static %}
+{% load i18n %}
+
+{% if products.results %}
+<section class="main w-12/12 pt-0" style="block-size: auto">
+    <div class="grid w-full mx-auto cf-1 gap-6" style="grid-template-columns: 1fr;">
+        <!-- <div class="section-heading">
+            <h2 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{% trans 'Popular Products' %}</h2>
+        </div> -->
+        <div class="section-heading">
+            {% if with_title and with_title != "False" %}
+                {% if title %}
+                    <h2 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{{ title }}</h2>
+                {% else %}
+                    <h2 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{% trans 'Foroden Products' %}</h2>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="section-body grid gap-2 md:gap-4 grid-cols-2 md:grid-cols-6 card p-4"
+            data-context="{{products.context_name}}">
+            
+            {% for product in products.results %}
+                <div class="single-image-product-card overflow-hidden rounded grid gap-0.5 card-outlined">
+                    <a class="grid gap-2 rounded overflow-hidden" href="{% url 'supplier:product-detail' product.product.slug %}">
+                        <img loading="lazy" src="/media/{{product.images.image}}" alt="{{product.name}}"
+                            class="item-img rounded" style="width: 100%;object-fit:cover;">
+                        <div class="item-details grid gap-0 py-1 md:py-2 px-4 gap-2"
+                            style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                            <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">
+                                {{product.product.name|slice:":35"}}...
+                            </h5>
+                            <p class="text-xs font-medium">
+                                <span>{{product.product.currency}}</span>
+                                <span>{{product.product.price}}</span>
+                            </p>
+                        </div>
+                        <span class="grid items-center pb-2 px-4 font-semibold text-sm">By {{ product.supplier.profile.business_name }}</span>
+                    </a>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+{% endif %}

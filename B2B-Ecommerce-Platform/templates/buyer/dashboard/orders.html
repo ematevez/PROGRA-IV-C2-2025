@@ -1,0 +1,204 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+
+<style>
+    .order-link-cta {
+        background-color: #e8e8e8;
+        color: #454545;
+        padding: .6em 1.2em;
+    }
+
+    .order-status h4 {
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        color: #fff;
+        background: #454545;
+        border-radius: 40px;
+        padding: 1.2em 2.4em;
+        inline-size: 150px;
+    }
+
+    .order-status.completed h4 {background: #18d11f;}
+    .order-status.pending h4 {background: #f99d1b;}
+    .order-status.canceled h4 {background: #f01a1a;}
+</style>
+
+    <div class="main-content">
+        <div class="content-area outlined" style="padding-block-start: 1.2rem; padding: .6rem .4rem;block-size: 100vh">
+            <div class="content-area-top flex" style="justify-content: space-between;padding-block-start: .4rem;">
+                <h3 style="font-weight:600;">{% trans 'My Orders' %}</h3>
+                <div class="sort-filters flex" style="gap:.6rem">
+                    <div class="sort-by flex">
+                        <h4 style="margin-inline-end: .6rem;">Sort time: </h4>
+                        <select name="sort-by" style="padding: .4rem .6rem;background-color: transparent;border-radius: 3px;">
+                            <option value="">All</option>
+                            <option value="">This Week</option>
+                            <option value="">This Month</option>
+                            <option value="">This Year</option>
+                        </select>
+                    </div>
+                    <div class="sort-by flex">
+                        <h4 style="margin-inline-end: .6rem;">Sort category: </h4>
+                        <select name="sort-by" style="padding: .4rem .6rem;background-color: transparent;border-radius: 3px;">
+                            <option value="">All</option>
+                            <option value="">Fashion</option>
+                            <option value="">Electronics</option>
+                            <option value="">Others</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="card data-table wishlist-table" style="border-block-end: 0;">
+                <table id="buyer-contracts___--___" class="display" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'Order ID' %}</th>
+                            <th>{% trans 'Items' %}</th>
+                            <th>{% trans 'View details' %}</th>
+                            <th>{% trans 'Status' %}</th>
+                            <th>{% trans 'Created At' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status completed"><h4>Delivered</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status completed"><h4>Delivered</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status completed"><h4>Delivered</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status completed"><h4>Delivered</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status completed"><h4>Delivered</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status pending"><h4>Pending</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status canceled"><h4>Canceled</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status canceled"><h4>Canceled</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                    </tbody>
+                    <!-- <tfoot>
+                        <tr>
+                            <th>{% trans 'Ratings' %}</th>
+                            <th>{% trans 'Product' %}</th>
+                            <th>{% trans 'Name' %}</th>
+                            <th>{% trans 'Cart' %}</th>
+                            <th>{% trans 'Share' %}</th>
+                        </tr>
+                    </tfoot> -->
+                </table>
+                <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                    <div class="cs-grid cs-align-center">
+                        <p class="cs-text-md" style="color: var(--text-color);">{% trans 'Showing Page' %} <span id="current-page-0"></span> {% trans 'of' %} <span id="max-page"></span>. (<span id="table-item-count"></span> {% trans 'Entries' %})</p>
+                    </div>
+                    <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                        <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Previous' %}</button>
+                        <span id="current-page" class="cs-text-md"></span>
+                        <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Next' %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+    <!-- <script src="{% static 'js/modal.js' %}"></script> -->
+    <script>
+        // Table
+        $(document).ready(function () {
+            $('#table-1').DataTable();
+        });
+
+        function navigateToContract() {
+            location.href = "_contract-detail.html";
+        }
+
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+
+
+    </script>
+
+{% endblock %}

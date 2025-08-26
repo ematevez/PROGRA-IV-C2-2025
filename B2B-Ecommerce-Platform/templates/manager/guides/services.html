@@ -1,0 +1,51 @@
+{% extends '../../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+        <section class="w-11/12 py-6 mx-auto grid grid-flow-dense md:flex md:gap-8" style="height: auto">
+
+            {% include './faqs.html' %}
+            {% get_current_language as LANGUAGE_CODE %}
+
+            <div class="section-body card py-6 px-2 md:px-6 grid gap-4 text-lighterBackgroundColor" style="box-shadow:unset;">
+                <div class="grid gap-2">
+                    <h1 class="font-bold text-lg md:text-2xl" style="text-align: justify;">{% trans "Foroden Supplier Services" %}:</h1>
+                    <p class="" style="text-align: justify;">{% trans 'Foroden Supplier Services make it easy for suppliers to sell their business as a service to different Foroden buyers. A verified Foroden Buyer is able to create a contract inorder to buy one or more supplier services.' %}</p>
+                </div>
+
+                <div class="grid gap-8">
+                    <div class="grid gap-2">
+                        <h2 class="font-bold text-lg md:text-xl" style="text-align: justify;">{% trans 'How to create a supplier service.' %}</h2>
+                    </div>
+                    <div class="grid gap-2 px-2 md:px-4">
+                        <h3 class="font-semibold flex gap-2 text-slate-500 text-base md:text-lg">
+                            <span>{% trans '1' %}.</span>
+                            <span>{% trans 'Access your supplier dashboard' %}</span>
+                        </h3>
+                        <div class="guide-img">
+                            {% with "images/guides/"|add:request.LANGUAGE_CODE|add:"/supplier_dash.png" as url %}
+                                
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <div class="grid gap-2 px-2 md:px-4">
+                        <h3 class="font-semibold flex gap-2 text-slate-500 text-base md:text-lg">
+                            <span>{% trans '2' %}.</span>
+                            <span>{% trans 'Select create service in the Sidebar' %}</span>
+                        </h3>
+                        <p class="font-normal text-slate-600 text-base md:text-lg">
+                            {% trans 'This Redirects you to a form, with which you can create a new service.' %}
+                        </p>
+                        <div class="guide-img">
+                            {% with "images/guides/"|add:request.LANGUAGE_CODE|add:"/create_service.png" as url %}
+                                
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

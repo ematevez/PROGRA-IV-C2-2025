@@ -1,0 +1,177 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load isEqual %}
+{% block content %}
+
+    <div class="grid gap-3 bg-white">
+        <div class="breadcrumb grid grid-flow-col justify-start gap-2 pt-1 px-5 md:px-0 md:w-full md:mx-auto">
+            <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
+            <span>/</span>
+            <a class="text-gray-600 hover:text-gray-900" href=''>{% trans 'Stores' %}</a>
+            <span>/</span>
+            <span class="text-lightBackgroundColor">{{object.name}}</span>
+        </div>
+
+        <div class="page-preinfor w-full mx-auto p-4 flex flex-wrap gap-2 md:gap-4 items-center" style="background-color: rgb(242, 245, 248);">
+            <div class="grid gap-2">
+                <h3 class="text-lg text-lightBackgroundColor font-semibold">{{object.name}}</h3>
+            </div>
+            <p class="flex gap-1">
+                <span class="text-base text-lghterBackgroundColor font-medium">{% trans 'Supplier' %}: </span>
+                <a class="text-slate-600" href="{% url 'supplier:supplier-detail' object.supplier.profile.slug %}">{{object.supplier}}</a>
+            </p>
+            <p class="flex gap-1" data-content="{{product_count.context_name}}">
+                <span class="text-base text-lghterBackgroundColor font-medium">{% trans 'Products' %}: </span>
+                <span class="text-slate-600">{{product_count.results}}</span>
+            </p>
+        </div>
+    </div>
+
+    <section class="main w-12/12" style="block-size: auto">
+        <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: 1fr;">
+            {% if products.results %}
+                <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-5 py-4"
+                data-context="{{products.context_name}}">
+                    {% for product in products.results %}
+                        <div class="single-image-product-card overflow-hidden rounded grid gap-0.5 card-outlined">
+                            <a class="grid gap-2 rounded overflow-hidden" href="{% url 'supplier:product-detail' product.product.slug %}">
+                                <img loading="lazy" src="/media/{{product.images.image}}" alt="{{product.name}}"
+                                    class="item-img rounded" style="width: 100%;object-fit:cover;">
+                                <div class="item-details grid gap-0 py-1 md:py-2 px-4 gap-2"
+                                    style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                    <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">
+                                        {{product.product.name|slice:":40"}}..
+                                    </h5>
+                                    <p class="text-xs font-medium">
+                                        <span>{{product.product.currency}}</span>
+                                        <span>{{product.product.price}}</span>
+                                    </p>
+                                </div>
+                                <span class="grid items-center pb-2 px-4 font-semibold text-sm">By {{ product.supplier.profile.business_name }}</span>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="flex justify-between items-center px-6 pb-3 py-2 text-lighterBackgroundColor text-lg rounded-md font-semibold leading-5 justify-self-center">
+                    <p>No Products Found</p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <div class="hidden pagination md:grid grid-flow-col gap-2 justify-center py-3 my-2 md:w-full mx-auto border-b border-t border-solid border-slate-200">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">{% trans 'Previous' %}</a>
+
+            <a href="?page=1" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+        {% endif %}
+        {% for page in page_obj.number|make_list %}
+            {% if current_page_number|isEqual:page %}
+                <a href="?page={{page}}" class="grid place-items-center px-4 py-2 outline-none rounded bg-lighterBackgroundColorHover text-white">{{ page }}</a>
+            {% else %}
+                <a href="?page={{page}}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page_obj.paginator.num_pages }}</a>
+
+            <a href="?page={{ page_obj.next_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">{% trans 'Next' %}</a>
+        {% endif %}
+    </div>
+
+    <div class="grid pagination md:hidden gap-2 justify-center py-3 my-2 w-11/12 md:w-full mx-auto border-b border-t border-solid border-slate-200">
+        <div class="grid grid-flow-col gap-2">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+            {% endif %}
+            {% for page in page_obj.number|make_list %}
+                {% if current_page_number|isEqual:page %}
+                    <a href="?page={{page}}" class="grid place-items-center px-4 py-2 outline-none rounded bg-lighterBackgroundColorHover text-white">{{ page }}</a>
+                {% else %}
+                    <a href="?page={{page}}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page_obj.paginator.num_pages }}</a>
+            {% endif %}
+        </div>
+
+        <div class="grid grid-flow-col gap-2">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">{% trans 'Previous' %}</a>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">{% trans 'Next' %}</a>
+            {% endif %}
+        </div>
+    </div>
+    
+    {% if showroom_stores.results %}
+    <section class="main w-12/12 py-3 my-3">
+        <div class="w-11/12 md:w-full mx-auto grid">                    
+            <div class="flex p-2 px-2 pt-0 justify-between items-baseline">
+                <div class="flex gap-5">                            
+                    <h1 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{% trans 'Stores From Showroom' %}</h1>
+                </div>
+                <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="{% url 'supplier:store-list' %}">{% trans 'View All' %}</a>
+            </div>
+            <div class="grid gap-3 md:grid-cols-5 rounded-md py-3" data-content="{{stores.context_name}}">
+                {% for related_store in showroom_stores.results %}
+                    {% for store in related_store %}
+                    <div class="store-card grid items-start rounded-md card gap-4">
+                        <a class="grid gap-1 rounded-md overflow-hidden" href="{% url 'supplier:store-detail' store.slug %}">
+                            <img loading="lazy" src="/media/{{store.image}}" alt="{{store.name}}" class="img-wrapper rounded-md">
+                            <div class="card-details grid items-end px-4 py-4">
+                                <h2 class="text-lg leading-5 text-white font-bold">    
+                                    {{store.name}}
+                                </h2>
+                                <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                    <span>{{store.supplier}}</span>
+                                    <!-- <span>120 Products</span> -->
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    
+    {% if suppiler_stores.results %}
+    <section class="main w-12/12 py-3 my-3">
+        <div class="w-11/12 md:w-full mx-auto grid">                    
+            <div class="flex p-2 px-2 pt-0 justify-between items-baseline">
+                <div class="flex gap-5">                            
+                    <h1 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{{ object.supplier.profile }} {% trans 'Stores' %}</h1>
+                </div>
+                <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="{% url 'supplier:store-list' %}">{% trans 'View All' %}</a>
+            </div>
+            <div class="grid gap-3 md:grid-cols-5 rounded-md py-3" data-content="{{suppiler_stores.context_name}}">
+                {% for related_store in suppiler_stores.results %}
+                    <div class="store-card grid items-start rounded-md card gap-4">
+                        <a class="grid gap-1 rounded-md overflow-hidden" href="{% url 'supplier:store-detail' related_store.slug %}">
+                            <img loading="lazy" src="/media/{{related_store.image}}" alt="{{related_store.name}}" class="img-wrapper rounded-md">
+                            <div class="card-details grid items-end px-4 py-4">
+                                <h2 class="text-lg leading-5 text-white font-bold">    
+                                    {{related_store.name}}
+                                </h2>
+                                <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                    <span>{{related_store.supplier}}</span>
+                                    <!-- <span>120 Products</span> -->
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+{% endblock %}

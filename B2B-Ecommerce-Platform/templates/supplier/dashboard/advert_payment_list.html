@@ -1,0 +1,72 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="cs-flex cs-justify-start outlined main-content-tabs" style="padding: 0.15rem;border-radius: .5rem;gap: .5rem;">
+            <a href="{% url 'supplier:dashboard-payments' %}">{% trans "Membership Payments" %}</a>
+            <a href="{% url 'supplier:dashboard-advert-payments' %}" class="active cs-text-accent">{% trans "Advertising Payments" %}</a>
+        </div>
+        <div class="content-area">
+            <div class="card data-table products-table">
+                <table class="display" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'No' %}</th>
+                            <th>{% trans 'Product' %}</th>
+                            <th>{% trans 'Start Date' %}</th>
+                            <th>{% trans 'End Date' %}</th>
+                            <th>{% trans 'Expired' %}</th>
+                            <th>{% trans 'Created On' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for advert in adverts %}
+                        <tr>
+                            <td>{% trans 'No' %}</td>
+                            <td>{{ advert.product.name }}</td>
+                            <td>{{ advert.start_date }}</td>
+                            <td>{{ advert.end_date }}</td>
+                            <td>{{ advert.expired }}</td>
+                            <td>{{ advert.created_on }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>{% trans 'No' %}</th>
+                            <th>{% trans 'Product' %}</th>
+                            <th>{% trans 'Start Date' %}</th>
+                            <th>{% trans 'End Date' %}</th>
+                            <th>{% trans 'Expired' %}</th>
+                            <th>{% trans 'Created On' %}</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
+    <script>
+        // Table
+        $(document).ready(function () {
+            
+        });
+
+        function navigateToContract() {
+            location.href = "_contract-detail.html";
+        }
+
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+    </script>
+
+{% endblock %}

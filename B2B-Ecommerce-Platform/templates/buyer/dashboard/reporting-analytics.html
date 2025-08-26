@@ -1,0 +1,224 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="main-content" style="overflow-y: scroll;">
+    <div class="cs-content-area cs-no-box-shadow outlined" style="block-size: 100vh;padding: .6rem .4rem;">
+        <div class="content-area-top flex" style="justify-content: space-between;padding-block-start: .4rem;">
+            <h3 style="font-weight:600;">{% trans 'Reporting & Analytics' %}</h3>
+        </div>
+
+        <div class="notifications-section flex" style="background-color: rgb(226, 226, 224);">
+            <h4 class="section-togglers order-analytics-label" data-section="sec_00" style="padding-block: 1.2rem;">Order Analytics</h4>
+            <h4 class="section-togglers order-analytics-label" data-section="sec_01" style="padding-block: 1.2rem;">Spend Management</h4>
+            <!-- <h4 class="section-togglers order-analytics-label" data-section="sec_02" style="padding-block: 1.2rem;">Supplier Performance</h4> -->
+            <h4 class="section-togglers order-analytics-label" data-section="sec_03" style="padding-block: 1.2rem;">Custom Reports</h4>
+        </div>
+
+        <div class="notification-section inview" id="sec_00" style="block-size: 560px;border-radius: 0;">
+            <div class="data-visualization" style="inline-size: 100%;block-size: 100%;">
+                <div class="cs-stats stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;padding: .5rem;block-size: 100%;border-radius: 0;">
+                    <div style="display: grid;block-size: 100%;">
+                        <canvas id="successful-deliveries" style="max-block-size: 90%;"></canvas>
+                        <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: #4b4a4a;justify-self: center;">{% trans 'Months of 2023' %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notification-section" id="sec_01" style="block-size: 560px;border-radius: 0;">
+            <div class="data-visualization" style="inline-size: 100%;block-size: 100%;">
+                <div class="cs-stats stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;padding: .5rem;block-size: 100%;border-radius: 0;">
+                    <div style="display: grid;block-size: 100%;">
+                        <canvas id="spend-management" style="max-block-size: 90%;"></canvas>
+                        <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: #4b4a4a;justify-self: center;">{% trans 'Months of 2023' %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notification-section" id="sec_03">
+            <div class="notifications">
+                <h4>Select Date Range: </h4>
+                <div class="filter-cards date-range" style="border: 0;margin-block-end: .4em;">
+                    <form action="" class="date-range-picker flex" style="justify-content: flex-start;">
+                        <div class="form-control flex flex-column" style="align-items: flex-start;">
+                            <label for="item-selling-price">From</label>
+                            <input type="date" name="from" id="min-date" class="date-range-filter" data-date-format="mm-dd-yyyy">
+                        </div>
+                        <div class="form-control flex flex-column" style="align-items: flex-start;">
+                            <label for="|" class="hidden">|</label>
+                            <img src="{% static 'icons/search-key-slash.svg' %}" alt="">
+                        </div>
+                        <div class="form-control flex flex-column" style="align-items: flex-start;">
+                            <label for="item-selling-price">To</label>
+                            <input type="date" name="to" id="max-date" class="date-range-filter" data-date-format="mm-dd-yyyy">
+                        </div>
+                    </form>
+                </div>
+                <button id="print-custom-reports" class="btn" style="margin-bottom: 14px;">Generate Report <i class="ti-printer"></i> </button>
+                
+                <table id="custom-reports" class="display" style="width:100%;margin-top:.5rem;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Created At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>000123</td>
+                            <td>Electonics</td>
+                            <td>$105,000</td>
+                            <td>06/21/2023</td>
+                        </tr>
+                        <tr>
+                            <td>000123</td>
+                            <td>Fashion</td>
+                            <td>$1,000,000</td>
+                            <td>06/23/2023</td>
+                        </tr>
+                        <tr>
+                            <td>000123</td>
+                            <td>Fashion</td>
+                            <td>$1,000,000</td>
+                            <td>06/23/2023</td>
+                        </tr>
+                        <tr>
+                            <td>000123</td>
+                            <td>Fashion</td>
+                            <td>$1,000,000</td>
+                            <td>06/23/2023</td>
+                        </tr>
+                        <tr>
+                            <td>000123</td>
+                            <td>Fashion</td>
+                            <td>$1,000,000</td>
+                            <td>06/23/2023</td>
+                        </tr>
+                        <tr>
+                            <td>000123</td>
+                            <td>Fashion</td>
+                            <td>$1,000,000</td>
+                            <td>06/23/2023</td>
+                        </tr>
+                        <tr>
+                            <td>000123</td>
+                            <td>Fashion</td>
+                            <td>$1,000,000</td>
+                            <td>06/23/2023</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>Order ID</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Created At</th>
+                      </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/createChart.js' %}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    
+        const section_togglers = document.querySelectorAll(".section-togglers")
+        section_togglers.forEach(
+            activator => activator.addEventListener("click", () => {
+                let sectionToShow = document.querySelector(`#${activator.dataset.section}`)
+
+                section_togglers.forEach(section_toggler => {
+                    section_toggler.style.borderBlockEnd = "unset";
+                    section_toggler.style.color = "#929293";
+                })
+                activator.style.color = "#363637";
+                activator.style.borderBlockEnd = "2px solid #363637";
+                
+                let openSections = document.querySelectorAll(".notification-section.inview");
+                openSections.forEach(section => section.classList.remove("inview"))
+
+                sectionToShow.classList.add("inview")
+            })
+        )
+
+
+        const customReportsTable = $("#custom-reports").DataTable();
+
+
+        // Extend dataTables search
+        $.fn.dataTable.ext.search.push(
+            function(settings, data, dataIndex) {
+                var min = $('#min-date').val();
+                var max = $('#max-date').val();
+                var createdAt = data[3] || 0; // Our date column in the table
+                if (
+                (min == "" || max == "") ||
+                (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
+                ) {
+                return true;
+                }
+                return false;
+            }
+        );
+
+        $('.date-range-filter').change(function() {
+            customReportsTable.draw();
+        });
+
+        function printDataTable(mTitle) {
+            const title = document.createElement('h3');
+            title.style.textDecoration = "underline";
+            title.textContent = mTitle;
+            const divToPrint = document.querySelector("#custom-reports");
+            divToPrint.append(title);
+            let htmlToPrint = '' +
+                '<style type="text/css">' +
+                    'table {' +
+                        'border-collapse:collapse;' +
+                    '}' +
+                    'table th, table td {' +
+                        'border:1px solid #000;' +
+                        'padding:0.5em;' +
+                    '}' +
+                '</style>';
+            htmlToPrint += divToPrint.outerHTML;
+            const newWin = window.open("");
+            newWin.document.write(htmlToPrint);
+            newWin.print();
+            newWin.close();
+            title.textContent = "";
+        }
+
+        document.querySelector("#print-custom-reports").addEventListener('click', ()=> {
+            printDataTable("Custom Report:");
+        });
+
+
+
+        let successfulDeliveries = createChart('Successful Deliveries (0-100%)',
+            'bar',
+            ['Jan', 'Feb', 'Mar', 'Apr', 'May','Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            [20, 13, 80, 100, 46, 70, 0, 0, 0, 0, 0, 0],
+            'successful-deliveries'
+        );
+
+        let spendManagement = createChart('Amount Spent ($)',
+            'line',
+            ['Jan', 'Feb', 'Mar', 'Apr', 'May','Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            [2000, 1300, 8500, 1000, 460, 7050, 0, 0, 0, 0, 0, 0],
+            'spend-management'
+        );
+    })
+</script>
+
+
+
+
+{{ category_group|json_script:"category_group" }}
+
+{% endblock %}

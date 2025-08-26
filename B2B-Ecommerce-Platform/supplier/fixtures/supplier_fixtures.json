@@ -1,0 +1,412 @@
+[
+    {
+        "fields": {
+            "name": "Armstrong-Mayer",
+            "slug": "armstrong-mayer",
+            "supplier": 2
+        },
+        "model": "supplier.store",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "name": "Huel-Gorczany",
+            "slug": "huel-gorczany",
+            "supplier": 2
+        },
+        "model": "supplier.store",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "name": "Balistreri LLC",
+            "slug": "balistreri-llc",
+            "supplier": 3
+        },
+        "model": "supplier.store",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "name": "Carroll, Ferry and Herman",
+            "slug": "carroll-ferry-and-herman",
+            "supplier": 4
+        },
+        "model": "supplier.store",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "name": "Schmpkt LLC",
+            "slug": "schmpkt-llc",
+            "supplier": 5
+        },
+        "model": "supplier.store",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "name": "Johnson, Welch and Johnston",
+            "slug": "johnson-welch-and-johnston",
+            "supplier": 5
+        },
+        "model": "supplier.store",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "name": "Runolfsson, Hauck and Koch",
+            "slug": "runolfsson-hauck-and-koch",
+            "supplier": 6
+        },
+        "model": "supplier.store",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "name": "Runolfsdottir-Bernhard",
+            "slug": "runolfsdottir-bernhard",
+            "supplier": 7
+        },
+        "model": "supplier.store",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "name": "Harber and Sons",
+            "slug": "harber-and-sons",
+            "supplier": 2
+        },
+        "model": "supplier.store",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "name": "Conn LLC",
+            "slug": "conn-llc",
+            "supplier": 3
+        },
+        "model": "supplier.store",
+        "pk": 10
+    },
+    {
+        "fields": {
+            "name": "Johns-Reichert",
+            "slug": "johns-reichert"
+        },
+        "model": "supplier.productcategory",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "name": "Pacocha and Sons",
+            "slug": "pacocha-and-sons"
+        },
+        "model": "supplier.productcategory",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "name": "Klein-Mueller",
+            "slug": "klein-mueller"
+        },
+        "model": "supplier.productcategory",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "name": "Jenkins-Bednar",
+            "slug": "jenkins-bednar"
+        },
+        "model": "supplier.productcategory",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "name": "D'Amore-Keeling",
+            "slug": "damore-keeling"
+        },
+        "model": "supplier.productcategory",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "name": "Renner-Adams",
+            "slug": "renner-adams"
+        },
+        "model": "supplier.productcategory",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "name": "Lynch, Welch and Stark",
+            "slug": "lynch-welch-and-stark"
+        },
+        "model": "supplier.productcategory",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "name": "Senger-Turner",
+            "slug": "senger-turner"
+        },
+        "model": "supplier.productcategory",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "name": "Douglas LLC",
+            "slug": "douglas-llc"
+        },
+        "model": "supplier.productcategory",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "name": "Leannon-Luettgen",
+            "slug": "leannon-luettgen"
+        },
+        "model": "supplier.productcategory",
+        "pk": 10
+    },
+    {
+        "fields": {
+            "category": 1,
+            "name": "Johns-Reichert",
+            "slug": "johns-reichert"
+        },
+        "model": "supplier.productsubcategory",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "category": 2,
+            "name": "Pacocha and Sons",
+            "slug": "pacocha-and-sons"
+        },
+        "model": "supplier.productsubcategory",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "category": 3,
+            "name": "Klein-Mueller",
+            "slug": "klein-mueller"
+        },
+        "model": "supplier.productsubcategory",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "category": 4,
+            "name": "Jenkins-Bednar",
+            "slug": "jenkins-bednar"
+        },
+        "model": "supplier.productsubcategory",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "category": 5,
+            "name": "D'Amore-Keeling",
+            "slug": "damore-keeling"
+        },
+        "model": "supplier.productsubcategory",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "category": 6,
+            "name": "Renner-Adams",
+            "slug": "renner-adams"
+        },
+        "model": "supplier.productsubcategory",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "category": 7,
+            "name": "Lynch, Welch and Stark",
+            "slug": "lynch-welch-and-stark"
+        },
+        "model": "supplier.productsubcategory",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "category": 8,
+            "name": "Senger-Turner",
+            "slug": "senger-turner"
+        },
+        "model": "supplier.productsubcategory",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "category": 9,
+            "name": "Douglas LLC",
+            "slug": "douglas-llc"
+        },
+        "model": "supplier.productsubcategory",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "category": 10,
+            "name": "Leannon-Luettgen",
+            "slug": "leannon-luettgen"
+        },
+        "model": "supplier.productsubcategory",
+        "pk": 10
+    },
+    {
+        "fields": {
+            "currency": "BRL",
+            "description": "egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus",
+            "name": "Olanzapine",
+            "price": 120,
+            "slug": "olanzapine",
+            "store": [
+                1
+            ],
+            "sub_category": 1
+        },
+        "model": "supplier.product",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "currency": "IDR",
+            "description": "vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae duis faucibus accumsan odio",
+            "name": "Childrens QPAP",
+            "price": 645,
+            "slug": "childrens-qpap",
+            "store": [
+                2
+            ],
+            "sub_category": 2
+        },
+        "model": "supplier.product",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "currency": "TMT",
+            "description": "donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit",
+            "name": "Glipizide",
+            "price": 701,
+            "slug": "glipizide",
+            "store": [
+                3
+            ],
+            "sub_category": 3
+        },
+        "model": "supplier.product",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "currency": "CNY",
+            "description": "nunc viverra dapibus nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris",
+            "name": "Aveeno Active Naturals Skin Relief Moisturizing",
+            "price": 831,
+            "slug": "aveeno-active-naturals-skin-relief-moisturizing",
+            "store": [
+                4
+            ],
+            "sub_category": 4
+        },
+        "model": "supplier.product",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "currency": "LKR",
+            "description": "vel est donec odio justo sollicitudin ut suscipit a feugiat et eros",
+            "name": "Skin Tag Remover",
+            "price": 271,
+            "slug": "skin-tag-remover",
+            "store": [
+                5
+            ],
+            "sub_category": 5
+        },
+        "model": "supplier.product",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "currency": "CZK",
+            "description": "lorem quisque ut erat curabitur gravida nisi at nibh in hac habitasse platea dictumst",
+            "name": "GUNA-IL 7",
+            "price": 450,
+            "slug": "guna-il-7",
+            "store": [
+                6
+            ],
+            "sub_category": 6
+        },
+        "model": "supplier.product",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "currency": "IDR",
+            "description": "sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo",
+            "name": "Benazepril Hydrochloride",
+            "price": 273,
+            "slug": "benazepril-hydrochloride",
+            "store": [
+                7
+            ],
+            "sub_category": 7
+        },
+        "model": "supplier.product",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "currency": "SEK",
+            "description": "in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis",
+            "name": "Carbon Dioxide",
+            "price": 513,
+            "slug": "carbon-dioxide",
+            "store": [
+                8
+            ],
+            "sub_category": 8
+        },
+        "model": "supplier.product",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "currency": "NGN",
+            "description": "sem fusce consequat nulla nisl nunc nisl duis bibendum felis sed interdum venenatis",
+            "name": "Medline ReadyBath Luxe",
+            "price": 221,
+            "slug": "medline-readybath-luxe",
+            "store": [
+                9
+            ],
+            "sub_category": 9
+        },
+        "model": "supplier.product",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "currency": "RSD",
+            "description": "ipsum ac tellus semper interdum mauris ullamcorper purus sit amet nulla",
+            "name": "Family Care Triple Antibiotic",
+            "price": 262,
+            "slug": "family-care-triple-antibiotic",
+            "store": [
+                10
+            ],
+            "sub_category": 10
+        },
+        "model": "supplier.product",
+        "pk": 10
+    }
+]

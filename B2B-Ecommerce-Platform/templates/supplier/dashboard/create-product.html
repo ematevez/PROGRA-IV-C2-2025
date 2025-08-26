@@ -1,0 +1,197 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="view-sub-tabs">
+            <a href="{% url 'supplier:dashboard-products' %}">{% trans "Product List" %}</a>
+            <a class="active" href="">{% trans "Create Product" %}</a>
+            <a href="{% url 'supplier:dashboard-bulkupload' %}">{% trans "Bulk Upload" %}</a>
+        </div>
+        
+        <div class="cs-grid content-area cs-align-start">
+            <div class="cs-grid br-sm multiple-part" style="--gap:1rem;">
+                <div class="form-part cs-grid cs-grid-flow-row outlined br-sm" style="--gap: .5rem;">
+                    <div class="part-header cs-grid cs-justify-between cs-align-center cs-grid-flow-col">
+                        <h2 id="form-part-title" style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                            {% trans 'Enter Product details' %}
+                        </h2>
+                        <div class="swipe-cta">
+                            <button class="btn" id="form-part-previous" onclick="previousFormPart(event)">{% trans "Previous" %}</button>
+                            <button class="btn" id="form-part-next" data-loading="false" onclick="nextFormPart(event)">
+                                <p class="text">{% trans "Next" %}</p>
+                                <div class="spinner"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600 msg-alert">
+                        <p class="alert-msg"></p>
+                        <i style="align-self: center;" class="fa fa-close"></i>
+                    </div>
+                    <form method="POST" class="part-body in-view  slide-in cs-grid" style="--gap: 1rem;"  id="product-details-form-part" data-part-idx="0" data-part-title="{% trans 'Enter Product Detailts' %}">
+                        <p class="text-base text-slate-600" style="margin-block-end: .25rem;"><b>*</b> {% trans 'Represents required fields' %}.</p>
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="name" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Name' %} *</label>
+                            <input type="text" class="cs-text-normal" name="name" id="name" required>
+                        </div>
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="product-description" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Description' %} *</label>
+                            <textarea style="padding: .5rem;" name="description" id="product-description" cols="30" rows="10" required></textarea>
+                        </div>
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="sub_category" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Sub category' %} *</label>
+                            <input type="text" class="cs-text-normal" name="sub_category" id="sub_category" required list="sub_categories">
+                            <datalist id="sub_categories">
+                                {% for subcategory in subcategories %}
+                                    <option value="{{subcategory.name}}" >
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                    </form>
+                    <form method="POST" enctype="multipart/form-data" class="part-body cs-grid" style="--gap: 1rem;"  id="product-media-form-part" data-part-idx="3" data-part-title="{% trans 'Upload Product Media' %}">
+                        <p class="text-base text-slate-600" style="margin-block-end: .25rem;"><b>*</b> {% trans 'Represents required fields' %}.</p>
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="images" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Images' %} *</label>
+
+                            <div class="selected-images" id="images"></div>
+
+                            <input type="file" name="images" multiple id="product-images" class="file-input" required>
+                            <label for="product-images" class="drop-area" id="product-images-area">
+                              <span>{% trans "Drag and drop Product Images here" %}</span>
+                              <span class="browse-link">{% trans "or browse" %}</span>
+                            </label>
+                        </div>
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="images" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Videos' %} </label>
+
+                            <div class="selected-images" id="videos"></div>
+
+                            <input type="file" name="videos" multiple id="product-videos" class="file-input">
+                            <label for="product-videos" class="drop-area" id="product-videos-area">
+                              <span>{% trans "Drag and drop Product Videos here" %}</span>
+                              <span class="browse-link">{% trans "or browse" %}</span>
+                            </label>
+                        </div>
+                    </form>
+                    <form method="POST" class="part-body slide-in cs-grid" style="--gap: 1rem;"  id="product-store-form-part" data-part-idx="1" data-part-title="{% trans 'Alocate Product to Store' %}">
+                        <p class="text-base text-slate-600" style="margin-block-end: .25rem;"><b>*</b> {% trans 'Represents required fields' %}.</p>
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="store" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Store' %} *</label>
+                            <input type="text" class="cs-text-normal" name="store" id="store" required list="stores">
+                            <datalist id="stores">
+                                {% for store in stores %}
+                                    <option value="{{store.name}}">
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <div class="form-group cs-grid" style="--gap: .5rem;">
+                                <label for="stock" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Current Stock' %} </label>
+                                <input type="number" class="cs-text-normal" name="stock" id="stock">
+                            </div>
+                        </div>
+                    </form>
+                    <form method="POST" class="part-body slide-in cs-grid" style="--gap: 1rem;"  id="product-labelling-form-part" data-part-idx="4" data-part-title="{% trans 'Product Tagging and Labelling' %}">
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="tag_2" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Product Tags' %}</label>
+                            <div class="cs-flex" style="--gap:1rem;">
+                                <input type="text" name="tag_1" id="tag_1" value="{{ supplier_profile.country }}" required placeholder="Tag 1" readonly>
+                                <input type="text" name="tag_2" id="tag_2" placeholder="Tag 2">
+                                <input type="text" name="tag_3" id="tag_3" placeholder="Tag 3">
+                                <input type="text" name="tag_4" id="tag_4" placeholder="Tag 4">
+                                <input type="text" name="tag_5" id="tag_5" placeholder="Tag 5">
+                            </div>
+                        </div>
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="color_1" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Product Colors' %}</label>
+                            <div class="cs-flex" style="--gap:1rem;">
+                                <input type="text" class="product-colors" name="color_1" id="color_1"  placeholder="Color 1">
+                                <input type="text" class="product-colors" name="color_2" id="color_2" placeholder="Color 2">
+                                <input type="text" class="product-colors" name="color_3" id="color_3" placeholder="Color 3">
+                                <input type="text" class="product-colors" name="color_4" id="color_4" placeholder="Color 4">
+                                <input type="text" class="product-colors" name="color_5" id="color_5" placeholder="Color 5">
+                            </div>
+                        </div>
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="material_1" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Product Materials' %}</label>
+                            <div class="cs-flex" style="--gap:1rem;">
+                                <input type="text" name="material_1" id="material_1"  placeholder="Material 1">
+                                <input type="text" name="material_2" id="material_2" placeholder="Material 2">
+                                <input type="text" name="material_3" id="material_3" placeholder="Material 3">
+                                <input type="text" name="material_4" id="material_4" placeholder="Material 4">
+                            </div>
+                        </div>
+                    </form>
+                    <form method="POST" class="part-body slide-in cs-grid" style="--gap: 1rem;"  id="product-pricing-form-part" data-part-idx="2" data-part-title="{% trans 'Product Pricing' %}">
+                        <p class="text-base text-slate-600" style="margin-block-end: .25rem;"><b>*</b> {% trans 'Represents required fields' %}.</p>
+                        <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;">
+                            <div class="form-group cs-grid" style="--gap: .5rem;">
+                                <label for="currency_1" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Currency 1' %} *</label>
+                                <input type="text" class="cs-text-normal" name="currency-1" id="currency_1" required list="currrencies">
+                            </div>
+                            <div class="form-group cs-grid" style="--gap: .5rem;">
+                                <label for="min_price_currency_1" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Min Price' %} *</label>
+                                <input type="text" class="cs-text-normal" name="min-price-currency-1" id="min_price_currency_1" required>
+                            </div>
+                            <div class="form-group cs-grid" style="--gap: .5rem;">
+                                <label for="max_price_currency_1" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Max Price' %} *</label>
+                                <input type="text" class="cs-text-normal" name="max-price-currency-1" id="max_price_currency_1" required>
+                            </div>
+                        </div>
+                        <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;">
+                            <div class="form-group cs-grid" style="--gap: .5rem;">
+                                <label for="currrency_1" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Currency 2' %}</label>
+                                <input type="text" class="cs-text-normal" name="currency-2" id="currency_2" list="currrencies">
+                            </div>
+                            <div class="form-group cs-grid" style="--gap: .5rem;">
+                                <label for="min_price_currency_2" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Min Price' %}</label>
+                                <input type="text" class="cs-text-normal" name="min-price-currency-2" id="min_price_currency_2">
+                            </div>
+                            <div class="form-group cs-grid" style="--gap: .5rem;">
+                                <label for="max_price_currency_2" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Max Price' %}</label>
+                                <input type="text" class="cs-text-normal" name="max-price-currency-2" id="max_price_currency_2">
+                            </div>
+                        </div>
+                        <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;">
+                            <div class="form-group cs-grid" style="--gap: .5rem;">
+                                <label for="currrency_1" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Currency 3' %}</label>
+                                <input type="text" class="cs-text-normal" name="currency-3" id="currency_3" list="currrencies">
+                            </div>
+                            <div class="form-group cs-grid" style="--gap: .5rem;">
+                                <label for="min_price_currency_3" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Min Price' %}</label>
+                                <input type="text" class="cs-text-normal" name="min-price-currency-3" id="min_price_currency_3">
+                            </div>
+                            <div class="form-group cs-grid" style="--gap: .5rem;">
+                                <label for="max_price_currency_3" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Max Price' %}</label>
+                                <input type="text" class="cs-text-normal" name="max-price-currency-3" id="max_price_currency_3">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="description cs-grid br-sm outlined cs-content-start">
+                    <h3 class="cs-font-bold cs-text-secondary cs-text-body">{% trans 'Guidelines' %}</h3>
+                    <ul class="cs-font-normal cs-text-normal cs-grid" style="--gap: .5rem;list-style-type:lower-alpha;list-style-position: inside;">
+                        <li>{% trans 'Provide a name that is easily understood.' %}</li>
+                        <li>{% trans 'Select a store (from the dropdown list) from those you created.' %}</li>
+                        <li>{% trans 'Select a product sub category from the dropdown list. This enables proper grouping of products.' %}</li>
+                        <li>{% trans 'Provide a currency that suites you best e.g EUR, USD.' %}</li>
+                        <li>{% trans 'Product tags help buyers to find your service easily.' %}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    <script>
+
+
+    
+    
+    </script>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/product_creation_form.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends './utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <!-- section area -->
+
+            <!-- when in display -> cs-grid -->
+            <!-- when not in display -> cs-hidden -->
+        
+        <section class="content br-sm outlined" style="--gap: 1rem;">
+            <div class="cs-grid" style="grid-template-columns: .8fr 3fr;padding: 1rem 2rem;--gap:2rem;">
+                <div class="img-wrapper br-full cs-overflow-hidden">
+                    <img src="media/{{request.user.image}}" style="object-fit: cover;" alt="{{request.user.username}}">
+                </div>
+                <div class="cs-grid cs-content-start" style="--gap: .5rem;padding: 1rem 0;">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                                <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                    <p>{{ message }}</p>
+                                    <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                                </div>
+                            {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                                <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                    <p>{{ message }}</p>
+                                    <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <div class="group cs-grid" style="--gap: .5rem;">
+                        <span class="cs-text-normal" style="color: var(--text-color);">Name:</span>
+                        <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ request.user.first_name }} {{ request.user.last_name }}</span>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .5rem;">
+                        <span class="cs-text-normal" style="color: var(--text-color);">UserName:</span>
+                        <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ request.user.username }}</span>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .5rem;">
+                        <span class="cs-text-normal" style="color: var(--text-color);">Email:</span>
+                        <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ request.user.email }}</span>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .5rem;">
+                        <span class="cs-text-normal" style="color: var(--text-color);">Acount Type:</span>
+                        <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ request.user.account_type }}</span>
+                    </div>
+                    <div class="group cs-flex" style="--gap: .5rem;">
+                        <a class="btn outlined cs-bg-hover-color br-sm" href="{% url 'app_admin:editprofile' %}">Edit Profile</a>
+                        <a class="btn cs-bg-primary  cs-text-white br-sm br-sm" href="{% url 'app_admin:editprofile' %}">Reset Password</a>
+                        <a class="btn outlined cs-bg-secondary cs-text-white br-sm" href="{% url 'app_admin:createsupport' %}">Create Support Account</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- section area -->
+{% endblock %}

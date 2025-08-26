@@ -1,0 +1,76 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load isEqual %}
+{% block content %}
+
+    <div class="main-content">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" class="fa fa-close"></i>
+                    </div>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" class="fa fa-close"></i>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <div class="cs-grid content-area w-desciption cs-align-start">
+            <form action="{% url 'buyer:order-shipping-details' object.order.order_id %}" method="POST" id="category-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;">
+                <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                    {% trans 'Fill in form to edit shipping details' %}
+                </h2>
+                <p class="cs-text-base text-slate-600"><b>*</b> {% trans 'Represents required fields' %}.</p>
+                {% csrf_token %}
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="carrier" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Shipping Carrier'  %} *</label>
+                    <Select name="carrier" id="carrier" required>
+                        {% for carrier in carriers %}
+                            <option value="{{carrier.pk}}">{{carrier.name}} - {{carrier.tax}} {% trans "tax charged on agreed price" %}</option>
+                        {% endfor %}
+                    </Select>
+                </div>
+                <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;">
+                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                        <label for="country" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Country' %} *</label>
+                        <input type="text" class="cs-text-normal" name="country" id="country" value="{{object.order.buyer.country}}" required>
+                    </div>
+                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                        <label for="product_material" class="cs-text-normal" style="color: var(--text-color);">{% trans 'City' %} *</label>
+                        <input type="text" class="cs-text-normal" name="city" id="city" value="{{object.order.buyer.city}}" required>
+                    </div>
+                </div>
+                <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;">
+                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                        <label for="address_1" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Shipping Address 1' %} *</label>
+                        <input type="text" class="cs-text-normal" name="address_1" id="address_1" value="{{object.order.address_1}}" required>
+                    </div>
+                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                        <label for="address_1" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Shipping Address 2' %} </label>
+                        <input type="text" class="cs-text-normal" name="address_2" id="address_2" value="{{object.order.address_2}}">
+                    </div>
+                </div>
+                <div class="form-group cs-grid cs-grid-flow-col" style="--gap: 1rem;justify-self: flex-end;">
+                    <input class="cs-text-white cs-bg-secondary br-sm" type="submit" name="edit"
+                    value="{% trans 'Save Details' %}">
+                    <a href="{% url 'buyer:order-detail' object.order.order_id %}" class="btn cs-text-white outlined cs-text-secondary cs-font-600 cs-grid cs-justify-center">{% trans 'Cancel' %}</a>
+                </div>
+            </form>
+
+            <div class="description cs-grid br-sm outlined cs-content-start">
+                <h3 class="cs-font-bold cs-text-secondary cs-text-body">{% trans "Guidelines" %}</h3>
+                <ul class="cs-font-normal cs-text-normal cs-grid" style="--gap: .5rem;list-style-type:lower-alpha;list-style-position: inside;">
+                    <li>{% trans 'Provide a name that is easily understood.' %}</li>
+                    <li>{% trans 'Provide a currency that suites you best e.g EUR, USD.' %}</li>
+                    <li>{% trans 'Service tags help buyers to find your service easily.' %}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

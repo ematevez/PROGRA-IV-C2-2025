@@ -1,0 +1,369 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap');
+
+/* css reset */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+    min-block-size: 100vh;
+    text-rendering: optimizeSpeed;
+    block-size: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+    max-inline-size: 100%;
+    display: block;
+    object-fit: contain;
+    aspect-ratio: 1/1;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* css reset */
+
+
+:root {
+    --brand-primary: #f6d683;
+    --brand-primary: #ecab08;
+    --brand-secondary: #171717;
+
+    --gray-1: #222222;
+    --gray-2: #656565;
+
+    --gray-3: #9aaa97;
+    --gray-4: #beccbe;
+    --gray-5: #d5e0d5;
+    --gray-6: #e4ebe4;
+
+    --gray-7: #f2f2f2;
+    --gray-8: #ffffff;
+
+    --text-1: var(--gray-1);
+    --text-2: var(--gray-2);
+    --text-3: var(--gray-3);
+    --text-4: var(--gray-4);
+    --text-5: var(--gray-5);
+    --text-6: var(--gray-6);
+    --text-7: var(--gray-7);
+    --text-8: var(--gray-8);
+
+    --font-lato: "Lato", sans-serif;
+    --font-nunito: "Nunito", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    block-size: 100%;
+}
+
+body {
+    color: var(--text-1);
+    font-family: var(--font-nunito);
+    block-size: 1.6;
+    overflow-x: hidden;
+}
+
+img {
+    width: 100%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    color: var(--text-1);
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    block-size: 1.2;
+    margin: 10px 0;
+}
+
+.container {
+    max-width: 1500px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0 10px;
+}
+
+.container-fluid {
+    max-width: 100%;
+    overflow: auto;
+}
+
+/* .flex {
+    block-size: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+/* .grid {
+    block-size: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+} */
+
+.card {
+    color: var(--text-1);
+    background-color: var(--gray-8);
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    /* padding: 20px; */
+    /* margin: 10px; */
+    margin-left: 0;
+    width: 100%;
+}
+
+.card-outlined {
+    border: 1px solid hsla(213, 28%, 19%, .1);
+    border-radius: 2.5px;
+}
+
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+/* 
+.cta {
+    color: var(--brand-primary);
+    font-weight: 800;
+    display: inline-block;
+    background-color: #fff;
+    padding: .3rem 1.2rem;
+    border: 1px solid var(--brand-primary);
+    border-radius: 30px;
+}
+
+.cta:hover {
+    color: #fff;
+    background-color: var(--brand-primary);
+    transition: .5s;
+}
+
+.cta.lg {
+    padding: 1rem 1.6rem;
+    font-size: 16px;
+    border: none;
+}
+
+.cta.lg:hover {
+    color: var(--brand-primary);
+    background-color: #e5fae4;
+} */
+
+
+#toggle-dropdown {
+    position: relative;
+}
+
+.dropdown {
+    font-family: var(--font-poppins);
+    font-weight: 400;
+    font-size: 15px;
+    min-width: 780px;
+    block-size: 290px;
+    padding: .8rem 0;
+    box-shadow: 0 3px 8px rgba(135, 135, 135, 0.2);
+    border-radius: 5px;
+    background-color: #fff;
+    position: absolute;
+    top: 33px;
+    left: 0;
+    overflow: hidden;
+}
+
+.dropdown-item {
+    block-size: 100%;
+}
+
+.dropdown-item span {
+    font-weight: 800;
+    margin-left: 14px;
+}
+
+.dropdown-links {
+    padding: .3rem .8rem !important;
+    border-radius: 5px;
+}
+
+.dropdown-links:hover {
+    background-color: #f3f3f3;
+}
+
+.dropdown-item ul li {
+    margin: .4rem 0;
+    padding: 0;
+}
+
+.dropdown-item ul li a {
+    margin: 0;
+    color: #656565;
+}
+
+
+
+/* forms */
+
+
+form:not(.search-form) input,
+form select, form textarea {
+    padding-inline: 1.5rem;
+    padding-block: .5rem;
+    font-size: 1rem;
+    border: 1px solid hsl(185, 11%, 78%);
+    outline: none;
+    border-radius: 5px;
+    transition: all .2s ease-in;
+}
+
+form:not(.search-form) input:not([type='submit']),
+form select {
+    background-color: transparent;
+}
+
+form.filter-group input {
+    padding-inline: .5rem;
+    padding-block: .35rem;
+}
+
+form input:focus,
+form input:focus-within,
+form textarea:focus,
+form textarea:focus-within {
+    outline: 1px solid hsl(212, 14%, 25%);
+}
+
+
+form input[type='submit'] {
+    cursor: pointer;
+}
+
+form input[type='submit']:hover {
+    background-color: hsl(213, 28%, 16%);
+}
+
+
+.horizontal-scroll {
+    --row-size: 17%;
+    grid-auto-flow: column;
+    grid-auto-columns: var(--row-size);
+    --gap: 0 1rem;
+    overflow-x: scroll;
+    overscroll-behavior-inline: contain;
+
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline: 1rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.horizontal-scroll > * {
+    scroll-snap-align: start;
+}
+
+@media (max-width: 786px) {
+    .horizontal-scroll {
+        --row-size: 37%;
+        grid-auto-columns: var(--row-size);
+    }
+    .horizontal-scroll.lg {
+        --row-size: 66%;
+        grid-auto-columns: var(--row-size);
+    }
+    
+    .horizontal-scroll.showrooms {
+        grid-auto-columns: 33%;
+    }
+}

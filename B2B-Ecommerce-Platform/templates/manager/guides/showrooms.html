@@ -1,0 +1,71 @@
+{% extends '../../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <section class="w-11/12 py-6 mx-auto grid grid-flow-dense md:flex md:gap-8" style="height: auto">
+
+        {% include './faqs.html' %}
+        {% get_current_language as LANGUAGE_CODE %}
+            <div class="section-body card py-6 px-2 md:px-6 grid gap-4 text-lighterBackgroundColor" style="box-shadow:unset;">
+                <div class="grid gap-2">
+                    <h1 class="font-bold text-lg md:text-2xl" style="text-align: justify;">{% trans "Foroden Showrooms" %}:</h1>
+                    <p class="" style="text-align: justify;">{% trans "Foroden provides a showrooms feature where stores from different locations are displayed and made accessible to the buyers." %}</p>
+                    <p class="" style="text-align: justify;">{% trans "The stores are displayed on the showrooms basing on their membership packages. Those with Gold membership are made accessible to all buyers all over the world." %}</p>
+                    <p class="" style="text-align: justify;">{% trans "The showrooms organize the stores in a way that our algorithms can make the best suggestions for our buyers hence simplifying the entire process of buying from our virtual stores." %}</p>
+                    <p class="" style="text-align: justify;">{% trans "Foroden offers the following showrooms:" %}</p>
+                    <ul class="grid gap-2 px-2 py-2 mx-4 font-semibold">
+                        {% for showroom in showrooms %}
+                            <li><a href="{% url 'manager:showroom-detail' showroom.slug %}" class="flex gap-2">
+                                <img style="aspect-ratio: 1;inline-size: 30px;" src="/media/{{showroom.image}}" alt="{{showroom.name}}">
+                                <span>{{ showroom.name }}</span>
+                            </a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="grid gap-8">
+                    <h2 class="font-bold text-lg md:text-xl" style="text-align: justify;">{% trans 'How to add a store to a showroom.' %}</h2>
+                    <div class="grid gap-2 px-2 md:px-4">
+                        <h3 class="font-semibold flex gap-2 text-slate-500 text-base md:text-lg">
+                            <span>{% trans '1' %}.</span>
+                            <span>{% trans 'Access your supplier dashboard' %}</span>
+                        </h3>
+                        <div class="guide-img">
+                            {% with "images/guides/"|add:request.LANGUAGE_CODE|add:"/supplier_dash.png" as url %}
+                                
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <div class="grid gap-2 px-2 md:px-4">
+                        <h3 class="font-semibold flex gap-2 text-slate-500 text-base md:text-lg">
+                            <span>{% trans '2' %}.</span>
+                            <span>{% trans 'Select Manage Store in the Sidebar' %}</span>
+                        </h3>
+                        <div class="guide-img">
+                            {% with "images/guides/"|add:request.LANGUAGE_CODE|add:"/manage_stores.png" as url %}
+                                
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <div class="grid gap-2 px-2 md:px-4">
+                        <h3 class="font-semibold flex gap-2 text-slate-500 text-base md:text-lg">
+                            <span>{% trans '3' %}.</span>
+                            <span>{% trans 'Select Store from the stores list' %}</span>
+                        </h3>
+                        <p class="font-normal text-slate-600 text-base md:text-lg">
+                            {% trans 'This opens up a store modal with 2 forms. Use form 1 to select a showroom to which you want to add the selected store. Use form 2 to add a specific product to the selected store.' %}
+                        </p>
+                        <div class="guide-img">
+                            {% with "images/guides/"|add:request.LANGUAGE_CODE|add:"/supplier_model.png" as url %}
+                                
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

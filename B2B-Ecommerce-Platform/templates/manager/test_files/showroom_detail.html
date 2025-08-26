@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden - {{ view_name }}</title>
+</head>
+<body>
+
+
+    <div class="flex">
+        <a href="{% url 'manager:home' %}" data-link="products">Home</a>
+        <a href="{% url 'supplier:products' %}" data-link="products">Products</a>
+        <a href="{% url 'manager:showrooms' %}" data-link="products">Showrooms</a>
+        <a href="{% url 'manager:services' %}" data-link="products">Services</a>
+        <a href="{% url 'manager:support' %}" data-link="products">Support</a>
+        <a href="{% url 'manager:about-us' %}" data-link="products">About Us</a>
+    </div>
+
+    <h4 data-showroom-name="{{showroom.name}}">{{showroom.name}}</h4>
+    <p data-showroom-location="{{showroom.location}}">{{showroom.location}}</p>
+
+    <h3>Store</h3>
+    <ul data-context='{{ stores.context_name }}' style="display: grid;grid-template-columns: repeat(5, 1fr); gap: 2rem;">
+        {% for store in stores.results %}
+            <li data-store-index="{{forloop.counter}}">
+                <a href="{% url 'supplier:store-detail' store.slug %}">
+                    <img style="width: 100%" src="/media/{{ store.image }}" alt="">
+                    <p>{{ store.name }}</p>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+    <h3>Other showrooms</h3>
+    <ul data-context='{{ other_showroom.context_name }}' style="display: grid;grid-template-columns: repeat(10, 1fr); gap: 2rem;">
+        {% for showroom in other_showroom.results %}
+            <li>
+                <a href="{% url 'manager:showroom-detail' showroom.slug %}" data-showroom-index="{{forloop.counter}}">
+                    <img style="width: 100%" src="/media/{{ showroom.image }}" alt="">
+                    <p>{{ showroom.name }}</p>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>

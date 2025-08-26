@@ -1,0 +1,189 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="main-content" style="overflow-y: scroll;">
+    <div class="cs-content-area cs-no-box-shadow outlined" style="block-size: 100vh;padding: .6rem .4rem;">
+        <div class="content-area-top flex" style="justify-content: space-between;padding-block-start: .4rem;">
+            <h3 style="font-weight:600;">{% trans 'Notifications' %}</h3>
+            <!-- <h4>Mark all as read</h4> -->
+        </div>
+
+        <div class="notifications-section flex" style="background-color: rgb(226, 226, 224);">
+            <h4 class="section-togglers" data-section="sec_00" style="padding-block: 1.2rem;">All Notifications</h4>
+            <h4 class="section-togglers" data-section="sec_01" style="padding-block: 1.2rem;">Contracts</h4>
+            <h4 class="section-togglers" data-section="sec_02" style="padding-block: 1.2rem;">Bids</h4>
+            <h4 class="section-togglers" data-section="sec_03" style="padding-block: 1.2rem;">Chats</h4>
+        </div>
+
+        <div class="notification-section inview" id="sec_00">
+            <div class="notifications">
+                <!-- <div class="notification flex">
+                    <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar">
+                    <div class="notification-content">
+                        <h6 class="notification-title"><strong>Rizeen Suppliers</strong> have sent you an invoice.</h6>
+                        <span class="notification-time">5 min ago</span>
+                        <div class="notification-actions">
+                            <button>View Invoice</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="notification flex">
+                    <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar">
+                    <div class="notification-content">
+                        <h6 class="notification-title"><strong>Hellen Joes</strong> sent you a quotation for the products you need to purchase from his store.</h6>
+                        <span class="notification-time">1 hour ago</span>
+                        <div class="notification-actions flex" style="justify-content: flex-start;align-items: center;gap:.4rem;">
+                            <img src="{% static 'graphics/file.png' %}" alt="">
+                            <div class="file-specs flex" style="flex-direction: column;align-items: flex-start;">
+                                <span><strong>Rizeen Smart Quotation.docx</strong></span>
+                                <span>1.2 MB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="notification-section" id="sec_01">
+            <div class="notifications">
+            </div>
+        </div>
+        <div class="notification-section" id="sec_02">
+            <div class="notifications">
+            </div>
+        </div>
+        <div class="notification-section" id="sec_03">
+            <div class="notifications">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const section_togglers = document.querySelectorAll(".section-togglers")
+        section_togglers.forEach(
+            activator => activator.addEventListener("click", () => {
+                let sectionToShow = document.querySelector(`#${activator.dataset.section}`)
+
+                section_togglers.forEach(section_toggler => {
+                    section_toggler.style.borderBlockEnd = "unset";
+                    section_toggler.style.color = "#929293";
+                })
+                activator.style.color = "#363637";
+                activator.style.borderBlockEnd = "2px solid #363637";
+                
+                let openSections = document.querySelectorAll(".notification-section.inview");
+                openSections.forEach(section => section.classList.remove("inview"))
+
+                sectionToShow.classList.add("inview")
+            })
+        )
+
+        // Fetch notifications
+        async function fetchAllNotifications() {
+            try {
+                let endpoint;
+
+                if (window.location.hostname === 'localhost') {
+                    endpoint = 'http://localhost:8000/en/api/notifications/';
+                } else {
+                    endpoint = 'http://mugisa.tech/en/api/notifications/';
+                }
+
+                const response = await fetch(endpoint);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch notifications');
+                }
+
+                const notifications = await response.json();
+
+                const div = document.querySelector("#sec_00");
+                if(notifications.results.length != 0){
+                    notifications.results.forEach(notification => {
+                        div.innerHTML += `
+                        <div class="notification flex">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar">
+                                <div class="notification-content">
+                                    <h6 class="notification-title">${notification.title}</h6>
+                                    <span class="notification-time">${notification.description}</span>
+                                    <span class="notification-time">${notification.created_on}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }else{
+                    div.innerHTML += `
+                    <div style="background-color: #f2f2f2; padding: 20px; border-radius: 8px; text-align: center;">
+                        <h4 style="color: #888888; font-size: 18px;">No notifications - yet</h4>
+                    </div>
+                    `;
+                }
+
+            } catch (error) {
+                console.error('Error:', error.message);
+                // Handle the error gracefully
+            }
+        };
+
+        // Fetch notifications by category
+        async function fetchNotifications(category, outputDivID) {
+            try {
+                let endpoint;
+
+                if (window.location.hostname === 'localhost') {
+                    endpoint = `http://localhost:8000/en/api/notifications/${category}`;
+                } else {
+                    endpoint = `http://mugisa.tech/en/api/notifications/${category}`;
+                }
+
+                const response = await fetch(endpoint);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch notifications');
+                }
+
+                const notifications = await response.json();
+
+                const div = document.querySelector(`#${outputDivID}`);
+                if(notifications.results.length != 0){
+                    notifications.results.forEach(notification => {
+                        div.innerHTML += `
+                        <div class="notification flex">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar">
+                                <div class="notification-content">
+                                    <h6 class="notification-title">${notification.title}</h6>
+                                    <span class="notification-time">${notification.description}</span>
+                                    <span class="notification-time">${notification.created_on}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }else{
+                    div.innerHTML += `
+                    <div style="background-color: #f2f2f2; padding: 20px; border-radius: 8px; text-align: center;">
+                        <h4 style="color: #888888; font-size: 18px;">No <span style="text-transform: lowercase;">${category}</span> notifications - yet</h4>
+                    </div>
+                    `;
+                }
+
+            } catch (error) {
+                console.error('Error:', error.message);
+                // Handle the error gracefully
+            }
+        };
+
+        fetchAllNotifications();
+        fetchNotifications("CONTRACTS", "sec_01");
+        fetchNotifications("BIDS", "sec_02");
+        fetchNotifications("CHATS", "sec_03");
+    
+    });
+</script>
+
+
+
+
+{{ category_group|json_script:"category_group" }}
+
+{% endblock %}

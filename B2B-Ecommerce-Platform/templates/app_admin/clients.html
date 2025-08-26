@@ -1,0 +1,497 @@
+{% extends './utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <!-- section area -->
+        <!-- section selectors -->
+        <nav data-page="client" class="section-nav-area br-sm cs-bg-white outlined">
+            <ul class="cs-grid section-nav list-none list-outside" style="--gap: .5rem;">
+                <div class="cs-flex">
+                    <li id="client-overview-activator" class="cs-text-md cs-font-500">Overview</li>
+                    <li id="client-suppliers-activator" class="cs-text-md cs-font-500">Suppliers</li>
+                    <li id="client-buyers-activator"class="cs-text-md cs-font-500">Buyers</li>
+                    <li id="client-products-activator"class="cs-text-md cs-font-500">Products</li>
+                    <li id="client-stores-activator"class="cs-text-md cs-font-500">Stores</li>
+                    <!-- <li id="client-contracts-activator"class="cs-text-md cs-font-500">Contracts</li> -->
+                    <li id="client-adverts-activator"class="cs-text-md cs-font-500">Adverts</li>
+                </div>
+            </ul>
+        </nav>
+        <!-- section selectors -->
+
+            <!-- when in display -> cs-grid -->
+            <!-- when not in display -> cs-hidden -->
+
+        <section id="client-overview-section" class="cs-hidden content br-sm" style="--gap: 1rem;">
+            <div class="cs-grid" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;grid-template-columns: repeat(4, 1fr);" data-context="{{statistics.name}}">
+                {% for statistic in statistics.results %}
+                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                        <h4 class="cs-text-md cs-font-500" style="margin: 0;color: var(--text-color);">
+                            {{statistic.name}}
+                        </h4>
+                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                            <div class="cs-grid">
+                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
+                                    {{statistic.count}}
+                                </p>
+                                <span class="cs-text-sm" style="color: var(--text-color);">
+                                    {{statistic.description}}</span>
+                            </div>
+                            <a id="{% if 'Total Buyers' == statistic.name %}client-buyers-overview-activator{% elif 'Total Products' == statistic.name %}client-products-overview-activator{% elif 'Total Contracts' == statistic.name %}client-contracts-overview-activator{% elif 'Total Adverts' == statistic.name %}client-adverts-overview-activator{% elif 'Total Stores' == statistic.name %}client-stores-overview-activator{% else %}client-suppliers-overview-activator{% endif %}" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end;cursor: pointer">View All</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="client-suppliers-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>business Name</th>
+                        <th>country</th>
+                        <th>VAT Number</th>
+                        <th>Legal Entity Identifier</th>
+                        <th>Membership</th>
+                        <th>Stores</th>
+                        <th>Joined On</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>business Name</th>
+                        <th>country</th>
+                        <th>VAT Number</th>
+                        <th>Legal Entity Identifier</th>
+                        <th>Membership</th>
+                        <th>Stores</th>
+                        <th>Joined On</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="client-buyers-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>business Name</th>
+                        <th>country</th>
+                        <th>VAT Number</th>
+                        <th>Legal Entity Identifier</th>
+                        <th>Joined On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr class="cs-text-md cs-font-500 client-item">
+                        <td>1</td>
+                        <td>Alex Fashions</td>
+                        <td>France</td>
+                        <td>192047239</td>
+                        <td>39N23J23MF</td>
+                        <td>12/03/2020</td>
+                    </tr> -->
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>business Name</th>
+                        <th>country</th>
+                        <th>VAT Number</th>
+                        <th>Legal Entity Identifier</th>
+                        <th>Joined On</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="client-contracts-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Supplier</th>
+                        <th>Buyer</th>
+                        <th>Service</th>
+                        <th>Complete</th>
+                        <th>Accepted</th>
+                        <th>Amount</th>
+                        <th>Created On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Supplier</th>
+                        <th>Buyer</th>
+                        <th>Service</th>
+                        <th>Complete</th>
+                        <th>Accepted</th>
+                        <th>Amount</th>
+                        <th>Created On</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="client-products-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Supplier</th>
+                        <th>Category</th>
+                        <th>Sub Subcategory</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Supplier</th>
+                        <th>Category</th>
+                        <th>Sub Subcategory</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                </div>
+            </div>
+        </section>
+        
+
+        <section id="client-adverts-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Product</th>
+                        <th>Supplier</th>
+                        <th>Amount</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Product</th>
+                        <th>Supplier</th>
+                        <th>Amount</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="client-stores-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Supplier</th>
+                        <th>Products</th>
+                        <th>Verify/Suspend</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Supplier</th>
+                        <th>Products</th>
+                        <th>Verify/Suspend</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- modals -->
+        <div id="client-modal" class="modal cs-hidden elevated outlined cs-align-start" style="align-content: flex-start;--gap: .5rem;">
+            <div class="modal-header cs-grid cs-align-start" style="--gap: 1rem;">
+                <div class="cs-flex cs-justify-between cs-align-center">
+                    <h3 style="margin: 0;" class="cs-text-body cs-text-secondary cs-font-600">
+                        Client Detials
+                    </h3>
+                    <button class="btn cs-bg-transparent" id="client-modal-deactivator">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+            </div>
+            <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="modal-body cs-grid cs-justify-center" style="--gap: 1rem;">
+                <div class="cs-grid cs-justify-between" style="grid-template-columns: 1fr 0fr 1fr;--gap: 1rem;">
+                    <div class="cs-grid cs-content-start"  style="--gap: .5rem;">
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Name:</h4>
+                            <p class="cs-text-normal cs-text-secondary" id="client-username"></p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-text-secondary cs-font-500" style="color: var(--text-color);margin: 0;">Business:</h4>
+                            <p class="cs-text-normal cs-text-secondary"  id="client-business_name"></p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Country:</h4>
+                            <p class="cs-text-normal cs-text-secondary" id="client-country"></p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">VAT Number:</h4>
+                            <p class="cs-text-normal cs-text-secondary" id="client-vta"></p>
+                        </div>
+                    </div>
+                    <hr style="border: 1px solid hsla(213, 28%, 80%, 30%);">
+                    <div class="cs-grid cs-content-start" style="--gap: .5rem;">
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;flex-wrap: wrap;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Legal Entity Identifier:</h4>
+                            <p class="cs-text-normal cs-text-secondary" id="client-lei"></p>
+                        </div>
+                        <div id="membership-group" class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Membership:</h4>
+                            <p class="cs-text-normal cs-text-secondary" id="client-membership"></p>
+                        </div>
+                        <div id="stores-group" class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Stores:</h4>
+                            <div class="cs-flex" id="client-stores" style="--gap: .5rem;padding: .25rem .75rem;flex-wrap: wrap;">
+                            </div>
+                        </div>
+                        <div id="showrooms-group" class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Showrooms:</h4>
+                            <div class="cs-flex" style="--gap: .5rem;padding: .25rem .75rem;flex-wrap: wrap;" id="client-showrooms">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                <div class="modal-cta cs-flex" style="--gap: 1rem;">
+                    <a id="view-client-page" class="btn cs-grid cs-justify-center cs-align-center cs-bg-white outlined cs-text-secondary cs-text-md br-sm">
+                        View Client Page
+                    </a>
+                    <button id="veiw-product-cta" class="btn cs-grid cs-justify-center cs-align-center cs-bg-primary cs-text-white cs-text-md br-sm">
+                        View Products
+                    </button>
+                    <a id="contact-user-cta" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
+                        Contact Client
+                    </a>
+                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" data-userId="1" id="suspend-btn">
+                        Suspend Account
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="product-modal" class="modal cs-hidden elevated outlined cs-align-start" style="align-content: flex-start;--gap: .5rem;">
+            <div class="modal-header cs-grid cs-align-start" style="--gap: 1rem;">
+                <div class="cs-flex cs-justify-between cs-align-center">
+                    <h3 style="margin: 0;" class="cs-text-body cs-text-secondary cs-font-600">
+                        Product Detials
+                    </h3>
+                    <button class="btn cs-bg-transparent" id="product-modal-deactivator">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+            </div>
+            <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="modal-body cs-grid cs-justify-center" style="--gap: 1rem;">
+                <div class="cs-grid cs-justify-between" style="grid-template-columns: 1fr 0fr 1fr;--gap: 1rem;">
+                    <div class="cs-grid cs-content-start" style="--gap: .5rem;">
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Name:</h4>
+                            <p class="cs-text-normal cs-text-secondary" id="product-name"></p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-text-secondary cs-font-500" style="color: var(--text-color);margin: 0;">Supplier:</h4>
+                            <p class="cs-text-normal cs-text-secondary" id="product-supplier"></p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Category:</h4>
+                            <p class="cs-text-normal cs-text-secondary" id="product-category"></p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Sub Category:</h4>
+                            <p class="cs-text-normal cs-text-secondary" id="product-subCategory"></p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Price:</h4>
+                            <p class="cs-text-normal cs-text-secondary" id="product-price"></p>
+                        </div>
+                        
+                        <div id="product-images" class="cs-grid" style="grid-template-columns: repeat(5, 1fr);--gap: .5rem;">
+                        </div>
+                    </div>
+                    <hr style="border: 1px solid hsla(213, 28%, 80%, 30%);">
+                    <div class="cs-grid cs-content-start">
+                        <p class="cs-text-medium cs-font-500" style="color: var(--text-color);" id="product-description">
+                        </p>
+                    </div>
+                </div>
+                <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                <div class="modal-cta cs-flex" style="--gap: 1rem;">
+                    <a id="view-product-page" class="btn cs-grid cs-justify-center cs-align-center cs-bg-white outlined cs-text-secondary cs-text-md br-sm">
+                        View Product Page
+                    </a>
+                    <a id="contact-user-cta" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
+                        Contact Client
+                    </a>
+                    <button class="btn cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" data-productId="1" id="suspend-btn">
+                        Suspend Product
+                    </button>
+                    <button class="btn cs-justify-center cs-align-center cs-bg-success cs-text-white cs-text-md br-sm" data-productId="1" id="verify-btn">
+                        Verify Product
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="contract-modal" class="modal cs-hidden elevated outlined cs-align-start" style="align-content: flex-start;--gap: .5rem;">
+            <div class="modal-header cs-grid cs-align-start" style="--gap: 1rem;">
+                <div class="cs-flex cs-justify-between cs-align-center">
+                    <h3 style="margin: 0;" class="cs-text-body cs-text-secondary cs-font-600">
+                        Contract Detials
+                    </h3>
+                    <button class="btn cs-bg-transparent" id="contract-modal-deactivator">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+            </div>
+            <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="modal-body cs-grid" style="--gap: 1rem;">
+                <div class="cs-grid cs-content-start" style="--gap: .5rem;">
+                    <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Supplier:</h4>
+                        <p class="cs-text-normal cs-text-secondary" id="contract-supplier"></p>
+                    </div>
+                    <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <h4 class="cs-text-normal cs-text-secondary cs-font-500" style="color: var(--text-color);margin: 0;">Buyer:</h4>
+                        <p class="cs-text-normal cs-text-secondary" id="contract-buyer"></p>
+                    </div>
+                    <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Service:</h4>
+                        <p class="cs-text-normal cs-text-secondary" id="contract-service"></p>
+                    </div>
+                    <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Price:</h4>
+                        <p class="cs-text-normal cs-text-secondary" id="contract-price"></p>
+                    </div>
+                    <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Complete:</h4>
+                        <p class="cs-text-normal cs-text-secondary" id="contract-iscomplete"></p>
+                    </div>
+                </div>
+                <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                <div class="modal-cta cs-flex cs-justify-center" style="--gap: 1rem;">
+                    <a href="./create_mail.html"  class="btn cs-grid cs-justify-center cs-align-center cs-bg-primary cs-text-white cs-text-md br-sm">
+                        Contact Buyer
+                    </a>
+                    <a href="./create_mail.html" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
+                        Contact Client
+                    </a>
+                    <!-- <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" data-contractId="1" id="suspend-btn">
+                        Suspend Contract
+                    </button> -->
+                </div>
+            </div>
+        </div>
+        
+        <div id="operation-confirm-modal" class="modal sm cs-hidden elevated outlined cs-align-start" style="align-content: flex-start;--gap: .5rem;">
+            <div class="modal-header cs-grid cs-align-start" style="--gap: 1rem;">
+                <div class="cs-flex cs-justify-between cs-align-center">
+                    <h3 style="margin: 0;" class="cs-text-body cs-text-secondary cs-font-600">
+                        Confirm Operation
+                    </h3>
+                </div>
+            </div>
+            <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="cs-grid" id="msg">
+                <p class="cs-text-normal cs-text-secondary" id="confirm-msg"></p>
+            </div>
+            <div class="modal-cta cs-flex" style="--gap: 1rem;margin-block-start: .5rem;">
+                <form action="" method="POST">
+                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm">
+                        Continue
+                    </button>
+                </form>
+                <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm" id="cancel-operation">
+                    Cancel
+                </button>
+            </div>
+        </div>
+        <!-- modals -->
+
+    <!-- section area -->
+
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="content-area">
+            <div class="view-sub-tabs">
+                <a href="{% url 'supplier:dashboard-stores' %}">Manage Stores</a>
+                <a class="active" href="{% url 'supplier:dashboard-storescreate' %}">Create Store</a>
+            </div>
+            <form action="{% url 'supplier:dashboard-storescreate' %}" method="POST" id="category-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;">
+                <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                    {% trans 'Fill in form to create new store' %}
+                </h2>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% csrf_token %}
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="name" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Name' %}</label>
+                    <input type="text" class="cs-text-normal" name="name" id="name" required>
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="image" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Store Image' %}</label>
+                    <input type="file" name="image" id="image" required>
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-end;">
+                    <input class="btn cs-text-white" type="submit" name="contract-start-date" id="contract-start-date"
+                    value="{% trans 'Create' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+
+    <script>
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+    </script>
+
+{% endblock %}

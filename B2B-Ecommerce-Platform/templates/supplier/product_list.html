@@ -1,0 +1,272 @@
+{% load static %}
+{% load i18n %}
+{% load isEqual %}
+{% include '../utils/header.html' %}
+    <main class="grid gap-10 my-10 mt-0 justify-self-start" style="min-inline-size: 100vw;">
+        <div class="grid bg-white gap-0">
+            <div class="breadcrumb grid grid-flow-col justify-start gap-2 pt-1 px-5 md:px-0 md:w-full md:mx-auto">
+                <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans "Home" %}</a>
+                <span>/</span>
+                <span class="text-lightBackgroundColor">{% trans 'Products' %}</span>
+            </div>
+    
+            <div class="product-filter grid md:flex gap-4 justify-between px-5 md:px-8 py-3" style="background-color: rgb(242, 245, 248);">
+                <div class="filter grid md:grid-flow-col gap-5 py-4 md:justify-self-end items-center justify-start">
+                    <form class="filter-group md:flex gap-2 items-center justify-start" method="GET" action="" data-context="{{price_limits.context_name}}">
+                        <p class="hidden md:grid font-medium text-slate-800">{% trans "Price" %}: </p>
+                        <div class="flex gap-2">
+                            <div class="filter-form-group flex gap-2 items-center">
+                                <label for="min-price" class="font-normal text-slate-600">{% trans "min" %}</label>
+                                <input type="number" name="min-price" class="px-2 py-1 rounded text-sm focus:outli5e-none" style="width: 100px;" id="min-price" value="{{price_limits.results.min_price}}">
+                            </div>
+                            <div class="filter-form-group flex gap-2 items-center">
+                                <label for="max-price" class="font-normal text-slate-600">{% trans "max" %}</label>
+                                <input type="number" name="max-price" class="px-2 py-1 rounded text-sm text-slate-500 focus:outline-none" style="width: 100px;" id="max-price" value="{{price_limits.results.max_price}}">
+                            </div>
+                        </div>
+                        <input type="submit" hidden />
+                    </form>
+                    <form id="price-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="">
+                        <p class="font-medium text-slate-800">{% trans "Price" %}: </p>
+                        <div class="filter-form-group flex gap-3 items-center">
+                            <input type="text" name="price" class="px-2 py-1 rounded text-sm text-slate-500 focus:outline-none" style="width: 100px;" id="price" value="">
+                        </div>
+                        <input type="submit" hidden />
+                    </form>
+                    <form id="rating-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="">
+                        <p class="font-medium text-slate-800">{% trans "Rating" %}: </p>
+                        <div class="filter-form-group flex gap-3 items-center">
+                            <select name="rating" id="rating-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('').submit()})()">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        <input type="submit" hidden />
+                    </form>
+                    <form id="category-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="{{categories.context_name}}">
+                        <p class="font-medium text-slate-800">{% trans 'Category' %}: </p>
+                        <div class="filter-form-group flex gap-3 items-center">
+                            <select name="category" id="category-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('#category-filter-form').submit()})()">
+                                <option value="all">{% trans 'All' %}</option>
+                                {% for category in categories.results %}
+                                    <option value="{{category.name}}">{{category.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input type="submit" hidden />
+                    </form>
+                    <form id="supplier-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="{{suppliers.context_name}}">
+                        <p class="font-medium text-slate-800">{% trans "Supplier" %}: </p>
+                        <div class="filter-form-group flex gap-3 items-center">
+                            <select name="supplier" id="supplier-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('#supplier-filter-form').submit()})()">
+                                <option value="all">All</option>
+                                {% for supplier in suppliers.results %}
+                                    <option value="{{supplier.profile.business_name}}">{{supplier.profile.business_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input type="submit" hidden />
+                    </form>
+                    <form id="country-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="{{countries.context_name}}">
+                        <p class="font-medium text-slate-800">{% trans 'Country' %}: </p>
+                        <div class="filter-form-group flex gap-3 items-center">
+                            <select name="country" id="country-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('#country-filter-form').submit()})()">
+                                <option value="all">{% trans 'All' %}</option>
+                                {% for country in countries.results %}
+                                    <option value="{{country.country}}">{{country.country}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input type="submit" hidden />
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% include '../utils/new_arrivals.html' %}
+
+        <section class="main w-12/12" style="block-size: auto">
+            <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: 1fr;">
+                {% if products.results %}
+                    <div id="products-area" class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-5 py-4"
+                    data-context="{{products.context_name}}">
+                        {% for product in products.results %}
+                            <div class="single-image-product-card overflow-hidden rounded grid gap-0.5 card-outlined">
+                                <a class="grid gap-2 rounded overflow-hidden" href="{% url 'supplier:product-detail' product.product.slug %}">
+                                    <img loading="lazy" src="/media/{{product.images.image}}" alt="{{product.name}}"
+                                        class="item-img rounded" style="width: 100%;object-fit:cover;">
+                                    <div class="item-details grid gap-0 py-1 md:py-2 px-4 gap-2"
+                                        style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                        <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">
+                                            {{product.product.name|slice:":40"}}..
+                                        </h5>
+                                        <p class="text-xs font-medium">
+                                            <span>{{product.product.currency}}</span>
+                                            <span>{{product.product.price}}</span>
+                                        </p>
+                                    </div>
+                                    <span class="grid items-center pb-2 px-4 font-semibold text-sm">By {{ product.supplier.profile.business_name }}</span>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="flex justify-between items-center px-6 pb-3 py-2 text-lighterBackgroundColor text-lg rounded-md font-semibold leading-5 justify-self-center">
+                        <p>No Products Found</p>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <div class="scroll-loading mb-6 text-yellowColor justify-self-center">Loading</div>
+    </main>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+
+<script>
+    (function () {
+        let hasNext = true;
+        var img;
+
+        const productsEl = document.querySelector('#products-area');
+        const loaderEl = document.querySelector('.scroll-loading');
+        loaderEl.style.display = "none";
+
+        // Get the products from API
+        const getProducts = async (page, limit) => {
+            const API_URL = `{% url 'api:loading_products' %}?page=${page}`;
+            console.log(API_URL)
+            const response = await fetch(API_URL);
+            // Handle 404
+            if (!response.ok) {
+                throw new Error(`An error occurred: ${response.status}`);
+            }
+            return await response.json();
+        }
+
+        // Show the products
+        const showProducts = (products) => {
+            products.forEach(product => {
+
+                const productEl = document.createElement('div');
+                productEl.className = "single-image-product-card overflow-hidden rounded grid gap-0.5 card-outlined"
+                productEl.innerHTML = `
+                    <a class="grid gap-2 rounded overflow-hidden" href="{% url 'supplier:products' %}${product.slug}">
+                        <img loading="lazy" src="${product.image}" alt="${product.name}"
+                            class="item-img rounded" style="width: 100%;object-fit:cover;">
+                        <div class="item-details grid gap-0 py-1 md:py-2 px-4 gap-2"
+                            style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                            <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">
+                                ${product.name}
+                            </h5>
+                            <p class="text-xs font-medium">
+                                <span>${product.currency}</span>
+                                <span>${product.price}</span>
+                            </p>
+                        </div>
+                        <span class="grid items-center pb-2 px-4 font-semibold text-sm">By ${product.supplier}</span>
+                    </a>
+                `;
+
+                productsEl.appendChild(productEl);
+            });
+        };
+
+        const hideLoader = () => {
+            loaderEl.style.display = "none";
+        };
+
+        const showLoader = () => {
+            loaderEl.style.display = "block";
+        };
+
+        const hasMoreProducts = (page, limit, total) => {
+            const startIndex = (page - 1) * limit + 1;
+            return total === 0 || startIndex < total;
+        };
+
+        // Load products
+        const loadProducts = async (page, limit) => {
+
+            // Show the loader
+            showLoader();
+
+            // 0.5 second later
+            setTimeout(async () => {
+                try {
+                    // If having more products to fetch
+                    // if (hasMoreProducts(page, limit, total)) {
+                        // Call the API to get products
+                        const response = await getProducts(page, limit);
+                        // Show products
+                        if (!response["next"]) {
+                            hasNext = false;
+                        }
+                        showProducts(response.results);
+                        // Update the total
+                        total = response.count;
+                    // }
+                } catch (error) {
+                    if (page == 2) {
+                        hasNext = false;
+                    }
+                    console.log(error.message);
+                } finally {
+                    hideLoader();
+                }
+            }, 1000);
+
+        };
+
+        // Control variables
+        let currentPage = 1;
+        const limit = 10;
+        let total = 0;
+
+
+        window.addEventListener('scroll', () => {
+            if (!hasNext) return;
+            const {
+                scrollTop,
+                scrollHeight,
+                clientHeight
+            } = document.documentElement;
+
+            if (scrollTop + clientHeight >= scrollHeight - 5 &&
+                hasMoreProducts(currentPage, limit, total)) {
+                currentPage++;
+                loadProducts(currentPage, limit);
+            }
+        }, {
+            passive: true
+        });
+
+        // Initialize
+        // loadProducts(currentPage, limit);
+
+    })();
+
+
+    document.querySelectorAll("option").forEach(elem => {
+        let filterValue;
+        if (window.location.href.includes("=")) {
+            filterValue = window.location.href.split("=")[1]
+
+            if (filterValue.includes("+")) {
+                filterValue = filterValue.split("+").join(" ")
+            }
+
+            elem.textContent = `${elem.textContent.slice(0,20)}...`
+            
+            if(elem.value == filterValue) {
+                elem.selected = true;
+            }
+        }
+    })
+</script>
+
+</html>

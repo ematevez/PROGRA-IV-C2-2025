@@ -1,0 +1,64 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="content-area">
+            <div class="view-sub-tabs">
+                <a class="active" href="{% url 'supplier:dashboard-services' %}">{% trans "Services List" %}</a>
+                <a href="{% url 'supplier:dashboard-servicescreate' %}">{% trans "Create Service" %}</a>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                        <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" class="fa fa-close"></i>
+                        </div>
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                        <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" class="fa fa-close"></i>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <div class="card data-table products-table">
+                <table id="services" class="display" style="width:100%;margin-top:.5rem;">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'No' %}.</th>
+                            <th>{% trans 'Name' %}</th>
+                            <th>{% trans 'Description' %}</th>
+                            <th>{% trans 'Price' %}</th>
+                            <th>{% trans 'Created On' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>{% trans 'No' %}.</th>
+                            <th>{% trans 'Name' %}</th>
+                            <th>{% trans 'Description' %}</th>
+                            <th>{% trans 'Price' %}</th>
+                            <th>{% trans 'Created On' %}</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                    <div class="cs-grid cs-align-center">
+                        <p class="cs-text-md" style="color: var(--text-color);">{% trans 'Showing Page' %} <span id="current-page-0"></span> {% trans 'of' %} <span id="max-page"></span>. (<span id="table-item-count"></span> {% trans 'Entries' %})</p>
+                    </div>
+                    <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                        <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Previous' %}</button>
+                        <span id="current-page" class="cs-text-md"></span>
+                        <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Next' %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

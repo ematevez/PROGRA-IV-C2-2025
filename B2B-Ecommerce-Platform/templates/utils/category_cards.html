@@ -1,0 +1,39 @@
+{% load static %}
+{% load i18n %}
+<section class="main w-12/12 mt-4 md:mt-0">
+    <div class="grid w-full mx-auto cf-1 gap-2 md:gap-6">
+        <div class="section-heading">
+            <h2 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{% trans 'Foroden Marketplace' %}</h2>
+        </div>
+        <div class="section-body grid gap-4 grid-cols-1 md:grid-cols-3">
+
+            {% for category in product_categories.results %}   
+                <div class="section-item-group grid gap-2 rounded-md card p-4" >
+                    <a href='{% url "supplier:category-detail" category.category.slug %}'class="section-item-group-title flex justify-between items-center"  data-category-group-index="{{ forloop.counter }}">
+                        <span class="text-lg font-bold">{{ category.category.name }}</span>
+                        <span class="text-sm text-slate-800 hover:text-yellowColor font-normal">{% trans "View All" %}</span>
+                    </a>
+                    <div class="section-item-group-content grid gap-4 grid-cols-3">
+                        
+                        {% for sub_category in category.sub_categories %}
+                            <div class="item">
+                                <a class="grid gap-0.5" href='{% url "supplier:subcategory-detail" category.category.slug sub_category.slug %}'  data-subcategory-index="{{ forloop.counter }}">
+                                    <img loading="lazy"
+                                        src="/media/{{sub_category.image}}"
+                                        alt="Product" class="item-img rounded"
+                                        style="width: 100%;aspect-ratio:1/1;object-fit:cover;border-radius: 5px;">
+                                    <div class="item-details grid gap-0 justify-start text-left justify-center">
+                                        <h5 class="text-sm font-semibold leading-5 text-center">
+                                            <span>{{sub_category.name|slice:":10"}}</span>
+                                        </h5>
+                                        <!-- <h6 class="text-gray-600 text-xs">120 Products</h6> -->
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

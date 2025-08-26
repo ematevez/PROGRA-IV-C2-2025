@@ -1,0 +1,94 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load format_date %}
+{% block content %}
+
+<section class="main w-12/12 py-6 pt-0 gap-10" style="block-size: auto;">
+    <div class="grid justify-center justify-center content-center justify-items-center content-center text-center gap-4 capitalize h-80 md:h-96" style="background-color: #0F172A;">
+        <div class="grid gap-2 w-10/12">
+            <h3 class="md:text-4xl text-2xl text-white font-bold">{% trans 'Support and Discussions' %}</h3>
+            <p class="text-base text-slate-300 font-normal">{% trans 'Find help  and workarounds for the most common account-related issues.' %} </p>
+        </div>
+
+        <form action="{% url 'manager:discussions' %}" method="GET" class="flex bg-white rounded-full overflow-hidden w-10/12">
+            <input type="text" style="width: 100%;padding: .7rem 2rem;font-size: 1rem;" name="search" placeholder="{% trans 'Search for help...' %}">
+            <button type="submit" class="bg-yellowColor" style="border: none;padding: 1rem 2rem;">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+        
+        <div class="flex gap-2 my-4">
+            <a href="{% url 'manager:chatroom' %}" class="bg-yellowColor text-white px-6 py-3 rounded-full">{% trans 'Send Message' %}</a>
+            <a href="{% url 'manager:create-discussion' %}" class="bg-yellowColor text-white px-6 py-3 rounded-full">{% trans 'Create Discussion' %}</a>
+        </div>
+    </div>
+
+    <div class="grid gap-4 md:gap-10 grid-cols-2 md:grid-cols-3 w-10/12 mx-auto py-8 justify-center">
+        <a href="{% url 'manager:guides-accounts' %}" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
+            <i class="fa fa-user text-6xl md:text-8xl text-lghterBackgroundColor"></i>
+            <div class="grid gap-1 justify-center text-center">
+                <h2 class="font-bold md:text-lg text-xl">{% trans 'Accounts' %}</h2>
+                <p class="text-slate-500">{% trans 'Get help on account related issues.' %}</p>
+            </div>
+        </a>
+        <a href="" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
+            <i class="fa fa-credit-card  text-6xl md:text-8xl text-lghterBackgroundColor"></i>
+            <div class="grid gap-1 justify-center text-center">
+                <h2 class="font-bold md:text-lg text-xl">{% trans 'Payments' %}</h2>
+                <p class="text-slate-500">{% trans 'Get help on payment related issues.' %}</p>
+            </div>
+        </a>
+        <a href="{% url 'manager:guides-stores' %}" class="grid px-6 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
+            <i class="fa fa-home  text-6xl md:text-8xl text-lghterBackgroundColor"></i>
+            <div class="grid gap-1 justify-center text-center">
+                <h2 class="font-bold md:text-lg text-xl">{% trans 'Stores' %}</h2>
+                <p class="text-slate-500">{% trans 'Help on Stores related issues.' %}</p>
+            </div>
+        </a>
+        <a href="{% url 'manager:guides-showrooms' %}" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
+            <i class="fa fa-shopping-cart  text-6xl md:text-8xl text-lghterBackgroundColor"></i>
+            <div class="grid gap-1 justify-center text-center">
+                <h2 class="font-bold md:text-lg text-xl">{% trans 'Showrooms' %}</h2>
+                <p class="text-slate-500">{% trans 'Get help on showroom related issues.' %}</p>
+            </div>
+        </a>
+        <a href="{% url 'manager:guides-memberships' %}" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
+            <i class="fa fa-money  text-6xl md:text-8xl text-lghterBackgroundColor"></i>
+            <div class="grid gap-1 justify-center text-center">
+                <h2 class="font-bold md:text-lg text-xl">{% trans 'Memberships' %}</h2>
+                <p class="text-slate-500">{% trans 'Get help on membership related issues.' %}</p>
+            </div>
+        </a>
+        <a href="{% url 'manager:guides-products' %}" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
+            <i class="fa fa-product-hunt  text-6xl md:text-8xl text-lghterBackgroundColor"></i>
+            <div class="grid gap-1 justify-center text-center">
+                <h2 class="font-bold md:text-lg text-xl">{% trans 'Products' %}</h2>
+                <p class="text-slate-500">{% trans 'Get help on product related issues.' %}</p>
+            </div>
+        </a>
+    </div>
+
+    {% if discussions %}
+        <div class="grid gap-2 w-10/12 mx-auto my-4">
+            <h3 class="text-2xl font-bold">{% trans 'Discussions' %}</h3>
+            <div class="grid gap-4">
+                {% for discussion in discussions %}
+                    <a href="{% url 'manager:discussion' discussion.slug %}" class="grid gap-2 border border-solid border-slate-300 px-4 py-3 rounded">
+                        <span class="flex gap-1 items-center">
+                            <h4 class="font-semibold text-lg">{{discussion.subject}}</h4>
+                            <span>-</span>
+                            <span class="font-semibold text-base text-slate-500">{{ discussion.user.first_name }} {{ discussion.user.last_name }}</span>
+                        </span>
+                        <div class="grid gap-2">
+                            <p class="text-base text-slate-600">{{ discussion.description }}</p>
+                            <span class="text-sm text-slate-500">{{ discussion.created_on|format_date }}</span>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,133 @@
+{% load static %}
+{% load i18n %}
+{% load isEqual %}
+{% include '../utils/header.html' %}
+<style>
+    .inbox-area {
+        block-size: 90vh;
+        padding: 0 0 1rem 0;
+    }
+    .inbox, .chat {
+        block-size: 100%;
+        overflow: hidden;
+        display: grid;
+        position: relative;
+    }
+    .inbox-area .list {
+        overflow-y: auto;
+        scroll-behavior: smooth;
+    }
+
+    .chat .list {
+        block-size: 65vh;
+        padding: .5rem 1rem 1rem;
+    }
+    .chat ul li {
+        padding: .25rem .5rem;
+        border: 1px solid hsl(0, 4%, 93%);
+        border-radius: 5px;
+        max-inline-size: 55%;
+        color: var(--text-color);
+        align-self: flex-start;
+        align-content: flex-start;
+    }
+    .chat ul li.received {
+        justify-self: flex-end;
+        text-align: left;
+        background-color: hsl(213, 28%, 25%);
+    }
+    .chat ul li.received p {
+        color: white;
+    }
+    .chat form {
+        position: absolute;
+        inset-block-end: 5px;
+        inset-inline-start: 5px;
+        min-inline-size: 100%;
+        padding: 0 10px;
+    }
+    .chat form input {
+        align-self: flex-end;
+    }
+    @media (max-width: 786px) {
+        .chat .list {
+            block-size: 67vh;
+        }
+        .chat form {
+            position: absolute;
+            inset-inline-start: 2.5px;
+            min-inline-size: 100%;
+            padding: 0 5px 0 0;
+        }
+    }
+</style>
+
+<section class="main w-12/12 py-6 pt-0 gap-8 my-8 mt-4" style="block-size: auto;">
+    <div class="inbox-area split cs-grid" style="--gap: 1rem;">
+        <div class="inbox outlined br-sm cs-align-start cs-content-start cs-grid">
+            <div class="chat border border-solid border-slate-300 rounded items-start content-start grid gap-2 px-1 py-5 w-11/12 md:w-6/12 mx-auto">
+                <div class="flex items-baseline justify-between px-4">
+                    <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">{{request.user.username}}</h4>
+                    <a class="text-md text-yellowColor" href="{% url 'manager:support' %}">{% trans 'Close Chat' %}</a>
+                </div>
+                <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                <ul class="chat-list list grid content-start gap-2">
+                </ul>
+                <form id="chat-form" class="grid" style="grid-template-columns: 1fr .2fr;--gap: .5rem;">
+                    <input type="text" name="message" id="message" placeholder="Message">
+                    <input class="btn text-white bg-lghterBackgroundColor" type="submit" name="" value="{% trans 'Send' %}">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{ room_name|json_script:"room_name" }}
+{{ request.user.username|json_script:"username" }}
+<script>
+    
+    const chatList = document.querySelector('.chat-list');
+    const roomName = JSON.parse(document.getElementById('room_name').textContent);
+    const username = JSON.parse(document.getElementById('username').textContent);
+
+    let protocol = window.location.host.includes("localhost") ? "ws://" : "ws://"
+    const chatSocket = new WebSocket(
+        protocol + window.location.host + "/ws/chat/" + roomName + "/"
+    );
+
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        
+        const msgElem = document.createElement('li');
+        msgElem.className = data.user === 'client' ? "grid received" : "grid sent";
+        msgElem.style.gap = ".25rem";
+        const msgElemContent = document.createElement('p');
+        msgElemContent.className = "cs-text-md";
+        msgElemContent.textContent = (data.message)
+        msgElem.appendChild(msgElemContent);
+    
+        chatList.appendChild(msgElem);
+    }
+    
+    const chatForm = document.querySelector("#chat-form");
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let messageField = chatForm.querySelector("#message");
+        if (messageField.value != "") {
+            chatSocket.send(JSON.stringify({
+                "message": messageField.value,
+                "username": username,
+                "user": "client"
+            }))
+            chatForm.reset();
+        }
+
+    })
+
+
+</script>
+
+<script src="{% static 'js/scripts.js' %}"></script>
+</body>
+
+</html>

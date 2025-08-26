@@ -1,0 +1,208 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load isEqual %}
+{% block content %}
+
+    <div class="grid gap-6 md:gap-3 bg-white">
+        <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto pt-1 px-5 md:px-0">
+            <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
+            <span>/</span>
+            <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:category-detail" subcategory_data.results.category.slug %}'>{{subcategory_data.results.category}}</a>
+            <span>/</span>
+            <span class="text-lightBackgroundColor">{{subcategory_data.results.sub_category}}</span>
+        </div>
+
+        <div class="product-filter grid md:flex gap-4 justify-between px-5 md:px-8 py-3" style="background-color: rgb(242, 245, 248);">
+            <div class="flex items-center gap-2">
+                <!-- <h3 class="text-xl text-lightBackgroundColor font-semibold">{{subcategory_data.results.sub_category}}</h3> -->
+                <span class="text-slate-500">({{product_count}} {% trans 'products' %})</span>
+            </div>
+            <div class="filter grid md:grid-flow-col gap-6 md:justify-self-end items-center justify-start">
+                <form class="filter-group md:flex gap-2 items-center justify-start" method="GET" action="" data-context="{{price_limits.context_name}}">
+                    <p class="hidden md:grid font-medium text-slate-800">{% trans 'Price' %}: </p>
+                    <div class="flex gap-2">
+                        <div class="filter-form-group flex gap-2 items-center">
+                            <label for="min-price" class="font-normal text-slate-600">{% trans 'min' %}</label>
+                            <input type="number" name="min-price" class="px-2 py-1 rounded text-sm focus:outli5e-none" style="width: 100px;" id="min-price" value="{{price_limits.results.min_price}}">
+                        </div>
+                        <div class="filter-form-group flex gap-2 items-center">
+                            <label for="max-price" class="font-normal text-slate-600">{% trans 'max' %}</label>
+                            <input type="number" name="max-price" class="px-2 py-1 rounded text-sm text-slate-500 focus:outline-none" style="width: 100px;" id="max-price" value="{{price_limits.results.max_price}}">
+                        </div>
+                    </div>
+                    <input type="submit" hidden />
+                </form>
+                <form id="price-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="">
+                    <p class="font-medium text-slate-800">{% trans "Price" %}: </p>
+                    <div class="filter-form-group flex gap-3 items-center">
+                        <input type="text" name="price" class="px-2 py-1 rounded text-sm text-slate-500 focus:outline-none" style="width: 100px;" id="price" value="">
+                    </div>
+                    <input type="submit" hidden />
+                </form>
+                <form id="rating-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="">
+                    <p class="font-medium text-slate-800">{% trans "Rating" %}: </p>
+                    <div class="filter-form-group flex gap-3 items-center">
+                        <select name="rating" id="rating-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('').submit()})()">
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+                    </div>
+                    <input type="submit" hidden />
+                </form>
+                <form id="supplier-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="{{suppliers.context_name}}">
+                    <p class="font-medium text-slate-800">{% trans 'Supplier' %}: </p>
+                    <div class="filter-form-group flex gap-3 items-center">
+                        <select name="supplier" id="supplier-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('#supplier-filter-form').submit()})()">
+                            <option value="all">{% trans 'All' %}</option>
+                            {% for supplier in suppliers.results %}
+                                <option value="{{supplier.profile.business_name}}">{{supplier.profile.business_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" hidden />
+                </form>
+                <form id="country-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="{{countries.context_name}}">
+                    <p class="font-medium text-slate-800">{% trans 'Country' %}: </p>
+                    <div class="filter-form-group flex gap-3 items-center">
+                        <select name="country" id="country-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('#country-filter-form').submit()})()">
+                            <option value="all">{% trans 'All' %}</option>
+                            {% for country in countries.results %}
+                                <option value="{{country.country}}">{{country.country}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" hidden />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% include '../utils/product_list.html' %}
+
+    <div class="hidden pagination md:grid grid-flow-col gap-2 justify-center py-3 my-2 md:w-full mx-auto border-b border-t border-solid border-slate-200">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">{% trans 'Previous' %}</a>
+
+            <a href="?page=1" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+        {% endif %}
+        {% for page in page_obj.number|make_list %}
+            {% if current_page_number|isEqual:page %}
+                <a href="?page={{page}}" class="grid place-items-center px-4 py-2 outline-none rounded bg-lighterBackgroundColorHover text-white">{{ page }}</a>
+            {% else %}
+                <a href="?page={{page}}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page_obj.paginator.num_pages }}</a>
+
+            <a href="?page={{ page_obj.next_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">{% trans 'Next' %}</a>
+        {% endif %}
+    </div>
+
+    <div class="grid pagination md:hidden gap-2 justify-center py-3 my-2 w-11/12 md:w-full mx-auto border-b border-t border-solid border-slate-200">
+        <div class="grid grid-flow-col gap-2">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+            {% endif %}
+            {% for page in page_obj.number|make_list %}
+                {% if current_page_number|isEqual:page %}
+                    <a href="?page={{page}}" class="grid place-items-center px-4 py-2 outline-none rounded bg-lighterBackgroundColorHover text-white">{{ page }}</a>
+                {% else %}
+                    <a href="?page={{page}}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page_obj.paginator.num_pages }}</a>
+            {% endif %}
+        </div>
+
+        <div class="grid grid-flow-col gap-2">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Previous</a>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Next</a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% include '../utils/new_arrivals.html' %}
+
+    {% if related_subcategories.results %}
+    <section class="main w-12/12 my-3">
+        <div class="w-full mx-auto grid md:grid-cols-2 items-start gap-6">
+            {% if related_subcategories.results %}
+                <div class="grid gap-1">
+                    <div class="flex py-2 pt-0 justify-between items-baseline">
+                        <div class="flex gap-5">                            
+                            <h1 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{% trans 'Related Products' %}</h1>
+                        </div>
+                    </div>
+                    <div class="grid gap-3 grid-cols-2 rounded-md items-start justify-start" data-context="{{related_subcategories.context_name}}">
+                        {% for subcategory in related_subcategories.results %}
+                            <div class="card-sm grid px-3 py-3 items-start rounded-md card {% if forloop.counter|isEqual:1 %} bg-lghterBackgroundColor {% elif forloop.counter|isEqual:2 %} bg-yellowColor {% elif forloop.counter|isEqual:4 %} bg-backgroundColor {% endif %} gap-3" data-subcategory-index="{{ forloop.counter }}">
+                                <div class="card-details grid">
+                                    <h5 class="text-base font-semibold leading-5 {% if forloop.counter|isEqual:3 %}   text-lghterBackgroundColor {% else %}text-white {% endif %}">
+                                        {{ subcategory.subcategory.name }}
+                                    </h5>
+                                </div>
+                                <div class="grid grid-flow-col justify-start gap-2">
+                                    {% for product in subcategory.products %}
+                                        <a class="grid gap-1 rounded-md" href="{% url 'supplier:product-detail' product.product.slug %}">
+                                            <img loading="lazy" src="/media/{{product.main_image.image}}" alt="{{ product.product.name }}" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;max-block-size: 15vh;">
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="grid gap-1">                     
+                <div class="flex py-2 pt-0 justify-between items-baseline" style="justify-content: space-between;">
+                    <div class="flex gap-5">                            
+                        <h1 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{% trans 'Popular Stores' %}</h1>
+                    </div>
+                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">{% trans 'View All' %}</a>
+                </div>
+                <div class="grid gap-3 grid-cols-1 md:grid-cols-2 rounded-md store-list-sm" data-context="{{ stores.context_name }}">
+                    {% for store in stores.results %}
+                        <div class="grid p-2 items-start rounded-md card gap-2 store-card-sm justify-self-start">
+                            <div class="card-details grid px-2 justify-self-start">
+                                <a href="{% url 'supplier:store-detail' store.store.slug %}" class="text-base font-semibold leading-5 text-lightBackgroundColor">    
+                                    {{store.store.name}}
+                                </a>
+                            </div>
+                            <div class="grid grid-cols-3 justify-evenly gap-2 products justify-self-start" >
+                                {% for product in store.products %}
+                                    <a class="product grid gap-1 rounded-md justify-self-start" href="{% url 'supplier:store-detail' store.store.slug %}">
+                                        <img loading="lazy" src="/media/{{product.main_image.image}}" alt="{{product.product.name|slice:':40'}}.." class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;max-block-size: 15vh;inline-size: 100%;">
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+<script>
+    document.querySelectorAll("option").forEach(elem => {
+        let filterValue;
+        if (window.location.href.includes("=")) {
+            filterValue = window.location.href.split("=")[1]
+            if(elem.value == filterValue) {
+                elem.selected = true;
+            }
+        }
+    })
+</script>
+
+{% endblock %}

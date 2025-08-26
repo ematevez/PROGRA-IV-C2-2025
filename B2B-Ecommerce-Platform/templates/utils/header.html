@@ -1,0 +1,344 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon/favicon.ico' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/utils.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/themify-icons.css' %}">
+    <link href="{% static 'icons/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet"  type='text/css'>
+    <link href="{% static 'css/tailwcss.css' %}" rel="stylesheet">
+
+    <title>Golden - {% trans view_name %}</title>
+
+    
+
+    <!-- Owl Carousel Assets -->
+    <!-- <link href="{% static 'owl-carousel/owl.carousel.css' %}" rel="stylesheet">
+    <link href="{% static 'owl-carousel/owl.theme.css' %}" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{% static 'css/coursel.css' %}">
+
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="{% static 'js/client/dashboard/requests.js' %}"></script>
+
+</head>
+
+<body>
+
+    <!-- desktop -->
+    <header class="hidden md:grid desktop top-nav">
+        <div class="w-12/12 bg-backgroundColor">
+            <div class="w-full mx-auto">
+                <!-- The temporary navbar -->
+                <div class="temp-nav py-2 grid content-center w-12/12 gap-1">
+                    <div class="header-left grid items-center">
+                        <a class="logo-wrapper" href="{% url 'manager:home' %}">
+                            <img src="{% static '/assets/imgs/resources/logo_trans.png' %}" alt="Logo" class="logo"
+                                style="object-fit: cover;">
+                        </a>
+                    </div>
+                    <form action="{% url 'supplier:products' %}" method="GET" class="search-form grid w-12/12 gap-0 justify-items-stretch">
+                        <input type="search" name="search" id="search-bar"
+                            class="py-1 px-4 focus:outline-none text-lghterBackgroundColor"
+                            placeholder="{% trans 'Search' %}" style="border-start-start-radius: 5px; border-end-start-radius: 5px">
+
+                        <button type="submit"
+                            class="grid place-items-center bg-yellowColor" style="border-start-end-radius: 5px; border-end-end-radius: 5px">
+                            <i class="ti-search"></i>
+                        </button>
+                    </form>
+                    <ul class="header-right list-none list-outside flex justify-end justify-items-end text-white" style="justify-content: flex-end;">
+                        <li class="grid place-items-center h-full positive-relative">
+                            <a href="" onClick="(function(){
+                            })();return false;" class="flex gap-1 px-4 gap-2 text-sm items-center">
+                                <span class="item-name grid place-items-center py-2">
+                                    <i class="ti-world font-bold"></i>
+                                </span>
+                                <span class="grid place-items-center py-2" style="text-transform: uppercase;">
+                                    {% get_current_language as LANGUAGE_CODE %}
+                                    {{LANGUAGE_CODE}}
+                                </span>
+                            </a>
+                            <ul
+                                class="dropdown-list   list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                    <li>
+                                        <a href="/{{language.code}}/" class="grid items-center py-3 px-8" href="">{{ language.name_local }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li class="grid place-items-center h-full positive-relative" >
+                            <a href="" onClick="(function(){
+                            })();return false;" class="flex gap-1 px-4 gap-2 text-sm items-center">
+                                <span class="item-name grid place-items-center py-2">
+                                    {% trans "My Account" %}
+                                </span>
+                                <span class="grid items-center py-2">
+                                    <i class="ti-angle-down font-bold"></i>
+                                </span>
+                            </a>
+                            <ul
+                                class="dropdown-list   list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
+                                <!-- <li>
+                                    <a class="grid items-center py-3 px-8" href="">Settings</a>
+                                </li> -->
+                                {%  if request.user.is_authenticated %}
+                                    <li>
+                                        <a href="{% url 'manager:profile' %}{% if not request.user.is_authenticated %}?next=profile{% endif %}" class="grid items-center py-3 px-8" href="">{% trans "Profile" %}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'manager:dashboard' %}{% if not request.user.is_authenticated %}?next=dashboard{% endif %}" class="grid items-center py-3 px-8" href="">{% trans "Dashboard" %}</a>
+                                    </li>
+                                    <li>
+                                        <a class="grid items-center py-3 px-8" href="{% url 'auth_app:logout' %}">{% trans "Logout" %}</a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a class="grid items-center py-3 px-8" href="{% url 'auth_app:login' %}">{% trans "Login" %}</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- The permanent/sticky navbar -->
+    <nav class="hidden md:grid desktop w-12/12 bg-lghterBackgroundColor">
+        <div class="w-full mx-auto flex justify-between  overflow-hidden">
+            <ul class="flex text-base text-white">
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:home' %}">{% trans "Home" %}</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'supplier:products' %}">{% translate "Products" %}</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:showrooms' %}">{% trans "Showrooms" %}</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:about-us' %}">{% trans "About Us" %}</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:services' %}">{% trans "Services" %}</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:support' %}">{% trans "Support" %}</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'payments:memberships' %}">{% trans "Memberships" %}</a></li>
+            </ul>
+
+            {% if not request.user.is_authenticated %}
+            <ul class="flex text-base text-white">
+                <li>
+                    <a class="grid py-3 px-4 bg-yellowColor hover:bg-yellowColorHover font-semibold transition-colors transition-200 ease-in" href="{% url 'auth_app:signup' %}?Supplier=1">{% trans "Sell On Foroden" %}</a>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- desktop -->
+
+    <!-- mobile -->
+    <header class="md:hidden mobile w-12/12 bg-backgroundColor">
+        <nav class="temp-nav py-3 w-full mx-auto grid content-center w-12/border-white gap-2">
+            <div class="header-left flex items-center justify-start items-center content-center gap-2" style="grid-template-columns: .4fr 1fr;">
+                <button class="text-white rounded-md py-0 px-2" id="mobile-menu-activator">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="logo-wrapper" href="{% url 'manager:home' %}">
+                    <img src="{% static 'assets/imgs/resources/logo_trans.png' %}" alt="Logo" class="logo" style="object-fit: cover;">
+                </a>
+            </div>
+            <div class="flex items-center gap-2 justify-end">
+                <button id="mobile-searchbar-activator"  class="text-white border py-0 px-2 outline-none border-none px-4 py-2">
+                    <i class="fa fa-search text-white"></i>
+                </button>
+                <!-- <button class="text-white border py-0 px-2 outline-none border-none px-4 py-2">
+                    <i class="fa fa-globe text-white"></i>
+                </button> -->
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'manager:dashboard' %}{% if not request.user.is_authenticated %}?next=dashboard{% endif %}" class="flex place-items-center px-4 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
+                        {% trans "Dashboard" %}
+                    </a>
+                {% else %}
+                    <a href="{% url 'auth_app:login' %}" class="flex place-items-center px-4 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
+                        {% trans "Sign In" %}
+                    </a>
+                {% endif %}
+            </div>
+        </nav>
+        <form action="{% url 'supplier:products' %}" method="GET" id="mobile-searchbar" class="search-form-mobile w-full mx-auto mx-auto py-3 gap-0">
+            <input type="search" name="search-bar" id="search-bar" class="py-3 px-6 w-12/12 rounded-md rounded-md focus:outline-none text-white"
+                placeholder="{% trans 'Search' %}">
+        </form>
+    </header>
+    <div class="mobile-menu gap-4 bg-backgroundColor content-start px-4" id="mobile-menu">            
+        <div class="menu-header py-6 grid gap-2 justify-center">
+            <div class="logo-wrapper justify-self-center">
+                <img src="{% static 'assets/imgs/resources/logo_trans.png' %}" alt="Logo" class="logo" style="object-fit: cover;">
+            </div>
+            <div class="flex gap-2 justify-center auth">
+                {% if not request.user.is_authenticated %}
+                    <a href="{% url 'auth_app:login' %}" class="flex place-items-center px-6 py-2 text-base bg-lighterBackgroundColorHover focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
+                        {% trans "Sign In" %}
+                    </a>
+                    {% if not request.user.is_authenticated %}
+                    <a href="{% url 'auth_app:signup' %}?Supplier=1" class="flex place-items-center px-6 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
+                        {% trans "Sell on Foroden" %}
+                    </a>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'auth_app:logout' %}" class="flex place-items-center px-6 py-2 text-base bg-lighterBackgroundColorHover focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
+                        {% trans "Logout" %}
+                    </a>
+                    <a href="{% url 'manager:dashboard' %}{% if not request.user.is_authenticated %}?next=dashboard{% endif %}" class="flex place-items-center px-6 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
+                        {% trans "Dashboard" %}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <hr style="border:none; border-block-end: 1px solid rgba(211, 211, 211, 0.377);">
+
+        <div class="menu-body grid gap-4 items-start">
+            <div class="grid gap-3">
+                <ul class="text-slate-300 grid gap-3">
+                    <li
+                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                        <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:home' %}">
+                            <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="{% static 'menu/home.svg' %}" alt="Home">
+                            <span>{% trans "Home" %}</span>
+                        </a>
+                    </li>
+                    <li
+                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                        <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:products' %}">
+                            <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="{% static 'menu/products.svg' %}" alt="Products">
+                            <span>{% trans "Products" %}</span>
+                        </a>
+                    </li>
+                    <li
+                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                        <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:showrooms' %}">
+                            <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="{% static 'menu/showrooms.svg' %}" alt="Showrooms">
+                            <span>{% trans "Showrooms" %}</span>
+                        </a>
+                    </li>
+                    <li
+                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                        <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:about-us' %}">
+                            <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="{% static 'menu/about.svg' %}" alt="About Us">
+                            <span>{% trans "About Us" %}</span>
+                        </a>
+                    </li>
+                    <li
+                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                        <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:services' %}">
+                            <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="{% static 'menu/services.svg' %}" alt="Services">
+                            <span>{% trans "Services" %}</span>
+                        </a>
+                    </li>
+                    <li
+                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                        <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:support' %}">
+                            <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="{% static 'menu/support.svg' %}" alt="Support">
+                            <span>{% trans "Support" %}</span>
+                        </a>
+                    </li>
+                    <li
+                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                        <a class="flex items-center justify-start gap-2 py-2" href="{% url 'payments:memberships' %}">
+                            <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="{% static 'menu/memberships.svg' %}" alt="memberships">
+                            <span>{% trans "Memberships" %}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            {% if categories_header %}
+                <hr style="border:none; border-block-end: 1px solid rgba(211, 211, 211, 0.377);">
+                <div class="grid gap-3">
+                    <h4 class="text-lg font-bold text-slate-100">
+                        {% trans "Categories for you" %}
+                    </h4>
+                    <ul class="text-slate-300 grid gap-2 pl-4">
+                        {% for category in categories_header %}
+                            <li
+                                class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                                <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-detail' category.slug  %}">
+                                    <!-- <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}"> -->
+                                    <span>{{ category.name }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                        <li
+                            class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                            <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-list' %}">
+                                <!-- <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}"> -->
+                                <span>View All</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+            {% if showroows_headers  %}
+                <hr style="border:none; border-block-end: 1px solid rgba(211, 211, 211, 0.377);">
+                <div class="grid gap-3">
+                    <h4 class="text-lg font-bold text-slate-100">
+                        {% trans "Showrooms" %}
+                    </h4>
+                    <ul class="text-slate-300 grid gap-2 pl-4">
+                        {% for showroom in showroows_headers %}
+                            <li
+                            class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                                <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:showroom-detail' showroom.slug %}">
+                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ showroom.image }}" alt="{{ showroom.name }}">
+                                    <span>{{showroom.name}}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                        <li
+                            class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                            <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:showrooms' %}">
+                                <!-- <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}"> -->
+                                <span>{% trans "View All" %}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+            <hr style="border:none; border-block-end: 1px solid rgba(211, 211, 211, 0.377);">
+            <div class="grid gap-3">
+                <h4 class="text-lg font-bold text-slate-100">
+                    {% trans "Languages" %}
+                </h4>
+                <ul class="text-slate-300 grid gap-2 pl-4">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <li>
+                            <a href="/{{language.code}}/" class="grid items-center py-3 px-8" href="">{{ language.name_local }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <hr style="border:none; border-block-end: 1px solid rgba(211, 211, 211, 0.377);">
+        <div class="menu-footer mb-6 flex gap-4 justify-center text-yellowColor items-center">
+            <a href="" class="px-2 text-lg">
+                <i class="fa fa-phone"></i>
+            </a>
+            <a href="" class="px-2 text-lg">
+                <i class="fa fa-cog"></i>
+            </a>
+            <a href="" class="px-2 text-lg">
+                <i class="fa fa-close"></i>
+            </a>
+        </div>
+    </div>
+    <!-- mobile -->

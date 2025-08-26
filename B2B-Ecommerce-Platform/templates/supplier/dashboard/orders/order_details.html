@@ -1,0 +1,303 @@
+{% extends '../../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load isEqual %}
+{% block content %}
+
+    <div class="main-content">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" class="fa fa-close"></i>
+                    </div>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" class="fa fa-close"></i>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <div class="order-detail split-view">
+            <div class="main-content bordered">
+                <div class="content-group">
+                    <div class="group-header-area">
+                        <h4 class="group-header">{% trans "Order Details" %}</h4>
+                        <a target="_blank" href="{% url 'supplier:order_excel' order.order_id %}" class="edit-cta">{% trans "Export as Excel" %}</a>
+                    </div>
+                    <div class="briefs">
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Order Id" %}:</span>
+                            <span class="content">{{ order.order_id }}</span>
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Supplier" %}:</span>
+                            <span class="content">{{ order.supplier }}</span>
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Buyer" %}:</span>
+                            <span class="content">{{ order.buyer }}</span>
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Delivery Date" %}:</span>
+                            <div class="editable">
+                                {% if order.delivery_date %}
+                                    <span class="content">{{ order.delivery_date }}</span>
+                                {% else %}
+                                    <span class="content">{% trans "Not Set" %}</span>
+                                {% endif %}
+                                <span class="edit_cta" id="set_delivery_date"><i class="ti-pencil"></i></span>
+                                <form id="delivery_date_form" class="floating_form" action="{% url 'supplier:dashboard-order-details' order.order_id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="date" name="delivery_date" required>
+                                    <input type="submit" hidden />
+                                </form>
+                            </div>
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Agreed Price" %}:</span>
+                            <div class="editable">
+                                {% if order.agreed_price %}
+                                    <span class="content">{{ order.currency }} {{ order.agreed_price }}</span>
+                                {% else %}
+                                    <span class="content">{% trans "Not Set" %}</span>
+                                {% endif %}
+                                <span class="edit_cta floating_form_activator" id="agreed_price"><i class="ti-pencil"></i></span>
+                                <form id="agreed_price_form" class="floating_form" action="{% url 'buyer:order-detail' order.order_id %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;">
+                                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                                            <label for="currency" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Currency' %} *</label>
+                                            <input type="text" class="cs-text-normal" name="currency" id="currency" required list="currrencies">
+                                        </div>
+                                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                                            <label for="agreed_price" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Price' %} *</label>
+                                            <input type="text" class="cs-text-normal" name="agreed_price" id="agreed_price" required>
+                                        </div>
+                                    </div>
+                                    <input type="submit" hidden />
+                                </form>
+                            </div>
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Discount" %}:</span>
+                            <span class="content">{{ order.discount }}</span>
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Total Price" %}:</span>
+                            {% if order.total_price %}
+                                <span class="content">{{ order.currency }} {{ order.total_price }}</span>
+                            {% else %}
+                                <span class="content">{% trans "Not Set" %}</span>
+                            {% endif %}
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Status" %}:</span>
+                            <span class="content {% if order.status == 'IN DELIVERY' %}  IN_DELIVERY {% elif order.status == 'VIEWED BY SUPPLER' %} VIEWED  {% elif order.status == 'ACCEPTED BY SUPPLER' %} ACCEPTED {% else %} {{order.status}} {% endif %}">{{ order.status }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-group">
+                    <div class="group-header-area">
+                        <h4 class="group-header">{% trans "Shipping and Contact Details" %}</h4>
+                    </div>
+                    <div class="briefs">
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Carrier" %}:</span>
+                            {% if shipping_details.carrier %}
+                                <span class="content">{{ shipping_details.carrier.name }}</span>
+                            {% else %}
+                                <span class="content">{% trans "Not Set" %}</span>
+                            {% endif %}
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Shipping Tax" %}:</span>
+                            {% if shipping_details.carrier %}
+                                <span class="content">{{ shipping_details.carrier.tax }}</span>
+                            {% else %}
+                                <span class="content">{% trans "Not Set" %}</span>
+                            {% endif %}
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Address 1" %}:</span>
+                            {% if shipping_details.address_1 %}
+                                <span class="content">{{ shipping_details.address_1 }}</span>
+                            {% else %}
+                                <span class="content">{% trans "Not Set" %}</span>
+                            {% endif %}
+                        </div>
+                        {% if shipping_details.address_2 %}
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Address 2" %}:</span>
+                            <span class="content">{{ shipping_details.address_2 }}</span>
+                        </div>
+                        {% endif %}
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Country" %}:</span>
+                            <span class="content">{{ order.buyer.country }}</span>
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "City" %}:</span>
+                            <span class="content">{{ order.buyer.city }}</span>
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Telno." %}:</span>
+                            <span class="content">+ {{ order.buyer.country_code }} {{ order.buyer.mobile_user }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-group">
+                    <div class="group-header-area">
+                        <h4 class="group-header">{% trans "Order Products" %}</h4>
+                    </div>
+                    <div class="order-products">
+                        <div class="data-table wishlist-table" style="border-block: 0;">
+                            <table class="display" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>{% trans 'Name' %}</th>
+                                        <th>{% trans 'Quantity' %}</th>
+                                        <th>{% trans 'Color' %}</th>
+                                        <th>{% trans 'Material' %}</th>
+                                        <th>{% trans 'Unit Price' %}</th>
+                                        <th>{% trans 'Total' %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for object in order_products %}
+                                    <tr>
+                                        <td>{{ object.product.name }}</td>
+                                        <td>{{ object.quantity }}</td>
+                                        <td>{{ object.color.name }}</td>
+                                        <td>{{ object.material.name }}</td>
+                                        <td>{{ object.price.currency }} {{ object.price.min_price }} - {{ object.price.max_price }}</td>
+                                        <td>{{ object.price.currency }} {{ object.min_total_price }} - {{ object.max_total_price }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <form method="POST" action="{% url 'supplier:dashboard-order-details' order.order_id %}" class="cta-area">
+                    {% csrf_token %}
+                    <span>{% trans "Update Status" %}:</span>
+                    {% if order.status != 'VIEWED BY SUPPLER' and order.status != 'REJECTED' %}
+                        <input type="submit" class="cta bg_CANCELLED" name="CANCELLED" value='{% trans "CANCEL" %}'/>
+                    {% endif %}
+                    {% if order.status == 'VIEWED BY SUPPLER' %}
+                        <input type="submit" class="cta bg_ACCEPTED" name="ACCEPTED" value='{% trans "ACCEPT" %}'/>
+                    {% endif %}
+                    {% if order.status == 'VIEWED BY SUPPLER' %}
+                        <input type="submit" class="cta bg_REJECTED" name="REJECTED" value='{% trans "REJECT" %}'/>
+                    {% endif %}
+                    {% if order.status == 'ACCEPTED BY SUPPLER' %}
+                        <input type="submit" class="cta bg_IN_DELIVERY" name="IN_DELIVERY" value='{% trans "IN DELIVERY" %}'/>
+                    {% endif %}
+                    {% if order.status == 'IN DELIVERY' %}
+                        <input type="submit" class="cta bg_DELIVERED" name="DELIVERED" value='{% trans "DELIVERED" %}'/>
+                    {% endif %}
+                    {% if order.status == 'IN DELIVERY' %}
+                        <input type="submit" class="cta bg_COMPLETED" name="COMPLETED" value='{% trans "COMPLETED" %}'/>
+                    {% endif %}
+                </form>
+            </div>
+            <div class="sider-chat-area bordered">
+                <div class="activators">
+                    <button id="notes_activator">{% trans "Notes" %}</button>
+                    <button id="chat_activator">{% trans "Chat" %}</button>
+                </div>
+                <form id="notes-area" method="POST" action="{% url 'supplier:dashboard-order-details' order.order_id %}" class="sider-part">
+                    {% csrf_token %}
+                    <textarea id="order_notes" name="order_notes" cols="30" rows="10">
+                        {% if order_notes %} {{order_notes.notes}} {% endif %}
+                    </textarea>
+                    <input type="submit" value="{% trans 'Save' %}">
+                </form>
+                <div class="chats inview sider-part" id="chat-area">
+                    <ul class="msgs-area">
+                    </ul>
+                    <form action="" class="chat-input-area" id="chat-form">
+                        <input type="text" id="message" placeholder="{% trans 'Type your message...' %}">
+                        <input type="submit" value="{% trans 'Send' %}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+                // chats
+                const chatList = document.querySelector('.msgs-area');
+            const order_id = "{{order.order_id}}"
+            const business_id = "{{request.user.business.pk}}"
+
+            let protocol = window.location.host.includes("localhost") ? "ws://" : "ws://"
+            const chatSocket = new WebSocket(
+                protocol + window.location.host + "/ws/chat/orders/" + order_id + "/"
+            );
+
+            chatSocket.onmessage = function (e) {
+                const data = JSON.parse(e.data);
+                
+                // business_id
+                let elem = document.createElement("li")
+                elem.classList.add("msg")
+                elem.textContent = data.message
+                
+                if (data.sender == business_id) {
+                    elem.classList.add("sent")
+                }
+                else {
+                    elem.classList.add("received")
+                }
+
+                chatList.appendChild(elem);
+            }
+            
+            const chatForm = document.querySelector("#chat-form");
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let messageField = chatForm.querySelector("#message");
+                if (messageField.value != "") {
+                    chatSocket.send(JSON.stringify({
+                        "message": messageField.value,
+                    }))
+                    chatForm.reset();
+                }
+
+            })
+
+            let notes_activator = document.getElementById("notes_activator")
+            notes_activator.addEventListener("click", () => {
+                document.querySelectorAll(".sider-part").forEach(elem => elem.classList.remove("inview"))
+                document.getElementById("notes-area").classList.add("inview")
+            })
+            let chat_activator = document.getElementById("chat_activator")
+            chat_activator.addEventListener("click", () => {
+                document.querySelectorAll(".sider-part").forEach(elem => elem.classList.remove("inview"))
+                document.getElementById("chat-area").classList.add("inview")
+            })
+            document.querySelectorAll(".floating_form_activator").forEach(
+                elem => elem.addEventListener("click", () => {
+                    elem.parentNode.querySelector(".floating_form").classList.toggle("inview")
+                })
+            )
+            tinymce.init({
+                selector: "#order_notes",
+                width: 100 + "%",
+                height: 400,
+            });
+
+            document.getElementById("order_notes")
+                .addEventListener("change", (e) => {
+                    e.target.value = e.target.value
+                })
+        })
+    </script>
+
+{% endblock %}

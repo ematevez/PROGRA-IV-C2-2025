@@ -1,0 +1,179 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load isEqual %}
+{% block content %}
+
+    {% if preview_products.results %}
+    <section class="main w-full mx-auto my-6" style="block-size: auto">
+        <div class="promotion-page-starter grid bg-lghterBackgroundColor rounded-md p-2 md:p-5 gap-4">
+            <div class="products-preview">
+                <div class="coursel" style="block-size: 100%;inline-size: 100%;">
+                    <div class="header">
+                      <div class="progress-bar"></div>
+                    </div>
+                    <div class="slider-container">
+                      <button class="handle left-handle">
+                        <div class="text">&#8249;</div>
+                      </button>
+                      <div class="slider" style="--slider-gap: .5rem">
+                        {% for product in preview_products.results %}
+                            <a class="item" href="{% url 'supplier:product-detail' product.product.slug %}">
+                                <img src="/media/{{product.main_image.image}}" alt="{{product.name}}">
+                                <div class="item-content grid">
+                                    <h1 class="text-base font-semibold text-lighterBackgroundColor" style="margin: 0">{{product.product.name|slice:":40"}}..</h1>
+                                    <h3 class="font-sm text-slate-600">{{product.product.sub_category}}</h3>
+
+                                    <!-- <a href="{% url 'supplier:product-detail' product.product.slug %}" class="grid grid-flow-col place-items-center gap-3 px-2 py-2 md:px-3 md:py-2 text-sm bg-lghterBackgroundColor hover:bg-lighterBackgroundColorHover duration-200 transition-all ease-in rounded text-white font-semibold">
+                                        <span>View Product</span>
+                                    </a> -->
+                                </div>
+                            </a>
+                        {% endfor %}
+                      </div>
+                      <button class="handle right-handle">
+                        <div class="text">&#8250;</div>
+                      </button>
+                    </div>
+                </div>
+            </div>
+            <div class="categories hidden md:grid py-1">
+                {% if categories_header %}
+                    <div class="grid items-start content-start gap-0" style="border: 1px solid rgba(211, 211, 211, 0.288); padding: .25rem .5rem;border-radius: .5rem;">
+                        <h4 class="text-lg font-bold text-slate-100">
+                            {% trans "Categories for you" %}
+                        </h4>
+                        <ul class="text-slate-300 grid p-2">
+                            {% for category in categories_header|slice:":5" %}
+                                <li
+                                    class="text-slate-100 hover:text-white transition-colors transition-200 ease-in">
+                                    <a class="flex items-center justify-start gap-2 py-1" href="{% url 'supplier:category-detail' category.slug  %}">
+                                        <span>{{ category.name }}</span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                            <li
+                                class="text-slate-100 hover:text-white transition-colors transition-200 ease-in">
+                                <a class="flex items-center justify-start gap-2 py-2 font-bold" href="{% url 'supplier:category-list' %}">
+                                    <span>View All</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+
+    <div class="grid w-full mx-auto cf-1 gap-2 md:gap-6">
+        <div class="section-heading">
+            <h2 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{% trans 'New Arrivals' %}</h2>
+        </div>
+        <div class="grid gap-4" style="grid-template-columns: 1fr;">
+            {% if products.results %}
+                <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-5 py-4"
+                data-context="{{products.context_name}}">
+                    {% for product in products.results %}
+                        <div class="single-image-product-card overflow-hidden rounded grid gap-0.5 card-outlined">
+                            <span class="card-badge">{% trans 'New' %}</span>
+                            <a class="grid gap-2 rounded overflow-hidden" href="{% url 'supplier:product-detail' product.product.slug %}">
+                                <img loading="lazy" src="/media/{{product.images.image}}" alt="{{product.name}}"
+                                    class="item-img rounded" style="width: 100%;object-fit:cover;">
+                                <div class="item-details grid gap-0 py-1 md:py-2 px-4 gap-2"
+                                    style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                    <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">
+                                        {{product.product.name|slice:":40"}}..
+                                    </h5>
+                                    <p class="text-xs font-medium">
+                                        <span>{{product.product.currency}}</span>
+                                        <span>{{product.product.price}}</span>
+                                    </p>
+                                </div>
+                                <span class="grid items-center pb-2 px-4 font-semibold text-sm">By {{ product.supplier.profile.business_name }}</span>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="flex justify-between items-center px-6 pb-3 py-2 text-lighterBackgroundColor text-lg rounded-md font-semibold leading-5 justify-self-center">
+                    <p>{% trans 'No Products Found' %}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="hidden pagination md:grid grid-flow-col gap-2 justify-center py-3 my-2 md:w-full mx-auto border-b border-t border-solid border-slate-200">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">{% trans 'Previous' %}</a>
+
+            <a href="?page=1" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+        {% endif %}
+        {% for page in page_obj.number|make_list %}
+            {% if current_page_number|isEqual:page %}
+                <a href="?page={{page}}" class="grid place-items-center px-4 py-2 outline-none rounded bg-lighterBackgroundColorHover text-white">{{ page }}</a>
+            {% else %}
+                <a href="?page={{page}}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page_obj.paginator.num_pages }}</a>
+
+            <a href="?page={{ page_obj.next_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">{% trans 'Next' %}</a>
+        {% endif %}
+    </div>
+
+    <div class="grid pagination md:hidden gap-2 justify-center py-3 my-2 w-11/12 md:w-full mx-auto border-b border-t border-solid border-slate-200">
+        <div class="grid grid-flow-col gap-2">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+            {% endif %}
+            {% for page in page_obj.number|make_list %}
+                {% if current_page_number|isEqual:page %}
+                    <a href="?page={{page}}" class="grid place-items-center px-4 py-2 outline-none rounded bg-lighterBackgroundColorHover text-white">{{ page }}</a>
+                {% else %}
+                    <a href="?page={{page}}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page_obj.paginator.num_pages }}</a>
+            {% endif %}
+        </div>
+
+        <div class="grid grid-flow-col gap-2">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Previous</a>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Next</a>
+            {% endif %}
+        </div>
+    </div>
+    
+    {% include '../utils/stores_list.html' with title="New Stores" %}
+
+    <script>
+
+        if(window.innerWidth < 800)
+        {
+            (function() {
+                let slider = document.querySelector('.slider-container .slider');
+                slider.style.setProperty("--items-per-screen",  1)
+            })()
+        }
+        else {
+
+            (function() {
+                let slider = document.querySelector('.slider-container .slider');
+                slider.style.setProperty("--items-per-screen",  3)
+            })()
+        }
+      
+    </script>
+      
+
+    <script src="{% static 'js/coursel.js' %}"></script>
+
+{% endblock %}

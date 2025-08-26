@@ -1,0 +1,116 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load isEqual %}
+{% block content %}
+
+    <div class="grid gap-2 wide-banner-area">
+        <img class="wide-banner" src="{% static 'assets/imgs/resources/01.jpg' %}" alt="">
+    </div>
+
+
+    <section class="main w-12/12" style="block-size: auto">
+        <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: 1fr;">
+            {% if products.results %}
+                <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-5 py-4"
+                data-context="{{products.context_name}}">
+                    {% for product in products.results %}
+                        <div class="single-image-product-card overflow-hidden rounded grid gap-0.5 card-outlined">
+                            <span class="card-badge">{% trans 'New' %}</span>
+                            <a class="grid gap-2 rounded overflow-hidden" href="{% url 'supplier:product-detail' product.product.slug %}">
+                                <img loading="lazy" src="/media/{{product.images.image}}" alt="{{product.name}}"
+                                    class="item-img rounded" style="width: 100%;object-fit:cover;">
+                                <div class="item-details grid gap-0 py-1 md:py-2 px-4 gap-2"
+                                    style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                    <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">
+                                        {{product.product.name|slice:":40"}}..
+                                    </h5>
+                                    <p class="text-xs font-medium">
+                                        <span>{{product.product.currency}}</span>
+                                        <span>{{product.product.price}}</span>
+                                    </p>
+                                </div>
+                                <span class="grid items-center pb-2 px-4 font-semibold text-sm">By {{ product.supplier.profile.business_name }}</span>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="flex justify-between items-center px-6 pb-3 py-2 text-lighterBackgroundColor text-lg rounded-md font-semibold leading-5 justify-self-center">
+                    <p>{% trans 'No Products Found' %}</p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <div class="hidden pagination md:grid grid-flow-col gap-2 justify-center py-3 my-2 md:w-full mx-auto border-b border-t border-solid border-slate-200">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">{% trans 'Previous' %}</a>
+
+            <a href="?page=1" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+        {% endif %}
+        {% for page in page_obj.number|make_list %}
+            {% if current_page_number|isEqual:page %}
+                <a href="?page={{page}}" class="grid place-items-center px-4 py-2 outline-none rounded bg-lighterBackgroundColorHover text-white">{{ page }}</a>
+            {% else %}
+                <a href="?page={{page}}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page_obj.paginator.num_pages }}</a>
+
+            <a href="?page={{ page_obj.next_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">{% trans 'Next' %}</a>
+        {% endif %}
+    </div>
+
+    <div class="grid pagination md:hidden gap-2 justify-center py-3 my-2 w-11/12 md:w-full mx-auto border-b border-t border-solid border-slate-200">
+        <div class="grid grid-flow-col gap-2">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+            {% endif %}
+            {% for page in page_obj.number|make_list %}
+                {% if current_page_number|isEqual:page %}
+                    <a href="?page={{page}}" class="grid place-items-center px-4 py-2 outline-none rounded bg-lighterBackgroundColorHover text-white">{{ page }}</a>
+                {% else %}
+                    <a href="?page={{page}}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page_obj.paginator.num_pages }}</a>
+            {% endif %}
+        </div>
+
+        <div class="grid grid-flow-col gap-2">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Previous</a>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Next</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+
+        if(window.innerWidth < 800)
+        {
+            (function() {
+                let slider = document.querySelector('.slider-container .slider');
+                slider.style.setProperty("--items-per-screen",  1)
+            })()
+        }
+        else {
+
+            (function() {
+                let slider = document.querySelector('.slider-container .slider');
+                slider.style.setProperty("--items-per-screen",  3)
+            })()
+        }
+      
+    </script>
+      
+
+    <script src="{% static 'js/coursel.js' %}"></script>
+
+{% endblock %}

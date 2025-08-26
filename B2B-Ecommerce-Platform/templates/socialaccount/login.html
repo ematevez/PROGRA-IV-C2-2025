@@ -1,0 +1,26 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load socialaccount %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-20 grid gap-4 border border-slate-400 border-solid w-11/12 md:w-6/12 py-5 px-5 my-8">
+{% if process == "connect" %}
+    <h1>{% blocktrans with provider.name as provider %}Connect {{ provider }}{% endblocktrans %}</h1>
+
+    <p>{% blocktrans with provider.name as provider %}You are about to connect a new third party account from {{ provider }}.{% endblocktrans %}</p>
+    {% else %}
+    <h1 class="text-lighterBackgroundColor text-2xl font-bold">{% blocktrans with provider.name as provider %}Sign In Via {{ provider }}{% endblocktrans %}</h1>
+
+    <p class="text-lighterBackgroundColor text-lg">{% blocktrans with provider.name as provider %}You are about to sign in using a third party account from {{ provider }}.{% endblocktrans %}</p>
+    {% endif %}
+
+    <form method="post" class="grid justify-start">
+      {% csrf_token %}
+      <input class="bg-backgroundColor hover:bg-backgroundColorHover text-white" style="width: 100%;" type="submit" value='{% trans "Continue" %}'>
+    </form>
+  </div>
+{% endblock %}

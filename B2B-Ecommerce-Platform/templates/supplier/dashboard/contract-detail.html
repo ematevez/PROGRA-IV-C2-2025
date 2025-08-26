@@ -1,0 +1,112 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="main-content">
+    <div class="content-area">
+
+        <h3 style="margin:1.6rem 0 .4rem 0;font-weight:600;">{% trans 'My Contract' %}</h3>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                    </div>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                        <p>{{ message }}</p>
+                        <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+            <div class="contract outlined cs-grid" style="--gap: 1rem;align-items: flex-start;padding: 1rem 1.5rem;">
+                <div class="contract-header">
+                    <div class="">
+                        <h4>{% trans 'Contract Details' %}</h4>
+                    </div>
+                </div>
+                <div class="contract-body cs-grid" style="align-items: flex-start;--gap: 1rem;">
+                    <div class="title flex">
+                        <h4>{% trans 'Buyer information' %}</h4>
+                        <h4>Ref No: {{ contract.ref_no }}</h4>
+                    </div>
+                    <div class="contract card">
+                        <div class="top-content flex">
+                            <div class="profile flex">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt=""
+                                    class="avatar">
+                                <h4 class="client">{{contract.buyer.profile.business_name}}</h4>
+                            </div>
+                            <h4 class="date">{{contract.created_on}}</h4>
+                        </div>
+                        <div class="bottom-content flex">
+                            <h4 class="location"><small>{% trans 'Requested from' %}:</small> {{contract.supplier.profile.country}}</h4>
+                            <!-- <h4 class="timestamp">Status: {% if contract.is_complete %} Complete {% else %} Not Complete {% endif %}</h4> -->
+                        </div>
+                    </div>
+                    <h4>{% trans 'Contract info' %}</h4>
+                    <div class="">
+                        <table class="contract-table">
+                            <thead>
+                                <tr>
+                                    <th>{% trans 'Service' %}</th>
+                                    <th>{% trans 'Price' %}</th>
+                                    <th>{% trans 'Status' %}</th>
+                                    <th>{% trans 'Created On' %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="">{{contract.service.name}}</span></td>
+                                    <td><span class="">{{contract.service.currency}} {{contract.service.price}}</span></td>
+                                    <td><span class="">{% if contract.is_complete %} Complete {% else %} Not Complete {% endif %}</span></td>
+                                    <td><span class="">{{contract.created_on}}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-5 flex" style="margin-top:.8rem;justify-content:flex-start;gap:.4rem;">
+                        {% if not contract.is_accepted %}
+                            <form action="{% url 'supplier:dashboard-contract-accept' contract.pk %}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-control">
+                                    <input type="submit" value="{% trans 'Accept' %}" name="accept" class="btn">
+                                </div>
+                            </form>
+                            <form action="{% url 'supplier:dashboard-contract-reject' contract.pk %}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-control">
+                                    <input type="submit" value="{% trans 'Reject' %}" name="reject" class="btn">
+                                </div>
+                            </form>
+                        {% else %}
+                        <form action="{% url 'supplier:dashboard-contract-reject' contract.pk %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-control">
+                                <input type="submit" value="{% trans 'Complete' %}" name="reject" class="btn">
+                            </div>
+                        </form>
+                        {% endif %}
+                        <form action="{% url 'payments:contract-payment' contract.pk %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-control">
+                                <input type="submit" value="{% trans 'Print' %}" name="print" class="btn">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
+    <script>
+
+
+    </script>
+{% endblock %}

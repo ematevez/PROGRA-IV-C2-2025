@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden - {{ view_name }}</title>
+</head>
+<body>
+
+
+    <div class="flex">
+        <a href="{% url 'manager:home' %}" data-link="products">Home</a>
+        <a href="{% url 'supplier:products' %}" data-link="products">Products</a>
+        <a href="{% url 'manager:showrooms' %}" data-link="products">Showrooms</a>
+        <a href="{% url 'manager:services' %}" data-link="products">Services</a>
+        <a href="{% url 'manager:support' %}" data-link="products">Support</a>
+        <a href="{% url 'manager:about-us' %}" data-link="products">About Us</a>
+    </div>
+
+    <h3>Categories</h3>
+    <ul data-context='{{ product_categories.context_name }}'>
+        {% for category in product_categories.results %}
+        <li class="flex">
+
+            <a href='{% url "supplier:category-detail" category.slug %}'>
+                <img style="width: 10px; aspect-ratio: 1;" src="/media/{{category.image}}" alt="">
+                <span>{{ category.name }}</span>
+            </a>
+        </li>
+        {% endfor %}
+        <br>
+
+        <li class="flex" data-category-index="{{ forloop.counter }}">
+            <a href="{% url 'supplier:category-list' %}">View All
+            </a>
+        </li>
+    </ul>
+
+
+    <h3>Products</h3>
+    <ul data-context='{{ products.context_name }}'>
+        {% for category_group in object_list %}
+            <div style="border: 2px solid lightgray;margin-block: 1rem">
+                <h4>{{ category_group.category }}</h4>
+
+                <div style="display: flex; gap: 1rem">
+                    {% for product in category_group.results.products %}
+                        <a href="{% url 'supplier:product-detail' product.product.slug %}">
+                            <li style="display: grid;">
+                                <img style="width: 10vw; aspect-ratio: 1;" src="/media/{{product.image.image}}" alt="">
+                                <span>{{ product.product.name }}</span>
+                            </li>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>

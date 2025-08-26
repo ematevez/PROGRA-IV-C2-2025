@@ -1,0 +1,199 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden - {{ view_name }}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon/favicon.ico' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link href="{% static 'icons/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet"  type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/utils.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboards.css' %}">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body
+    class="admin-body cs-bg-white cs-grid"
+    style="
+            --white-color: #fff;
+            --accent-color: hsl(38, 95%, 47%);
+            --primary-color: hsl(0, 0%, 9%);
+            --primary-color-hover: hsl(0, 0%, 20%);
+            --secondary-color: hsl(213, 28%, 19%);
+            --secondary-color-hover: hsl(213, 28%, 14%);
+            --gap: 0rem;
+        "
+>
+    
+    <!-- sidenav -->
+    <aside class="admin-side-nav cs-grid cs-align-start" style="--gap: .5rem;align-content: flex-start;">
+        <div class="header cs-grid">
+            <div class="cs-flex cs-align-center cs-justify-between" style="--gap: 2rem">
+                <div class="logo-wrapper cs-overflow-hidden">
+                    <img loading="lazy" src="{% static 'assets/imgs/resources/logo_website-e1652772171833-1.png' %}" alt="Logo" class="logo" style="object-fit: cover;">
+                </div>
+                <button class="btn cs-bg-transparent cs-text-primary"><i class="fa fa-bars"></i></button>
+            </div>
+            <hr style="border: 1px solid hsl(0, 0%, 95%);">
+        </div>
+        <div class="body cs-grid" style="--gap: 2rem;">
+            <div class="item-group cs-grid" style="--gap: 0rem;">
+                <!-- <h3 class="item-group-title cs-font-500 cs-text-md" style="color: hsl(0, 0%, 60%)">Navigation</h3> -->
+                <div class="items cs-grid" style="--gap: .1rem">
+                    <ul class="item list-none list-outside">
+                        <li>
+                            <a href="{% url 'app_admin:home' %}" class="{%if active_tab == 'Home'%} active {% endif %} side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                                <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">{% trans "Home" %}</h5>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'app_admin:clients' %}" class="{%if active_tab == 'Clients'%} active {% endif %} side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                                <i class="fa fa-user cs-text-normal-md cs-text-primary"></i>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">{% trans "Clients" %}</h5>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'app_admin:manager' %}" class="manager {%if active_tab == 'Manager'%} active {% endif %} side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                                <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">{% trans "Manager" %}</h5>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'app_admin:discussions' %}" class="{%if active_tab == 'Support'%} active {% endif %} side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                                <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">{% trans "Support" %}</h5>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'app_admin:promotions' %}" class="{%if active_tab == 'Promotions'%} active {% endif %} side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                                <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">{% trans "Promotions" %}</h5>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer cs-grid" style="align-self: flex-end;--gap: 1rem;">
+            <hr style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="cs-flex justify-center" style="--gap:1rem;">
+                <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                    <i class="fa fa-cog"></i>
+                </button>
+                <a href="{% url 'app_admin:profile' %}" class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                    <i class="fa fa-user"></i>
+                </a>
+                <a href="{% url 'manager:home' %}" class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                    <i class="fa fa-home"></i>
+                </a>
+            </div>
+            <a href="{% url 'auth_app:logout' %}" class="cs-grid btn outlined cs-text-md cs-font-500 br-sm cs-bg-hover-color" style="place-items: center;">Log out</a>
+        </div>
+    </aside>
+    <!-- sidenav -->
+
+    <!-- main -->
+    <main class="cs-grid admin-content-area" style="--gap: 1rem;">
+        <!-- header area -->
+            <header class="content-area-header cs-grid br-sm" style="--gap: .5rem;">
+                <div class="cs-grid cs-align-center" style="align-content: center;--gap: .35rem">
+                    <h1 class="section-title cs-font-700 cs-font-500 cs-text-secondary" style="block-size: 20px;margin: 0;font-size: 1.4rem;">{% trans 'Admin Dashboard' %}</h1>
+                    <p class="cs-flex cs-text-md cs-text-secondary" style="gap: .5rem;">
+                        <a href="{% url 'app_admin:home' %}" style="color: hsla(213, 28%, 60%, 100%);">{% trans 'Home' %}</a>
+                        {% if active_tab != 'Home' %}
+                            <span>/</span>
+                            <span>{{active_tab}}</span>
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="cs-grid">
+                    <!-- <form action="./search.html" class="cs-grid" style="align-self: center;">
+                        <div class="cs-flex form-group outline-input" style="align-items: center;--gap: 0">
+                            <i class="fa fa-search cs-text-body" style="color: hsl(0, 0%, 85%);"></i>
+                            <input type="text" name="search" id="search-bar" placeholder="Search...">
+                        </div>
+                    </form> -->
+                </div>
+                <div class="cs-grid justify-end cs-grid-flow-col align-center" style="justify-content: flex-end;--gap: 1rem">
+                    <button class="notification-cta badge btn cs-bg-transparent" style="visibility: hidden;">
+                        <span class="count">4</span>
+                        <i class="fa fa-bell"></i>
+                        <div class="notification-list cs-hidden outlined cs-bg-white br-sm" style="--gap: 1rem;text-align: left;">
+                            <h4 class="cs-text-normal cs-font-600 cs-text-secondary" style="margin: 0;">{% trans 'Notifications' %}</h4>
+                            <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                            <ul class="cs-grid" style="--gap: .25rem">
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </button>
+                    
+                    <a href="{% url 'app_admin:profile' %}" class="cs-flex br-md" style="--gap: 1rem;padding: .5rem 1rem;background-color: hsla(213, 28%, 70%, 10%);align-content: center;align-items: center;">
+                        <div class="cs-grid" style="--gap: .25rem;justify-items: flex-end;align-content: center;">
+                            <h4 class="cs-text-md cs-font-500" style="block-size: 14px;margin: 0;">{% trans request.user.username %}</h4>
+                            <p class="cs-text-sm cs-font-500" style="color: hsl(0, 0%, 60%);">{% trans 'Support' %}</p>
+                        </div>
+                        <div class="avator br-full cs-overflow-hidden">
+                            <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                        </div>
+                    </a>
+                </div>
+            </header>
+        <!-- header area -->
+
+        {% block content %}
+        {% endblock %}
+
+        <!-- section area -->
+    </main>
+    <!-- main -->
+
+    <script src="{% static 'js/admin.js' %}"></script>
+    <script src="{% static 'js/createChart.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+
+PROJECT_DIR=/home/ubuntu/B2B-Ecommerce-Platform
+
+apt-get update -y
+
+# install required software
+apt-get install -y python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx
+
+
+# create db
+# user is prompted for db name
+# echo "Enter Database Name: "
+# read dbName
+
+# echo "Enter Database User: "
+# read dbUser
+
+# if psql -lqt | cut -d \| -f 1 | grep -qw "$dbName"; then
+#   echo "Database '$DB_NAME' already exists. Exiting."
+#   exit 1
+# fi
+
+# psql -U $dbUser -d $dbName -c '\d'
+
+
+
+# set up django project
+# Install pkg-config
+sudo apt-get install pkg-config
+# Install the development files for cairo
+sudo apt-get install libcairo2-dev
+
+cd $PROJECT_DIR
+apt install python3.8-venv
+python3 -m venv $PROJECT_DIR/venv
+source $PROJECT_DIR/venv/bin/activate
+python -m pip install -r $PROJECT_DIR/requirements.txt
+
+apt-get install python3-dev libpq-dev
+python -m pip install psycopg2-binary
+python -m pip install --upgrade setuptools wheel
+python -m pip install django gunicorn
+python -m pip install -U 'Twisted[tls,http2]'
+
+# create gunicorn service
+touch /etc/systemd/system/gunicorn_b2b.service
+echo "
+[Unit]
+Description=gunicorn daemon for b2b
+After=network.target
+
+[Service]
+user=ubuntu
+Group=www-data
+WorkingDirectory=$PROJECT_DIR
+ExecStart=$PROJECT_DIR/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:$PROJECT_DIR/myproject.sock core.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+" > /etc/systemd/system/gunicorn_b2b.service
+
+# create daphne service
+touch /etc/systemd/system/daphne_b2b.service
+echo "
+[Unit]
+Description=daphne daemon for b2b
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=$PROJECT_DIR
+ExecStart=$PROJECT_DIR/venv/bin/daphne -p 9001 core.asgi:application
+
+[Install]
+WantedBy=multi-user.target
+" > /etc/systemd/system/daphne_b2b.service
+
+sudo systemctl daemon-reload
+sudo systemctl start gunicorn_b2b
+sudo systemctl enable gunicorn_b2b
+
+apt-get install nginx -y
+# write nginx conf file
+echo "
+upstream channels-backend {
+        server localhost:9001;
+}
+
+server{
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    server_name b2b.mugisa.tech;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root $PROJECT_DIR;
+    }
+    location /media/ {
+        root $PROJECT_DIR;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:$PROJECT_DIR/myproject.sock;
+    }
+
+    location /ws/ {
+        proxy_pass http://channels-backend;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_redirect off;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host \$server_name;
+    }
+}
+" > b2b
+mv b2b /etc/nginx/sites-available/b2b
+
+sudo ln -s /etc/nginx/sites-available/b2b /etc/nginx/sites-enabled
+nginx -t
+service nginx restart
+ufw allow 'Nginx Full'

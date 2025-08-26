@@ -1,0 +1,128 @@
+{% extends './utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="cs-grid content-area w-desciption cs-align-start">
+            <form action="{% url 'app_admin:email-promotions-edit' promotion.slug %}" method="POST" id="category-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;">
+                <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                    {% trans 'Fill in form to edit email promotion' %}
+                </h2>
+                <p class="cs-text-base text-slate-600"><b>*</b> {% trans 'Represents required fields' %}.</p>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% csrf_token %}
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="subject" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Subject' %} *</label>
+                    <input type="text" class="cs-text-normal" name="subject" id="subject" value="{{promotion.subject}}" required>
+                </div>
+                <div class="form-group cs-grid" style="gap: .5rem;">
+                    <label class="cs-text-normal" style="color: var(--text-color);">{% trans 'Target Group' %} *</label>
+                    <div class="form-group cs-flex" style="--gap: 1rem;">
+                        {% for choice in choices %}
+                        <div class="sub-group cs-grid" style="gap: .25rem;font-size: 1rem;grid-template-columns: .5fr 1fr;">
+                            {% if promotion.target == choice %}
+                                <input type="radio" class="promotion_type_selector" name="promotion_types" id="{{choice}}" value="{{choice}}" required="true" checked>
+                            {% else %}
+                                <input type="radio" class="promotion_type_selector" name="promotion_types" id="{{choice}}" value="{{choice}}" required="true">
+                            {% endif %}
+                            <label for="{{choice}}" class="cs-font-500 cs-text-secondary" style="font-size: .8rem;text-transform: capitalize;">{{choice}}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group" id="showroow_list" style="gap: .5rem;display: none;">
+                    <label class="cs-text-normal" style="color: var(--text-color);">{% trans 'Select Showroom' %} *</label>
+                    <div class="form-group cs-flex" style="gap: 1rem;flex-wrap: wrap;justify-content: flex-start;">
+                        {% for showroom in showrooms %}
+                        <div class="sub-group cs-grid" style="gap: .15rem;font-size: 1rem;grid-template-columns: .5fr 1fr;">
+                            {% if promotion.showroom == showroom %}
+                            <input type="radio" class="showroom_selector" name="showrooms" id="{{showroom.name}}" value="{{showroom.slug}}" checked>
+                            {% else %}
+                            <input type="radio" class="showroom_selector" name="showrooms" id="{{showroom.name}}" value="{{showroom.slug}}" >
+                            {% endif %}
+                            <label for="{{showroom.name}}" class="cs-font-500 cs-text-secondary" style="font-size: .9rem;text-transform: capitalize;">{{showroom.name}}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="description" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Description' %} </label>
+                    <textarea style="padding: .5rem;" name="description" id="description" cols="30" rows="5"></textarea>
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    {% if promotion.has_image %}
+                        <img src="/media/{{ promotion.image }}" alt="{{ promotion.name }}" style="width: 10rem; aspect-ratio: 1;">
+                    {% endif %}
+                    <label for="showroom-location" class="cs-text-normal" style="color: var(--text-color);">{% trans "Image" %}</label>
+                    <input type="file" name="image" id="showroom-image">
+                </div>
+                <div class="form-group cs-grid cs-grid-flow-col" style="--gap: 1rem;">
+                    <input class="cs-text-white cs-bg-secondary" type="submit" name="edit"
+                    value="Edit Promotion">
+                    <input class="cs-text-white cs-bg-danger" type="submit" name="delete"
+                    value="Delete Promotion">
+                    <a href="{% url 'app_admin:email-promotions' %}" class="btn cs-text-white outlined cs-text-secondary cs-font-600 cs-grid cs-justify-center">{% trans 'Cancel' %}</a>
+                </div>
+            </form>
+
+            <div class="description cs-grid br-sm outlined cs-content-start">
+                <h3 class="cs-font-bold cs-text-secondary cs-text-body">{% trans 'Guidelines' %}</h3>
+                <ul class="cs-font-normal cs-text-normal cs-grid" style="--gap: .5rem;list-style-type:lower-alpha;list-style-position: inside;">
+                    <li>{% trans 'Provide a name to easily identify the banner.' %}</li>
+                    <li>{% trans 'If the promotion belongs to a showroom, select showroom and select the desired showroom.' %}</li>
+                    <li>{% trans 'An image can be ignored for text promotions.' %}</li>
+                    <li>{% trans 'Text promotions must contain a short description.' %}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    {{ promotion.description|json_script:"set_description" }}
+    {{ promotion.type|json_script:"set_type" }}
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const set_description = JSON.parse(document.getElementById('set_description').textContent);
+            const set_type = JSON.parse(document.getElementById('set_type').textContent);
+            document.getElementById('description').value = set_description;
+            
+
+            document.querySelectorAll(".promotion_type_selector").forEach(
+                selector => {
+                    selector.addEventListener("change", () => {
+                        if (selector.value === "SHOWROOWS") {
+                            document.querySelector("#showroow_list").style.display = "grid";
+                        } else {
+                            document.querySelector("#showroow_list").style.display = "none";
+                        }
+                    })
+                    
+                    if (set_type === "SHOWROOWS") {
+                        document.querySelector("#showroow_list").style.display = "grid";
+                    } else {
+                        document.querySelector("#showroow_list").style.display = "none";
+                    }
+                }
+            )            
+        })
+    </script>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+
+{% endblock %}

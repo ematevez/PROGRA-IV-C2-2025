@@ -1,0 +1,354 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<script src="{% static 'js/jquery-3.5.1.js' %}"></script>
+
+    <section class="main w-12/12 gap-2">
+        <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto px-5 ">
+            <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
+            <span>/</span>
+            <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:category-detail" object.sub_category.category.slug %}'>{{object.sub_category.category}}</a>
+            <span>/</span>
+            <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:subcategory-detail" object.sub_category.category.slug object.sub_category.slug %}'>{{object.sub_category}}</a>
+            <span>/</span>
+            <span>{{object.name}}</span>
+        </div>
+        <div class="page-starter product grid w-full mx-auto cf-1 gap-2 overflow-hidden">
+            <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12 ">
+                <div class="grid p-0 side-menu card rounded-none rounded-t-md overflow-hidden">
+                    <h2 class="text-xl font-bold px-5 py-3 text-lighterBackgroundColor" style="background-color: hsla(213, 28%, 90%, .8);">
+                        {% trans "Product Categories" %}</h2>
+                    <ul class="grid gap-0.5 px-5 py-2" data-context='{{ product_categories.context_name }}'>
+                        
+                        {% for category in categories_header %}  
+                            <li
+                                class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in" data-category-index="{{ forloop.counter }}">
+                                <a class="flex items-center justify-start gap-2 py-2" href='{% url "supplier:category-detail" category.slug %}'>
+                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}">
+                                    <span>{{ category.name }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <a class="side-menu-footer bg-yellowColor flex gap-1 px-6 items-center py-3 text-white rounded-b-md" href="{% url 'supplier:category-list' %}">
+                    <i class="ti-menu"></i>
+                    <span>{% trans "All Categories" %}</span>
+                </a>
+            </div>
+            <div class="grid gap-4 justify-start content-start">
+                <div class="grid gap-5 px-5 product-detail justify-start content-start">
+                    <div class="product-images grid gap-2 items-start content-start" data-context="{{product_images.context_name}}">
+                        <div class="img-magnifier img-wrapper overflow-hidden" >
+                            <img  style="object-fit: cover;" src="" alt="{{object.name}}">
+                            <video style="aspect-ratio: 1;object-fit: cover;cursor: pointer;display: none;" src="/media/{{video.video}}" controls="true">
+                        </div>
+                        <hr>
+                        <div class="product-images-list grid gap-2 grid-cols-4">
+                            {% for image in product_images.results %}
+                                <img style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="/media/{{image.image}}" alt="{{object.name}}">
+                            {% endfor %}
+                            {% for video in product_videos.results %}
+                                <video style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="/media/{{video.video}}">
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="grid gap-2 md:gap-4 justify-start content-start">
+                        <div class="grid gap-1">              
+                            <h3 class="text-lg md:text-xl font-bold text-lghterBackgroundColor" style="margin: 0;">{{ object.name }}</h3>
+                            <p class="text-bold justify-start text-lghterBackgroundColor" style="display:grid;grid-auto-flow: column; align-items: baseline;gap: .25rem;">
+                                <span class="text-base md:text-base">{{ object.currency }}</span>
+                                <span class="text-lg md:text-base font-bold">{{ object.price }}</span>
+                            </p>
+                        </div>
+                        <div class="grid md:gap-1 py-2 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                            <p class="text-base font-normal text-slate-800">{{object.description}}</p>
+                        </div>
+                        <div class="cta grid md:grid-cols-2 justify-start gap-3">
+                            <a href="{% url 'supplier:supplier-detail' product_supplier.results.profile.slug %}" class="grid grid-flow-col place-items-center gap-3 px-3 md:px-5 py-2 text-base md:py-2 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                                <span class="text-white"><i class="fa fa-address-book"></i></span>
+                                <span>{% trans 'Contact Supplier' %}</span>
+                            </a>
+                            <a id="order_product" href="#" class="grid grid-flow-col place-items-center gap-3 px-3 md:px-5 py-2 text-base md:py-2 duration-200 transition-all ease-in rounded-full text-white font-semibold" style="background-color: lightseagreen;">
+                                <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
+                                <span>{% trans 'Add To Cart' %}</span>
+                            </a>
+                            <form action="{% url 'buyer:wishlist-add-product' object.slug %}" method="POST">
+                                {% csrf_token %}
+                                <button class="grid grid-flow-col place-items-center gap-3 px-3 md:px-5 py-2 text-base md:py-2 duration-200 transition-all ease-in rounded-full text-white font-semibold" style="background-color: black;color: #fff">
+                                    <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
+                                    <span>{% trans 'Add To Wishlist' %}</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2 px-5">
+                    <div class="flex flex-wrap gap-2 justify-start">
+                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-2 justify-start items-center" data-context="{{product_stores.context_name}}">
+                            <span>{% trans 'Stores' %}: </span>
+    
+                            {% for store in product_stores.results %}
+                                <a href="{% url 'supplier:store-detail' store.slug %}" class="grid px-4 py-1 text-base bg-blue-200 rounded-full text-lighterBackgroundColor">{{ store }}</a>
+                            {% endfor %}
+                        </p>
+                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-2 justify-start items-center" data-context="{{product_tagss.context_name}}">
+                            <span>{% trans 'Tags' %}: </span>
+                            {% for tag in tags %}
+                                <a href="{% url 'supplier:products' %}?search={{ tag.name }}" class="grid px-4 py-1 text-base bg-blue-200 rounded-full text-lighterBackgroundColor">{{ tag.name }}</a>
+                            {% endfor %}
+                        </p>
+                        {% if colors %}
+                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-2 justify-start items-center" data-context="{{product_colors.context_name}}">
+                            <span>{% trans 'Colors' %}: </span>
+                            {% for color in colors %}
+                                {% if color.name %}
+                                <span class="grid px-4 py-1 text-base bg-blue-200 rounded-full" style="width: 30px;block-size:30px;background-color: {{color.name}};"></span>
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                        {% endif %}
+                        {% if materials %}
+                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-2 justify-start items-center" data-context="{{product_colors.context_name}}">
+                            <span>{% trans 'Materials' %}: </span>
+                            {% for material in materials %}
+                                {% if material.name %}
+                                <span class="grid px-4 py-1 text-base bg-blue-200 rounded-full text-lighterBackgroundColor">{{material.name}}</span>
+                                {% endif %}
+                                {% endfor %}
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="hidden md:grid gap-4 content-start">
+                {% if text_promotion.results %}
+                <a 
+                    href="{% if text_promotion.results.type == 'SUPPLIERS' %} {% url 'auth_app:signup' %}?Supplier=1 {% elif text_promotion.results.type == 'BUYERS' %} {% url 'auth_app:signup' %}?Buyer=1 {% elif text_promotion.results.type == 'SHOWROOWS' %} {% url 'manager:showrooms' %} {% elif text_promotion.results.type == 'PRODUCTS' %} {% url 'supplier:products' %} {% endif %}" 
+                    class="grid gap-2 items-start p-4 rounded-md" style="background-image: linear-gradient(to right top,hsl(350, 100%, 95%),hsl(350, 100%, 90%),hsl(350, 100%, 91%),hsl(350, 100%, 93%),hsl(350, 100%, 95%));">
+                    <div class="grid">
+                        <h4 class="font-semibold text-lighterBackgroundColor">{{text_promotion.results.name}}</h4>
+                        <p class="text-lighterBackgroundColor text-base">{{text_promotion.results.description}}</p>
+                    </div>
+                    <button class="bg-black py-2 px-4 text-base justify-self-end rounded-full text-white font-semibold">{% trans "View All" %}</button>
+                </a>
+                {% endif %}
+                <!-- <div class="advert-banner-small">
+                    <img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image">
+                </div> -->
+                {% if user_categories.results %}
+                <div class="grid gap-2">
+                    <div class="bg-yellowColor px-4 py-2 rounded-t-md">
+                        <h2 class="text-white font-semibold text-lg">{% trans "Visited Categories" %}</h2>
+                    </div>
+                    <ul class="grid gap-0.5 px-5" data-context='{{ user_categories.context_name }}'>
+                        {% for category in user_categories.results %}  
+                            <li
+                                class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in" data-category-index="{{ forloop.counter }}">
+                                <a class="flex items-center justify-start gap-2 py-1" href='{% url "supplier:category-detail" category.slug %}'>
+                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}">
+                                    <span>{{ category.name|slice:":15" }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    
+    <section class="grid md:grid-cols-2">
+        <div class="grid md:w-full mx-auto p-2 md:p-0 cf-1 gap-4">
+            <div class="section-body new_arrival grid gap-2 items-start card p-3 py-4 rounded-md" style="background-color: white;color: hsl(213, 28%, 19%)">
+                <div class="flex justify-between items-baseline px-3">
+                    <!-- <div class="flex gap-5"> -->
+                        <h1 class="text-lg md:text-xl text-yellowColor font-bold">{% trans 'New Arrivals' %}</h1>
+                        <!-- <h1 class="hidden md:flex gap-1 items-baseline text-lg text-slate-400 font-bold"><span
+                                class="text-lg text-xl text-slate-500">30%</span> OFF</h1> -->
+                    <!-- </div> -->
+                </div>
+                <div class="grid gap-1 horizontal-scroll items-start" style="--row-size: 29%;--sm-row-size:33%" data-context="{{new_arrivals.context_name}}">
+                    {% for new_arrival in new_arrivals.results %}
+                        <div class="promotion-card grid"  data-new_arrival-index="{{forloop.counter}}">
+                            <a class="grid rounded-md " href="{% url 'supplier:new-arivals' %}" style="background-color: rgba(239, 246, 247, 0.438);padding: .25rem;">
+                                <div class="grid p-2">
+                                    <img loading="lazy" src="/media/{{new_arrival.main_image.image}}" alt="{{new_arrival.product.name}}" class="item-img rounded" style="inline-size: 100%;aspect-ratio:1/.8;object-fit:cover;">
+                                </div>
+                                <div class="item-details grid gap-0 px-2 items-start content-start">
+                                    <h5 class="text-base font-semibold leading-5">
+                                        {{new_arrival.product.name|slice:":15"}}..
+                                    </h5>
+                                    <!-- <p class="text-base font-bold flex gap-2 items-baseline">
+                                        {{new_arrival.product.currency}} <span>{{new_arrival.product.price}}</span>
+                                        <s class="text-slate-400 font-normal text-sm">{{new_arrival.product.price}}</s>
+                                    </p> -->
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="grid md:w-full mx-auto p-2 md:p-0 cf-1 gap-4">
+            <div class="section-body new_arrival grid gap-2 items-start card p-3 py-4 rounded-md" style="background-color: white;color: hsl(213, 28%, 19%)">
+                <div class="flex justify-between items-baseline px-3">
+                    <!-- <div class="flex gap-5"> -->
+                        <h1 class="text-lg md:text-xl text-yellowColor font-bold">{% trans 'Trending Products' %}</h1>
+                        <!-- <h1 class="hidden md:flex gap-1 items-baseline text-lg text-slate-400 font-bold"><span
+                                class="text-lg text-xl text-slate-500">30%</span> OFF</h1> -->
+                    <!-- </div> -->
+                </div>
+                <div class="grid gap-1 horizontal-scroll items-start" style="--row-size: 29%;--sm-row-size:33%" data-context="{{advertised_products.context_name}}">
+                    {% for advertised_product in advertised_products.results %}
+                        <div class="promotion-card grid"  data-advertised_product-index="{{forloop.counter}}">
+                            <a class="grid rounded-md" href="{% url 'supplier:product-detail' advertised_product.product.slug %}" style="background-color: rgba(239, 246, 247, 0.438);padding: .25rem;">
+                                <div class="grid p-2">
+                                    <img loading="lazy" src="/media/{{advertised_product.main_image.image}}" alt="{{advertised_product.product.name}}" class="item-img rounded" style="inline-size: 100%;aspect-ratio:1/.8;object-fit:cover;">
+                                </div>
+                                <div class="item-details grid gap-0 px-2 items-start content-start">
+                                    <h5 class="text-base font-semibold leading-5">
+                                        {{advertised_product.product.name|slice:":15"}}..
+                                    </h5>
+                                    <!-- <p class="text-base font-bold flex gap-2 items-baseline">
+                                        {{advertised_product.product.currency}} <span>{{advertised_product.product.price}}</span>
+                                        <s class="text-slate-400 font-normal text-sm">{{advertised_product.product.price}}</s>
+                                    </p> -->
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="order_product_modal">
+        <div id="order_product_form" data-product-slug="{{object.slug}}">
+            <div class="flex" id="remove_modal" style="padding: .6em;justify-content: flex-end;align-items: center;"><i class="ti-close"></i></div>
+            <div class="product-form-wrapper">
+                <div class="product">
+                    <span class="category">{{ object.sub_category.category }} - {{ object.sub_category }}</span>
+                    <span class="stock">{{ object.stock }} {% trans "left" %}</span>
+                    <h1>{{ object.name }}</h1>
+                    <div class="block-price-rating">
+                        <div class="block-price">
+                        <div class="price-new">
+                            <span class="price-new-dollar"> {{ object.currency }} {{ object.price }}</span>
+                            <span class="price-new-cent">90</span>  
+                        </div>
+                        <!-- <div class="price-old">
+                            <span class="price-old-dollar">$599</span>
+                            <span class="price-old-cent">&#8228;90</span>
+                        </div>   -->
+                        </div>
+                        <div class="block-rating">
+                        <!-- <span class="review">40 Reviews</span> -->
+                        <span class="rating"><img src="/media/{{product_images.results.first.image}}"></span>
+                        </div>
+                    </div>
+                    <!-- <span>Rating</span>
+                    <div class="item-ratings star-03">
+                        <i class="ti-star"></i>
+                        <i class="ti-star"></i>
+                        <i class="ti-star"></i>
+                        <i class="ti-star"></i>
+                        <i class="ti-star"></i>
+                    </div> -->
+                    <div class="descr">
+                        <p>
+                            {{ object.description }}
+                        </p>
+                    </div> 
+                    <div class="block-select clearfix">
+                        <form id="product_variable_form" method="POST" action="" style="display: grid; gap: .7rem;">
+                            <div class="set-product-qunatity">
+                                <button id="decrementQuantity">-</button>
+                                <input type="number" style="text-align: center;" name="quantity" value="1" id="quantity">
+                                <button id="incrementQuantity">+</button>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem;justify-content: stretch;">
+                                <div class="select-color">
+                                    <span>{% trans "Select Color" %}</span>
+                                    <select class="color" name="color" id="color">
+                                        {% for color in colors %}
+                                            <option value="{{ color.pk }}">{{ color.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="select-currency" style="inline-size: 100%;">
+                                    <span>Select material</span>
+                                    <select class="currency" name="material" id="material" style="inline-size: 100%;">
+                                        {% for material in materials %}
+                                            <option value="{{ material.pk }}">{{ material.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="select-currency" style="inline-size: 100%;">
+                                <span>Select currency</span>
+                                <select class="currency" name="pricing" id="pricing" style="inline-size: 100%;">
+                                    {% for pricing in pricings %}
+                                        <option value="{{ pricing.pk }}">{{ pricing.currency }} {{ pricing.min_price }} - {{ pricing.currency }} {{ pricing.max_price }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div> 
+                            <button type="submit" style="background-color: rgb(236, 171, 8);" class="btn" id="add_product_to_cart">{% trans "Add To Cart" %}</button>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+
+        const productModalOverlay = document.querySelector("#order_product_modal");
+        const orderProduct = document.querySelector("#order_product");
+        orderProduct.addEventListener("click", () => {
+            productModalOverlay.classList.add("inview")
+            const removeProductModalOverlay = document.querySelector("#remove_modal");
+            removeProductModalOverlay.addEventListener("click", () => productModalOverlay.classList.remove("inview"));
+            document.getElementById("incrementQuantity").addEventListener("click", e => {
+                e.preventDefault()
+                let currentVal = parseInt(document.getElementById("quantity").value)
+                let newVal = currentVal + 1;
+                document.getElementById("quantity").value = newVal
+            })                
+            document.getElementById("decrementQuantity").addEventListener("click", e => {
+                e.preventDefault()
+                let currentVal = parseInt(document.getElementById("quantity").value)
+                if (currentVal <= 1) return;
+                let newVal = currentVal - 1;
+                document.getElementById("quantity").value = newVal
+            })
+            
+            document.querySelector("#add_product_to_cart").addEventListener("click", async (e) => {
+                e.preventDefault()
+                let product_data = {
+                    color: document.querySelector("#color").value,
+                    material: document.querySelector("#material").value,
+                    pricing: document.querySelector("#pricing").value,
+                    quantity: document.querySelector("#quantity").value
+                }
+                let product_slug = document.querySelector("#order_product_form").dataset.productSlug
+                try {
+                    let response = await makeRequest(`/api/cart/product/${product_slug}/add/`, method="POST", data=product_data)
+                    productModalOverlay.classList.remove("inview")
+                }
+                catch (err) {
+
+                }
+            })
+        });
+    </script>
+
+    {% include '../utils/product_list.html' %}
+
+
+    {% include '../utils/category_group.html' %}
+    
+{% endblock %}

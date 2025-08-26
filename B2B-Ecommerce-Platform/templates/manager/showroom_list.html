@@ -1,0 +1,101 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+        <section class="main w-12/12">
+
+            <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto">
+                <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
+                <a>/</a>
+                <span class="text-lightBackgroundColor">{% trans 'Showrooms' %}</span>
+            </div>
+            
+            <div class="grid w-full mx-auto cf-1 gap-6">
+                <div class="section-heading">
+                    <h2 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{% trans 'Showrooms' %}</h2>
+                </div>
+                <div class="showrooms section-body grid gap-4 grid-cols-1 md:grid-cols-4">
+                    {% for showroom in showrooms_with_products.results %}
+
+                    <a href="{% url 'manager:showroom-detail' showroom.showroom.slug %}" class="grid showroom-card card p-2 rounded-md">
+                        <div class="body">
+                            <div class="grid">
+                                <div class="grid store gap-1">
+                                    <img src="/media/{{showroom.banner.image}}" style="object-fit: cover;block-size: 100%" alt="{{store.name}}">
+                                </div>
+                            </div>
+                            <aside class="grid gap-1">
+                                {% for product in showroom.products %}
+                                <div class="product">
+                                    <img src="/media/{{product.images.image}}" alt="{{product.product.name}}">
+                                </div>
+                                {% endfor %}
+                            </aside>
+                            <div class="flex gap-2 showroom-detail">
+                                <div class="img-wrapper">
+                                    <img src="/media/{{showroom.showroom.image}}" alt="{{showroom.showroom.name}}">
+                                </div>
+                                <div class="grid">
+                                    <h5 class="font-bold text-lighterBackgroundColor">{{showroom.showroom.name}}</h5>
+                                    <div class="flex gap-2">
+                                        <p class="text-base text-slate-400 font-normal">{{showroom.store_count}} {% trans 'Stores' %}</p>
+                                        <p class="text-base text-slate-400 font-normal">{{showroom.store_count}} {% trans 'Products' %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+                <div class="showrooms section-body grid gap-4 grid-cols-1 md:grid-cols-5">
+                    {% for showroom in showrooms_without_products.results %}
+
+                    <a href="{% url 'manager:showroom-detail' showroom.showroom.slug %}" class="grid showroom-card card p-2 rounded-md">
+                        <div class="flex gap-2 showroom-detail">
+                            <div class="img-wrapper">
+                                <img src="/media/{{showroom.showroom.image}}" alt="{{showroom.showroom.name}}">
+                            </div>
+                            <div class="grid">
+                                <h5 class="font-bold text-lighterBackgroundColor">{{showroom.showroom.name}}</h5>
+                                <div class="flex gap-2">
+                                    <p class="text-base text-slate-400 font-normal">{{showroom.store_count}} {% trans 'Stores' %}</p>
+                                    <p class="text-base text-slate-400 font-normal">{{showroom.store_count}} {% trans 'Products' %}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="main w-12/12 py-3 my-3">
+            <div class="w-full mx-auto grid">                    
+                <div class="flex p-2 px-2 pt-0 justify-between items-baseline">
+                    <div class="flex gap-5">                            
+                        <h1 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{% trans 'Foroden Stores' %}</h1>
+                    </div>
+                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="{% url 'supplier:store-list' %}">{% trans 'View All' %}</a>
+                </div>
+                <div class="grid gap-3 horizontal-scroll rounded-md py-3">
+                    {% for store in stores.results %}
+                        <div class="store-card grid items-start rounded-md card gap-4">
+                            <a class="grid gap-1 rounded-md overflow-hidden" href="{% url 'supplier:store-detail' store.slug %}">
+                                <img loading="lazy" src="/media/{{store.image}}" alt="{{store.name}}" class="img-wrapper rounded-md">
+                                <div class="card-details grid items-end px-4 py-4">
+                                    <h2 class="text-lg leading-5 text-white font-bold">    
+                                        {{store.name}}
+                                    </h2>
+                                    <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                        <span>{{store.supplier}}</span>
+                                        <!-- <span>120 Products</span> -->
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+{% endblock %}

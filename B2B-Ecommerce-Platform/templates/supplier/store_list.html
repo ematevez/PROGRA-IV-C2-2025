@@ -1,0 +1,106 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load isEqual %}
+{% block content %}
+
+    <div class="grid gap-6 md:gap-3 bg-white">
+        <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto pt-1 px-5 md:px-0">
+            <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
+            <span>/</span>
+            <span class="text-lightBackgroundColor">{% trans 'Stores' %}</span>
+        </div>
+
+        <div class="product-filter grid md:flex gap-4 justify-between px-5 md:px-8 py-3" style="background-color: rgb(242, 245, 248);">
+            <div class="flex items-center gap-2">
+                <h3 class="text-xl text-lightBackgroundColor font-semibold">{% trans 'Stores' %}</h3>
+            </div>
+            <div class="filter grid md:grid-flow-col gap-6 md:justify-self-end items-center justify-start">
+                <form id="supplier-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="{{suppliers.context_name}}">
+                    <p class="font-medium text-slate-800">{% trans 'Supplier' %}: </p>
+                    <div class="filter-form-group flex gap-3 items-center">
+                        <select name="supplier" id="supplier-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('#supplier-filter-form').submit()})()">
+                            <option value="all">{% trans 'All' %}</option>
+                            {% for supplier in suppliers.results %}
+                                <option value="{{supplier.profile.business_name}}">{{supplier.profile.business_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" hidden />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <section class="main w-12/12 py-3 mb-3">
+        <div class=" w-full md:w-full mx-auto grid">
+            <div class="grid gap-3 md:grid-cols-5 rounded-md py-3">
+                {% for store in object_list %}
+                    <div class="store-card grid items-start rounded-md card gap-4">
+                        <a class="grid gap-1 rounded-md overflow-hidden" href="{% url 'supplier:store-detail' store.slug %}">
+                            <img loading="lazy" src="/media/{{store.image}}" alt="{{store.name}}" class="img-wrapper rounded-md">
+                            <div class="card-details grid items-end px-4 py-4">
+                                <h2 class="text-lg leading-5 text-white font-bold">    
+                                    {{store.name}}
+                                </h2>
+                                <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                    <span>{{store.supplier}}</span>
+                                    <!-- <span>120 Products</span> -->
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <div class="hidden pagination md:grid grid-flow-col gap-2 justify-center py-3 my-2 md:w-full mx-auto border-b border-t border-solid border-slate-200">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Previous</a>
+
+            <a href="?page=1" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+        {% endif %}
+        {% for page in paginator.page_range %}
+            {% if page_obj.number == page %}
+                <a href="?page={{page}}" class="grid place-items-center px-4 py-2 outline-none rounded bg-lighterBackgroundColorHover text-white">{{ page }}</a>
+            {% else %}
+                <a href="?page={{page}}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page_obj.paginator.num_pages }}</a>
+
+            <a href="?page={{ page_obj.next_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Next</a>
+        {% endif %}
+    </div>
+
+    <div class="grid pagination md:hidden gap-2 justify-center py-3 my-2 w-11/12 md:w-full mx-auto border-b border-t border-solid border-slate-200">
+        <div class="grid grid-flow-col gap-2">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+            {% endif %}
+            {% for page in paginator.page_range %}
+                {% if page_obj.number == page %}
+                    <a href="?page={{page}}" class="grid place-items-center px-4 py-2 outline-none rounded bg-lighterBackgroundColorHover text-white">{{ page }}</a>
+                {% else %}
+                    <a href="?page={{page}}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page_obj.paginator.num_pages }}</a>
+            {% endif %}
+        </div>
+
+        <div class="grid grid-flow-col gap-2">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Previous</a>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Next</a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

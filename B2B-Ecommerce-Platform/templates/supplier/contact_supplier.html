@@ -1,0 +1,45 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <section class="grid">
+        <div class="grid px-8 py-8 rounded auth-area w-11/12 md:w-10/12 gap-4 mx-auto my-10" style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="grid gap-1">
+                <h3 class="text-2xl font-medium text-lghterBackgroundColor" style="font-family: serif">{% trans 'Contact' %} {{ profile.business_name }}</h3>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                            <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                            <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="grid gap-3 justify-content">
+                <form action="{% url 'supplier:supplier-contact' profile.slug %}" method="POST" class="grid gap-4">
+                    {% csrf_token %}
+                    <div class="form-group grid gap-1">
+                        <label for="description" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Subject' %} </label>
+                        <input class="py-4" style="width: 100%;" type="text" id="subject" required name="subject">
+                    </div>
+                    <div class="form-group grid gap-1">
+                        <label for="description" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Message' %} </label>
+                        <textarea class="py-4" rows="5" style="width: 100%;background: transparent;" type="text" id="message" required name="message">Hello {{ profile.business_name }}. I am interested in your services on Foroden. Please reach out to me via {{ request.user.email }}. {{ user_profile.business_name }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <input class="bg-backgroundColor hover:bg-backgroundColorHover text-white" style="width: 100%;" type="submit" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

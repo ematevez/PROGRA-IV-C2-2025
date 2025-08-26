@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/_main.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/themify-icons.css' %}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <title>Golden - GOLDEN</title>
+</head>
+
+<body>
+    <div class="app-container container">
+        <div class="app-content flex">
+            <div class="sidebar card">
+                <div class="sidebar-header">
+                    <div class="app-logo">
+                        <i class="ti-layout-grid2"></i>
+                        <span>Seller's Portal</span>
+                    </div>
+                </div>
+                <div class="sidebar-body">
+                    <ul class="main-menu">
+                        <li class="link">
+                            <a href="_dashboard.html">
+                                <span class="flex">
+                                    <span><i class="icon ti-home"></i><span class="text">Dashboard</span></span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="link">
+                            <a href="#">
+                                <span class="flex">
+                                    <span><i class="icon ti-folder"></i><span class="text">Stores</span></span><i
+                                        class="ti-angle-down" style="color:#fff;"></i>
+                                </span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="link"><a href="_create-store.html"> Create store</a></li>
+                                <li class="link"><a href="_manage-store.html"> Manage store</a></li>
+                            </ul>
+                        </li>
+                        <li class="link">
+                            <a href="#">
+                                <span class="flex">
+                                    <span><i class="icon ti-receipt"></i><span class="text">Products</span></span><i
+                                        class="ti-angle-down" style="color:#fff;"></i>
+                                </span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="link"><a href="_manage-product.html"> Manage products</a></li>
+                            </ul>
+                        </li>
+                        <li class="link">
+                            <a href="_contract.html">
+                                <span class="flex">
+                                    <span><i class="icon ti-layout-accordion-list"></i><span
+                                            class="text">Contracts</span></span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sidebar-footer"></div>
+            </div>
+            <div class="main">
+                <div class="navbar">
+                    <div class="flex">
+                        <div class="logo">
+                            <form class="search-form">
+                                <div class="form-control">
+                                    <input type="search" name="" id="" placeholder="Search">
+                                    <button type="submit"><i class="ti-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                        <nav>
+                            <ul class="nav-links flex">
+                                <li class="link bell"><i class="ti-bell"></i></li>
+                                <li class="link settings"><i class="ti-settings"></i></li>
+                                <li class="link customer-display"><i class="ti-screen"></i></li>
+
+                                <div class="dropdown">
+                                    <div class="flex">
+                                        <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt=""
+                                            class="avatar" id="toggle-dropdown">
+                                        <h4>Phillip M.</h4>
+                                    </div>
+                                    <div class="dropdown-menu" id="dropdown-menu">
+                                        <ul class="dropdown-items">
+                                            <li class="dropdown-item"><i class="ti-help"></i> <a href="#">Help</a></li>
+                                            <li class="dropdown-item"><i class="ti-settings"></i> <a
+                                                    href="#">Settings</a></li>
+                                            </li>
+                                            <li class="dropdown-item footer"><a href="#">Sign Out</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="main-content">
+                    <div class="top flex">
+                        <div class="left content">
+                            <div class="top-cards flex">
+                                <div class="top-card card flex">
+                                    <div class="card-content card-content-left">
+                                        <span><i class="ti ti-money"></i></span>
+                                    </div>
+                                    <div class="card-content card-content-right">
+                                        <h4>Sales</h4>
+                                        <h6 id="sales">0</h6>
+                                    </div>
+                                </div>
+                                <div class="top-card card flex">
+                                    <div class="card-content card-content-left">
+                                        <span><i class="ti ti-money"></i></span>
+                                    </div>
+                                    <div class="card-content card-content-right">
+                                        <h4>Returns</h4>
+                                        <h6 id="returns">0</h6>
+                                    </div>
+                                </div>
+                                <div class="top-card card flex">
+                                    <div class="card-content card-content-left">
+                                        <span><i class="ti ti-credit-card"></i></span>
+                                    </div>
+                                    <div class="card-content card-content-right">
+                                        <h4>Income</h4>
+                                        <h6 id="income">0</h6>
+                                    </div>
+                                </div>
+                                <div class="top-card card flex">
+                                    <div class="card-content card-content-left">
+                                        <span><i class="ti ti-credit-card"></i></span>
+                                    </div>
+                                    <div class="card-content card-content-right">
+                                        <h4>Losses</h4>
+                                        <h6 id="losses">0</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="top-cards flex">
+                                <div class="top-card card flex">
+                                    <div class="card-content card-content-left">
+                                        <span><i class="ti ti-money"></i></span>
+                                    </div>
+                                    <div class="card-content card-content-right">
+                                        <h4>Stores</h4>
+                                        <h6 id="stores">0</h6>
+                                    </div>
+                                </div>
+                                <div class="top-card card flex">
+                                    <div class="card-content card-content-left">
+                                        <span><i class="ti ti-money"></i></span>
+                                    </div>
+                                    <div class="card-content card-content-right">
+                                        <h4>Services</h4>
+                                        <h6 id="services">0</h6>
+                                    </div>
+                                </div>
+                                <div class="top-card card flex">
+                                    <div class="card-content card-content-left">
+                                        <span><i class="ti ti-credit-card"></i></span>
+                                    </div>
+                                    <div class="card-content card-content-right">
+                                        <h4>Products</h4>
+                                        <h6 id="products">0</h6>
+                                    </div>
+                                </div>
+                                <div class="top-card card flex">
+                                    <div class="card-content card-content-left">
+                                        <span><i class="ti ti-credit-card"></i></span>
+                                    </div>
+                                    <div class="card-content card-content-right">
+                                        <h4>Categories</h4>
+                                        <h6 id="categories">0</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-content flex">
+                                <div class="filter-cards duration card flex p-0">
+                                    <div class="form-control flex action">
+                                        <button class="btn act-btn active br-0 m-0 day" id="day">Today</button>
+                                    </div>
+                                    <div class="form-control flex action">
+                                        <button class="btn act-btn br-0 m-0 week" id="week">Week</button>
+                                    </div>
+                                    <div class="form-control flex action">
+                                        <button class="btn act-btn br-0 m-0 month" id="month">Month</button>
+                                    </div>
+                                    <div class="form-control flex action">
+                                        <button class="btn act-btn br-0 m-0 year" id="year">Year</button>
+                                    </div>
+                                </div>
+                                <div class="filter-cards date card flex p-0"
+                                    style="border: 1px solid var(--brand-primary);">
+                                    <form action="" class="pick-date-form flex">
+                                        <div class="form-control flex action">
+                                            <input type="date" name="" id="">
+                                            <button class="btn active pick-date"><i class="ti-link"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right content">
+                            <div class="card m-0">
+                                <h4>Top 3 selling products</h4>
+                                <div class="wrapper flex">
+                                    <div class="top-selling-product">
+                                        <span><i class="ti ti-wallet"></i></span>
+                                    </div>
+                                    <div class="top-selling-product-details">
+                                        <h4>Cosmetic & Jewellery</h4>
+                                        <h6>£475k</h6>
+                                    </div>
+                                </div>
+                                <div class="wrapper flex">
+                                    <div class="top-selling-product">
+                                        <span><i class="ti ti-wallet"></i></span>
+                                    </div>
+                                    <div class="top-selling-product-details">
+                                        <h4>Fashion</h4>
+                                        <h6>£27k</h6>
+                                    </div>
+                                </div>
+                                <div class="wrapper flex">
+                                    <div class="top-selling-product">
+                                        <span><i class="ti ti-wallet"></i></span>
+                                    </div>
+                                    <div class="top-selling-product-details">
+                                        <h4>Home furniture</h4>
+                                        <h6>£64k</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="data-visual flex">
+                        <div class="card">
+                            <h4 id="chart-1-title"></h4>
+                            <div>
+                                <canvas id="chart-1"></canvas>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h4 id="chart-2-title"></h4>
+                            <div>
+                                <canvas id="chart-2" style="max-block-size: 266px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+{% load static %}
+{% load i18n %}
+{% if stores.results %}
+<section class="main w-12/12 py-3 my-3">
+    <div class=" w-full md:w-full mx-auto grid">                    
+        <div class="flex p-2 px-2 pt-0 justify-between items-baseline">
+            <div class="flex gap-5">
+                {% if title %}
+                    <h1 class="capitalize sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{{ title }}</h1>
+                {% else %}
+                    <h1 class="capitalize sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">Foroden {% trans "Stores" %}</h1>
+                {% endif %}
+            </div>
+            <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="{% url 'supplier:store-list' %}">{% trans "View All" %}</a>
+        </div>
+        <div class="grid horizontal-scroll lg gap-3 md:grid-cols-5 rounded-md py-3" data-content="{{stores.context_name}}">
+            {% for store in stores.results %}
+                <div class="store-card grid items-start rounded-md card gap-4">
+                    <a class="grid gap-1 rounded-md overflow-hidden" href="{% url 'supplier:store-detail' store.slug %}">
+                        <img loading="lazy" src="/media/{{store.image}}" alt="{{store.name}}" class="img-wrapper rounded-md">
+                        <div class="card-details grid items-end px-4 py-4">
+                            <h2 class="text-lg leading-5 text-white font-bold">    
+                                {{store.name}}
+                            </h2>
+                            <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                <span>{{store.supplier.profile.business_name}}</span>
+                                <!-- <span>120 Products</span> -->
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}

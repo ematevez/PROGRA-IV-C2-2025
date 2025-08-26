@@ -1,0 +1,430 @@
+{% extends './utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+        <section id="client-suppliers-section" class="content cs-grid br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <div class="cs-grid" style="margin: .15rem .5rem">
+                <h4 class="cs-text-normal cs-text-accent" style="margin: 0;">Suppliers</h4>
+            </div>
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>business Name</th>
+                        <th>country</th>
+                        <th>VAT Number</th>
+                        <th>Legal Entity Identifier</th>
+                        <th>Membership</th>
+                        <th>Stores</th>
+                        <th>Joined On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="cs-text-md cs-font-500 client-item">
+                        <td>1</td>
+                        <td>Alex Fashions</td>
+                        <td>France</td>
+                        <td>192047239</td>
+                        <td>39N23J23MF</td>
+                        <td>Premium</td>
+                        <td>4</td>
+                        <td>12/03/2020</td>
+                    </tr>
+                    <tr class="cs-text-md cs-font-500 client-item">
+                        <td>2</td>
+                        <td>Alex Fashions</td>
+                        <td>France</td>
+                        <td>192047239</td>
+                        <td>39N23J23MF</td>
+                        <td>Premium</td>
+                        <td>4</td>
+                        <td>12/03/2020</td>
+                    </tr>
+                    <tr class="cs-text-md cs-font-500 client-item">
+                        <td>3</td>
+                        <td>Alex Fashions</td>
+                        <td>France</td>
+                        <td>192047239</td>
+                        <td>39N23J23MF</td>
+                        <td>Premium</td>
+                        <td>4</td>
+                        <td>12/03/2020</td>
+                    </tr>
+                    <tr class="cs-text-md cs-font-500 client-item">
+                        <td>4</td>
+                        <td>Alex Fashions</td>
+                        <td>France</td>
+                        <td>192047239</td>
+                        <td>39N23J23MF</td>
+                        <td>Premium</td>
+                        <td>4</td>
+                        <td>12/03/2020</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>business Name</th>
+                        <th>country</th>
+                        <th>VAT Number</th>
+                        <th>Legal Entity Identifier</th>
+                        <th>Membership</th>
+                        <th>Stores</th>
+                        <th>Joined On</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <section id="client-buyers-section" class="content cs-grid br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <div class="cs-grid" style="margin: .15rem .5rem">
+                <h4 class="cs-text-normal cs-text-accent" style="margin: 0;">Buyers</h4>
+            </div>
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>business Name</th>
+                        <th>country</th>
+                        <th>VAT Number</th>
+                        <th>Legal Entity Identifier</th>
+                        <th>Membership</th>
+                        <th>Stores</th>
+                        <th>Joined On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="cs-text-md cs-font-500 client-item">
+                        <td>1</td>
+                        <td>Alex Fashions</td>
+                        <td>France</td>
+                        <td>192047239</td>
+                        <td>39N23J23MF</td>
+                        <td>Premium</td>
+                        <td>4</td>
+                        <td>12/03/2020</td>
+                    </tr>
+                    <tr class="cs-text-md cs-font-500 client-item">
+                        <td>2</td>
+                        <td>Alex Fashions</td>
+                        <td>France</td>
+                        <td>192047239</td>
+                        <td>39N23J23MF</td>
+                        <td>Premium</td>
+                        <td>4</td>
+                        <td>12/03/2020</td>
+                    </tr>
+                    <tr class="cs-text-md cs-font-500 client-item">
+                        <td>3</td>
+                        <td>Alex Fashions</td>
+                        <td>France</td>
+                        <td>192047239</td>
+                        <td>39N23J23MF</td>
+                        <td>Premium</td>
+                        <td>4</td>
+                        <td>12/03/2020</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>business Name</th>
+                        <th>country</th>
+                        <th>VAT Number</th>
+                        <th>Legal Entity Identifier</th>
+                        <th>Membership</th>
+                        <th>Stores</th>
+                        <th>Joined On</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <section id="client-products-section" class="content cs-grid br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <div class="cs-grid" style="margin: .15rem .5rem">
+                <h4 class="cs-text-normal cs-text-accent" style="margin: 0;">Products</h4>
+            </div>
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Supplier</th>
+                        <th>Category</th>
+                        <th>Sub Subcategory</th>
+                        <th>Views</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="cs-text-md cs-font-500 product-item">
+                        <td>1</td>
+                        <td>Air Jordans</td>
+                        <td>Al Shoes Store </td>
+                        <td>Fashion</td>
+                        <td>Shoes</td>
+                        <td>10</td>
+                    </tr>
+                    <tr class="cs-text-md cs-font-500 product-item">
+                        <td>2</td>
+                        <td>Air Jordans</td>
+                        <td>Al Shoes Store </td>
+                        <td>Fashion</td>
+                        <td>Shoes</td>
+                        <td>10</td>
+                    </tr>
+                    <tr class="cs-text-md cs-font-500 product-item">
+                        <td>3</td>
+                        <td>Air Jordans</td>
+                        <td>Al Shoes Store </td>
+                        <td>Fashion</td>
+                        <td>Shoes</td>
+                        <td>10</td>
+                    </tr>
+                    <tr class="cs-text-md cs-font-500 product-item">
+                        <td>4</td>
+                        <td>Air Jordans</td>
+                        <td>Al Shoes Store </td>
+                        <td>Fashion</td>
+                        <td>Shoes</td>
+                        <td>10</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Supplier</th>
+                        <th>Category</th>
+                        <th>Sub Subcategory</th>
+                        <th>Views</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+
+        <!-- modals -->
+        <div id="client-modal" class="modal cs-hidden elevated outlined cs-align-start" style="align-content: flex-start;--gap: .5rem;">
+            <div class="modal-header cs-grid cs-align-start" style="--gap: 1rem;">
+                <div class="cs-flex cs-justify-between cs-align-center">
+                    <h3 style="margin: 0;" class="cs-text-body cs-text-secondary cs-font-600">
+                        Client Detials
+                    </h3>
+                    <button class="btn cs-bg-transparent" id="client-modal-deactivator">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+            </div>
+            <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="modal-body cs-grid cs-justify-center" style="--gap: 1rem;">
+                <div class="cs-grid cs-justify-between" style="grid-template-columns: 1fr 0fr 1fr;--gap: 1rem;">
+                    <div class="cs-grid cs-content-start"  style="--gap: .5rem;">
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Name:</h4>
+                            <p class="cs-text-normal cs-text-secondary">Alexandar Mackey</p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-text-secondary cs-font-500" style="color: var(--text-color);margin: 0;">Business:</h4>
+                            <p class="cs-text-normal cs-text-secondary">Alexandar Mackey Fashions</p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Country:</h4>
+                            <p class="cs-text-normal cs-text-secondary">France</p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">VAT Number:</h4>
+                            <p class="cs-text-normal cs-text-secondary">320283023290</p>
+                        </div>
+                    </div>
+                    <hr style="border: 1px solid hsla(213, 28%, 80%, 30%);">
+                    <div class="cs-grid cs-content-start" style="--gap: .5rem;">
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Legal Entity Identifier:</h4>
+                            <p class="cs-text-normal cs-text-secondary">238VWEB230932NO</p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Membership:</h4>
+                            <p class="cs-text-normal cs-text-secondary">Premium</p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Stores:</h4>
+                            <div class="cs-flex" style="--gap: .5rem;padding: .25rem .75rem;flex-wrap: wrap;">
+                                <a class="cs-bg-hover-color br-md cs-text-md" style="padding: .25rem .75rem;">Shoes</a>
+                                <a class="cs-bg-hover-color br-md cs-text-md" style="padding: .25rem .75rem;">Home</a>
+                            </div>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Showrooms:</h4>
+                            <div class="cs-flex" style="--gap: .5rem;padding: .25rem .75rem;flex-wrap: wrap;">
+                                <a class="cs-bg-hover-color br-md cs-text-md" style="padding: .25rem .75rem;">Shoes</a>
+                                <a class="cs-bg-hover-color br-md cs-text-md" style="padding: .25rem .75rem;">Home</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                <div class="modal-cta cs-flex" style="--gap: 1rem;">
+                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-white outlined cs-text-secondary cs-text-md br-sm">
+                        View Client Page
+                    </button>
+                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-primary cs-text-white cs-text-md br-sm">
+                        View Products
+                    </button>
+                    <a href="./create_mail.html" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
+                        Contact Client
+                    </a>
+                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" data-userId="1" id="suspend-btn">
+                        Suspend Account
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="product-modal" class="modal cs-hidden elevated outlined cs-align-start" style="align-content: flex-start;--gap: .5rem;">
+            <div class="modal-header cs-grid cs-align-start" style="--gap: 1rem;">
+                <div class="cs-flex cs-justify-between cs-align-center">
+                    <h3 style="margin: 0;" class="cs-text-body cs-text-secondary cs-font-600">
+                        Product Detials
+                    </h3>
+                    <button class="btn cs-bg-transparent" id="product-modal-deactivator">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+            </div>
+            <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="modal-body cs-grid cs-justify-center" style="--gap: 1rem;">
+                <div class="cs-grid cs-justify-between" style="grid-template-columns: 1fr 0fr 1fr;--gap: 1rem;">
+                    <div class="cs-grid cs-content-start" style="--gap: .5rem;">
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Name:</h4>
+                            <p class="cs-text-normal cs-text-secondary">Air Jordans</p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-text-secondary cs-font-500" style="color: var(--text-color);margin: 0;">Supplier:</h4>
+                            <p class="cs-text-normal cs-text-secondary">Alexandar Mackey Fashions</p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Country:</h4>
+                            <p class="cs-text-normal cs-text-secondary">Fashon</p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Sub Category:</h4>
+                            <p class="cs-text-normal cs-text-secondary">Shoes</p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Price:</h4>
+                            <p class="cs-text-normal cs-text-secondary">USD 150</p>
+                        </div>
+                        
+                        <div class="cs-grid" style="grid-template-columns: repeat(5, 1fr);--gap: .5rem;">
+                            <img loading="lazy" src="{% static 'assets/imgs/resources/download (5).jpeg" alt="" style="object-fit: cover;aspect-ratio: 1;">
+                            <img loading="lazy" src="{% static 'assets/imgs/resources/download (8).jpeg" alt="" style="object-fit: cover;aspect-ratio: 1;">
+                            <img loading="lazy" src="{% static 'assets/imgs/resources/download (16).jpeg" alt="" style="object-fit: cover;aspect-ratio: 1;">
+                        </div>
+                    </div>
+                    <hr style="border: 1px solid hsla(213, 28%, 80%, 30%);">
+                    <div class="cs-grid cs-content-start">
+                        <p class="cs-text-medium cs-font-500" style="color: var(--text-color);">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident ducimus in velit consequuntur error nostrum, ab dignissimos dolorum. Nesciunt fuga delectus dignissimos natus iusto qui vitae libero quam mollitia omnis!
+                        </p>
+                    </div>
+                </div>
+                <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                <div class="modal-cta cs-flex" style="--gap: 1rem;">
+                    <a href="" class="btn cs-grid cs-justify-center cs-align-center cs-bg-white outlined cs-text-secondary cs-text-md br-sm">
+                        View Product Page
+                    </a>
+                    <a href="./create_mail.html" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
+                        Contact Client
+                    </a>
+                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" data-productId="1" id="suspend-btn">
+                        Suspend Product
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="contract-modal" class="modal cs-hidden elevated outlined cs-align-start" style="align-content: flex-start;--gap: .5rem;">
+            <div class="modal-header cs-grid cs-align-start" style="--gap: 1rem;">
+                <div class="cs-flex cs-justify-between cs-align-center">
+                    <h3 style="margin: 0;" class="cs-text-body cs-text-secondary cs-font-600">
+                        Contract Detials
+                    </h3>
+                    <button class="btn cs-bg-transparent" id="contract-modal-deactivator">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+            </div>
+            <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="modal-body cs-grid cs-justify-center" style="--gap: 1rem;">
+                <div class="cs-grid cs-justify-between" style="grid-template-columns: 1fr 0fr 1fr;--gap: 1rem;">
+                    <div class="cs-grid cs-content-start" style="--gap: .5rem;">
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Supplier:</h4>
+                            <p class="cs-text-normal cs-text-secondary">Alexandar Mackey Fashions</p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-text-secondary cs-font-500" style="color: var(--text-color);margin: 0;">Buyer:</h4>
+                            <p class="cs-text-normal cs-text-secondary">Alexandar Mackey Fashions</p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Service:</h4>
+                            <p class="cs-text-normal cs-text-secondary">Representation</p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Price:</h4>
+                            <p class="cs-text-normal cs-text-secondary">USD 1000</p>
+                        </div>
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Complete:</h4>
+                            <p class="cs-text-normal cs-text-secondary">False</p>
+                        </div>
+                    </div>
+                    <hr style="border: 1px solid hsla(213, 28%, 80%, 30%);">
+                    <div class="cs-grid cs-content-start">
+                        <p class="cs-text-medium cs-font-500" style="color: var(--text-color);">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident ducimus in velit consequuntur error nostrum, ab dignissimos dolorum. Nesciunt fuga delectus dignissimos natus iusto qui vitae libero quam mollitia omnis!
+                        </p>
+                    </div>
+                </div>
+                <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                <div class="modal-cta cs-flex" style="--gap: 1rem;">
+                    <a href="./create_mail.html"  class="btn cs-grid cs-justify-center cs-align-center cs-bg-primary cs-text-white cs-text-md br-sm">
+                        Contact Buyer
+                    </a>
+                    <a href="./create_mail.html" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
+                        Contact Client
+                    </a>
+                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" data-contractId="1" id="suspend-btn">
+                        Suspend Contract
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="operation-confirm-modal" class="modal sm cs-hidden elevated outlined cs-align-start" style="align-content: flex-start;--gap: .5rem;">
+            <div class="modal-header cs-grid cs-align-start" style="--gap: 1rem;">
+                <div class="cs-flex cs-justify-between cs-align-center">
+                    <h3 style="margin: 0;" class="cs-text-body cs-text-secondary cs-font-600">
+                        Confirm Operation
+                    </h3>
+                </div>
+            </div>
+            <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
+            <p class="cs-text-normal cs-text-secondary" id="confirm-msg"></p>
+            <div class="modal-cta cs-flex" style="--gap: 1rem;margin-block-start: .5rem;">
+                <form action="" method="post">
+                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm">
+                        Continue
+                    </button>
+                </form>
+                <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm" id="cancel-operation">
+                    Cancel
+                </button>
+            </div>
+        </div>
+        <!-- modals -->
+
+    <!-- section area -->
+{% endblock %}

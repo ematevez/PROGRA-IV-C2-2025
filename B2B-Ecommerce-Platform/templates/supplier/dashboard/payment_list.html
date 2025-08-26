@@ -1,0 +1,72 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="cs-flex cs-justify-start outlined main-content-tabs" style="padding: 0.15rem;border-radius: .5rem;gap: .5rem;">
+            <a href="{% url 'supplier:dashboard-payments' %}" class="active cs-text-accent">{% trans "Membership Payments" %}</a>
+            <a href="{% url 'supplier:dashboard-advert-payments' %}">{% trans "Advertising Payments" %}</a>
+        </div>
+        <div class="content-area">
+            <div class="card data-table products-table">
+                <table class="display" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'No' %}</th>
+                            <th>{% trans 'Paid For' %}</th>
+                            <th>{% trans 'Plan' %}</th>
+                            <th>{% trans 'Pice' %}</th>
+                            <th>{% trans 'Frequency' %}</th>
+                            <th>{% trans 'Status' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for payment in memberships %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{% trans 'Membership' %}</td>
+                            <td>{{ payment.feature.name }}</td>
+                            <td>{{ payment.feature.price }}</td>
+                            <td>{{ payment.feature.get_duration }}</td>
+                            <td>{% if payment.status %} {% trans 'Active' %} {% else %}  {% trans 'Not Active' %} {% endif %}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>{% trans 'No' %}</th>
+                            <th>{% trans 'Paid For' %}</th>
+                            <th>{% trans 'Plan' %}</th>
+                            <th>{% trans 'Pice' %}</th>
+                            <th>{% trans 'Frequency' %}</th>
+                            <th>{% trans 'Status' %}</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
+    <script>
+        // Table
+        $(document).ready(function () {
+            
+        });
+
+        function navigateToContract() {
+            location.href = "_contract-detail.html";
+        }
+
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+    </script>
+
+{% endblock %}

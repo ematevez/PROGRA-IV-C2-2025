@@ -1,0 +1,293 @@
+CATEGORIES
+Agricultural Machinery
+    - Agricultural Machinery Parts
+    - Agricultural Sprayers
+    - Animal & Poultry Husbandry Equipment
+    - Aquaculture Machine Aerators
+    - Balers
+    - Biomass Briquette Machines
+    - Biomass Dryers
+    - Compost Making Machines
+    - Cultivators
+    - Egg Incubators
+    - Farm Irrigation Systems
+    - Farm Trailers
+    - Feed Processing Machines
+    - Fertilizer Spreaders
+    - Forestry Machinery
+    - Harvesters
+    - Irrigation & Hydroponics Eqiupment
+    - Milking Machines
+    - Oil Pressers
+    - Other Farm Machines
+    - Other Agricultural Machinery & Equipment
+    - Seed Processing Machine
+    - Seeders & Transplanters
+    - Shellers
+    - Silos
+    - Slaughtering Equipment
+    - Towable Backhoes
+    - Tractors
+
+Agro Supplies
+    - Agricultural Equipment
+    - Agricultural Waste
+    - Animal Feed
+    - Animal Products
+    - Fresh Fruit
+    - Fresh Vegetables
+    - Frozen Products
+
+Automotives
+    - Vehicles
+    - Car Lights
+    - Car Repair Tools
+    - ATV,RV,Boat & Other Vehicle
+    - Travel & Roadway Product
+    - Motorcycle Accessories & Parts
+    - Car Electronics
+    - Auto Replacement Parts
+    - Exterior Accessories
+    - Interior Accessories
+
+Baby Products and Accessories
+    - Baby Stroller & Accessories
+    - Toilet Training
+    - Car Seats & Accessories
+    - Pregnancy & Maternity
+    - Baby Souvenirs
+    - Baby Furniture
+    - Matching Family Outfits
+    - kids&Baby Accessories
+    - Children's Shoes
+    - Nappy Changing
+    - Baby Shoes
+    - Girls' Baby Clothing
+    - Boys' Baby Clothing
+    - Feeding
+    - Activity & Gear
+    - Safety Equipment
+    - Baby Care
+    - Boys' Clothing
+    - Girls' Clothing
+    - Baby Bedding
+
+Chemical Industry
+    - Adhesives & Sealants
+    - Admixture & Additives
+    - Agrochemicals
+    - Basic Organic Chemicals
+    - Biological Chemical Products
+    - Catalysts & Chemical Auxiliary Agents
+    - Chemical Reagents
+    - Chemical Waste
+    - Coating & Paint
+    - Custom Chemical Services
+    - Daily Chemicals
+
+Women's Fashion
+    - Rompers
+    - Bodysuits
+    - Women's Pants & Capris
+    - Dress
+    - Skirt
+    - Jeans
+    - Muslim Fashion
+    - Bottoms
+    - Plus size clothes
+    - Swimsuit
+    - Women Tops
+    - Blouses & Shirts
+    - Dresses
+    - Jumpsuits
+    - Sweaters
+    - Suits & Sets
+    - Jackets & Coats
+    - Tops & Tees
+    - Hoodies & Sweatshirts
+
+Mens's Fashion
+    - Men's Pants
+    - Men's Shirts
+    - Men's Sweaters
+    - Suits & Blazers
+    - Men's Jackets & Coats
+    - Casual Shorts
+    - Hoodies & Sweatshirts
+    - Other Mens' Clothes
+
+Cosmetic Products
+    - Sanitary Paper
+    - Oral Hygiene
+    - Skin Care
+    - Makeup
+    - Shaving & Hair Removal
+    - Health Care Products
+    - Bath & Shower
+    - Hair Care & Styling
+    - Fragrances & Deodorants
+    - Tattoo & Body Art
+    - Nails Art Tools
+
+Construction and Building Industry
+    - Balustrades & Handrails
+    - Bathroom & Kitchen
+    - Building & Industrial Glass
+    - Building Boards
+    - Ceilings
+    - Corner Guards
+    - Door, Window & Accessories
+    - Earthwork Products
+
+Data and Communication Technology
+    - Amplifiers and Comparators
+    - Connectors
+    - Development Systems
+    - Diodes, Transistors and Thyristors
+    - Displays, Signage and Optoelectronics
+    - EL Products
+    - Electronic Accessories & Supplies
+    - Electronic Data Systems
+
+Safety and Security Equipments
+    - Alarms
+    - Self Defense Supplies
+    - Surveillance Products
+    - Locks & Keys
+    - Safes
+    - IoT Solutions & Software
+    - Other Security & Protection Products
+
+Consumer Electronics
+    - Camera, Photo & Accessories
+    - Chargers, Batteries & Power Supplies
+    - Computer Hardware & Software
+    - Earphone & Headphone & Accessories
+    - Electronic Publications
+    - Home Audio, Video Accessories
+    - Mobile Phone & Accessories
+
+Electrical Equipment
+    - Electrical Instruments
+    - Electrical Supplies
+    - Generators
+    - Industrial Controls
+    - Low Voltage Products
+    - Medium & High Voltage Products
+    - Power Supplies
+
+Energy Sector
+    - Biodiesel and Biogas
+    - Charcoal and Coal
+    - Solar
+
+Environment and Recycling
+    - Environmental Products
+    - Recycling
+
+Food Industry
+    - Baby Food
+    - Baked Foods
+    - Beverages
+    - Canned Food
+    - Confectionery
+    - Dairy Products
+    - Egg Products
+    - others
+
+Jewelry
+    - Beads & Jewelry Making
+    - Wedding & Engagement Jewelry
+    - Earrings
+    - Necklaces & Pendants
+    - Bracelets & Bangles
+    - other
+
+Medical Products
+    - Animal & Veterinary
+    - Health Care Products
+    - Household Medical Devices
+    - Medical Consumables
+    - Professional Medical Devices
+    - Sex Products
+
+Plastic and Rubber Industry
+    - Plastic Products
+    - Plastic Raw Materials
+    - Rubber Products
+    - Others
+
+School and Office Stationery
+    - Art Supplies
+    - Books
+    - Calculators
+    - Calendars
+    - Others
+
+Sporting and Recreation Equipments
+    - Artificial Grass & Sports Flooring
+    - Boats & Ships
+    - Camping & Hiking
+    - Cycling
+    - Exercise Rehabilitation
+    - Fishing
+    - Fitness & Body Building
+    - Golf
+    - Indoor Sports
+    - Musical Instruments
+
+Textile Products
+    - Feather Textile
+    - Fabric
+    - Fiber
+    - Fur
+    - Leather
+
+Home Appliances *not posted*
+    - Air Conditioning Appliances
+    - Baby Appliances
+    - Cleaning Appliances
+    - Home Heaters
+    - Laundry Appliances
+    - Kitchen Appliances
+    - Personal Care & Beauty Appliances
+    - Refrigerators & Freezers
+    - Other Home Appliances
+
+
+Marine Vehicles and Equipment
+Kitchenware–Glassware
+Leather Products &amp; Shoes
+Machinery Industry
+Marble–Mining
+Forestry Products
+Furniture Giftware - Entertainment
+Heating - Cooling - Ventilation
+Horeca - Hospitality Industry
+Husbandry Industry
+Industrial Products
+Export - Import - Commercial Activities
+
+
+Pending Tasks in order of priority
+- Contract Payments (Both) To be discussed
+- dashboards final refractor (Mugisa) 4
+
+Ongoing Tasks
+- Supplier - Buyer contracts (Mugisa)
+- dashboard charts - requests analysis (90% requests charts not handled)
+
+Complete Tasks
+- Social Authentication (Mugisa)
+- Chatrooms (Mugisa)
+- About Us Page refracter (Azizz)
+- homepage advertising area (Azizz)
+- Showroom detail page refractor (Either)
+- Supplier - Buyer contracts (Mugisa)
+- Supplier Modal (Mugisa)
+- Footer Links (Azizz)
+- Account and Business details edits
+- Footer Links Pages
+- Support Pages (Guide Templates)
+- contact supplier
+- Membership Payments refractor (Both) To be discussed

@@ -1,0 +1,7 @@
+
+#GET all notifications
+# GET http://localhost:8000/en/api/notifications/
+
+
+#GET for specific business
+# GET http://localhost:8000/en/api/notifications/business/?page=2

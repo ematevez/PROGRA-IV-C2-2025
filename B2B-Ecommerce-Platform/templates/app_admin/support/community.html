@@ -1,0 +1,57 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load format_date %}
+{% block content %}
+    <!-- section area -->
+        <!-- section selectors -->
+        <nav class="section-nav-area br-sm cs-bg-white outlined">
+            <ul class="cs-grid section-nav list-none list-outside" style="--gap: .25rem;">
+                <div class="cs-flex">
+                    <li class="cs-text-md cs-font-500">
+                        <a href="{% url 'app_admin:discussions' %}">Chatrooms</a>
+                    </li>
+                    <li class="cs-text-md cs-font-500 active">
+                        <a class="active" href="{% url 'app_admin:community' %}">Community</a>
+                    </li>
+                    <!-- <li class="cs-text-md cs-font-500">Chatrooms</li> -->
+                </div>
+            </ul>
+        </nav>
+        <!-- section selectors -->
+
+        <section class="content cs-grid br-sm" style="--gap: 1rem;">
+            <div class="inbox-area cs-grid" style="--gap: 1rem">
+                <div class="inbox outlined br-sm cs-align-start cs-content-start cs-grid" style="--gap:.5rem;padding: 1rem 1rem;">
+                    <div class="cs-flex cs-align-baseline cs-justify-between">
+                        <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">Discussions</h4>
+                        <span class="cs-text-md cs-text-accent" >{{discussions|length}} Discussions</span>
+                    </div>
+                    <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                    <ul class="list cs-grid cs-content-start" style="--gap: .25rem">
+                        {% for discussion in discussions %}
+                            {% if discussion.is_verified %}
+                            <li class="list-body cs-grid cs-justify-between cs-align-center">
+                            {% else %}
+                            <li class="list-body alert cs-grid cs-justify-between cs-align-center">
+                            {% endif %}
+                                <a href="{% url 'app_admin:community-chat' discussion.slug %}" class="cs-grid" style="--gap:.25rem;">
+                                    <p class="cs-flex cs-align-baseline cs-justify-between">
+                                        <span class="cs-grid cs-text-secondary cs-text-md">{{discussion.subject}}</span>
+                                    </p>
+                                    <p class="cs-flex cs-align-baseline cs-justify-start" style="--gap: .5rem;">                    
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">{{discussion.created_on|format_date}}</span>
+                                    </p>
+                                </a>
+                                <form action="{% url 'app_admin:community-chat-delete' discussion.slug %}" method="POST">
+                                    {% csrf_token %}
+                                    <input class="btn cs-text-white cs-bg-danger" style="padding: .25rem .5rem; font-size: .8rem;border: none" type="submit" value="Delete">
+                                </form>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+    <!-- section area -->
+{% endblock %}

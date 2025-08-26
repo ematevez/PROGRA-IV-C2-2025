@@ -1,0 +1,100 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="content-area outlined" style="padding-block-start: 1.2rem; padding: .6rem .4rem;block-size: 100vh">
+            <div class="content-area-top flex" style="justify-content: space-between;padding-block-start: .4rem;">
+                <h3 style="font-weight:600;">{% trans 'My Whishlist' %}</h3>
+                <div class="sort-by flex">
+                    <h4 style="margin-inline-end: .6rem;">Sort by: </h4>
+                    <select name="sort-by" style="padding: .4rem .6rem;background-color: transparent;border-radius: 3px;">
+                        <option value="">Category</option>
+                        <option value="">Date</option>
+                        <option value="">Others</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card data-table wishlist-table" style="border-block-end: 0;">
+                <table class="display" style="width:100%;">
+                    <tbody>
+                        {% for object in object_list %}
+                            <tr>
+                                <td>
+                                    <div class="item-link">
+                                        <h4>{{ object.product.name }}</h4>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-link">
+                                        <h4>{{ object.product.supplier }}</h4>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-link">
+                                        <a href="{% url 'supplier:product-detail' object.product.slug %}">
+                                            <button class="item-link-btn" style="display: flex;">{% trans "View Product" %} <i class="ti-arrow-top-right"></i></button>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-link">
+                                        <a href="{% url 'supplier:product-detail' object.product.slug %}">
+                                            <button class="item-link-btn"><i class="ti-shopping-cart-full"></i>{% trans "Add To Cart" %}</button>
+                                        </a>
+                                    </div>
+                                </td>
+                                <!-- <td>
+                                    <div class="item-link">
+                                        <button class="item-link-btn"><i class="ti-sharethis"></i> Share</button>
+                                    </div>
+                                </td> -->
+                                <td>
+                                    <div class="item-link">
+                                        <form action="{% url 'buyer:wishlist-delete-product' object.product.slug %}" method="POST">
+                                            {% csrf_token %}
+                                            <button class="item-link-btn"><i class="ti-shopping-cart-full"></i>{% trans "Remove" %}</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                    <div class="cs-grid cs-align-center">
+                        <p class="cs-text-md" style="color: var(--text-color);">{% trans 'Showing Page' %} <span id="current-page-0"></span> {% trans 'of' %} <span id="max-page"></span>. (<span id="table-item-count"></span> {% trans 'Entries' %})</p>
+                    </div>
+                    <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                        <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Previous' %}</button>
+                        <span id="current-page" class="cs-text-md"></span>
+                        <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Next' %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+    <!-- <script src="{% static 'js/modal.js' %}"></script> -->
+    <script>
+        // Table
+        $(document).ready(function () {
+            $('#table-1').DataTable();
+        });
+
+        function navigateToContract() {
+            location.href = "_contract-detail.html";
+        }
+
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+    </script>
+
+{% endblock %}

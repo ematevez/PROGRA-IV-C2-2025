@@ -1,0 +1,70 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="view-sub-tabs">
+            <a href="{% url 'supplier:dashboard-products' %}">{% trans "Product List" %}</a>
+            <a href="{% url 'supplier:dashboard-productscreate' %}">{% trans "Create Product" %}</a>
+            <a class="active" href="">{% trans "Bulk Upload" %}</a>
+        </div>
+        
+        <div class="cs-grid content-area cs-align-start">
+            <div class="cs-grid br-sm" style="--gap:1rem;grid-template-columns: 2fr .5fr;; align-items: flex-start;">
+                <div class="form-part cs-grid cs-grid-flow-row  br-sm" style="--gap: .75rem">
+                    <form action="{% url 'supplier:dashboard-bulkupload' %}" method="POST" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 1rem;--gap:.5rem;">
+                        <h2 id="form-part-title" style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                            {% trans 'Select Excel to Perform Bulk Upload' %}
+                        </h2>
+                        <a href="{% static 'assets/files/bulk_product_excel.xlsx' %}" download style="color: hsl(43, 94%, 50%)"><b>{% trans "Download Sample Excel" %}</b></a>
+                        {% if messages %}
+                            {% for message in messages %}
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                        <p>{{ message }}</p>
+                                        <i style="align-self: center;" class="fa fa-close"></i>
+                                    </div>
+                                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                        <p>{{ message }}</p>
+                                        <i style="align-self: center;" class="fa fa-close"></i>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        {% csrf_token %}
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="file" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Excel File' %} *</label>
+
+                            <div class="selected-excel-file" id="file" style="display: none;">
+                                <i class="fa fa-file" style="font-size: 2.5rem;"></i>
+                            </div>
+
+                            <input type="file" name="bulk_upload_file" id="bulk_upload_file" class="file-input" required>
+                            <label for="bulk_upload_file" class="drop-area" id="bulk_upload_file_area">
+                              <span>{% trans "Drag and drop Excel File here" %}</span>
+                              <span class="browse-link">{% trans "or browse" %}</span>
+                            </label>
+                        </div>
+                        <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-end;">
+                            <input class="btn cs-text-white" type="submit" name="contract-start-date" id="contract-start-date"
+                            value="{% trans 'Create' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                        </div>
+                    </form>
+
+                </div>
+                <div class="description cs-grid br-sm outlined cs-content-start" style="padding: 1rem;">
+                    <h3 class="cs-font-bold cs-text-secondary cs-text-body">{% trans 'Guidelines' %}</h3>
+                    <ul class="cs-font-normal cs-text-normal cs-grid" style="--gap: .5rem;list-style-type:lower-alpha;list-style-position: inside;">
+                        <li>{% trans 'Provide a name that is easily understood.' %}</li>
+                        <li>{% trans 'Select a store (from the dropdown list) from those you created.' %}</li>
+                        <li>{% trans 'Select a product sub category from the dropdown list. This enables proper grouping of products.' %}</li>
+                        <li>{% trans 'Provide a currency that suites you best e.g EUR, USD.' %}</li>
+                        <li>{% trans 'Product tags help buyers to find your service easily.' %}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

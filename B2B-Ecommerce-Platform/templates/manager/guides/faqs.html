@@ -1,0 +1,13 @@
+{% load static %}
+{% load i18n %}
+
+<ul class="grid gap-2 content-start p-4">
+    <li class="font-bold">{% trans 'FAQs' %}</li>
+    <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-stores' %}">{% trans 'What is a store?' %}</a></li>
+    <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-showrooms' %}">{% trans 'What is a showroom?' %}</a></li>
+    <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-services' %}">{% trans 'What is a Supplier service?' %}</a></li>
+    <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-memberships' %}">{% trans 'What are memberships?' %}</a></li>
+    <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-products' %}">{% trans 'How to create a product?' %}</a></li>
+    <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-memberships' %}">{% trans 'Payment Methods' %}</a></li>
+    <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-accounts' %}">{% trans 'Accounts Creation' %}</a></li>
+</ul>

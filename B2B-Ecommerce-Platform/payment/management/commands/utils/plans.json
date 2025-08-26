@@ -1,0 +1,152 @@
+[
+  {
+    "id": "one-virtual-showroom-monthly-virtual-showrooms-dev-03",
+    "name": "One Virtual Showroom Monthly",
+    "description": "One Virtual Showroom Monthly subscription",
+    "interval_unit" : "MONTH",
+    "interval_count" : "1",
+    "currency": "USD",
+    "cost": "60",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "one-virtual-showroom-6-month-virtual-showrooms-dev-03",
+    "name": "One Virtual Showroom 6 Month",
+    "description": "One Virtual Showroom 6 Month subscription",
+    "interval_unit" : "MONTH",
+    "interval_count" : "6",
+    "currency": "USD",
+    "cost": "300",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "one-virtual-showroom-annual-virtual-showrooms-dev-03",
+    "name": "One Virtual Showroom Annual",
+    "description": "One Virtual Showroom Annual subscription",
+    "interval_unit" : "YEAR",
+    "interval_count" : "12",
+    "currency": "USD",
+    "cost": "600",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "multiple-virtual-showroom-monthly-virtual-showrooms-dev-03",
+    "name": "Multiple Virtual Showrooms Monthly",
+    "description": "Multiple Virtual Showrooms Monthly subscription",
+    "interval_unit" : "MONTH",
+    "interval_count" : "1",
+    "currency": "USD",
+    "cost": "100",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "multiple-virtual-showroom-6-month-virtual-showrooms-dev-03",
+    "name": "Multiple Virtual Showrooms 6 Month",
+    "description": "Multiple Virtual Showrooms 6 Month subscription",
+    "interval_unit" : "MONTH",
+    "interval_count" : "6",
+    "currency": "USD",
+    "cost": "400",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "multiple-virtual-showroom-annual-virtual-showrooms-dev-03",
+    "name": "Multiple Virtual Showrooms Annual",
+    "description": "Multiple Virtual Showrooms Annual subscription",
+    "interval_unit" : "YEAR",
+    "interval_count" : "12",
+    "currency": "USD",
+    "cost": "800",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "one-virtual-showroom-monthly-digital-marketing-dev-03",
+    "name": "One Virtual Showroom Monthly",
+    "description": "One Virtual Showroom Monthly subscription",
+    "interval_unit" : "MONTH",
+    "interval_count" : "1",
+    "currency": "USD",
+    "cost": "50",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "one-virtual-showroom-6-month-digital-marketing-dev-03",
+    "name": "One Virtual Showroom 6 Month",
+    "description": "One Virtual Showroom 6 Month subscription",
+    "interval_unit" : "MONTH",
+    "interval_count" : "6",
+    "currency": "USD",
+    "cost": "250",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "one-virtual-showroom-annual-digital-marketing-dev-03",
+    "name": "One Virtual Showroom Annual",
+    "description": "One Virtual Showroom Annual subscription",
+    "interval_unit" : "YEAR",
+    "interval_count" : "12",
+    "currency": "USD",
+    "cost": "500",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "multiple-virtual-showroom-monthly-digital-marketing-dev-03",
+    "name": "Multiple Virtual Showrooms Monthly",
+    "description": "Multiple Virtual Showrooms Monthly subscription",
+    "interval_unit" : "MONTH",
+    "interval_count" : "1",
+    "currency": "USD",
+    "cost": "100",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "multiple-virtual-showroom-6-month-digital-marketing-dev-03",
+    "name": "Multiple Virtual Showrooms 6 Month",
+    "description": "Multiple Virtual Showrooms 6 Month subscription",
+    "interval_unit" : "MONTH",
+    "interval_count" : "6",
+    "currency": "USD",
+    "cost": "500",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "multiple-virtual-showroom-annual-digital-marketing-dev-03",
+    "name": "Multiple Virtual Showrooms Annual",
+    "description": "Multiple Virtual Showrooms Annual subscription",
+    "interval_unit" : "YEAR",
+    "interval_count" : "12",
+    "currency": "USD",
+    "cost": "1000",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "local-marketing-monthly-dev-03",
+    "name": "Local Marketing Monthly",
+    "description": "Local Marketing Monthly subscription",
+    "interval_unit" : "MONTH",
+    "interval_count" : "1",
+    "currency": "USD",
+    "cost": "500",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "local-marketing-6-month-dev-03",
+    "name": "Local Marketing 6 Month",
+    "description": "Local Marketing 6 Month subscription",
+    "interval_unit" : "MONTH",
+    "interval_count" : "6",
+    "currency": "USD",
+    "cost": "2500",
+    "status" : "ACTIVE"
+  },
+  {
+    "id": "local-marketing-annual-dev-03",
+    "name": "Local Marketing Annual",
+    "description": "Local Marketing Annual subscription",
+    "interval_unit" : "YEAR",
+    "interval_count" : "12",
+    "currency": "USD",
+    "cost": "5000",
+    "status" : "ACTIVE"
+  }
+]

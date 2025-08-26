@@ -1,0 +1,33 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <!-- <main class="grid gap-8" style="min-block-size:70vh;background-color: white;"> -->
+      
+        <section style="background-color: white;" class="main w-12/12 py-6">
+            <div class="grid w-full mx-auto cf-1 gap-6">
+                <div class="section-heading">
+                    <h2 class="sec-title text-2xl font-bold">Product Categories</h2>
+                </div>
+                <div class="section-body grid gap-2 md:gap-4 md:grid-cols-6" data-context-name="{{context_name}}">
+                    {% for category_group in object_list %}
+                        <div class="grid gap-2 align-start p-2 px-4 border border-solid border-slate-200 rounded" style="align-items: flex-start;align-content: flex-start;" data-category-index="{{ forloop.counter }}">
+                            <a href='{% url "supplier:category-detail" category_group.category.slug %}' class="text-base font-semibold">{{ category_group.category.name }}</a>
+                            <ul class="grid gap-1 list-inside">
+
+                                {% for sub_category in category_group.sub_categories %}
+                                    <li>
+                                        <a href='{% url "supplier:subcategory-detail" category_group.category.slug sub_category.slug %}' class="text-sm text-slate-700" data-subcategory-index="{{ forloop.counter }}">{{sub_category.name}}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {%endfor %}
+                </div>
+            </div>
+        </section>
+
+    <!-- </main> -->
+
+{% endblock %}

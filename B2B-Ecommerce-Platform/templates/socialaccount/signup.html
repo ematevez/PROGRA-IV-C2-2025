@@ -1,0 +1,40 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load socialaccount %}
+{% load i18n %}
+
+
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+  <style>
+    form p {
+      display: grid !important;
+      gap: .5rem;
+    }
+    form p label {
+      margin: 0 .25rem;
+      font-weight: 500;
+    }
+  </style>
+  <div class="container mx-auto mt-20 grid gap-4 border border-slate-400 border-solid w-11/12 md:w-6/12 py-5 px-6 my-8 rounded">
+    <h1 class="text-lighterBackgroundColor text-2xl font-bold">{% trans "Sign Up" %}</h1>
+
+    <p class="text-lighterBackgroundColor text-base">{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
+    {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
+
+    <form class="signup grid gap-3" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+
+
+      {% csrf_token %}
+      {{ form.as_p }}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <input class="bg-backgroundColor hover:bg-backgroundColorHover text-white" style="width: 100%;" type="submit" value='{% trans "Sign Up" %}'>
+    </form>
+  </div>
+
+{% endblock %}

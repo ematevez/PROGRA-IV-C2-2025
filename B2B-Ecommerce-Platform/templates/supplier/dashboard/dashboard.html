@@ -1,0 +1,255 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<script src="{% static 'fullcalendar-6.1.8/dist/index.global.min.js' %}"></script>
+<script src="{% static 'js/fullcalendar-6-custom/fullcalendar.js' %}"></script>
+
+<div class="main-content split cs-split" style="overflow-y: scroll;">
+    <div class="cs-content-area">
+        <div class="upper-content-area cs-top-cards cs-no-box-shadow" data-context="{{statistics.context_name}}">
+            {% for statistic in statistics.results %}
+                <div class="top-card flex">
+                    <div class="cs-card-content card-content-left">
+                        <span><i class="cs-ti ti-filter"></i></span>
+                    </div>
+                    <div class="card-content card-content-right">
+                        <h4>{{statistic.name}}</h4>
+                        <h6 id="stores">{{statistic.count}}</h6>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="middle-content-area bordered">
+            <h3 class="title accented">Important Today</h3>
+            <h4 class="sub-title">Activities you need to focus on to maintain buyer satisfaction</h4>
+            <div class="cs-content flex">
+                {% for order in orders %}
+                <div class="card cs-no-box-shadow flex">
+                    <h4>{{order.status}}</h4>
+                    <div class="cs-content-inner flex">
+                        <span><i class="cs-ti ti-filter"></i></span>
+                        <span class="count">{{order.dcount}}</span>
+                    </div>
+                    <!-- <div class="card-content card-content-right">
+                        <h6 class="potential" id="stores">Potential business +204</h6>
+                    </div> -->
+                </div>
+                {% endfor %}
+                {% if not orders %}
+                <div class="card cs-no-box-shadow flex">
+                    <h4>{% trans "Order" %}</h4>
+                    <div class="cs-content-inner flex">
+                        <span><i class="cs-ti ti-filter"></i></span>
+                        <span class="count">{% trans "0" %}</span>
+                    </div>
+                    <!-- <div class="card-content card-content-right">
+                        <h6 class="potential" id="stores">Potential business +204</h6>
+                    </div> -->
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="lower-content-area md-hidden bordered">
+            <h3 class="title accented">Revenue & Trending products</h3>
+            <h4 class="sub-title">Lst update: 18 May 2023</h4>
+            <!-- <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;padding: .5rem;">
+                <div class="cs-grid cs-justify-between" style="--gap: 1rem;grid-template-columns: 1fr 1fr;">
+                    <div id="request-selectors" class="selectors cs-flex cs-align-start" style="--gap: .5rem;">
+                        <button style="padding: 0.25rem .75rem;" class="active btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="day">{% trans 'Day' %}</button>
+                        <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="week">{% trans 'Week' %}</button>
+                        <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="month">{% trans 'Month' %}</button>
+                        <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="year">{% trans 'Year' %}</button>
+                    </div>
+                </div>
+                <div style="display: grid;">
+                    <canvas id="requests"></canvas>
+                    <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: var(--secondary-color);justify-self: center;">{% trans 'Requests Statistics' %}</span>
+                </div>
+
+            </div> -->
+
+            <div class="data-visualization flex">
+                <!-- DATA VISUALIZATION -->
+                <div class="cs-stats stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;padding: .5rem;">
+                    <div style="display: grid;">
+                        <canvas id="revenue" style="max-block-size: 266px;"></canvas>
+                        <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: var(--secondary-color);justify-self: center;">{% trans 'Product Sub Categories Statistics' %}</span>
+                    </div>
+                </div>
+                <!-- DATA VISUALIZATION -->
+    
+                <!-- DATA VISUALIZATION -->
+                <div class="cs-stats stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;padding: .5rem;">
+                    <div style="display: grid;">
+                        <canvas id="users" style="max-block-size: 266px;"></canvas>
+                        <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: var(--secondary-color);justify-self: center;">{% trans 'Product Sub Categories Statistics' %}</span>
+                    </div>
+                </div>
+                <!-- DATA VISUALIZATION -->
+            </div>
+        </div>
+    </div>
+    <div class="side-content">
+        <div class="right cs-right bordered">
+            <div id='calendar' class="perview"></div>
+        </div>
+        <div class="right cs-right bordered">
+            <h4 class="accented">Trending products <i class="ti-arrow-right"></i> </h4>
+            <div class="cs-products">
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
+                    <img src="" alt="">
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span><i class="ti-star"></i> 4.5 | 12.3k</span>
+                        <span>Sold 72</span>
+                    </div>
+                </div>
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
+                    <img src="" alt="">
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span><i class="ti-star"></i> 4.5 | 12.3k</span>
+                        <span>Sold 72</span>
+                    </div>
+                </div>
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
+                    <img src="" alt="">
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span><i class="ti-star"></i> 4.5 | 12.3k</span>
+                        <span>Sold 72</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right cs-right bordered">
+            <h4 class="accented">Almost out of stock <i class="ti-arrow-right"></i> </h4>
+            <div class="cs-products flex">
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
+                    <img src="" alt="">
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span>Left 15</span>
+                    </div>
+                </div>
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
+                    <img src="" alt="">
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span>Sold 72</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="right-card card">
+            <h2>{% trans 'Latest Products' %}</h2>
+            <div class="body">
+                {% for product in latest_products.results %}
+                <div class="top-selling-product-details">
+                    <h4>{{ product.name }}</h4>
+                </div>
+                {% endfor %}
+                {% if not latest_products.results %}
+                    <h3 class="cs-font-500 cs-text-md">No Products Found.</h3>
+                {% endif %}
+            </div>
+        </div> -->
+    </div> 
+</div>
+
+<script src="{% static 'js/createChart.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+{{ category_group|json_script:"category_group" }}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const category_group = JSON.parse(document.getElementById('category_group').textContent);
+
+        let revenue = createChart('Revenue.',
+            'line',
+            ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
+            [80, 100, 46, 70],
+            'revenue'
+        );
+
+        let mChart2 = createChart('Users.',
+            'doughnut',
+            ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
+            [80, 100, 46, 70],
+            'users'
+        );
+
+        // USE THIS
+        // let mChart2 = createChart('Users',
+        //     'doughnut',
+        //     category_group.map(obj => obj.category__name),
+        //     category_group.map(obj => obj.dcount),
+        //     'users'
+        // );
+        // USE THIS
+
+
+        // const actionBtns = document.querySelectorAll('.selectors button');
+        // for (let i = 0; i < actionBtns.length; i++) {
+        //     actionBtns[i].addEventListener('click', e => {
+        //         actionBtns.forEach(btn => {
+        //             if (btn.classList.contains('active')) btn.classList.remove('active');
+        //         });
+
+        //         actionBtns[i].classList.add('active');
+
+        //         if (actionBtns[i].getAttribute('id') === "day") {
+
+        //             mChart1.destroy();
+        //             mChart1 = createChart('Revenue per day.',
+        //                 'line',
+        //                 ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
+        //                 [80, 100, 46, 70],
+        //                 'requests'
+        //             );
+
+        //         } else if (actionBtns[i].getAttribute('id') === "week") {
+
+        //             mChart1.destroy();
+        //             mChart1 = createChart('Revenue per week.',
+        //                 'line',
+        //                 ['week 1', 'week 1', 'week 1','week 1'],
+        //                 [80, 100, 46, 70],
+        //                 'requests'
+        //             );
+
+        //         } else if (actionBtns[i].getAttribute('id') === "month") {
+
+        //             mChart1.destroy();
+        //             mChart1 = createChart('Revenue per month.',
+        //                 'line',
+        //                 ['08/2000', '08/2000', '08/2000','08/2000'],
+        //                 [80, 100, 46, 70],
+        //                 'requests'
+        //             );
+
+        //         } else if (actionBtns[i].getAttribute('id') === "year") {
+
+        //             mChart1.destroy();
+        //             mChart1 = createChart('Revenue per year.',
+        //                 'line',
+        //                 ['2000', '2000', '2000','2000'],
+        //                 [40, 50, 46, 70],
+        //                 'requests'
+        //             );
+        //         } else {
+        //             // console.log("");
+        //         }
+        //     });
+        // }
+    });
+</script>
+
+
+
+{% endblock %}

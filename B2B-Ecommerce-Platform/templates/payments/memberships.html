@@ -1,0 +1,158 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<style>
+    .package {
+        border: 1px solid rgb(219, 219, 219);
+        cursor: pointer;
+    }
+    .active {
+        border: none;
+        outline: 2px solid hsl(38 95% 47% / 1);
+        transform: scale(1.1);
+    }
+</style>
+
+<section class="main w-12/12 py-6 pt-0" style="block-size: auto;">
+    <div class="grid justify-center content-center md:px-0 px-4 text-center gap-4 capitalize h-60 md:h-80" style="background-color: #0F172A;">
+        <h3 class="md:text-6xl text-3xl text-white font-bold">{% trans 'Simple, predictable pricing' %}</h3>
+        <p class="md:text-xl text-base text-slate-300 font-semibold">{% trans 'Reach more businesses with our different promotion deals' %}</p>
+    </div>
+    <div class="grid md:px-8 px-2 py-8 rounded auth-area w-11/12 md:w-10/12 gap-10 mx-auto my-10" style="border: 1px solid hsl(0, 0%, 95%);">
+        <div class="grid gap-6">
+            <div class="grid gap-4 px-4">
+                <h1 class="text-lg md:text-xl font-semibold text-lighterBackgroundColor">i. {% trans "Virtual Showrooms" %}</h1>
+                <div class="grid md:flex gap-8 justify-center md:justify-start py-4 md:px-6">
+                    <div class="package active grid gap-3 p-6 md:p-8 rounded-md">
+                        <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'One Virtual Showroom' %}</h2>
+                        <hr class="border-t border-solid border-slate-300">
+                        <div class="grid gap-2">
+                            <div class="flex gap-2">
+                                <input type="radio" name="one-showroom" id="one-virtual-showroom-monthly-virtual-showrooms" data-price="60">
+                                <label class="text-base font-semibold" for="one-virtual-showroom-monthly-virtual-showrooms">600 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="radio" name="one-showroom" id="one-virtual-showroom-6-monthly-virtual-showrooms" data-price="300" checked>
+                                <label class="text-base font-semibold" for="one-virtual-showroom-6-monthly-virtual-showrooms">300 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="radio" name="one-showroom" id="one-virtual-showroom-annual-virtual-showrooms" data-price="600">
+                                <label class="text-base font-semibold" for="one-virtual-showroom-annual-virtual-showrooms">600 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="package grid gap-3 p-6 md:p-8 rounded-md">
+                        <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'Multiple Virtual Showrooms' %}</h2>
+                        <hr class="border-t border-solid border-slate-300">
+                        <div class="grid gap-2">
+                            <div class="flex gap-2">
+                                <input type="radio" name="multiple-showroom" id="multiple-virtual-showroom-monthly-virtual-showrooms" data-price="100">
+                                <label class="text-base font-semibold" for="multiple-virtual-showroom-monthly-virtual-showrooms">100 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="radio" name="multiple-showroom" id="multiple-virtual-showroom-6-monthly-virtual-showrooms" data-price="400" checked>
+                                <label class="text-base font-semibold" for="multiple-virtual-showroom-6-monthly-virtual-showrooms">400 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="radio" name="multiple-showroom" id="multiple-virtual-showroom-annual-virtual-showrooms" data-price="800">
+                                <label class="text-base font-semibold" for="multiple-virtual-showroom-annual-virtual-showrooms">800 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid gap-4 px-4">
+                <h1 class="text-lg md:text-xl font-semibold text-lighterBackgroundColor">ii. {% trans "Digital Marketing" %}</h1>
+                <div class="grid md:flex gap-8 justify-center md:justify-start py-4 md:px-6">
+                    <div class="package grid gap-3 p-6 md:p-8 rounded-md">
+                        <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'One Virtual Showroom' %}</h2>
+                        <hr class="border-t border-solid border-slate-300">
+                        <div class="grid gap-2">
+                            <div class="flex gap-2">
+                                <input type="radio" name="digital-one-showroom" id="one-virtual-showroom-monthly-digital-marketing" data-price="50">
+                                <label class="text-base font-semibold" for="one-virtual-showroom-monthly-digital-marketing">50 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="radio" name="digital-one-showroom" id="one-virtual-showroom-6-monthly-digital-marketing" data-price="250" checked>
+                                <label class="text-base font-semibold" for="one-virtual-showroom-6-monthly-digital-marketing">250 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="radio" name="digital-one-showroom" id="one-virtual-showroom-annual-digital-marketing" data-price="500">
+                                <label class="text-base font-semibold" for="one-virtual-showroom-annual-digital-marketing">500 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="package grid gap-3 p-6 md:p-8 rounded-md">
+                        <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'Multiple Virtual Showrooms' %}</h2>
+                        <hr class="border-t border-solid border-slate-300">
+                        <div class="grid gap-2">
+                            <div class="flex gap-2">
+                                <input type="radio" name="digital-multiple-showroom" id="multiple-virtual-showroom-monthly-digital-marketing" data-price="100">
+                                <label class="text-base font-semibold" for="multiple-virtual-showroom-monthly-digital-marketing">100 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="radio" name="digital-multiple-showroom" id="multiple-virtual-showroom-6-monthly-digital-marketing" data-price="500" checked>
+                                <label class="text-base font-semibold" for="multiple-virtual-showroom-6-monthly-digital-marketing">500 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="radio" name="digital-multiple-showroom" id="multiple-virtual-showroom-annual-digital-marketing" data-price="1000">
+                                <label class="text-base font-semibold" for="multiple-virtual-showroom-annual-digital-marketing">1000 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid gap-4 px-4">
+                <h1 class="text-lg md:text-xl font-semibold text-lighterBackgroundColor">ii. {% trans "Local Marketing" %}</h1>
+                <div class="grid md:flex gap-8 justify-center md:justify-start py-4 md:px-6">
+                    <div class="package grid gap-3 p-6 md:p-8 rounded-md">
+                        <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'In Every Country' %}</h2>
+                        <hr class="border-t border-solid border-slate-300">
+                        <div class="grid gap-2">
+                            <div class="flex gap-2">
+                                <input type="radio" name="local-marketing" id="local-marketing-monthly" data-price="500">
+                                <label class="text-base font-semibold" for="local-marketing-monthly">500 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="radio" name="local-marketing" id="local-marketing-6-month" data-price="2500" checked>
+                                <label class="text-base font-semibold" for="local-marketing-6-month">2500 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="radio" name="local-marketing" id="local-marketing-annual" data-price="5000">
+                                <label class="text-base font-semibold" for="local-marketing-annual">5000 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid justify-center">
+            <a href="{% url 'payment:memberships' %}" class="grid grid-flow-col place-items-center gap-3 px-4 md:px-8 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                <span class="text-white"><i class="fa fa-credit-card"></i></span>
+                <span>{% trans 'Buy Plan' %}</span>
+            </a>
+        </div>
+    </div>
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const packages = document.querySelectorAll(".package");
+            packages.forEach(package => {
+                package.addEventListener('click', (e) => {
+                    packages.forEach(_package => {
+                        if (_package.classList.contains('active')) _package.classList.remove('active');
+                    })
+                    if (e.target.classList.contains('package')) {
+                        e.target.classList.add('active');
+                    } else {
+                        e.target.closest('.package').classList.add('active');
+                    }
+                    window.scrollTo(0, document.body.scrollHeight);
+                })
+            })
+        })
+    </script>
+</section>
+{% endblock %}

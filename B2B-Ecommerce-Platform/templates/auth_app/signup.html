@@ -1,0 +1,147 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load socialaccount %}
+{% block content %}
+
+    <section class="grid">
+        <div class="grid container px-8 py-8 rounded auth-area w-11/12 md:w-6/12 gap-4 my-10" style="border: 1px solid hsl(0, 0%, 85%);">
+            <div class="grid gap-1">
+                <h3 class="text-2xl font-medium text-lghterBackgroundColor" style="font-family: serif">{% trans 'Welcome To Foroden' %}</h3>
+                <p class="text-base text-slate-700">{% trans 'Join the biggest community of over 70,000 Business People.' %}</p>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                            <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                            <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="grid gap-3 justify-content">
+                <form action="{% url 'auth_app:signup' %}" method="POST" class="grid gap-4">
+                    {% csrf_token %}
+                    <input type="hidden" name="account_type" value="{{account_type}}">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="form-group grid gap-1">
+                            <label for="first_name" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'First Name' %}</label>
+                            <input class="py-4" style="width: 100%;" type="text" id="first_name" required autocomplete="given-name" name="first_name">
+                        </div>
+                        <div class="form-group grid gap-1">
+                            <label for="last_name" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Last Name' %}</label>
+                            <input class="py-4" style="width: 100%;" type="text" id="last_name" required autocomplete="family-name" name="last_name">
+                        </div>
+                    </div>
+                    <div class="form-group grid gap-1">
+                        <label for="username" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Username' %}</label>
+                        <input class="py-4" style="width: 100%;" type="text" id="username" required autocomplete="username" name="username">
+                    </div>
+                    <div class="form-group grid gap-1">
+                        <label for="email" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Email' %}</label>
+                        <input class="py-4" style="width: 100%;" type="email" id="email" required autocomplete="email" name="email">
+                    </div>
+                    <div class="form-group grid gap-1">
+                        <label for="password" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Password' %}</label>
+                        <input class="py-4" style="width: 100%;" type="password" id="password" required autocomplete="new-password" name="password">
+                        <div class="flex gap-2 my-2">
+                            <input class="border-none outline-none focus:outline-none focus:border-none hover:outline-none hover:border-none" type="checkbox" id="show-password">
+                            <label for="show-password">{% trans 'Show Password' %}</label>
+                        </div>
+                    </div>
+                    <div class="form-group grid gap-1">
+                        <label for="confirm-password" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Confirm Password' %}</label>
+                        <input class="py-4" style="width: 100%;" type="password" id="confirm-password" required name="confirm-password">
+                    </div>
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6LexwJkmAAAAAGjf5cAF4iW-Sqn-UGXXmODz0Fq0"></div>
+                    </div>
+                    <div class="form-group">
+                        <input class="bg-backgroundColor hover:bg-backgroundColorHover text-white" style="width: 100%;" type="submit" value="{% trans 'Sign Up' %}">
+                    </div>
+                </form>
+                <p class="text-center" style="color: rgb(2, 74, 80)">{% trans 'Already Have An Account?' %} 
+                    <a href="{% url 'auth_app:login' %}">{% trans 'Sign into account' %}</a></p>
+            </div>
+            <div class="separator">
+                <span>{% trans "Or" %}</span>
+            </div>
+            <div class="sign-in-with grid grid-cols-1 md:grid-cols-2 gap-2">
+                <a href="{% provider_login_url 'google' %}{% if userType %}?request_user=extension{% endif %}" class="flex justify-center gap-5 md:gap-10 items-center bg-white shadow-md font-semibold" style="border: thin solid rgba(136, 136, 136, 0.192);color: #444;white-space: nowrap;">
+                    <i class="fa fa-google"></i>
+                    <span>{% trans 'Continue With Google' %}</span>
+                </a>
+                <a href='{% provider_login_url "facebook" method="oauth2" %}' class="flex justify-center gap-5 md:gap-10 px-6 py-3 items-center rounded bg-white shadow-md font-semibold text-white" style="white-space: nowrap;background-color: #3A63BE;">
+                    <i class="text-xl fa fa-facebook"></i>
+                    <span class="text-base">{% trans "Continue With Facebook" %}</span>
+                </a>
+                <a href='{% provider_login_url "facebook" method="oauth2" %}' class="flex justify-center gap-5 md:gap-10 px-6 py-3 items-center rounded bg-white shadow-md font-semibold text-white" style="white-space: nowrap;border: thin solid rgba(136, 136, 136, 0.192);color: #444;">
+                    <i class="text-xl fa fa-facebook"></i>
+                    <span class="text-base">{% trans "Continue With LinkedIn"  %}</span>
+                </a>
+            </div>
+
+            
+
+        </div>
+    </section>
+
+
+    <script>
+        const confirmPassword = document.querySelector('#confirm-password');
+        const password = document.querySelector('#password');
+        const form = document.querySelector('form');
+        
+        if (confirmPassword) {
+            confirmPassword.addEventListener('keyup', () => {
+                if (confirmPassword.value !== password.value) {
+                    confirmPassword.classList.add('error');
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        return false;
+                    })
+                }
+                else {
+                    confirmPassword.classList.remove('error')
+                }
+            })
+        }
+
+        document.querySelector("#show-password").addEventListener('change', () => {
+            console.log(password.value)
+            if (password.value) {
+                if(password.type != 'text') {
+                    password.type = 'text';
+                } else {
+                    password.type = 'password';
+                }
+            }
+        })
+
+        // Validate user password
+        function validatePassword(password) {
+            if (password.length < 8) return "Password must be at least 8 characters long.";
+
+            if (!/[A-Z]/.test(password)) return "Password must contain at least one uppercase letter.";
+
+            if (!/[a-z]/.test(password)) return "Password must contain at least one lowercase letter.";
+
+            if (!/[0-9]/.test(password)) return "Password must contain at least one digit.";
+
+            if (!/[^A-Za-z0-9]/.test(password)) return "Password must contain at least one special character such as @, ?, !, #, etc.";
+
+            return "Password is strong.";
+        }
+
+        // TODO: Implementation
+    
+
+    </script>
+
+{% endblock %}

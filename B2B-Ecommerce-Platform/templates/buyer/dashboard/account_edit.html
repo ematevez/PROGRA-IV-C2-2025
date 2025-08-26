@@ -1,0 +1,68 @@
+{% extends './utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="content-area">
+            <div class="cs-grid outlined" style="grid-template-columns: 1fr;padding: .5rem 1.5rem;--gap:2rem;">
+                <!-- <div class="img-wrapper br-full cs-overflow-hidden">
+                    <img src="{% static 'assets/imgs/resources/profiledefault.png" style="object-fit: cover;" alt="{{request.user.username}}">
+                </div> -->
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <form action="{% url 'buyer:dashboard-editaccountsprofile' %}" method="POST" class="cs-grid cs-content-start" style="--gap: 1rem;">
+                    <h2>{% trans 'Account Details' %}</h2>
+                    {% csrf_token %}
+                    <div class="group cs-grid" style="--gap: .75rem;">
+                        <label class="">{% trans 'First Name' %} *:</label>
+                        <input type="text" name="first_name" required class="outlined br-sm" style="padding: .5rem 1.5rem;" value="{{request.user.first_name}}"/>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .75rem;">
+                        <label class="">{% trans 'Last Name' %} *:</label>
+                        <input type="text" name="last_name" required class="outlined br-sm" style="padding: .5rem 1.5rem;" value="{{request.user.last_name}}"/>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .75rem;">
+                        <label class="">{% trans 'Username' %} *:</label>
+                        <input type="text" name="username" required class="outlined br-sm" style="padding: .5rem 1.5rem;" value="{{request.user.username}}"/>
+                    </div>
+                    <div class="group cs-grid" style="--gap: .75rem;">
+                        <label class="">{% trans 'Email' %} *:</label>
+                        <input type="text" name="email" required class="outlined br-sm" style="padding: .5rem 1.5rem;" value="{{request.user.email}}"/>
+                    </div>
+                    <div class="group cs-grid cs-justify-start" style="--gap: .5rem;grid-auto-flow: column;">
+                        <input class="btn cs-text-white" type="submit" value="{% trans 'Edit Account Details' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                        <a href="{% url 'buyer:profile' %}" style="padding: .7rem 1.5rem;font-size: 1rem;background-color: black;color:white;border-radius: 5px;">{% trans 'Cancel' %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/client/dashboard/sidebar.js' %}"></script>
+
+    <script>
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+    </script>
+
+{% endblock %}

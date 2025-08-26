@@ -1,0 +1,66 @@
+{% extends './utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <!-- se<ction area -->
+
+            <!-- when in display -> cs-grid -->
+            <!-- when not in display -> cs-hidden -->
+        
+        <section class="content br-sm outlined" style="--gap: 1rem;">
+            <form action="{% url 'app_admin:subcategory-create' %}" method="POST" id="category-form" class="cs-grid br-sm" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;" autocomplete="off">
+                <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                    Fill in form to create product sub categories
+                </h2>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% csrf_token %}
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="category-name" class="cs-text-normal" style="color: var(--text-color);">Select Category</label>
+                    <input type="text" name="category-name" id="category-name" required  list="categories">
+                    <datalist id="categories">
+                        {% for category in categories %}
+                            <option value="{{category}}" default>
+                        {% endfor %}
+                    </datalist>
+                </div>
+                <div class="form-group cs-grid cs-align-center" style="--gap: .5rem;">
+                    <label for="showroom-name" class="cs-text-normal" style="color: var(--text-color);">Sub Categories</label>
+                    <div class="cs-grid" id="subCategory-group" style="--gap: 1rem;">
+                        <div class="subcategory-inputs cs-grid cs-align-center" style="grid-template-columns: 1fr 1fr .1fr;" data-subcategorycount="1">
+                            <input type="text" name="subcategory-1" id="subcategory-1" placeholder="Sub Category Name" required>
+                            <input type="file" name="sub-category-image-1" id="sub-category-image-1" required>
+                            <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-hover-color cs-text-secondary br-full" id="add-input" style="padding: 1rem .5rem;" onclick="(function(){
+                            })();return false;">
+                                <i class="fa fa-plus"></i>
+                            </button>
+
+                            <button class="btn cs-justify-center cs-align-center cs-bg-hover-color cs-text-secondary br-full cs-hidden delete-input" data-subcategoryDeleteCount="1" style="padding: 1rem .5rem;" onclick="(function(){
+                            })();return false;">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <input class="cs-text-white cs-bg-secondary" type="submit" name="contract-start-date" id="contract-start-date"
+                    value="{% trans 'Create' %}">
+                </div>
+            </form>
+        </section>
+
+    <!-- section area> -->
+{% endblock %}

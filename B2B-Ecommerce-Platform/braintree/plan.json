@@ -1,0 +1,122 @@
+[
+    {
+        "id": "one-virtual-showroom-monthly-virtual-showrooms-dev-3",
+        "name": "One Virtual Showroom Monthly",
+        "description": "One Virtual Showroom Monthly subscription",
+        "billing_frequency": "1",
+        "currency_iso_code": "USD",
+        "price": "60"
+    },
+    {
+        "id": "one-virtual-showroom-6-month-virtual-showrooms-dev-3",
+        "name": "One Virtual Showroom 6 Month",
+        "description": "One Virtual Showroom 6 Month subscription",
+        "billing_frequency": "6",
+        "currency_iso_code": "USD",
+        "price": "300"
+    },
+    {
+        "id": "one-virtual-showroom-annual-virtual-showrooms-dev-3",
+        "name": "One Virtual Showroom Annual",
+        "description": "One Virtual Showroom Annual subscription",
+        "billing_frequency": "12",
+        "currency_iso_code": "USD",
+        "price": "600"
+    },
+    {
+        "id": "multiple-virtual-showroom-monthly-virtual-showrooms-dev-3",
+        "name": "Multiple Virtual Showrooms Monthly",
+        "description": "Multiple Virtual Showrooms Monthly subscription",
+        "billing_frequency": "1",
+        "currency_iso_code": "USD",
+        "price": "100"
+    },
+    {
+        "id": "multiple-virtual-showroom-6-month-virtual-showrooms-dev-3",
+        "name": "Multiple Virtual Showrooms 6 Month",
+        "description": "Multiple Virtual Showrooms 6 Month subscription",
+        "billing_frequency": "6",
+        "currency_iso_code": "USD",
+        "price": "400"
+    },
+    {
+        "id": "multiple-virtual-showroom-annual-virtual-showrooms-dev-3",
+        "name": "Multiple Virtual Showrooms Annual",
+        "description": "Multiple Virtual Showrooms Annual subscription",
+        "billing_frequency": "12",
+        "currency_iso_code": "USD",
+        "price": "800"
+    },
+    {
+        "id": "one-virtual-showroom-monthly-digital-marketing-dev-3",
+        "name": "One Virtual Showroom Monthly",
+        "description": "One Virtual Showroom Monthly subscription",
+        "billing_frequency": "1",
+        "currency_iso_code": "USD",
+        "price": "50"
+    },
+    {
+        "id": "one-virtual-showroom-6-month-digital-marketing-dev-3",
+        "name": "One Virtual Showroom 6 Month",
+        "description": "One Virtual Showroom 6 Month subscription",
+        "billing_frequency": "6",
+        "currency_iso_code": "USD",
+        "price": "250"
+    },
+    {
+        "id": "one-virtual-showroom-annual-digital-marketing-dev-3",
+        "name": "One Virtual Showroom Annual",
+        "description": "One Virtual Showroom Annual subscription",
+        "billing_frequency": "12",
+        "currency_iso_code": "USD",
+        "price": "500"
+    },
+    {
+        "id": "multiple-virtual-showroom-monthly-digital-marketing-dev-3",
+        "name": "Multiple Virtual Showrooms Monthly",
+        "description": "Multiple Virtual Showrooms Monthly subscription",
+        "billing_frequency": "1",
+        "currency_iso_code": "USD",
+        "price": "100"
+    },
+    {
+        "id": "multiple-virtual-showroom-6-month-digital-marketing-dev-3",
+        "name": "Multiple Virtual Showrooms 6 Month",
+        "description": "Multiple Virtual Showrooms 6 Month subscription",
+        "billing_frequency": "6",
+        "currency_iso_code": "USD",
+        "price": "500"
+    },
+    {
+        "id": "multiple-virtual-showroom-annual-digital-marketing-dev-3",
+        "name": "Multiple Virtual Showrooms Annual",
+        "description": "Multiple Virtual Showrooms Annual subscription",
+        "billing_frequency": "12",
+        "currency_iso_code": "USD",
+        "price": "1000"
+    },
+    {
+        "id": "local-marketing-monthly-dev-3",
+        "name": "Local Marketing Monthly",
+        "description": "Local Marketing Monthly subscription",
+        "billing_frequency": "1",
+        "currency_iso_code": "USD",
+        "price": "500"
+    },
+    {
+        "id": "local-marketing-6-month-dev-3",
+        "name": "Local Marketing 6 Month",
+        "description": "Local Marketing 6 Month subscription",
+        "billing_frequency": "6",
+        "currency_iso_code": "USD",
+        "price": "2500"
+    },
+    {
+        "id": "local-marketing-annual-dev-3",
+        "name": "Local Marketing Annual",
+        "description": "Local Marketing Annual subscription",
+        "billing_frequency": "12",
+        "currency_iso_code": "USD",
+        "price": "5000"
+    }
+]

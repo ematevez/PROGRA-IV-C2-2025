@@ -1,0 +1,102 @@
+{% extends '../../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+        <section class="w-11/12 py-6 mx-auto grid grid-flow-dense md:flex md:gap-8" style="height: auto">
+
+            {% include './faqs.html' %}
+            {% get_current_language as LANGUAGE_CODE %}
+
+            <div class="section-body card py-6 px-2 md:px-6 grid gap-4 text-lighterBackgroundColor" style="box-shadow:unset;">
+                <div class="grid gap-2">
+                    <h1 class="font-bold text-lg md:text-2xl" style="text-align: justify;">{% trans "Foroden Account Creation" %}:</h1>
+                    <p class="" style="text-align: justify;">{% trans "Foroden offers 2 types of client accounts, that is:" %}</p>
+                    <div class="grid gap-2">
+                        <h3 class="font-semibold flex gap-2 text-slate-500 text-base md:text-lg">
+                            <span>{% trans '1' %}.</span>
+                            <span>{% trans 'Supplier Account' %}</span>
+                        </h3>
+                        <p class="font-normal text-slate-700 text-base md:text-lg">
+                            {% trans 'Foroden Suppliers are users who indent to promote their businesses and products. These have access to the following features:' %}
+                            <ul class="grid gap-1 font-normal mx-4 list-disc list-inside">
+                                <li>{% trans "Product Advertising" %}</li>
+                                <li>{% trans "Business Advertising" %}</li>
+                                <li>{% trans "Service Trading" %}</li>
+                                <li>{% trans "Contract Creation" %}</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="grid gap-2">
+                        <h3 class="font-semibold flex gap-2 text-slate-500 text-base md:text-lg">
+                            <span>{% trans '2' %}.</span>
+                            <span>{% trans 'Buyer Account' %}</span>
+                        </h3>
+                        <p class="font-normal text-slate-700 text-base md:text-lg">
+                            {% trans 'Foroden Buyers are users who seek different services or products from Foroden Suppliers: These have access to the following features:' %}
+                            <ul class="grid gap-1 font-normal mx-4 list-disc list-inside">
+                                <li>{% trans "Contract Creation" %}</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid gap-8">
+                    <div class="grid gap-2">
+                        <h2 class="font-bold text-lg md:text-xl" style="text-align: justify;">{% trans 'How to create a client account.' %}</h2>
+                    </div>
+                    <div class="grid gap-2 px-2 md:px-4">
+                        <h3 class="font-semibold flex gap-2 text-slate-500 text-base md:text-lg">
+                            <span>{% trans '1' %}.</span>
+                            <span>{% trans 'Choose your desire account creation method' %}</span>
+                        </h3>
+                        <p class="font-normal text-slate-600 text-base md:text-lg">
+                            {% trans 'Foroden offers both custom account creation and social account creation using Google and LinkedIn ' %}
+                        </p>
+                        <div class="guide-img">
+                            {% with "images/guides/"|add:request.LANGUAGE_CODE|add:"/auth_page.png" as url %}
+                                
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <div class="grid gap-2 px-2 md:px-4">
+                        <h3 class="font-semibold flex gap-2 text-slate-500 text-base md:text-lg">
+                            <span>{% trans 'a' %}.</span>
+                            <span>{% trans 'Using custom account creation' %}</span>
+                        </h3>
+                        <div class="guide-img">
+                            {% with "images/guides/"|add:request.LANGUAGE_CODE|add:"/custom_signup.png" as url %}
+                                
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <div class="grid gap-2 px-2 md:px-4">
+                        <h3 class="font-semibold flex gap-2 text-slate-500 text-base md:text-lg">
+                            <span>{% trans 'b' %}.</span>
+                            <span>{% trans 'Using social authentication' %}</span>
+                        </h3>
+                        <p class="font-normal text-slate-600 text-base md:text-lg">
+                            {% trans 'You are prompted to selected your desired account type.' %}
+                        </p>
+                        <div class="guide-img">
+                            <img loading="lazy" src="{% static 'images/guides/en/social_signup.png' %}" alt="access-dashboard">
+                        </div>
+                    </div>
+                    <div class="grid gap-2 px-2 md:px-4">
+                        <h3 class="font-semibold flex gap-2 text-slate-500 text-base md:text-lg">
+                            <span>{% trans '1' %}.</span>
+                            <span>{% trans 'Enter your business details' %}</span>
+                        </h3>
+                        <div class="guide-img">
+                            {% with "images/guides/"|add:request.LANGUAGE_CODE|add:"/business_infor.png" as url %}
+                                
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

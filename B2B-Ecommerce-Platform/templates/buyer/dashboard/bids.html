@@ -1,0 +1,63 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="main-content" style="overflow-y: scroll;">
+    <div class="cs-content-area cs-no-box-shadow outlined" style="block-size: 100vh;padding: .6rem .4rem;">
+        <div class="content-area-top flex" style="justify-content: space-between;padding-block-start: .4rem;">
+            <h3 style="font-weight:600;">{% trans 'Bids' %}</h3>
+            <h4>Mark all as read</h4>
+        </div>
+
+        <div class="notifications-section flex" style="background-color: rgb(226, 226, 224);">
+            <h4 class="section-togglers" data-section="sec_00" style="padding-block: 1.2rem;">All Bids</h4>
+        </div>
+
+        <div class="notification-section inview" id="sec_00">
+            <div class="notifications">
+                <div class="notification flex">
+                    <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar">
+                    <div class="notification-content">
+                        <h6 class="notification-title"><strong>Reizhen Wrist Watch</strong> bids are ready for comparison.</h6>
+                        <span class="notification-time">5 min ago</span>
+                        <div class="notification-actions cta">
+                            <a href="{% url 'buyer:bids-compare' %}">Compare Bids</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    
+    const section_togglers = document.querySelectorAll(".section-togglers")
+    section_togglers.forEach(
+        activator => activator.addEventListener("click", () => {
+            let sectionToShow = document.querySelector(`#${activator.dataset.section}`)
+
+            section_togglers.forEach(section_toggler => {
+                section_toggler.style.borderBlockEnd = "unset";
+                section_toggler.style.color = "#929293";
+            })
+            activator.style.color = "#363637";
+            activator.style.borderBlockEnd = "2px solid #363637";
+            
+            let openSections = document.querySelectorAll(".notification-section.inview");
+            openSections.forEach(section => section.classList.remove("inview"))
+
+            sectionToShow.classList.add("inview")
+        })
+    )
+})
+</script>
+
+
+
+
+{{ category_group|json_script:"category_group" }}
+
+{% endblock %}

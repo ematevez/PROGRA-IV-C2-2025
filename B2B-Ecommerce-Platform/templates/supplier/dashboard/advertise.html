@@ -1,0 +1,230 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<style>
+#ui-datepicker-div {
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.192);
+}
+.ui-datepicker-header {
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: repeat(3, 1fr);
+    margin-block-end: 1rem;
+}
+.ui-datepicker-prev {
+    grid-column: 1/2;
+    grid-row: 1/-1;
+    color: hsl(38, 95%, 47%);
+}
+.ui-datepicker-title {
+    grid-column: 2/3;
+    grid-row: 1/-1;
+    justify-self: center;
+}
+.ui-datepicker-next {
+    grid-column: 3/4;
+    grid-row: 1/-1;
+    justify-self: flex-end;
+    color: hsl(38, 95%, 47%);
+}
+</style>
+
+<div class="main-content">
+    <div class="cs-grid content-area w-desciption cs-align-start">
+        <form action="{% url 'supplier:dashboard-advertise' %}" method="POST" id="advert-form"
+            class="cs-grid br-sm outlined" style="padding: 1rem;--gap:1rem;">
+            <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                {% trans 'Fill in form to advertise product' %}
+            </h2>
+            <p class="text-base text-slate-600"><b>*</b> {% trans 'Represents required fields' %}.</p>
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600"
+                style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem"
+                onclick="(function(){event.target.style.display = 'none';return false;})()">
+                <p>{{ message }}</p>
+                <i style="align-self: center;"
+                    onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()"
+                    class="fa fa-close"></i>
+            </div>
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600"
+                style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem"
+                onclick="(function(){event.target.style.display = 'none';return false;})()">
+                <p>{{ message }}</p>
+                <i style="align-self: center;"
+                    onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()"
+                    class="fa fa-close"></i>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% csrf_token %}
+            <div class="form-group cs-grid" style="--gap: .5rem;">
+                <div class="cs-flex cs-justify-between" style="padding: 0.5rem 0;flex-wrap: wrap;">
+                    <label for="product" class="cs-text-normal"
+                        style="color: var(--text-color);">{% trans 'Select Product' %} *</label>
+                    <a class="cs-font-normal cs-text-md" href="{% url 'supplier:dashboard-productscreate' %}">{% trans "New Product?" %}<span class="cs-text-accent cs-font-bold">{% trans 'Create Product' %}</span></a>
+                </div>
+                <select name="product" id="product" class="cs-text-normal" required>
+                    <option></option>
+                    {% for product in products %}
+                    <option value="{{product.name}}">{{product.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group cs-grid" style="--gap: .5rem;">
+                <label for="advert_platform" class="cs-text-normal" style="color: var(--text-color);">
+                    {% trans 'Advert Location' %} *
+                </label>
+
+                <input type="hidden" id="advertising_location" name="advertising_location" required>
+                <div class="cs-price-listing cs-grid cs-text-normal cs-grid" style="--gap: .5rem">
+                    {% for location in advertising_locations %}
+                        {% if location.showroom %}
+                            <div class="cs-price-listing-item cs-grid cs-grid-flow-col" style="grid-template-columns: repeat(2, 1fr);" data-price="{{location.id}}">
+                                <span class="name">{{ location.showroom.name }}</span>
+                                <span class="price">$ {{ location.price }}</span>
+                            </div>
+                        {% else %}
+                            <div class="cs-price-listing-item cs-grid cs-grid-flow-col" style="grid-template-columns: repeat(2, 1fr);" data-price="{{location.id}}">
+                                <span class="name">{{ location.name }}</span>
+                                <span class="price">$ {{ location.price }}</span>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group cs-grid cs-grid-flow-row" style="--gap: .5rem;">
+                <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;border-radius: .25rem;"
+                    id="date_selection">
+                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                        <label for="start_date" class="cs-text-normal"
+                            style="color: var(--text-color);">{% trans 'Start Date' %} *</label>
+                        <input type="text" class="cs-text-normal" name="start_date" id="start_date" readonly required>
+                    </div>
+                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                        <label for="end_date" class="cs-text-normal"
+                            style="color: var(--text-color);">{% trans 'End Date' %} *</label>
+                        <input type="text" class="cs-text-normal" name="end_date" id="end_date" readonly required>
+                    </div>
+                </div>
+                <div class="cs-flex cs-justify-between" style="padding: 0.5rem 0;flex-wrap: wrap;">
+                    <p class="cs-font-normal cs-text-md">{% trans "Advertising Period:" %}</p>
+                        <span class="cs-text-accent cs-font-bold" id="duration">
+                        <span class="count"></span> {% trans "Days" %}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-end;">
+                <input class="btn cs-text-white" type="submit" value="{% trans 'Create Advert' %}"
+                    style="padding: .7rem 1.5rem;font-size: 1rem;">
+            </div>
+        </form>
+
+        <div class="description cs-grid br-sm outlined cs-content-start">
+            <h3 class="cs-font-bold cs-text-secondary cs-text-body">{% trans 'Guidelines' %}</h3>
+            <ul class="cs-font-normal cs-text-normal cs-grid"
+                style="--gap: .5rem;list-style-type:lower-alpha;list-style-position: inside;">
+                <li>{% trans 'Select the desired product by entering the product name.' %}</li>
+                <li>{% trans 'To advertise a new product, you must first create the product.' %}</li>
+                <li>{% trans 'Select where you want your advert to appear.' %}</li>
+                <li>{% trans 'Specify the advertising period by selecting the start date and end date.' %}</li>
+                <li>{% trans 'Please take note of the advertising cost' %}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        const bookedDays = (date) => {
+            var array = ["2022-11-14", "2022-11-17", "2022-11-14"]
+            var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+            return [array.indexOf(string) == -1]
+        }
+
+        $(function () {
+            $("#start_date").datepicker({
+                minDate: 0,
+                dateFormat: "yy-mm-dd",
+                beforeShowDay: bookedDays
+            });
+        });
+
+        $(function () {
+            $("#end_date").datepicker({
+                minDate: 0,
+                dateFormat: "yy-mm-dd",
+                beforeShowDay: bookedDays
+            });
+        });
+
+        $('#start_date').change(function () {
+            startDate1 = $(this).datepicker('getDate');
+            $("#end_date").datepicker("option", "minDate", startDate1);
+            getDuration()
+        })
+
+        $('#end_date').change(function () {
+            endDate1 = $(this).datepicker('getDate');
+            $("#start_date").datepicker("option", "maxDate", endDate1);
+            getDuration()
+        })
+
+
+        function getDuration() {
+            date1 = new Date($('#start_date').val());
+            date2 = new Date($('#end_date').val());
+            var milli_secs = date2.getTime() - date1.getTime();
+
+            var days = milli_secs / (1000 * 3600 * 24);
+            if (!isNaN(days)) {
+                $("#duration .count").text(days);
+            }
+            else {
+                $("#duration .count").text(0);
+            }
+        }
+    })
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+        var advertising_location = document.querySelector("input#advertising_location")
+        var price_listing = document.querySelector(".cs-price-listing")
+        document.querySelectorAll(".cs-price-listing-item").forEach(
+            elem => elem.addEventListener("click", () => {
+                let selected = document.querySelector(".cs-price-listing-item.selected");
+                if (selected) selected.classList.remove("selected");
+                elem.classList.add("selected");
+
+                advertising_location.value = elem.dataset.price;
+            })
+        )
+
+        document.querySelector("form").addEventListener("submit", (e) => {
+            if (advertising_location.value == "undefined" || advertising_location.value == "") {
+                e.preventDefault();
+                price_listing.classList.add("error")
+
+                setTimeout(() => {
+                    price_listing.classList.remove("error")
+                }, 3000);
+            }
+        })
+    })
+
+
+</script>
+
+<script src="{% static 'js/dropdown.js' %}"></script>
+
+{% endblock %}

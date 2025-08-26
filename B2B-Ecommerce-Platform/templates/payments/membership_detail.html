@@ -1,0 +1,274 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<script src="https://www.paypal.com/sdk/js?client-id=AVtfMXZd9wxW19asF-CH9XMsGdzbSBqop8qCgwgR9zWEMlMeX4KOxuuHHiyhv282-SH7xAtl7z3eEmag&components=buttons"></script>
+
+
+<script src="https://js.braintreegateway.com/web/dropin/1.18.0/js/dropin.min.js"></script>
+<script src="https://pay.google.com/gp/p/js/pay.js"></script>
+<script src="https://js.braintreegateway.com/web/3.86.0/js/client.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.86.0/js/google-payment.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.86.0/js/client.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.86.0/js/data-collector.min.js"></script>
+
+<!-- <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+<script src="https://js.stripe.com/v3/"></script> -->
+
+<section class="main w-12/12 py-6" style="block-size: auto;">
+
+    <div class="mx-auto w-10/12 rounded-md py-4 px-6 grid gap-20">
+        <div class="grid justify-betweeen px-2 gap-3">
+            <div class="grid">
+                <h2 class="text-2xl font-bold text-lghterBackgroundColor">{% trans '1.' %} {% trans 'Membership Package' %}</h2>
+            </div>
+            <div class="grid ml-6 gap-1">
+            <p class="text-lg text-slate-600">{% trans 'Selected plan' %}: <span class="text-slate-900 text-lghterBackgroundColor font-semibold">{{ object.name }}</span></p>
+                <p class="text-lg text-slate-600">{% trans 'Price' %}: <span class="text-slate-900 text-lghterBackgroundColor font-semibold">{{ object.currency }} {{ object.price }}</span></p>
+                <p class="text-lg text-slate-600">{{ object.description }}</span></p>
+            </div>
+
+            <ul class="list grid gap-2 px-4 py-4">
+                {% for feature in features.results %}
+                    <li class="flex text-lg gap-3 items-center text-slate-700"><i class="fa fa-check"></i> {{feature.name}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+            
+        <div class="grid justify-betweeen px-2 gap-2">
+            <div class="grid">
+                <h2 class="text-2xl font-bold text-lghterBackgroundColor">{% trans '2.' %} {% trans 'Select Payment Method' %}</h2>
+            </div>
+
+            <div class="grid gap-3 py-3">
+                <div class="flex gap-2 px-4 flex-wrap">
+                    <div class="google-container">
+                        <span id="google-pay-button">
+                            <img src="{% static 'icons/GPay.png' %}" style="inline-size: auto;block-size: 70px;" alt="g-pay">
+                        </span>
+                    </div>
+                </div>
+                <div class="payment-methods grid md:grid-cols-2 gap-4 justify-start">
+                    <div class="flex justify-center p-3" id="paypal-button-container"></div>
+                    <form autocomplete="off">
+                        {% if braintree_error %}
+                        <div class="alert alert-danger fade in">
+                            <button class="close" data-dismiss="alert">&times;</button>
+                            {{ braintree_error|safe }}
+                        </div>
+                        {% endif %}
+                        <div class="braintree-notifications"></div>
+                        <div id="braintree-dropin"></div>
+                        <input style="background-color: #0783ca" id="braintree-submit-button" class="btn btn-success btn-lg btn-block" type="button" value="Pay now!" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // paypal
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        paypal.Buttons({
+
+            style: {
+                color: 'gold',
+                shape: 'rect',
+                label: 'paypal',
+                layout: 'vertical'
+            },
+    
+            // Sets up the transaction when a payment button is clicked
+    
+            createOrder: (data, actions) => {
+                return actions.order.create({    
+                    purchase_units: [{    
+                        amount: {
+                            currency_code: '{{object.currency}}',
+                            value: '{{object.price}}'    
+                        }    
+                    }]    
+                });    
+            },
+    
+            // Finalize the transaction after payer approval    
+            onApprove: (data, actions) => {
+
+                // data fields
+                    // accelerated: false
+                    // billingToken: null
+                    // facilitatorAccessToken:
+                    // orderID: 
+                    // payerID: 
+                    // paymentID:
+                    // paymentSource: "paypal"
+
+                let url = "{% url 'payments:completePaypalPayment' %}";
+                return fetch(url, {
+                    method: "POST",
+                    headers: {'X-CSRFToken': getCookie('csrftoken')},
+                    body: JSON.stringify({
+                        ...data,
+                        plan: '{{object.id}}'
+                    })
+                }).then((response) => {
+                    if (response.status >= 200 && response.status <= 299) {
+                        location.href = "{% url 'manager:home' %}";
+                    }
+                    else {
+                        // cancel payment
+                    }
+                })
+            },
+
+            onCancel: () => {
+
+            },
+
+            onError : () => {
+
+            }
+    
+        }).render('#paypal-button-container');
+    
+        // braintree
+        var braintree_client_token = "{{ braintree_client_token }}";
+        var card_pay_button = document.querySelector('#braintree-submit-button');
+
+        braintree.dropin.create({
+            authorization: braintree_client_token,
+            container: '#braintree-dropin',
+            card: {
+            cardholderName: {
+                required: false
+            }
+            }
+        }, function (createErr, instance) {
+            card_pay_button.addEventListener('click', function () {
+                instance.requestPaymentMethod(function (err, payload) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "payment:braintree-payment" object.pk %}',
+                        data: {'paymentMethodNonce': payload.nonce,
+                                'csrfmiddlewaretoken': '{{ csrf_token }}'}
+                    }).done(function (result) {
+                        //do accordingly
+                    });
+                });
+            });
+        });
+
+        // Make sure to have https://pay.google.com/gp/p/js/pay.js loaded on your page
+
+        // You will need a button element on your page styled according to Google's brand guidelines
+        // https://developers.google.com/pay/api/web/guides/brand-guidelines
+        var g_pay_button = document.querySelector('#google-pay-button');
+    
+        if (!window.PaymentRequest) {
+            g_pay_button.parentNode.removeChild(g_pay_button);
+        }
+        else {
+            var paymentsClient = new google.payments.api.PaymentsClient({
+            environment: 'TEST' // Or 'PRODUCTION'
+            });
+        
+            braintree.client.create({
+                authorization: braintree_client_token
+                }, function (clientErr, clientInstance) {
+                braintree.googlePayment.create({
+                    client: clientInstance,
+                    googlePayVersion: 2,
+                    googleMerchantId: '3060-9705-7230' // Optional in sandbox; if set in sandbox, this value must be a valid production Google Merchant ID
+                }, function (googlePaymentErr, googlePaymentInstance) {
+                    paymentsClient.isReadyToPay({
+                    // see https://developers.google.com/pay/api/web/reference/object#IsReadyToPayRequest
+                    apiVersion: 2,
+                    apiVersionMinor: 0,
+                    allowedPaymentMethods: googlePaymentInstance.createPaymentDataRequest().allowedPaymentMethods,
+                    existingPaymentMethodRequired: true // Optional
+                    }).then(function(response) {
+                    if (response.result) {
+                        
+                        g_pay_button.addEventListener('click', function (event) {
+                            event.preventDefault();
+        
+                            var paymentDataRequest = googlePaymentInstance.createPaymentDataRequest({
+                                transactionInfo: {
+                                currencyCode: '{{object.currency}}',
+                                totalPriceStatus: 'FINAL',
+                                totalPrice: '{{object.price}}' // Your amount
+                                }
+                            });
+        
+                            var cardPaymentMethod = paymentDataRequest.allowedPaymentMethods[0];
+                            cardPaymentMethod.parameters.billingAddressRequired = true;
+                            cardPaymentMethod.parameters.billingAddressParameters = {
+                                format: 'FULL',
+                                phoneNumberRequired: true
+                            };
+        
+                            paymentsClient.loadPaymentData(paymentDataRequest).then(function(paymentData) {
+                                googlePaymentInstance.parseResponse(paymentData, function (err, result) {
+                                    if (err) {
+                                        // Handle parsing error
+                                        console.log(err)
+                                    }
+        
+                                    // Send result.nonce to your server
+                                    // result.type may be either "AndroidPayCard" or "PayPalAccount", and
+                                    // paymentData will contain the billingAddress for card payments
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '{% url "payment:gPayPayment" object.pk %}',
+                                        data: {'paymentMethodNonce': result.nonce,
+                                                'csrfmiddlewaretoken': '{{ csrf_token }}', 'type': result.type, 'paymentData': paymentData}
+                                    }).done(function (result) {
+                                        //do accordingly
+                                    });
+                                    console.log(result)
+                                });
+                            }).catch(function (err) {
+                                // Handle errors
+                                console.log(err)
+                            });
+                        });
+                    }
+                    }).catch(function (err) {
+                        // Handle errors
+
+                        console.log(err)
+                    });
+                });
+        
+                // Set up other Braintree components
+            });
+        }
+
+
+  
+    })
+
+  </script>
+{% endblock %}

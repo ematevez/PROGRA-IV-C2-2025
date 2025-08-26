@@ -1,0 +1,114 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+
+<main class="grid gap-6 md:gap-4">
+    <div class="breadcrumb flex flex-wrap justify-start gap-2 w-full mx-auto px-5 pt-2">
+        <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
+        <a>/</a>
+        <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:supplier-detail" supplier.slug %}'>{{ supplier.business_name }}</a>
+        <a>/</a>
+        <span class="text-lightBackgroundColor">{{ service.name }}</span>
+    </div>
+    <section class="main w-12/12 py-6 pt-0 grid gap-10 px-5" style="height: auto;">
+        <div class="grid gap-6 md:gap-10 supplier-detail w-full md:w-full mx-auto">
+            <div class="grid gap-4 justify-start content-start">
+                <div class="grid md:grid-flow-col justify-between gap-1">                        
+                    <h3 class="text-xl md:text-2xl font-bold text-lghterBackgroundColor">{{ service.name }}</h3>
+                </div>
+                <div class="client-infor grid gap-4 py-4 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                    <div class="grid gap-2">
+                        <h4 class="text-lg font-semibold text-lightBackgroundColor">{% trans 'About Service' %}</h4>
+                        <p class="text-base font-normal text-slate-800">
+                            {{ service.description }}
+                        </p>
+                    </div>
+                    <div class="grid items-start gap-2">
+                        <!-- <span class="flex gap-1 items-start">
+                            <h3 class="text-base font-semibold text-lightBackgroundColor">Currents Customers: </h3>
+                            <p class="flex gap-1 items-center font-normal text-slate-700">
+                                120
+                            </p>
+                        </span> -->
+                        <span class="flex gap-1 items-start">
+                            <h3 class="text-base font-semibold text-lightBackgroundColor">{% trans 'Price' %}: </h3>
+                            <p class="flex gap-1 items-center font-normal text-slate-700">
+                                <span>{{ service.currency }} {{ service.price }}</span>
+                                <!-- <span class="font-sm text-slate-500 font-normal">
+                                    (Paid once)
+                                </span> -->
+                            </p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contract-form grid gap-4 w-full md:w-full mx-auto">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                        <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                        </div>
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                        <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <form action="{% url 'supplier:supplier-contract' service.slug %}" method="POST" class="grid gap-6 p-5" style="background-color: rgb(242, 245, 248);">
+                <div class="form-heading text-xl md:text-2xl text-lghterBackgroundColor font-bold text-capitalize">
+                    Fill in form to create contract.
+                </div>
+                {% csrf_token %}
+                <div class="form-group grid gap-2">
+                    <label for="contract-name" class="text-slate-700 text-base font-normal">{% trans 'Service' %}</label>
+                    <input type="text" name="contract-name" id="contract-name" readonly value="{{ service.name }}">
+                </div>
+                <div class="form-group grid gap-2">
+                    <label for="contract-price" class="text-slate-700 text-base font-normal">Price <span class="text-slate-600">({{ service.currency }})</span></label>
+                    <input class="text-lghterBackgroundColor" type="number" name="contract-price" id="contract-price" value="{{ service.price }}" readonly>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 justify-items-stretch">
+                    <div class="form-group grid gap-2">
+                        <label for="contract-start-date" class="text-slate-700 text-base font-normal">Start Date</label>
+                        <input class="w-12/12 text-lghterBackgroundColor" type="date" name="contract-start-date" id="contract-start-date" required>
+                    </div>
+                    <div class="form-group grid gap-2">
+                        <label for="contract-end-date" class="text-slate-700 text-base font-normal">End Date</label>
+                        <input class="w-12/12 text-lghterBackgroundColor" type="date" name="contract-end-date" id="contract-end-date" required>
+                    </div>
+                </div>
+                <div class="form-group grid gap-2">
+                    <input class="text-white bg-lghterBackgroundColor hover:yellowColor" type="submit" value="Create Contract">
+                </div>
+            </form>
+        </div>
+    </section>
+
+</main>
+
+
+{{ is_buyer|json_script:"is_buyer" }}
+<script>
+    const is_buyer = JSON.parse(document.getElementById('is_buyer').textContent);
+    console.log("is_buyer: ", is_buyer)
+    if (is_buyer == false) {
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault()
+        })
+        document.querySelectorAll('form input')
+        .forEach(elem => {
+            elem.disabled = true;
+        })
+    }
+</script>
+
+
+{% endblock %}
