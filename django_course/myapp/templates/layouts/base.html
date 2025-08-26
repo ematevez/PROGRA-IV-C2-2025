@@ -6,38 +6,65 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django Projects</title>
+    <title>CLASE DE PRGRA</title>
     <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
 </head>
 <body>
-    
-    <nav class="navbar container">
-        <ul>
-            <li>
-                <a href="{% url 'index' %}">Home</a>
-            </li>
-            <li>
-                <a href="{% url 'about' %}">About</a>
-            </li>
-            <li>
-                <a href="{% url 'projects' %}">Projects</a>
-            </li>
-            <li>
-                <a href="{% url 'tasks' %}">Tasks</a>
-            </li>
-            <li>
-                <a href="{% url 'create_task' %}">Create task</a>
-            </li>
-            <li>
-                <a href="{% url 'create_project' %}">Create Project</a>
-            </li>
-        </ul>
+  
+    <nav class="navbar bg-body-tertiary fixed-top dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Menu Lateral</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                    {% comment %} ! {% endcomment %}
+                    <a href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'projects' %}">Projects</a></li>
+                    <li><a class="dropdown-item" href="{% url 'tasks' %}">Tasks</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="{% url 'create_task' %}">Create task</a></li>
+                    <li><a class="dropdown-item" href="{% url 'create_project' %}">Create Project</a></li> 
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                <form class="d-flex mt-3" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+            </div>
+        </div>
     </nav>
-    
-    <main class="container">
+
+
+    <main class="container mt-5">
         {% block content %}
         {% endblock %}
     </main>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </html>
