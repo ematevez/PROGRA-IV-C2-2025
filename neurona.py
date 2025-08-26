@@ -1,7 +1,7 @@
 # import google.generativeai as genai
   
 
-# genai.configure(api_key="AIzaSyBptkJZQzUdomahxUkEQI6rtvUawSxILiQ")
+# genai.configure(api_key="")
 # model = genai.GenerativeModel("gemini-2.0-flash").start_chat()
 
 
@@ -21,7 +21,7 @@
 # import google.generativeai as genai
 
 # # Configura tu API key
-# genai.configure(api_key="AIzaSyBptkJZQzUdomahxUkEQI6rtvUawSxILiQ")
+# genai.configure(api_key="")
 
 # # Crear modelo
 # model = genai.GenerativeModel("gemini-1.5-flash")
@@ -47,7 +47,7 @@
 # import google.generativeai as genai
 
 # # Configuración de Gemini
-# genai.configure(api_key="AIzaSyBptkJZQzUdomahxUkEQI6rtvUawSxILiQ")
+# genai.configure(api_key="")
 
 # def generar_codigo(prompt, filename="script_generado.py"):
 #     """Genera código con Gemini y lo guarda en un archivo .py"""
@@ -108,7 +108,7 @@ import os
 import google.generativeai as genai
 
 # Configura tu API key de Google AI Studio
-genai.configure(api_key="AIzaSyBptkJZQzUdomahxUkEQI6rtvUawSxILiQ")
+genai.configure(api_key="")
 
 SCRIPT_NAME = "script_generado.py"
  #Arreglas esto que no borra las 2 primeras lineas y la ultima==============================0000
