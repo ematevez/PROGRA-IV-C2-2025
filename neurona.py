@@ -5,10 +5,6 @@
 # model = genai.GenerativeModel("gemini-2.0-flash").start_chat()
 
 
-
-# # response = chat.send_message("Hola, ¿cómo estás?")
-# # print("Gemini dice: ", response.text)
-
 # print("Habla conmigo! (escribe 'salir' para terminar)")
 
 # while True:
@@ -115,7 +111,7 @@ import google.generativeai as genai
 genai.configure(api_key="AIzaSyBptkJZQzUdomahxUkEQI6rtvUawSxILiQ")
 
 SCRIPT_NAME = "script_generado.py"
-
+ #Arreglas esto que no borra las 2 primeras lineas y la ultima==============================0000
 def limpiar_script():
     """Elimina líneas problemáticas del script."""
     if not os.path.exists(SCRIPT_NAME):
@@ -132,7 +128,7 @@ def limpiar_script():
         f.writelines(lineas_limpias)
 
     print("Script limpiado!")
-
+# ===============================================================================================
 def correr_script():
     """Ejecuta el script generado."""
     if not os.path.exists(SCRIPT_NAME):
@@ -176,7 +172,7 @@ if __name__ == "__main__":
         
         if opcion == "1":
             prompt = input("Describe qué quieres que haga el script: ")
-            generar_codigo(prompt)
+            generar_codigo("Haceme en python lo que dice a continuacion " + prompt + " y asegurate que el codigo no tenga ningun texto solo listo para ejecutar")
         elif opcion == "2":
             prompt = input("Describe los cambios que quieres aplicar al script: ")
             modificar_codigo(prompt)
