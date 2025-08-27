@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Productos</h2>
+<ul>
+  {% for p in products %}
+    <li>
+      <strong>{{ p.title }}</strong> — $ {{ p.price }}<br>
+      <small>Publicado por {{ p.seller.get_full_name|default:p.seller.username }}</small>
+    </li>
+  {% empty %}
+    <li>No hay productos aún.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

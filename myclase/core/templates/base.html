@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Mercadito{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body class="container dark bg-black">
+  <nav class="container-fluid dark">
+    <ul>
+      <li><strong>Mercadito</strong></li>
+    </ul>
+    <ul>
+      {% if user.is_authenticated %}
+        <li>Hola, {{ user.first_name|default:user.username }}</li>
+        {% comment %} <li><a href="{% url 'account_logout' %}">Salir</a></li> {% endcomment %}
+        {% if user.is_authenticated %}
+          <li>Hola, {{ user.first_name|default:user.username }}</li>
+          <li>
+            <form method="post" action="{% url 'account_logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-link nav-link" style="display:inline; padding:0; border:none; background:none;">
+                Salir
+              </button>
+            </form>
+          </li>
+        {% else %}
+          <li><a href="{% url 'account_login' %}">Entrar</a></li>
+        {% endif %}
+
+      {% else %}
+        <li><a href="{% url 'account_login' %}">Entrar</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</html>
