@@ -1,0 +1,13 @@
+
+<!--logout.html-->
+{% extends "base.html" %}
+{% block title %}Salir{% endblock %}
+
+{% block content %}
+<h2>¿Seguro querés salir?</h2>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Salir</button>
+</form>
+<a href="{% url 'home' %}">Cancelar</a>
+{% endblock %}

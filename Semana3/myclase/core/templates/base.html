@@ -30,15 +30,15 @@
               <a href="{% url 'profile' %}" class="nav-link">
                 {% if user.profile.avatar %}
                   <img src="{{ user.profile.avatar.url }}" 
-                       alt="Avatar" 
-                       class="rounded-circle" 
-                       width="32" height="32"
-                       style="object-fit: cover;">
+                      alt="Avatar" 
+                      class="rounded-circle" 
+                      width="32" height="32"
+                      style="object-fit: cover;">
                 {% else %}
                   <img src="https://ui-avatars.com/api/?name={{ user.username }}&background=random" 
-                       alt="Avatar" 
-                       class="rounded-circle" 
-                       width="32" height="32">
+                      alt="Avatar" 
+                      class="rounded-circle" 
+                      width="32" height="32">
                 {% endif %}
               </a>
             </li>

@@ -1,0 +1,21 @@
+<!-- signup.html-->
+{% extends "base.html" %}
+{% load socialaccount %}
+
+{% block title %}Registrarse{% endblock %}
+
+{% block content %}
+<h2>Registrarse</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Crear cuenta</button>
+</form>
+
+<p>O registrate con:</p>
+<a href="{% provider_login_url 'google' %}"><img src="/static/google-logo.png" width="30"> Google</a>
+<a href="{% provider_login_url 'github' %}"><img src="/static/github-logo.png" width="30"> GitHub</a>
+
+<p>¿Ya tenés cuenta? <a href="{% url 'account_login' %}">Entrar</a></p>
+{% endblock %}

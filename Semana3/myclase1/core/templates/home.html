@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+{% block title %}Inicio • Mercadito{% endblock %}
+
+
+{% block content %}
+  <h1 >Inicio</h1>
+  {% if not user.is_authenticated %}
+    <p>Ingresá para publicar o comprar.</p>
+    <p>
+      <a href="{% provider_login_url 'google' %}" role="button">Entrar con Google</a>
+      <a href="{% provider_login_url 'github' %}" role="button" class="secondary">Entrar con GitHub</a>
+    </p>
+  {% else %}
+    <p>Ya estás logueado ✅. Próximo paso: crear productos y compras.</p>
+  {% endif %}
+{% endblock %}
+
+
+
+
