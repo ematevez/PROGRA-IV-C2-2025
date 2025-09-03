@@ -1,0 +1,47 @@
+.social-login {
+    display: flex;
+    justify-content: center;  /* centra horizontal */
+    gap: 20px;                /* espacio entre logos */
+    margin-top: 20px;
+}
+
+.social-login a {
+    text-decoration: none;
+}
+
+.social-logo {
+    width: 50px;   /* ajusta al tamaño que quieras */
+    height: auto;
+    transition: transform 0.2s ease-in-out;
+}
+
+.social-logo:hover {
+    transform: scale(1.1); /* efecto al pasar el mouse */
+}
+
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 28px;
+  text-decoration: none;
+  color: rgb(24, 23, 23);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-social.google {
+  background: #DB4437; /* Rojo Google */
+}
+
+.btn-social.github {
+  background: #333; /* Negro GitHub */
+}
+
+.btn-social:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+

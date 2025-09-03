@@ -59,8 +59,9 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
-ACCOUNT_SIGNUP_FIELDS = ["email", "username", "password1", "password2"]
-ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+#! Solo por ahora para evitar errores al enviar mails
+#TODO cambiarlo para que envie correos reales
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 # (opcional) Config de allauth
@@ -93,6 +94,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 "django.template.context_processors.request",  # <-- requerido por allauth
+                'django.template.context_processors.csrf', #solo esto para formularios
             ],
         },
     },
@@ -170,6 +172,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

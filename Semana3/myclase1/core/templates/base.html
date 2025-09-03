@@ -1,43 +1,68 @@
+{% load static %}
+
 <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
   <title>{% block title %}Mercadito{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-</head>
-<body class="container dark bg-black">
-  <nav class="container-fluid dark">
-    <ul>
-      <li><strong>Mercadito</strong></li>
-    </ul>
-    <ul>
-      {% if user.is_authenticated %}
-        <li>Hola, {{ user.first_name|default:user.username }}</li>
-        {% comment %} <li><a href="{% url 'account_logout' %}">Salir</a></li> {% endcomment %}
-        {% if user.is_authenticated %}
-          <li>Hola, {{ user.first_name|default:user.username }}</li>
-          <li>
-            <form method="post" action="{% url 'account_logout' %}">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-link nav-link" style="display:inline; padding:0; border:none; background:none;">
-                Salir
-              </button>
-            </form>
-          </li>
-        {% else %}
-          <li><a href="{% url 'account_login' %}">Entrar</a></li>
-        {% endif %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-      {% else %}
-        <li><a href="{% url 'account_login' %}">Entrar</a></li>
-      {% endif %}
-    </ul>
+</head>
+<body class="bg-light">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="{% url 'home' %}">Mercadito</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center">
+          {% if user.is_authenticated %}
+            <li class="nav-item me-3 text-white">
+              Hola, {{ user.first_name|default:user.username }}
+            </li>
+            <li class="nav-item me-3">
+              <a href="{% url 'perfil' %}" class="nav-link">
+              {% if user.profile.avatar %}
+                  <img src="{{ user.profile.avatar.url }}" 
+                      alt="Avatar" 
+                      class="rounded-circle" 
+                      width="32" height="32"
+                      style="object-fit: cover;">
+                {% else %}
+                  <img src="https://ui-avatars.com/api/?name={{ user.username }}&background=random" 
+                      alt="Avatar" 
+                      class="rounded-circle" 
+                      width="32" height="32">
+                {% endif %}
+              </a>
+            </li>
+            <li class="nav-item">
+              <form method="post" action="{% url 'account_logout' %}" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-light btn-sm">Salir</button>
+              </form>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a href="{% url 'account_login' %}" class="btn btn-outline-light btn-sm">Entrar</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
   </nav>
-  <main class="container">
+
+  <!-- Contenido -->
+  <main class="container my-4">
     {% block content %}{% endblock %}
   </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </html>
