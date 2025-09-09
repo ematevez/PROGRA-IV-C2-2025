@@ -1,0 +1,142 @@
+.auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.auth-container h2 {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-primary:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.auth-links {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.social-login {
+    display: flex;
+    justify-content: center;  /* centra horizontal */
+    gap: 20px;                /* espacio entre logos */
+    margin-top: 20px;
+}
+
+.social-login a {
+    text-decoration: none;
+}
+
+.social-logo {
+    width: 50px;   /* ajusta al tamaño que quieras */
+    height: auto;
+    transition: transform 0.2s ease-in-out;
+}
+
+.social-logo:hover {
+    transform: scale(1.1); /* efecto al pasar el mouse */
+}
+
+
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 28px;
+  text-decoration: none;
+  color: rgb(24, 23, 23);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-social.google {
+  background: #DB4437; /* Rojo Google */
+}
+
+.btn-social.github {
+  background: #333; /* Negro GitHub */
+}
+
+.btn-social:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.card p {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.card .btn-primary {
+  display: inline-block;
+  padding: 8px 12px;
+  background: #007bff;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.card .btn-primary:hover {
+  background: #0056b3;
+}
