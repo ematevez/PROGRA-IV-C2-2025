@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Nuevo producto{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <h2>Publicar producto</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.title.label_tag }}
+      {{ form.title }}
+    </div>
+    <div class="form-group">
+      {{ form.description.label_tag }}
+      {{ form.description }}
+    </div>
+    <div class="form-group">
+      {{ form.marca.label_tag }}
+      {{ form.marca }}
+    </div>
+    <div class="form-group">
+      {{ form.price.label_tag }}
+      {{ form.price }}
+    </div>
+
+    <button type="submit" class="btn-primary">Publicar</button>
+  </form>
+</div>
+{% endblock %}

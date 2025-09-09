@@ -1,0 +1,52 @@
+<!-- templates\account\signup.html -->
+{% extends "base.html" %}
+{% load socialaccount %}
+
+{% block content %}
+<div class="auth-container">
+  <h2>Crear cuenta</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.username.label_tag }}
+      {{ form.username }}
+    </div>
+    <div class="form-group">
+      {{ form.email.label_tag }}
+      {{ form.email }}
+    </div>
+    <div class="form-group">
+      {{ form.password1.label_tag }}
+      {{ form.password1 }}
+    </div>
+    <div class="form-group">
+      {{ form.password2.label_tag }}
+      {{ form.password2 }}
+    </div>
+
+    <button type="submit" class="btn-primary">Registrarse</button>
+  </form>
+
+  <p class="auth-links">
+    ¿Ya tenés cuenta?
+    <a href="{% url 'account_login' %}">Iniciá sesión</a>
+  </p>
+
+  <div class="social-login">
+        <a href="{% provider_login_url 'google' %}" role="button" class="btn-social">
+            <i class="fab fa-google"></i>
+        </a>
+        <a href="{% provider_login_url 'github' %}" role="button" class="btn-social">
+            <i class="fab fa-github"></i>
+        </a>
+  </div>    
+</div>
+{% endblock %}
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+<!-- templates\account\login.html -->
+{% extends "base.html" %}
+
+{% load socialaccount %}
+
+{% block content %}
+  <h2>Iniciar sesión</h2>
+
+  <!-- Login tradicional con usuario/contraseña -->
+  <form method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.login.label_tag }}
+      {{ form.login }}
+    </div>
+    <div class="form-group">
+      {{ form.password.label_tag }}
+      {{ form.password }}
+    </div>
+
+    <button type="submit" class="btn-primary">Ingresar</button>
+  </form>
+
+  <hr>
+  
+  <!-- Links para resetear contraseña y registrarse -->
+  <p class="auth-links">
+    <a href="{% url 'account_reset_password' %}">¿Olvidaste tu contraseña?</a><br>
+    ¿No tenés cuenta?
+    <a href="{% url 'account_signup' %}">Registrate</a>
+  </p>
+  
+  <!-- Botones sociales -->
+  <h3>O ingresa con</h3>
+  <div class="social-login">
+        <a href="{% provider_login_url 'google' %}" role="button" class="btn-social">
+            <i class="fab fa-google"></i>
+        </a>
+        <a href="{% provider_login_url 'github' %}" role="button" class="btn-social">
+            <i class="fab fa-github"></i>
+        </a>
+  </div>    
+
+
+{% endblock %}
+
