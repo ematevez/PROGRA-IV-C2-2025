@@ -1,6 +1,8 @@
 # PROGRA-IV-C2-2025
 DATOS DE PROGRAMAS DJANGO
 
+pip install -r requirements.txt 
+
 <img width="893" height="477" alt="image" src="https://github.com/user-attachments/assets/97d58dec-d994-4a55-9275-5050d5ae98d8" />
 
 
