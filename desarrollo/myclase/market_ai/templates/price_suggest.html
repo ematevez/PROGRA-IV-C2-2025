@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Sugeridor de precio (IA)</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn-primary" type="submit">Sugerir precio</button>
+</form>
+
+{% if sugerencia %}
+  <div class="ai-result">
+    <h3>Resultado de Gemini</h3>
+    <pre>{{ sugerencia }}</pre>
+  </div>
+{% endif %}
+{% endblock %}

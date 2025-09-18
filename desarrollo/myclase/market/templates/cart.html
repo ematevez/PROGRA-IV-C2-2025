@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Tu carrito{% endblock %}
+
+{% block content %}
+<h2>Carrito de compras</h2>
+
+{% if cart.items.all %}
+  <ul>
+    {% for item in cart.items.all %}
+      <li>{{ item.product.title }} (x{{ item.quantity }}) — ${{ item.subtotal }}</li>
+    {% endfor %}
+  </ul>
+  <p><strong>Total:</strong> ${{ cart.total }}</p>
+
+  <!-- Botón de pago de todo el carrito -->
+  <button id="checkout-btn" class="btn btn-primary">Pagar carrito completo</button>
+
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
+  <script>
+    const mp = new MercadoPago("{{ PUBLIC_KEY }}", { locale: 'es-AR' });
+
+    document.getElementById("checkout-btn").addEventListener("click", () => {
+      fetch("{% url 'market:crear-preferencia-carrito' %}")
+        .then(response => response.json())
+        .then(data => {
+          window.location.href = data.init_point;
+        });
+    });
+  </script>
+
+{% else %}
+  <p>Tu carrito está vacío.</p>
+{% endif %}
+{% endblock %}

@@ -1,14 +1,10 @@
 from pathlib import Path
-# import environ # cuando vamos a servidor tenemos que sacar todas las claves
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-
-# env = environ.Env(DEBUG=(bool, True))
-
-# environ.Env.read_env()  # lee .env si existe
-
-
+import os
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / '.env')
 
 
 
@@ -46,7 +42,8 @@ INSTALLED_APPS = [
     # Apps propias
     "core",  
     "market",
-    "perfil",  
+    "market_ai",  
+    "perfil",
 ]
 
 SITE_ID = 1
@@ -61,7 +58,7 @@ LOGOUT_REDIRECT_URL = "home"
 ACCOUNT_SIGNUP_FIELDS = ["email", "username", "password1", "password2"]
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
-
+MERCADOPAGO_ACCESS_TOKEN = os.getenv("MERCADOPAGO_ACCESS_TOKEN")
 # (opcional) Config de allauth
 ACCOUNT_LOGIN_METHODS = {"email", "username"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]

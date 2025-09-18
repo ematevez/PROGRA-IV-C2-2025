@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Chat asistente del Mercadito (IA)</h2>
+
+<div class="chat-box">
+  {% for turn in history %}
+    <div class="chat-user"><strong>Tú:</strong> {{ turn.user }}</div>
+    <div class="chat-ai"><strong>Asistente:</strong> {{ turn.ai }}</div>
+    <hr>
+  {% endfor %}
+</div>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn-primary" type="submit">Enviar</button>
+</form>
+{% endblock %}
