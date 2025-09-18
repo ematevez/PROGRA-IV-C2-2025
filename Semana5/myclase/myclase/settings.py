@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     # Apps propias
     "core",  
     "market",
-    "perfil",
     "market_ai",  
+    "perfil",
 ]
 
 SITE_ID = 1

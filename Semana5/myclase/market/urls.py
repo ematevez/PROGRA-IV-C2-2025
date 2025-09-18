@@ -1,11 +1,12 @@
 
-from django.contrib import admin
 from django.urls import path
-from market.views import product_list, product_create
+from . import views
+
+app_name = "market"
 
 urlpatterns = [
-    path("lista/", product_list, name="product-list"),  # market
-    path("nuevo/", product_create, name="product-create"),
+    path("list/", views.product_list, name="productlist"),  # market
+    path("new/", views.product_create, name="productcreate"),
 ]
 
 

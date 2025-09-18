@@ -4,7 +4,7 @@
 {% block content %}
 <div class="auth-container">
   <h2>Publicar producto</h2>
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-group">
       {{ form.title.label_tag }}
