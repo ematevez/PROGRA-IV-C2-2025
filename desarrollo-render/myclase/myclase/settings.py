@@ -1,17 +1,10 @@
-import os
-from decouple import config
-import dj_database_url
 from pathlib import Path
-# import environ # cuando vamos a servidor tenemos que sacar todas las claves
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-
-# env = environ.Env(DEBUG=(bool, True))
-
-# environ.Env.read_env()  # lee .env si existe
-
-
+import os
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / '.env')
 
 
 
@@ -19,20 +12,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-3z7-*mm6rwki_2vx%7yt+!q83utn^kjwx1m^5u)(iq@qa9rm&a'
 
-SECRET_KEY = config("SECRET_KEY", default="unsafe-secret-key")
-# SECRET_KEY = 'django-insecure-3z7-*mm6rwki_2vx%7yt+!q83utn^kjwx1m^5u)(iq@qa9rm&a'
+# SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = env("DEBUG", default=True)
+DEBUG = True
 
-DEBUG = config("DEBUG", default=False, cast=bool)
-# DEBUG = 'RENDER'
+ALLOWED_HOSTS = ["*"]
 
-# Hosts: para producción podés usar el dominio onrender.com o '*' para pruebas
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="*").split(",")
-# ALLOWED_HOSTS = []
-# RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-# if RENDER_EXTERNAL_HOSTNAME:
-#     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-#     CSRF_TRUSTED_ORIGINS = [f"https://{RENDER_EXTERNAL_HOSTNAME}"]
 
 # Application definition
 
@@ -51,14 +38,12 @@ INSTALLED_APPS = [
     "allauth.socialaccount",          # social login
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.github",
-    "rest_framework",                 # API REST
-    "drf_yasg",                       # swagger
- 
 
     # Apps propias
     "core",  
     "market",
-    "perfil",  
+    "market_ai",  
+    "perfil",
 ]
 
 SITE_ID = 1
@@ -73,7 +58,7 @@ LOGOUT_REDIRECT_URL = "home"
 ACCOUNT_SIGNUP_FIELDS = ["email", "username", "password1", "password2"]
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
-
+MERCADOPAGO_ACCESS_TOKEN = os.getenv("MERCADOPAGO_ACCESS_TOKEN")
 # (opcional) Config de allauth
 ACCOUNT_LOGIN_METHODS = {"email", "username"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]
@@ -88,7 +73,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "allauth.account.middleware.AccountMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware', #-> for render deployment
 
 ]
 
@@ -117,15 +101,13 @@ WSGI_APPLICATION = 'myclase.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 DATABASES = {
-    "default": dj_database_url.parse(config("DATABASE_URL", default="sqlite:///"+str(BASE_DIR / "db.sqlite3")))
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
@@ -179,15 +161,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
-
-# #-> for render deployment
-# if not DEBUG:
-#     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-#     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 
 # Default primary key field type
