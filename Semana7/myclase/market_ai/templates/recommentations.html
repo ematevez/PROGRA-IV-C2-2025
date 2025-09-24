@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Productos similares a "{{ product.title }}"</h2>
+
+<div class="card-grid">
+  {% for p in recommended %}
+    <div class="card">
+      <h3>{{ p.title }}</h3>
+      <p>{{ p.description|truncatewords:12 }}</p>
+      <p><strong>${{ p.price }}</strong></p>
+      <a href="{% url 'market:product-detail' p.pk %}" class="btn-primary">Ver</a>
+    </div>
+  {% empty %}
+    <p>No se encontraron recomendaciones.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Usuarios conectados</h2>
+<ul>
+  {% for ua in active %}
+    <li>{{ ua.user.username }} — {{ ua.last_seen|timesince }} ago</li>
+  {% empty %}
+    <li>No hay usuarios conectados.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Productos • Mercadito{% endblock %}
+
+{% block content %}
+<h2>Todos los productos</h2>
+
+{% if user.is_authenticated %}
+  <p>
+    <a href="{% url 'market:productcreate' %}" class="btn btn-success">
+      ➕ Publicar producto
+    </a>
+  </p>
+{% endif %}
+
+<div class="card-grid">
+  {% for product in products %}
+    <div class="card">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.title }}" style="width:100%; max-height:200px; object-fit:cover;">
+      {% endif %}
+      <h3>{{ product.title }}</h3>
+      <p>{{ product.description|truncatewords:20 }}</p>
+      <p><strong>${{ product.price }}</strong></p>
+
+      {% if user.is_authenticated %}
+        <a href="{% url 'market:add-to-cart' product.id %}" class="btn btn-primary">🛒 Agregar al carrito</a>
+      {% else %}
+        <a href="{% url 'account_login' %}" class="btn btn-secondary">Inicia sesión para comprar</a>
+      {% endif %}
+    </div>
+  {% empty %}
+    <p>No hay productos disponibles.</p>
+  {% endfor %}
+</div>
+{% endblock %}
+

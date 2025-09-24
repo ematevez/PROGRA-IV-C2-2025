@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Sesión expirada</h2>
+  <p>Tu sesión se cerró por inactividad. <a href="{% url 'login' %}">Iniciar sesión de nuevo</a>.</p>
+{% endblock %}

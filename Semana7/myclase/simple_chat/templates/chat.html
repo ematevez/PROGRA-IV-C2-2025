@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Chat del Mercadito</h2>
+
+<div id="chat-box" style="height: 300px; overflow:auto; border:1px solid #ddd; padding:10px;"></div>
+
+<form id="chat-form">
+  {% csrf_token %}
+  <textarea id="chat-text" rows="2" style="width:100%"></textarea>
+  <button type="submit" class="btn-primary">Enviar</button>
+</form>
+
+<script>
+let lastId = 0;
+const box = document.getElementById("chat-box");
+
+function renderMessage(m){
+  const el = document.createElement("div");
+  el.innerHTML = `<strong>${m.user}</strong>: ${m.text} <small style="color:#999">${new Date(m.created_at).toLocaleTimeString()}</small>`;
+  box.appendChild(el);
+  box.scrollTop = box.scrollHeight;
+}
+
+async function poll(){
+  const res = await fetch("{% url 'simple_chat:messages-api' %}?after_id=" + lastId);
+  const data = await res.json();
+  data.messages.forEach(m => {
+    renderMessage(m);
+    lastId = Math.max(lastId, m.id);
+  });
+}
+setInterval(poll, 3000); // cada 3s
+poll();
+
+document.getElementById("chat-form").addEventListener("submit", async (e)=>{
+  e.preventDefault();
+  const text = document.getElementById("chat-text").value;
+  if (!text.trim()) return;
+  const form = new FormData();
+  form.append("text", text);
+  form.append("csrfmiddlewaretoken", document.querySelector('[name=csrfmiddlewaretoken]').value);
+  const resp = await fetch("{% url 'simple_chat:post-api' %}", {
+    method: "POST",
+    body: form
+  });
+  if (resp.ok){
+    document.getElementById("chat-text").value = "";
+    poll(); // traer los nuevos
+  }
+});
+</script>
