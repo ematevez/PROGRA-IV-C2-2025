@@ -22,33 +22,34 @@ ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
-
-INSTALLED_APPS = [
-    'django.contrib.admin',
+BASICS = ['django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "django.contrib.sites",           # <-- requerido por allauth
-    
-    # Terceros
+    "django.contrib.sites",    ]
+
+TERCEROS = [ # Terceros
     "allauth",                        # núcleo
     "allauth.account",                # cuentas locales (si querés)
     "allauth.socialaccount",          # social login
     "allauth.socialaccount.providers.google",
-    "allauth.socialaccount.providers.github",
+    "allauth.socialaccount.providers.github",]
 
-    # Apps propias
+PROPIAS = [ # Apps propias  
     "core",  
     "market",
     "market_ai",  
     "perfil",
     "presence",
     "simple_chat",
-    "quotes",
+    "quotes",]
 
-]
+INSTALLED_APPS = BASICS + TERCEROS + PROPIAS
+
+
+
 
 SITE_ID = 1
 
