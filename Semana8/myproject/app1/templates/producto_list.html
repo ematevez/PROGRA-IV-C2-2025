@@ -1,10 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Lista de Productos</h2>
-<ul>
+<h2 class="mb-4">Lista de Productos</h2>
+<div class="row">
   {% for producto in object_list %}
-    <li>{{ producto.nombre }} - ${{ producto.precio }} <br>
-    <img src="{{ producto.imagen.url }}" width="100"></li>
+  <div class="col-md-4 mb-3">
+    <div class="card shadow-sm">
+      <img src="{{ producto.imagen.url }}" class="card-img-top" style="height:200px; object-fit:cover;">
+      <div class="card-body">
+        <h5 class="card-title">{{ producto.nombre }}</h5>
+        <p class="card-text">{{ producto.descripcion|truncatewords:15 }}</p>
+        <p class="text-primary fw-bold">${{ producto.precio }}</p>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p>No hay productos registrados todavía.</p>
   {% endfor %}
-</ul>
+</div>
+<a type="button" class="btn btn-secondary btn-lg" href="/app1/nuevo/">Nuevo</a>
 {% endblock %}
+
+
