@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Lista de Productos</h2>
+<ul>
+  {% for producto in object_list %}
+    <li>{{ producto.nombre }} - ${{ producto.precio }} <br>
+    <img src="{{ producto.imagen.url }}" width="100"></li>
+  {% endfor %}
+</ul>
+{% endblock %}

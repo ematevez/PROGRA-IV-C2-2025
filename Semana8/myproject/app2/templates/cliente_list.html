@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Lista de Clientes</h2>
+<ul>
+  {% for cliente in clientes %}
+    <li>{{ cliente.nombre }} - {{ cliente.email }} <br>
+    <img src="{{ cliente.foto.url }}" width="100"></li>
+  {% endfor %}
+</ul>
+{% endblock %}
