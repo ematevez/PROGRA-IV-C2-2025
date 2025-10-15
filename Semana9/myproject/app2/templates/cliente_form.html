@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Nuevo Cliente</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <p>Nombre: <input type="text" name="nombre" class="form-control"></p>
+  <p>Email: <input type="email" name="email" class="form-control"></p>
+  <p>Foto: <input type="file" name="foto" class="form-control"></p>
+  <button type="submit" class="btn btn-success">Guardar</button>
+</form>
+{% endblock %}

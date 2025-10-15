@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Netcapt{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="display-4">Buscador 🚀</h1>
+</div>
+  <div id="status">
+    Estado: <span id="scan_state">cargando...</span>
+    &nbsp;|&nbsp; Última: <span id="last_scan">--</span>
+    &nbsp;|&nbsp; <button id="force_scan">Forzar escaneo</button>
+  </div>
+
+  <table id="hosts_table">
+    <thead>
+      <tr><th>IP</th><th>MAC</th><th>Hostname</th><th>Última detección</th></tr>
+    </thead>
+    <tbody>
+      {% for h in hosts %}
+        <tr>
+          <td>{{ h.ip }}</td>
+          <td>{{ h.mac }}</td>
+          <td>{{ h.hostname }}</td>
+          <td>{{ h.last_seen }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="4">No se detectaron hosts</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+<script>
+// obtiene CSRF desde cookie (función estándar Django)
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+async function fetchStatus(){
+  try{
+    const r = await fetch('/scan_status.json');
+    const j = await r.json();
+    document.getElementById('scan_state').textContent = j.is_scanning ? 'Escaneando...' : 'Idle';
+    document.getElementById('last_scan').textContent = j.last_scan_at ? new Date(j.last_scan_at).toLocaleString() : '--';
+  }catch(e){
+    console.error(e);
+  }
+}
+
+async function fetchHosts(){
+  try{
+    const r = await fetch('/hosts.json');
+    const j = await r.json();
+    const tbody = document.querySelector('#hosts_table tbody');
+    tbody.innerHTML = '';
+    if(!j.hosts.length){
+      tbody.innerHTML = '<tr><td colspan="4">No se detectaron hosts</td></tr>';
+      return;
+    }
+    for(const h of j.hosts){
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${h.ip}</td><td>${h.mac||''}</td><td>${h.hostname||''}</td><td>${new Date(h.last_seen).toLocaleString()}</td>`;
+      tbody.appendChild(tr);
+    }
+  }catch(e){
+    console.error(e);
+  }
+}
+
+let pollInterval = null;
+function startPolling(){
+  fetchStatus();
+  fetchHosts();
+  pollInterval = setInterval(()=>{ fetchStatus(); fetchHosts(); }, 5000);
+}
+
+document.getElementById('force_scan').addEventListener('click', async ()=>{
+  if (!confirm('Iniciar escaneo ahora? (requiere ser usuario staff)')) return;
+
+  try {
+    const r = await fetch('/start_scan/', {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': csrftoken,
+        'Accept': 'application/json',
+      },
+      credentials: 'same-origin',
+    });
+
+    if (r.status === 200) {
+      const j = await r.json();
+      alert(j.message || 'Escaneo iniciado');
+    } else if (r.status === 401 || r.status === 302) {
+      // 302 redirect: probablemente a /admin/login/ (usuario no autenticado)
+      alert('No autorizado: iniciá sesión como usuario staff en /admin/');
+      // opcional: redirect a login
+      // window.location.href = '/admin/login/?next=/hosts/';
+    } else {
+      const j = await r.json().catch(()=>({message: 'Error desconocido'}));
+      alert(`No se pudo iniciar: ${j.message || 'error'}`);
+    }
+  } catch (e) {
+    console.error(e);
+    alert('Error realizando la petición.');
+  }
+});
+
+startPolling();
+</script>
+{% endblock %}
