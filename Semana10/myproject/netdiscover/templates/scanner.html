@@ -1,0 +1,282 @@
+{% extends "base.html" %}
+
+{% block title %}Escáner de Red{% endblock %}
+{% block content %}    
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .info {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .info p {
+            margin: 5px 0;
+            color: #555;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background: #5568d3;
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .progress {
+            background: #f0f0f0;
+            border-radius: 5px;
+            height: 30px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background: #667eea;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .results {
+            margin-top: 30px;
+        }
+        
+        .summary {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .summary.show {
+            display: block;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .error.show {
+            display: block;
+        }
+        
+        .status-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #4caf50;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Escáner de Red Local</h1>
+        
+        <div class="info">
+            <p><strong>Tu IP:</strong> {{ local_ip }}</p>
+            <p><strong>Rango de red:</strong> {{ network_range }}</p>
+        </div>
+        
+        <button id="scanBtn" onclick="startScan()">Escanear Red</button>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Escaneando red... Esto puede tomar 2-3 minutos</p>
+            <div class="progress">
+                <div class="progress-bar" id="progressBar">0%</div>
+            </div>
+        </div>
+        
+        <div class="error" id="error"></div>
+        
+        <div class="results">
+            <div class="summary" id="summary">
+                <h3>📊 Resumen del Escaneo</h3>
+                <p><strong>Red escaneada:</strong> <span id="scannedRange"></span></p>
+                <p><strong>Dispositivos encontrados:</strong> <span id="deviceCount"></span></p>
+            </div>
+            
+            <div id="resultsTable"></div>
+        </div>
+    </div>
+    
+    <script>
+        async function startScan() {
+            const btn = document.getElementById('scanBtn');
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const summary = document.getElementById('summary');
+            const resultsTable = document.getElementById('resultsTable');
+            const progressBar = document.getElementById('progressBar');
+            
+            // Limpiar
+            error.classList.remove('show');
+            summary.classList.remove('show');
+            resultsTable.innerHTML = '';
+            progressBar.style.width = '0%';
+            progressBar.textContent = '0%';
+            
+            // Mostrar loading
+            btn.disabled = true;
+            loading.classList.add('show');
+            
+            // Simular progreso (ya que no podemos tener progreso real fácilmente)
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 1;
+                if (progress <= 90) {
+                    progressBar.style.width = progress + '%';
+                    progressBar.textContent = progress + '%';
+                }
+            }, 2000); // Actualizar cada 2 segundos
+            
+            try {
+                const response = await fetch('/netdiscover/scan/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Error en la solicitud');
+                }
+                
+                const data = await response.json();
+                
+                clearInterval(progressInterval);
+                progressBar.style.width = '100%';
+                progressBar.textContent = '100%';
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                // Mostrar resumen
+                document.getElementById('scannedRange').textContent = data.network_range;
+                document.getElementById('deviceCount').textContent = data.total_devices;
+                summary.classList.add('show');
+                
+                // Mostrar tabla
+                if (data.devices && data.devices.length > 0) {
+                    let html = '<table>';
+                    html += '<tr><th>#</th><th>IP</th><th>MAC</th><th>Hostname</th></tr>';
+                    
+                    data.devices.forEach((device, index) => {
+                        html += `<tr>
+                            <td>${index + 1}</td>
+                            <td><span class="status-dot"></span>${device.ip}</td>
+                            <td>${device.mac}</td>
+                            <td>${device.hostname}</td>
+                        </tr>`;
+                    });
+                    
+                    html += '</table>';
+                    resultsTable.innerHTML = html;
+                } else {
+                    resultsTable.innerHTML = '<p>No se encontraron dispositivos en la red.</p>';
+                }
+                
+            } catch (e) {
+                clearInterval(progressInterval);
+                error.textContent = '❌ Error: ' + e.message;
+                error.classList.add('show');
+            } finally {
+                btn.disabled = false;
+                loading.classList.remove('show');
+            }
+        }
+    </script>
+{% endblock %}

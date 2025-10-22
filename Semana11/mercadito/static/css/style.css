@@ -1,0 +1,11 @@
+body {
+  background-color: #f7f7f7;
+}
+
+.table-success {
+  font-weight: bold;
+}
+
+.navbar-brand {
+  font-weight: 600;
+}

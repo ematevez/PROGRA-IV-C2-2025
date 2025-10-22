@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Comparar precios{% endblock %}
+{% block content %}
+
+<h2>Comparar precios 🔎</h2>
+<form method="get" class="d-flex mb-4">
+  <input type="text" name="producto" class="form-control me-2" placeholder="Buscar producto..." required>
+  <button type="submit" class="btn btn-success">Buscar</button>
+</form>
+
+{% if data %}
+  <h4>Resultados para: <strong>{{ producto }}</strong></h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Supermercado</th>
+        <th>Precio</th>
+        <th>Enlace</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in data.fuentes %}
+      <tr {% if item.precio == data.mejor_precio %}class="table-success"{% endif %}>
+        <td>{{ item.supermercado }}</td>
+        <td>${{ item.precio }}</td>
+        <td><a href="{{ item.url }}" target="_blank">Ir al sitio</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% elif producto %}
+  <p>No se encontraron precios para “{{ producto }}”.</p>
+{% endif %}
+
+{% endblock %}

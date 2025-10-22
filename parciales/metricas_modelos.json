@@ -1,0 +1,23 @@
+{
+  "gemma3:4b": {
+    "usos": 3,
+    "exitos": 1,
+    "fallos": 2,
+    "tiempo_promedio": 6036.799143632253,
+    "calidad_promedio": 7.0
+  },
+  "qwen2.5:3b": {
+    "usos": 3,
+    "exitos": 1,
+    "fallos": 2,
+    "tiempo_promedio": 229.9899512132009,
+    "calidad_promedio": 7.0
+  },
+  "mi-modelo-evolutivo": {
+    "usos": 0,
+    "exitos": 0,
+    "fallos": 0,
+    "tiempo_promedio": 0,
+    "calidad_promedio": 0
+  }
+}

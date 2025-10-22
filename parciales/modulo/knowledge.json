@@ -1,0 +1,3364 @@
+{
+  "logs": [
+    {
+      "time": "2025-10-15 20:58:53",
+      "message": "🚀 Sistema autoevolutivo iniciado."
+    },
+    {
+      "time": "2025-10-15 20:59:22",
+      "message": "🚀 Sistema autoevolutivo iniciado."
+    },
+    {
+      "time": "2025-10-15 21:01:22",
+      "message": "🤖 Iniciando mejora autónoma..."
+    },
+    {
+      "time": "2025-10-15 21:01:23",
+      "message": "No se generó código nuevo."
+    },
+    {
+      "time": "2025-10-15 21:03:23",
+      "message": "🤖 Iniciando mejora autónoma..."
+    },
+    {
+      "time": "2025-10-15 21:03:23",
+      "message": "No se generó código nuevo."
+    },
+    {
+      "time": "2025-10-15 21:05:23",
+      "message": "🤖 Iniciando mejora autónoma..."
+    },
+    {
+      "time": "2025-10-15 21:05:24",
+      "message": "No se generó código nuevo."
+    },
+    {
+      "time": "2025-10-15 21:07:24",
+      "message": "🤖 Iniciando mejora autónoma..."
+    },
+    {
+      "time": "2025-10-15 21:07:24",
+      "message": "No se generó código nuevo."
+    },
+    {
+      "time": "2025-10-15 21:09:25",
+      "message": "🤖 Iniciando mejora autónoma..."
+    },
+    {
+      "time": "2025-10-15 21:09:25",
+      "message": "No se generó código nuevo."
+    },
+    {
+      "time": "2025-10-15 21:11:25",
+      "message": "🤖 Iniciando mejora autónoma..."
+    },
+    {
+      "time": "2025-10-15 21:11:25",
+      "message": "No se generó código nuevo."
+    },
+    {
+      "time": "2025-10-15 21:13:26",
+      "message": "🤖 Iniciando mejora autónoma..."
+    },
+    {
+      "time": "2025-10-15 21:13:26",
+      "message": "No se generó código nuevo."
+    },
+    {
+      "time": "2025-10-15 21:15:26",
+      "message": "🤖 Iniciando mejora autónoma..."
+    },
+    {
+      "time": "2025-10-15 21:15:26",
+      "message": "No se generó código nuevo."
+    },
+    {
+      "time": "2025-10-15 21:17:27",
+      "message": "🤖 Iniciando mejora autónoma..."
+    },
+    {
+      "time": "2025-10-15 21:17:27",
+      "message": "No se generó código nuevo."
+    },
+    {
+      "time": "2025-10-15 21:18:05",
+      "message": "🚀 Sistema autoevolutivo iniciado."
+    },
+    {
+      "time": "2025-10-15 21:20:06",
+      "message": "🤖 Iniciando mejora autónoma..."
+    },
+    {
+      "time": "2025-10-15 21:20:06",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-15 21:29:21",
+      "message": "🚀 Sistema autoevolutivo iniciado."
+    },
+    {
+      "time": "2025-10-15 21:31:22",
+      "message": "🤖 Iniciando mejora autónoma..."
+    },
+    {
+      "time": "2025-10-15 21:31:22",
+      "message": "Usando prompt: quiero que tengas una interface grafica"
+    },
+    {
+      "time": "2025-10-15 21:45:02",
+      "message": "Usando prompt: quiero que tus textos sean mas amigables"
+    },
+    {
+      "time": "2025-10-15 22:33:06",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-15 22:33:06",
+      "message": "Backup creado: core_backup_20251015_223306.py"
+    },
+    {
+      "time": "2025-10-15 22:33:06",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-15 22:35:07",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 00:17:23",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 00:17:23",
+      "message": "Backup creado: core_backup_20251016_001723.py"
+    },
+    {
+      "time": "2025-10-16 00:17:23",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 00:19:23",
+      "message": "Usando prompt: hacer un entorno grafico"
+    },
+    {
+      "time": "2025-10-16 00:26:01",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 00:26:01",
+      "message": "Backup creado: core_backup_20251016_002601.py"
+    },
+    {
+      "time": "2025-10-16 00:26:01",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 00:28:01",
+      "message": "Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 00:31:59",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 00:31:59",
+      "message": "Backup creado: core_backup_20251016_003159.py"
+    },
+    {
+      "time": "2025-10-16 00:31:59",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 00:33:59",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 00:37:36",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 00:37:36",
+      "message": "Backup creado: core_backup_20251016_003736.py"
+    },
+    {
+      "time": "2025-10-16 00:37:36",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 00:39:36",
+      "message": "Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 00:45:01",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 00:45:01",
+      "message": "Backup creado: core_backup_20251016_004501.py"
+    },
+    {
+      "time": "2025-10-16 00:45:01",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 00:47:01",
+      "message": "Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 00:50:58",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 00:50:58",
+      "message": "Backup creado: core_backup_20251016_005058.py"
+    },
+    {
+      "time": "2025-10-16 00:50:58",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 00:52:58",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 01:01:44",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 01:01:44",
+      "message": "Backup creado: core_backup_20251016_010144.py"
+    },
+    {
+      "time": "2025-10-16 01:01:44",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 01:03:44",
+      "message": "Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 01:08:23",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 01:08:23",
+      "message": "Backup creado: core_backup_20251016_010823.py"
+    },
+    {
+      "time": "2025-10-16 01:08:23",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 01:10:23",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 01:15:40",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 01:15:40",
+      "message": "Backup creado: core_backup_20251016_011540.py"
+    },
+    {
+      "time": "2025-10-16 01:15:40",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 01:17:40",
+      "message": "Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 01:21:21",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 01:21:21",
+      "message": "Backup creado: core_backup_20251016_012121.py"
+    },
+    {
+      "time": "2025-10-16 01:21:21",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 01:23:21",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 01:29:40",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 01:29:40",
+      "message": "Backup creado: core_backup_20251016_012940.py"
+    },
+    {
+      "time": "2025-10-16 01:29:40",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 01:31:40",
+      "message": "Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 01:36:09",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 01:36:09",
+      "message": "Backup creado: core_backup_20251016_013609.py"
+    },
+    {
+      "time": "2025-10-16 01:36:09",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 01:38:09",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 01:45:28",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 01:45:28",
+      "message": "Backup creado: core_backup_20251016_014528.py"
+    },
+    {
+      "time": "2025-10-16 01:45:28",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 01:47:28",
+      "message": "Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 01:55:11",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 01:55:11",
+      "message": "Backup creado: core_backup_20251016_015511.py"
+    },
+    {
+      "time": "2025-10-16 01:55:11",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 01:57:11",
+      "message": "Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 02:02:28",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 02:02:28",
+      "message": "Backup creado: core_backup_20251016_020228.py"
+    },
+    {
+      "time": "2025-10-16 02:02:28",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 02:04:28",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 02:11:49",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 02:11:49",
+      "message": "Backup creado: core_backup_20251016_021149.py"
+    },
+    {
+      "time": "2025-10-16 02:11:49",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 02:13:49",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 02:17:55",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 02:17:55",
+      "message": "Backup creado: core_backup_20251016_021755.py"
+    },
+    {
+      "time": "2025-10-16 02:17:55",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 02:19:55",
+      "message": "Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 02:25:29",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 02:25:29",
+      "message": "Backup creado: core_backup_20251016_022529.py"
+    },
+    {
+      "time": "2025-10-16 02:25:29",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 02:27:29",
+      "message": "Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 02:31:40",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 02:31:40",
+      "message": "Backup creado: core_backup_20251016_023140.py"
+    },
+    {
+      "time": "2025-10-16 02:31:40",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 02:33:40",
+      "message": "Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 02:38:12",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 02:38:12",
+      "message": "Backup creado: core_backup_20251016_023812.py"
+    },
+    {
+      "time": "2025-10-16 02:38:12",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 02:40:12",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 02:45:47",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 02:45:47",
+      "message": "Backup creado: core_backup_20251016_024547.py"
+    },
+    {
+      "time": "2025-10-16 02:45:47",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 02:47:47",
+      "message": "Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 02:51:57",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 02:51:57",
+      "message": "Backup creado: core_backup_20251016_025157.py"
+    },
+    {
+      "time": "2025-10-16 02:51:57",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 02:53:57",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 03:01:00",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 03:01:00",
+      "message": "Backup creado: core_backup_20251016_030100.py"
+    },
+    {
+      "time": "2025-10-16 03:01:00",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 03:03:00",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 03:10:39",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 03:10:39",
+      "message": "Backup creado: core_backup_20251016_031039.py"
+    },
+    {
+      "time": "2025-10-16 03:10:39",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 03:12:39",
+      "message": "Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 03:17:02",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 03:17:02",
+      "message": "Backup creado: core_backup_20251016_031702.py"
+    },
+    {
+      "time": "2025-10-16 03:17:02",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 03:19:02",
+      "message": "Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 03:23:01",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 03:23:01",
+      "message": "Backup creado: core_backup_20251016_032301.py"
+    },
+    {
+      "time": "2025-10-16 03:23:01",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 03:25:01",
+      "message": "Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 03:28:39",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 03:28:39",
+      "message": "Backup creado: core_backup_20251016_032839.py"
+    },
+    {
+      "time": "2025-10-16 03:28:39",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 03:30:39",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 03:35:44",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 03:35:44",
+      "message": "Backup creado: core_backup_20251016_033544.py"
+    },
+    {
+      "time": "2025-10-16 03:35:44",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 03:37:44",
+      "message": "Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 03:40:55",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 03:40:55",
+      "message": "Backup creado: core_backup_20251016_034055.py"
+    },
+    {
+      "time": "2025-10-16 03:40:55",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 03:42:55",
+      "message": "Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 03:47:57",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 03:47:57",
+      "message": "Backup creado: core_backup_20251016_034757.py"
+    },
+    {
+      "time": "2025-10-16 03:47:57",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 03:49:57",
+      "message": "Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 03:53:13",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 03:53:13",
+      "message": "Backup creado: core_backup_20251016_035313.py"
+    },
+    {
+      "time": "2025-10-16 03:53:13",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 09:06:42",
+      "message": "Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 09:11:34",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 09:11:34",
+      "message": "Backup creado: core_backup_20251016_091134.py"
+    },
+    {
+      "time": "2025-10-16 09:11:34",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 09:13:35",
+      "message": "Usando prompt: quiero que tengas un entorno grafico con flask o django"
+    },
+    {
+      "time": "2025-10-16 09:57:46",
+      "message": "Ningún modelo generó código válido."
+    },
+    {
+      "time": "2025-10-16 09:59:46",
+      "message": "Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 11:23:03",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 11:23:03",
+      "message": "Backup creado: core_backup_20251016_112303.py"
+    },
+    {
+      "time": "2025-10-16 11:23:03",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 11:25:03",
+      "message": "Usando prompt: podrias escanear  la red local"
+    },
+    {
+      "time": "2025-10-16 11:29:37",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 11:29:37",
+      "message": "Backup creado: core_backup_20251016_112937.py"
+    },
+    {
+      "time": "2025-10-16 11:29:37",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 11:31:37",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 11:38:15",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 11:38:15",
+      "message": "Backup creado: core_backup_20251016_113815.py"
+    },
+    {
+      "time": "2025-10-16 11:38:15",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 11:40:15",
+      "message": "Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 11:46:03",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 11:46:03",
+      "message": "Backup creado: core_backup_20251016_114603.py"
+    },
+    {
+      "time": "2025-10-16 11:46:03",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 11:48:03",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 11:51:53",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 11:51:53",
+      "message": "Backup creado: core_backup_20251016_115153.py"
+    },
+    {
+      "time": "2025-10-16 11:51:53",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 11:53:53",
+      "message": "Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 11:57:53",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 11:57:53",
+      "message": "Backup creado: core_backup_20251016_115753.py"
+    },
+    {
+      "time": "2025-10-16 11:57:53",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 11:59:53",
+      "message": "Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 12:03:10",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:03:10",
+      "message": "Backup creado: core_backup_20251016_120310.py"
+    },
+    {
+      "time": "2025-10-16 12:03:10",
+      "message": "core.py actualizado con éxito."
+    },
+    {
+      "time": "2025-10-16 12:05:10",
+      "message": "Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 12:14:06",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 12:16:23",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:19:11",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:19:11",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 12:21:11",
+      "message": "🤖 Usando prompt: usara un entorno grafico como ser pygame o tkinter para poder interactuar con el usuario"
+    },
+    {
+      "time": "2025-10-16 12:24:00",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:25:55",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:25:55",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 12:27:55",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 12:30:24",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:32:05",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:32:06",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 12:34:06",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 12:36:19",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:38:03",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:38:03",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 12:40:03",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 12:42:05",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:43:31",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:43:31",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 12:45:31",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 12:48:35",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:48:35",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 12:50:35",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 12:52:30",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:55:28",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 12:55:28",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 12:57:28",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 12:59:55",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:01:40",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:01:40",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 13:03:40",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 13:05:25",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:06:42",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:06:42",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 13:08:42",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 13:10:48",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:13:28",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:13:28",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 13:15:28",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 13:17:40",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:19:08",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:19:08",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 13:21:08",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 13:23:14",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:24:30",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:24:30",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 13:26:30",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 13:28:34",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:29:54",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:29:54",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 13:31:54",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 13:34:07",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:35:44",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:35:44",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 13:37:44",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 13:39:45",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:41:34",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:41:34",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 13:43:34",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 13:45:47",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:47:10",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:47:10",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 13:49:10",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 13:51:10",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:52:47",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:52:47",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 13:54:47",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 13:56:56",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:58:24",
+      "message": "⚠️ qwen2.5:3b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 13:58:24",
+      "message": "❌ Ningún modelo generó código válido."
+    },
+    {
+      "time": "2025-10-16 14:00:24",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 14:02:44",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:04:39",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:04:40",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 14:06:40",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 14:09:51",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:09:51",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 14:11:51",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 14:14:24",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:17:01",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:17:01",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 14:19:01",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 14:21:22",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:23:02",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:23:02",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 14:25:02",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 14:27:25",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:28:47",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:28:48",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 14:30:48",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 14:33:12",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:35:07",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:35:08",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 14:37:08",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 14:39:23",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:41:02",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:41:02",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 14:43:02",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 14:45:22",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:47:20",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:47:20",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 14:49:20",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 14:52:44",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 14:52:44",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 14:54:44",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 14:57:25",
+      "message": "⚠️ gemma3:4b no produjo una versión válida."
+    },
+    {
+      "time": "2025-10-16 15:00:04",
+      "message": "✅ qwen2.5:3b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 15:00:04",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 15:02:04",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 15:05:09",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 15:05:09",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 15:07:09",
+      "message": "🤖 Usando prompt: print(core_agent.decision_log) dosent work and the core.py dosent nothing"
+    },
+    {
+      "time": "2025-10-16 15:09:36",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 15:09:37",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 15:11:37",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 15:14:23",
+      "message": "✅ gemma3:4b generó una versión válida."
+    },
+    {
+      "time": "2025-10-16 15:14:23",
+      "message": "❌ Nuevo core rechazado (falló las pruebas)."
+    },
+    {
+      "time": "2025-10-16 15:16:23",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 15:18:07",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 15:18:07",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:19:01",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:19:01",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:21:13",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 15:21:13",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:21:44",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:21:44",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:23:44",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 15:23:44",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:24:21",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:24:21",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:26:21",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 15:26:21",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:26:54",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:26:54",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:28:54",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 15:28:54",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:29:33",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:29:33",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:31:33",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 15:31:33",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:32:03",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:32:03",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:34:03",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 15:34:03",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:34:34",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:34:34",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:36:34",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 15:36:34",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:37:09",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:37:10",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:39:10",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 15:39:10",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:39:46",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:39:46",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:41:46",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 15:41:46",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:42:31",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:42:31",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:44:31",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 15:44:31",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:45:07",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:45:07",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:47:07",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 15:47:07",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:47:38",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:47:38",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:49:38",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 15:49:38",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:50:12",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:50:12",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:52:12",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 15:52:12",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:52:48",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:52:49",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:54:49",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 15:54:49",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:55:21",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:55:21",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:57:21",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 15:57:21",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 15:57:53",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 15:57:53",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 15:59:54",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 15:59:54",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:00:27",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:00:27",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:02:27",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 16:02:27",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:03:02",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:03:02",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:05:02",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 16:05:02",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:05:32",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:05:32",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:07:32",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 16:07:32",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:08:00",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:08:00",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:10:00",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 16:10:00",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:10:31",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:10:31",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:12:31",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 16:12:31",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:13:05",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:13:06",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:15:06",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 16:15:06",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:15:34",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:15:34",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:17:34",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 16:17:34",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:18:01",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:18:02",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:20:02",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 16:20:02",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:20:29",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:20:29",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:22:29",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 16:22:29",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:23:01",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:23:01",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:25:01",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 16:25:01",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:25:34",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:25:35",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:27:35",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 16:27:35",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:28:00",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:28:01",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:30:01",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 16:30:01",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:30:45",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:30:45",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:32:45",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 16:32:45",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:33:18",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:33:19",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:35:19",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 16:35:19",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:35:47",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:35:47",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:37:47",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 16:37:47",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:38:17",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:38:17",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:40:17",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 16:40:17",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:40:57",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:40:57",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 16:42:57",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 16:42:57",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 16:43:34",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 16:43:34",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:07:14",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 20:07:14",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:08:10",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:08:10",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:10:10",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 20:10:10",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:10:37",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:10:37",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:12:37",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 20:12:37",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:13:07",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:13:07",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:15:07",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 20:15:07",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:15:42",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:15:42",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:17:42",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 20:17:42",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:18:12",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:18:12",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:20:12",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 20:20:12",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:20:44",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:20:44",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:22:44",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 20:22:44",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:23:12",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:23:12",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:25:12",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 20:25:12",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:25:39",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:25:39",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:27:39",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 20:27:39",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:28:30",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:28:30",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:30:30",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 20:30:30",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:31:06",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:31:07",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:33:07",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 20:33:07",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:33:32",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:33:32",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:35:32",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 20:35:32",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:36:01",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:36:01",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:38:01",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 20:38:01",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:38:30",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:38:30",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:40:30",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 20:40:30",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:40:54",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:40:54",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:42:54",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 20:42:54",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:43:21",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:43:21",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:45:22",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 20:45:22",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:45:46",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:45:46",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:47:46",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 20:47:46",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:48:15",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:48:15",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:50:15",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 20:50:15",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:50:48",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:50:48",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:52:48",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 20:52:48",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:53:20",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:53:20",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:55:20",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 20:55:20",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:55:46",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:55:46",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 20:57:46",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 20:57:46",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 20:58:17",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 20:58:17",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:00:17",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 21:00:17",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:00:46",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:00:46",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:02:46",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 21:02:46",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:03:15",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:03:15",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:05:15",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 21:05:15",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:05:45",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:05:45",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:07:45",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 21:07:45",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:08:22",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:08:23",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:10:23",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 21:10:23",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:10:56",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:10:56",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:12:56",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 21:12:56",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:13:29",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:13:29",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:15:29",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 21:15:29",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:16:04",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:16:04",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:18:04",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 21:18:05",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:18:35",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:18:35",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:20:35",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 21:20:35",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:21:05",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:21:06",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:23:06",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 21:23:06",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:23:38",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:23:39",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:25:39",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 21:25:39",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:26:09",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:26:09",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:28:09",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 21:28:09",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:29:01",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:29:01",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:31:01",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 21:31:01",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:31:31",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:31:31",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:33:31",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 21:33:31",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:34:00",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:34:00",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:36:00",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 21:36:00",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:36:29",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:36:29",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:38:29",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 21:38:29",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:39:05",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:39:05",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:41:05",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 21:41:05",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:41:36",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:41:36",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:43:36",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 21:43:36",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:44:21",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:44:21",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:46:22",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 21:46:22",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:46:53",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:46:53",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:48:53",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 21:48:53",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:49:38",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:49:38",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:51:38",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 21:51:38",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:52:09",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:52:09",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:54:09",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 21:54:09",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:54:40",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:54:40",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:56:40",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 21:56:40",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:57:11",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:57:11",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 21:59:11",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 21:59:11",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 21:59:40",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 21:59:40",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:01:40",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 22:01:40",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:02:09",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:02:09",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:04:09",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 22:04:09",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:04:37",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:04:37",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:06:37",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 22:06:37",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:07:07",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:07:07",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:09:07",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 22:09:07",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:09:35",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:09:35",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:11:35",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 22:11:35",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:12:06",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:12:06",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:14:06",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 22:14:06",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:14:43",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:14:44",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:16:44",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 22:16:44",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:17:17",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:17:17",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:19:17",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 22:19:17",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:19:49",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:19:49",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:21:49",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 22:21:49",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:22:18",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:22:18",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:24:18",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 22:24:18",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:24:46",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:24:46",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:26:46",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 22:26:46",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:27:22",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:27:22",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:29:22",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-16 22:29:22",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:29:48",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:29:48",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:31:48",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 22:31:48",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:32:36",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:32:36",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:34:36",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 22:34:36",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:35:07",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:35:07",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:37:07",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-16 22:37:07",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:37:36",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:37:36",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:39:36",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 22:39:36",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:40:10",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:40:10",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:42:10",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 22:42:10",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:42:40",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:42:41",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:44:41",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-16 22:44:41",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:45:13",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:45:13",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-16 22:47:14",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-16 22:47:14",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-16 22:47:45",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-16 22:47:45",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 09:45:14",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-17 09:45:14",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 09:46:01",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 09:46:01",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 09:48:01",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-17 09:48:01",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 09:48:26",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 09:48:26",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 09:50:26",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-17 09:50:26",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 09:50:56",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 09:50:56",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 09:52:56",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-17 09:52:56",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 09:53:26",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 09:53:27",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 09:55:27",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-17 09:55:27",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 09:55:50",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 09:55:50",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 09:57:50",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-17 09:57:50",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 09:58:16",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 09:58:16",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:00:16",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-17 10:00:16",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:00:43",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:00:43",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:02:43",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-17 10:02:43",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:03:11",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:03:11",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:05:11",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-17 10:05:11",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:05:40",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:05:40",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:07:40",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-17 10:07:40",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:08:10",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:08:10",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:10:10",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-17 10:10:10",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:10:36",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:10:36",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:12:36",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-17 10:12:36",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:13:04",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:13:04",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:15:04",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-17 10:15:04",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:15:31",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:15:32",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:17:32",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-17 10:17:32",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:17:58",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:17:59",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:19:59",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-17 10:19:59",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:20:31",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:20:32",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:22:32",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-17 10:22:32",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:23:08",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:23:08",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:25:08",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-17 10:25:08",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:25:34",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:25:34",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:27:34",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-17 10:27:34",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:28:04",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:28:04",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:30:04",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-17 10:30:04",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:30:31",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:30:31",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:32:31",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-17 10:32:31",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:32:57",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:32:57",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:34:57",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-17 10:34:57",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:35:21",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:35:21",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:37:21",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-17 10:37:21",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:37:44",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:37:44",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:39:44",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-17 10:39:44",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:40:09",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:40:09",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:42:09",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-17 10:42:09",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:42:37",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:42:37",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:44:37",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-17 10:44:37",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:45:04",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:45:04",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:47:04",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-17 10:47:04",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:47:34",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:47:34",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:49:34",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-17 10:49:34",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:50:01",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:50:01",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:52:01",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-17 10:52:01",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:52:29",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:52:29",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:54:29",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-17 10:54:29",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:54:58",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:54:58",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:56:58",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-17 10:56:58",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 10:57:46",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 10:57:46",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 10:59:46",
+      "message": "🤖 Usando prompt: agrega verificación adicional antes de sobrescribirse"
+    },
+    {
+      "time": "2025-10-17 10:59:46",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 11:00:17",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 11:00:18",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 11:02:18",
+      "message": "🤖 Usando prompt: refactoriza el código para hacerlo más legible y eficiente"
+    },
+    {
+      "time": "2025-10-17 11:02:18",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 11:02:43",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 11:02:43",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 11:04:43",
+      "message": "🤖 Usando prompt: mejora la estabilidad del sistema de automejora"
+    },
+    {
+      "time": "2025-10-17 11:04:43",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 11:05:07",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 11:05:07",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 11:07:07",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-17 11:07:07",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 11:07:57",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 11:07:57",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    },
+    {
+      "time": "2025-10-17 11:09:57",
+      "message": "🤖 Usando prompt: optimiza el manejo de memoria y procesos"
+    },
+    {
+      "time": "2025-10-17 11:09:57",
+      "message": "🚀 Usando el modelo más reciente: qwen2.5:3b"
+    },
+    {
+      "time": "2025-10-17 11:10:24",
+      "message": "✅ Código generado correctamente por el modelo."
+    },
+    {
+      "time": "2025-10-17 11:10:24",
+      "message": "❌ Nuevo core rechazado por fallar las pruebas."
+    }
+  ]
+}

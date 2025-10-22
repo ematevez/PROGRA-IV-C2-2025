@@ -1,0 +1,7 @@
+{
+  "modelos": ["gemma3:4b", "qwen2.5:3b"],
+  "intervalo_automejora": 120,
+  "modo_seguro": true,
+  "nivel_log": "INFO",
+  "max_versiones": 10
+}

@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% block title %}Comparar Precios - {{ producto|default:"Buscar" }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="display-4">🛒 Comparador de Precios</h1>
+                <p class="lead text-muted">Coto vs Carrefour</p>
+            </div>
+
+            <!-- Formulario de búsqueda -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <form method="get" action="{% url 'comparara' %}">
+                        <div class="input-group input-group-lg">
+                            <input 
+                                type="text" 
+                                name="producto" 
+                                class="form-control" 
+                                placeholder="Ej: leche, arroz, harina..." 
+                                value="{{ producto|default:'' }}"
+                                required
+                            >
+                            <button class="btn btn-primary" type="submit">
+                                <i class="bi bi-search"></i> Comparar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {% if data %}
+                <!-- Resultados de la búsqueda -->
+                <div class="mt-4">
+                    
+                    {% if data.total_encontrados == 0 %}
+                        <!-- Sin resultados -->
+                        <div class="alert alert-warning" role="alert">
+                            <h5 class="alert-heading">😕 No se encontraron productos</h5>
+                            <p>No pudimos encontrar "{{ producto }}" en ningún supermercado. 
+                            Intentá con otro término de búsqueda.</p>
+                        </div>
+                    
+                    {% else %}
+                        <!-- Banner de mejor precio -->
+                        {% if data.mas_barato %}
+                        <div class="alert alert-success shadow-sm mb-4" role="alert">
+                            <h4 class="alert-heading">
+                                🏆 ¡Mejor Precio!
+                            </h4>
+                            <hr>
+                            <p class="mb-1">
+                                <strong>{{ data.mas_barato.supermercado }}</strong> tiene el mejor precio
+                            </p>
+                            {% if data.diferencia > 0 %}
+                            <p class="mb-0">
+                                💵 Ahorrás: <strong>${{ data.diferencia|floatformat:2 }}</strong>
+                            </p>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        <!-- Tarjetas de productos -->
+                        <div class="row">
+                            {% for resultado in data.resultados %}
+                            <div class="col-md-6 mb-4">
+                                <div class="card h-100 shadow-sm {% if data.mas_barato and resultado.supermercado == data.mas_barato.supermercado %}border-success border-3{% endif %}">
+                                    
+                                    <!-- Badge de supermercado -->
+                                    <div class="card-header text-white {% if resultado.supermercado == 'Coto Digital' %}bg-danger{% else %}bg-primary{% endif %}">
+                                        <h5 class="mb-0">
+                                            {{ resultado.supermercado }}
+                                            {% if data.mas_barato and resultado.supermercado == data.mas_barato.supermercado %}
+                                            <span class="badge bg-success float-end">Más Barato</span>
+                                            {% endif %}
+                                        </h5>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <!-- Imagen del producto -->
+                                        {% if resultado.imagen %}
+                                        <div class="text-center mb-3">
+                                            <img 
+                                                src="{{ resultado.imagen }}" 
+                                                alt="{{ resultado.nombre }}" 
+                                                class="img-fluid rounded"
+                                                style="max-height: 200px; object-fit: contain;"
+                                                onerror="this.src='https://via.placeholder.com/200x200?text=Sin+Imagen'"
+                                            >
+                                        </div>
+                                        {% endif %}
+
+                                        <!-- Nombre del producto -->
+                                        <h6 class="card-title text-truncate" title="{{ resultado.nombre }}">
+                                            📦 {{ resultado.nombre }}
+                                        </h6>
+
+                                        <!-- Precio -->
+                                        <div class="text-center my-3">
+                                            <h2 class="display-4 text-{% if data.mas_barato and resultado.supermercado == data.mas_barato.supermercado %}success{% else %}primary{% endif %}">
+                                                {{ resultado.precio }}
+                                            </h2>
+                                        </div>
+
+                                        <!-- Link al producto -->
+                                        {% if resultado.link %}
+                                        <a 
+                                            href="{{ resultado.link }}" 
+                                            target="_blank" 
+                                            class="btn btn-outline-primary w-100"
+                                        >
+                                            Ver en {{ resultado.supermercado }} 
+                                            <i class="bi bi-box-arrow-up-right"></i>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+
+                                    <!-- Footer con info adicional -->
+                                    <div class="card-footer text-muted small">
+                                        <div class="d-flex justify-content-between">
+                                            <span>💰 Precio: ${{ resultado.precio_numerico|floatformat:2 }}</span>
+                                            <span>{% if resultado.imagen %}🖼️ Con imagen{% endif %}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Tabla comparativa -->
+                        <div class="card shadow-sm mt-4">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">📊 Comparación Detallada</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Supermercado</th>
+                                                <th>Producto</th>
+                                                <th class="text-end">Precio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for resultado in data.resultados %}
+                                            <tr {% if data.mas_barato and resultado.supermercado == data.mas_barato.supermercado %}class="table-success"{% endif %}>
+                                                <td>
+                                                    <strong>{{ resultado.supermercado }}</strong>
+                                                    {% if data.mas_barato and resultado.supermercado == data.mas_barato.supermercado %}
+                                                    <span class="badge bg-success ms-2">Mejor</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td class="text-truncate" style="max-width: 300px;" title="{{ resultado.nombre }}">
+                                                    {{ resultado.nombre }}
+                                                </td>
+                                                <td class="text-end">
+                                                    <strong class="{% if data.mas_barato and resultado.supermercado == data.mas_barato.supermercado %}text-success{% endif %}">
+                                                        {{ resultado.precio }}
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endif %}
+                </div>
+            {% else %}
+                <!-- Estado inicial -->
+                <div class="text-center text-muted py-5">
+                    <i class="bi bi-search" style="font-size: 4rem;"></i>
+                    <p class="lead mt-3">Ingresá un producto para comparar precios</p>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<!-- Loading overlay (opcional) -->
+<style>
+    .card {
+        transition: transform 0.2s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .border-3 {
+        border-width: 3px !important;
+    }
+</style>
+
+<!-- Script para mostrar loading (opcional) -->
+<script>
+document.querySelector('form').addEventListener('submit', function() {
+    const btn = this.querySelector('button[type="submit"]');
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Buscando...';
+    btn.disabled = true;
+});
+</script>
+{% endblock %}

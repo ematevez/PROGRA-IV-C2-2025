@@ -7,7 +7,7 @@ class Command(BaseCommand):
     help = "Escanea la red local y guarda IPs/MACs en la DB."
 
     def add_arguments(self, parser):
-        parser.add_argument('--network', type=str, help='Red CIDR, ej 192.168.1.0/24')
+        parser.add_argument('--network', type=str, help='Red CIDR, ej 192.168.10.0/255')
         parser.add_argument('--method', type=str, choices=['nmap','scapy','ping'], default='nmap',
                             help='Metodo de escaneo: nmap (por defecto), scapy (necesita root), ping (broadcast via ping+arp)')
 

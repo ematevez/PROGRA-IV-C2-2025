@@ -1,0 +1,445 @@
+#!/usr/bin/env python3
+# sistema_evolutivo_fix.py
+"""
+Versión corregida y funcional del núcleo del SistemaEvolutivo.
+Reparaciones: ejecutar(), monitor_inactividad, backups al escribir, manejo ollama fail-safe.
+"""
+import os
+import sys
+import time
+import json
+import threading
+import subprocess
+from datetime import datetime
+from collections import defaultdict
+
+# --- CONFIG ---
+MODELOS_BASE = ["gemma3:4b", "qwen2.5:3b"]
+MODELO_ENTRENADO = "mi-modelo-evolutivo"
+ARCHIVO_YO_MISMO = os.path.abspath(__file__)
+ARCHIVO_DATASET = "dataset_entrenamiento.jsonl"
+ARCHIVO_METRICAS = "metricas_modelos.json"
+ARCHIVO_CONOCIMIENTO = "conocimiento.json"
+MIN_DATOS_ENTRENAMIENTO = 5
+TIEMPO_INACTIVIDAD = 120  # segundos
+
+# --- Estado global ---
+ultima_actividad = time.time()
+modo_autonomo_activo = False
+
+# --- Helpers Ollama (fail-safe) ---
+def ollama_available():
+    try:
+        # quick check: ollama --version
+        p = subprocess.run(["ollama", "--version"], capture_output=True, text=True)
+        return p.returncode == 0
+    except Exception:
+        return False
+
+def ollama_chat_safe(model, messages):
+    """
+    Wrapper que intenta llamar a Ollama y devuelve dict o lanza excepción con mensaje claro.
+    """
+    if not ollama_available():
+        raise RuntimeError("Ollama no disponible (asegurate de 'ollama serve' y 'ollama login' si es necesario).")
+    try:
+        import ollama
+        return ollama.chat(model=model, messages=messages)
+    except Exception as e:
+        raise RuntimeError(f"Error en ollama.chat: {e}")
+
+# ============ DatasetManager (simplificado) ============
+class DatasetManager:
+    def __init__(self):
+        self.datos = self.cargar_dataset()
+
+    def cargar_dataset(self):
+        datos = []
+        if os.path.exists(ARCHIVO_DATASET):
+            with open(ARCHIVO_DATASET, 'r', encoding='utf-8') as f:
+                for linea in f:
+                    linea = linea.strip()
+                    if not linea:
+                        continue
+                    try:
+                        datos.append(json.loads(linea))
+                    except Exception:
+                        print("⚠️ Línea JSON inválida en dataset, se ignora.")
+        return datos
+
+    def agregar_ejemplo(self, instruccion, codigo_entrada, codigo_salida, modelo_usado, calidad):
+        ejemplo = {
+            "timestamp": datetime.now().isoformat(),
+            "prompt": f"Modifica este código: {instruccion}\n\nCÓDIGO:\n{codigo_entrada}",
+            "completion": codigo_salida,
+            "modelo": modelo_usado,
+            "calidad": calidad,
+            "longitud_entrada": len(codigo_entrada),
+            "longitud_salida": len(codigo_salida)
+        }
+        self.datos.append(ejemplo)
+        with open(ARCHIVO_DATASET, 'a', encoding='utf-8') as f:
+            f.write(json.dumps(ejemplo, ensure_ascii=False) + '\n')
+        print(f"   📊 Dataset: {len(self.datos)} ejemplos")
+
+    def tiene_suficientes_datos(self):
+        return len(self.datos) >= MIN_DATOS_ENTRENAMIENTO
+
+    def generar_modelfile(self):
+        if len(self.datos) < MIN_DATOS_ENTRENAMIENTO:
+            return None
+        buenos = [d for d in self.datos if d.get('calidad', 0) >= 7]
+        if len(buenos) < 3:
+            buenos = sorted(self.datos, key=lambda x: x.get('calidad', 0), reverse=True)[:10]
+        content = f"FROM {MODELOS_BASE[0]}\n\n# Modelfile generado automáticamente\n"
+        for i, e in enumerate(buenos[:5]):
+            content += f"\n# Ejemplo {i+1}\nTEMPLATE \"\"\"Usuario: {e['prompt'][:200]}...\"\nAsistente: {e['completion'][:200]}...\"\"\"\n"
+        return content
+
+# ============ EvaluadorModelos ============
+class EvaluadorModelos:
+    def __init__(self):
+        self.metricas = self.cargar_metricas()
+
+    def cargar_metricas(self):
+        if os.path.exists(ARCHIVO_METRICAS):
+            try:
+                with open(ARCHIVO_METRICAS, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+            except Exception:
+                print("⚠️ metricas JSON inválido, se reinician métricas.")
+        base = {m: {"usos":0,"exitos":0,"fallos":0,"tiempo_promedio":0,"calidad_promedio":0} for m in MODELOS_BASE+[MODELO_ENTRENADO]}
+        return base
+
+    def guardar_metricas(self):
+        with open(ARCHIVO_METRICAS, 'w', encoding='utf-8') as f:
+            json.dump(self.metricas, f, indent=2)
+
+    def registrar_uso(self, modelo, tiempo, exito, calidad=None):
+        if modelo not in self.metricas:
+            self.metricas[modelo] = {"usos":0,"exitos":0,"fallos":0,"tiempo_promedio":0,"calidad_promedio":0}
+        m = self.metricas[modelo]
+        m["usos"] += 1
+        if exito:
+            m["exitos"] += 1
+            if calidad:
+                m["calidad_promedio"] = (m["calidad_promedio"] * (m["exitos"]-1) + calidad) / m["exitos"]
+        else:
+            m["fallos"] += 1
+        m["tiempo_promedio"] = (m["tiempo_promedio"] * (m["usos"]-1) + tiempo) / m["usos"]
+        self.guardar_metricas()
+
+    def obtener_mejor_modelo(self):
+        mejor, mejor_score = None, -1
+        for modelo, stats in self.metricas.items():
+            if stats["usos"] == 0:
+                continue
+            tasa_exito = stats["exitos"] / stats["usos"]
+            calidad = stats["calidad_promedio"] / 10
+            velocidad = 1 / (stats["tiempo_promedio"] + 1)
+            score = tasa_exito*0.5 + calidad*0.3 + velocidad*0.2
+            if score > mejor_score:
+                mejor_score = score
+                mejor = modelo
+        return mejor if mejor else MODELOS_BASE[0]
+
+    def mostrar_ranking(self):
+        print("\n📊 RANKING DE MODELOS")
+        for modelo, stats in self.metricas.items():
+            print(f"- {modelo}: usos={stats['usos']} éxitos={stats['exitos']} calidad={stats['calidad_promedio']:.1f}")
+
+# ============ AnalizadorAutonomo (correcciones) ============
+class AnalizadorAutonomo:
+    def __init__(self, archivo_fuente=None):
+        # permitir pasar archivo (útil para tests)
+        self.archivo = archivo_fuente or ARCHIVO_YO_MISMO
+        self.analisis_cache = []
+
+    def analizar_codigo_propio(self):
+        try:
+            with open(self.archivo, 'r', encoding='utf-8') as f:
+                codigo_actual = f.read()
+        except Exception as e:
+            print(f"⚠️ No se pudo leer archivo fuente ({self.archivo}): {e}")
+            return None
+
+        # métricas simples
+        num_lineas = len(codigo_actual.splitlines())
+        num_funciones = codigo_actual.count('def ')
+        num_clases = codigo_actual.count('class ')
+
+        prompt = f"Analiza y sugiere UNA mejora concreta para este código ({self.archivo}). Líneas:{num_lineas} funciones:{num_funciones} clases:{num_clases}.\n\n{codigo_actual[:4000]}"
+
+        try:
+            # usar wrapper seguro
+            resp = ollama_chat_safe(MODELOS_BASE[0], [{'role':'user','content':prompt}])
+            contenido = resp.get('message', {}).get('content', '') if isinstance(resp, dict) else ''
+        except Exception as e:
+            print(f"⚠️ Ollama no disponible para análisis: {e}")
+            # fallback heurístico: sugerir cache en memoria
+            return {'mejora': 'Implementar cache en memoria para respuestas frecuentes', 'razon': 'Reduce llamadas repetidas a modelos', 'timestamp': datetime.now().isoformat()}
+
+        # parseo simple
+        if 'MEJORA:' in contenido and 'RAZÓN:' in contenido:
+            try:
+                mejora = contenido.split('MEJORA:')[1].split('RAZÓN:')[0].strip()
+                razon = contenido.split('RAZÓN:')[1].strip()
+                return {'mejora': mejora, 'razon': razon, 'timestamp': datetime.now().isoformat()}
+            except Exception:
+                pass
+        # fallback: primera línea significativa
+        for linea in contenido.splitlines():
+            linea = linea.strip()
+            if linea:
+                return {'mejora': linea[:200], 'razon': 'Auto-generado', 'timestamp': datetime.now().isoformat()}
+        return None
+
+    def generar_mejora_emergente(self):
+        prompt = "Genera una idea innovadora y corta para mejorar un sistema auto-entrenante (una frase)."
+        try:
+            resp = ollama_chat_safe(MODELOS_BASE[-1], [{'role':'user','content':prompt}])
+            idea = resp.get('message', {}).get('content', '').strip()
+            idea = idea.splitlines()[0].split('.')[0]
+            return idea[:200]
+        except Exception as e:
+            print("⚠️ Ollama no disponible para idea emergente:", e)
+            return "sistema de cache episódica para conversaciones"
+
+# ============ EntrenadorModelo (simplificado) ============
+class EntrenadorModelo:
+    def __init__(self, dataset_manager):
+        self.dataset = dataset_manager
+        self.modelo_existe = False
+
+    def verificar_modelo_existe(self):
+        try:
+            p = subprocess.run(['ollama','show', MODELO_ENTRENADO], capture_output=True, text=True)
+            self.modelo_existe = (p.returncode == 0)
+            return self.modelo_existe
+        except Exception:
+            self.modelo_existe = False
+            return False
+
+    def entrenar(self):
+        if not self.dataset.tiene_suficientes_datos():
+            print("⚠️ No hay suficientes ejemplos para entrenar.")
+            return False
+        modelfile = self.dataset.generar_modelfile()
+        if not modelfile:
+            print("⚠️ No se pudo generar Modelfile.")
+            return False
+        with open('Modelfile', 'w', encoding='utf-8') as f:
+            f.write(modelfile)
+        try:
+            res = subprocess.run(['ollama','create', MODELO_ENTRENADO, '-f', 'Modelfile'], capture_output=True, text=True)
+            if res.returncode == 0:
+                print("✅ Entrenamiento completado.")
+                self.modelo_existe = True
+                return True
+            else:
+                print("❌ Error en entrenamiento:", res.stderr)
+                return False
+        except Exception as e:
+            print("❌ Fallo ejecutando ollama create:", e)
+            return False
+
+# ============ SistemaEvolutivo con ejecutar() ============
+class SistemaEvolutivo:
+    def __init__(self):
+        self.version = "fix-1.0"
+        self.iteracion = 0
+        self.dataset = DatasetManager()
+        self.evaluador = EvaluadorModelos()
+        self.entrenador = EntrenadorModelo(self.dataset)
+        self.analizador = AnalizadorAutonomo()
+        self.conocimiento = self.cargar_conocimiento()
+        self.mejoras_autonomas = 0
+
+    def cargar_conocimiento(self):
+        if os.path.exists(ARCHIVO_CONOCIMIENTO):
+            try:
+                with open(ARCHIVO_CONOCIMIENTO, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+            except Exception:
+                print("⚠️ conocimiento.json corrupto, se reinicia.")
+        return {"mejoras": [], "entrenamientos": 0, "mejoras_autonomas": [], "auto_analisis": []}
+
+    def guardar_conocimiento(self):
+        with open(ARCHIVO_CONOCIMIENTO, 'w', encoding='utf-8') as f:
+            json.dump(self.conocimiento, f, indent=2)
+
+    def mostrar_info(self):
+        print("\n" + "="*60)
+        print(f"SISTEMA EVOLUTIVO v{self.version}  — Dataset {len(self.dataset.datos)}")
+        print(f"Entrenamientos: {self.conocimiento.get('entrenamientos',0)}")
+        print(f"Mejor modelo (estimado): {self.evaluador.obtener_mejor_modelo()}")
+        print("="*60)
+
+    def elegir_modelos_a_usar(self):
+        modelos = MODELOS_BASE.copy()
+        if self.entrenador.modelo_existe:
+            modelos.append(MODELO_ENTRENADO)
+        return modelos
+
+    def generar_mejora_multi_modelo(self, instruccion):
+        # Simplificado: pedimos a un solo modelo (evita threading por ahora)
+        try:
+            with open(ARCHIVO_YO_MISMO, 'r', encoding='utf-8') as f:
+                codigo_actual = f.read()
+        except Exception as e:
+            codigo_actual = "# no se pudo leer el código actual"
+
+        prompt = f"Modifica este código agregando: {instruccion}\n\n{codigo_actual[:4000]}"
+        modelo = self.elegir_modelos_a_usar()[0]
+        try:
+            resp = ollama_chat_safe(modelo, [{'role':'user','content':prompt}])
+            contenido = resp.get('message',{}).get('content','')
+        except Exception as e:
+            print("⚠️ Error pidiendo mejora a Ollama:", e)
+            return None, None, 0
+
+        # extraer bloque de código
+        codigo = contenido
+        if '```' in contenido:
+            # intenta extraer primer bloque
+            ini = contenido.find('```')
+            fin = contenido.find('```', ini+3)
+            if fin > ini:
+                codigo = contenido[ini+3:fin].strip()
+        # validar sintaxis
+        try:
+            compile(codigo, '<string>', 'exec')
+            tiempo = 1.0
+            return codigo, modelo, tiempo
+        except Exception as e:
+            print("⚠️ Código inválido generado:", e)
+            return None, None, 0
+
+    def aplicar_mejora(self, nuevo_codigo, descripcion, modelo_usado, tiempo, es_autonoma=False):
+        # backup del archivo original
+        try:
+            with open(ARCHIVO_YO_MISMO, 'r', encoding='utf-8') as f:
+                codigo_anterior = f.read()
+        except Exception as e:
+            print("❌ No se puede leer archivo actual para backup:", e)
+            return
+
+        backup = ARCHIVO_YO_MISMO + ".bak"
+        try:
+            with open(backup, 'w', encoding='utf-8') as f:
+                f.write(codigo_anterior)
+            print(f"📦 Backup guardado en {backup}")
+        except Exception as e:
+            print("⚠️ No se pudo crear backup:", e)
+
+        calidad = 7 if es_autonoma else 5
+        # registrar en dataset
+        self.dataset.agregar_ejemplo(descripcion, codigo_anterior, nuevo_codigo, modelo_usado, calidad)
+        # registrar métricas
+        self.evaluador.registrar_uso(modelo_usado, tiempo, True, calidad)
+
+        # escribir nuevo código (se sobrescribe el archivo)
+        try:
+            with open(ARCHIVO_YO_MISMO, 'w', encoding='utf-8') as f:
+                header = f"# ITERACION: {self.iteracion + 1}\n# TIPO: {'AUTONOMA' if es_autonoma else 'MANUAL'}\n"
+                f.write(header + nuevo_codigo)
+            print("✅ Mejora aplicada y archivo actualizado (backup preservado).")
+            # actualizar conocimiento
+            info = {'iteracion': self.iteracion+1, 'descripcion': descripcion, 'modelo': modelo_usado, 'calidad': calidad, 'timestamp': datetime.now().isoformat(), 'autonoma': es_autonoma}
+            self.conocimiento.setdefault('mejoras', []).append(info)
+            self.guardar_conocimiento()
+            # NOTA: no reiniciamos automáticamente para evitar loops peligrosos
+        except Exception as e:
+            print("❌ Fallo al escribir nuevo código:", e)
+
+    def modo_autonomo(self):
+        global modo_autonomo_activo, ultima_actividad
+        if modo_autonomo_activo:
+            print("Modo autónomo ya activo.")
+            return
+        modo_autonomo_activo = True
+        print("\n=== MODO AUTÓNOMO INICIADO ===")
+        analisis = self.analizador.analizar_codigo_propio()
+        if analisis:
+            instruccion = analisis.get('mejora') or "refactorizar"
+        else:
+            instruccion = self.analizador.generar_mejora_emergente()
+        print("Idea/Instr:", instruccion)
+        codigo, modelo, tiempo = self.generar_mejora_multi_modelo(instruccion)
+        if codigo:
+            self.aplicar_mejora(codigo, f"[AUTO] {instruccion}", modelo, tiempo, es_autonoma=True)
+        else:
+            print("No se generó código válido en modo autónomo.")
+        ultima_actividad = time.time()
+        modo_autonomo_activo = False
+        print("=== MODO AUTÓNOMO FINALIZADO ===")
+
+    def monitor_inactividad(self):
+        global ultima_actividad
+        print("Monitor de inactividad iniciado (intervalo:", TIEMPO_INACTIVIDAD, "s)")
+        while True:
+            time.sleep(5)
+            inactividad = time.time() - ultima_actividad
+            if inactividad >= TIEMPO_INACTIVIDAD:
+                print("Inactividad detectada. Activando modo autónomo...")
+                try:
+                    self.modo_autonomo()
+                except Exception as e:
+                    print("Error en modo autónomo:", e)
+                ultima_actividad = time.time()
+
+    def ejecutar(self):
+        # iniciar monitor en thread
+        t = threading.Thread(target=self.monitor_inactividad, daemon=True)
+        t.start()
+        print("Bienvenido al Sistema Evolutivo (modo interactivo). Escribí 'help' para comandos.")
+        while True:
+            try:
+                cmd = input("\n> ").strip()
+                global ultima_actividad
+                ultima_actividad = time.time()
+                if not cmd:
+                    continue
+                if cmd in ['exit','quit','salir']:
+                    print("Saliendo...")
+                    break
+                if cmd == 'help':
+                    print("Comandos: help, stats, entrenar, ranking, auto, aplicar <texto>, quit")
+                    continue
+                if cmd == 'stats':
+                    self.mostrar_info()
+                    continue
+                if cmd == 'ranking':
+                    self.evaluador.mostrar_ranking()
+                    continue
+                if cmd == 'entrenar':
+                    ok = self.entrenador.entrenar()
+                    if ok:
+                        self.conocimiento['entrenamientos'] = self.conocimiento.get('entrenamientos',0) + 1
+                        self.guardar_conocimiento()
+                    continue
+                if cmd == 'auto':
+                    print("Forzando modo autónomo...")
+                    self.modo_autonomo()
+                    continue
+                if cmd.startswith('aplicar '):
+                    instruccion = cmd[len('aplicar '):].strip()
+                    if instruccion:
+                        codigo, modelo, tiempo = self.generar_mejora_multi_modelo(instruccion)
+                        if codigo:
+                            print("Código generado. Aplicando...")
+                            self.aplicar_mejora(codigo, instruccion, modelo, tiempo, es_autonoma=False)
+                        else:
+                            print("No se generó código válido.")
+                    continue
+                print("Comando no reconocido.")
+            except KeyboardInterrupt:
+                print("\n(interrupt) Saliendo...")
+                break
+            except Exception as e:
+                print("Error en loop principal:", e)
+
+# ============ RUN ============
+if __name__ == "__main__":
+    sistema = SistemaEvolutivo()
+    sistema.ejecutar()

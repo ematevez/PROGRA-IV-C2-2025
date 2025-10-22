@@ -1,0 +1,11 @@
+======================================================================
+PRODUCTO: LECHE
+======================================================================
+
+Nombre:       Leche Parcialmente Descremada COTO 1l
+Precio:       $1.390,00
+Supermercado: Coto Digital
+Link:         https://www.cotodigital.com.arhttps://www.cotodigital.com.ar/sitios/cdigi/productos/leche-parcialmente-descremada-coto-1l/_/R-00010491-00010491-200%3F
+Imagen:       https://static.cotodigital3.com.ar/sitios/fotos/large/00010400/00010491.jpg
+
+======================================================================
